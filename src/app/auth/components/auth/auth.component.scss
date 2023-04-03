@@ -1,0 +1,15 @@
+.wrapper {
+  margin: 20vh auto;
+  width: 25%;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .links {
+    margin-top: 1vh;
+    display: flex;
+    justify-content: space-between;
+  }
+}
