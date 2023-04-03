@@ -5,10 +5,18 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { SiteLayoutComponent } from './site-layout/site-layout.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, StoreModule.forRoot({}, {}), EffectsModule.forRoot([])],
+  declarations: [AppComponent, SiteLayoutComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
