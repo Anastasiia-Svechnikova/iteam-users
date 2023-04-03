@@ -1,7 +1,6 @@
 <mat-toolbar color="primary">
   <button
     mat-icon-button
-    class="nav"
     aria-label="Open main navigation menu"
     (click)="onToggleSideNav()">
     <mat-icon>menu</mat-icon>
@@ -10,7 +9,7 @@
   <span>{{ title }}</span>
   <button
     mat-icon-button
-    class="user"
+    class="user-btn"
     aria-label="Open profile menu"
     [matMenuTriggerFor]="menu">
     <mat-icon>person</mat-icon>
@@ -20,9 +19,9 @@
   #menu="matMenu"
   class="user-menu">
   <button mat-menu-item>
-    <span class="link">My profile <mat-icon>person</mat-icon></span>
+    <span class="menu-link">My profile <mat-icon>person</mat-icon></span>
   </button>
   <button mat-menu-item>
-    <span class="link">Log out <mat-icon>exit_to_app</mat-icon></span>
+    <span class="menu-link">Log out <mat-icon>exit_to_app</mat-icon></span>
   </button>
 </mat-menu>
