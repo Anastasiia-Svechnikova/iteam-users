@@ -1,0 +1,45 @@
+<app-header (toggleSideNav)="drawer.toggle()"></app-header>
+<mat-drawer-container
+  class="container"
+  autosize>
+  <mat-drawer
+    #drawer
+    class="sidenav"
+    mode="side">
+    <button
+      mat-icon-button
+      routerLink="/home"
+      routerLinkActive="active"
+      class="nav"
+      aria-label="Go to home page">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      routerLink="/projects"
+      routerLinkActive="active"
+      class="nav"
+      aria-label="Go to projects page">
+      <mat-icon>dashboard</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      routerLink="/user-profile"
+      routerLinkActive="active"
+      class="nav"
+      aria-label="Go to user profile page">
+      <mat-icon>people</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      routerLink="/admin"
+      routerLinkActive="active"
+      class="nav"
+      aria-label="Go to admin page">
+      <mat-icon>bar_chart</mat-icon>
+    </button>
+  </mat-drawer>
+  <div class="sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

@@ -1,0 +1,20 @@
+.spacer {
+  width: 30px;
+}
+
+.user {
+  margin-left: auto;
+}
+
+.link {
+  width: 130px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.user-menu {
+  width: 200px;
+}
+.logout .mat-icon {
+  margin: 0;
+}
