@@ -1,5 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { UserRoles } from 'src/app/shared/constants/constants';
 import { sideNavigationLinksData } from '../../constants/constants';
 
