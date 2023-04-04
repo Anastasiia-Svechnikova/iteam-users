@@ -1,14 +1,12 @@
 import { createAction, props } from '@ngrx/store';
 
-import { ILoggedUser } from '../models/user';
-
 export const login = createAction(
   '[Auth] Login',
   props<{ email: string; password: string }>(),
 );
 export const loginSuccess = createAction(
   '[Auth] Login Success',
-  props<{ user: ILoggedUser }>(),
+  props<{ userId:number }>(),
 );
 export const loginFail = createAction('[Auth] Login Fail');
 

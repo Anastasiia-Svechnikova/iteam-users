@@ -5,7 +5,6 @@ import {
   on,
 } from '@ngrx/store';
 
-import { ILoggedUser } from '../models/user';
 import {
   login,
   loginFail,
@@ -16,17 +15,12 @@ import {
 } from './actions';
 
 export interface IAuthState {
-  user: ILoggedUser;
+  userId: number;
   isRequesting: boolean;
 }
 
 const initialState: IAuthState = {
-  user: {
-    id: 0,
-    roles: [],
-    name: '',
-    surname: '',
-  },
+  userId:0,
   isRequesting: false,
 };
 
@@ -36,9 +30,9 @@ export const AuthReducer = createReducer(
     ...state,
     isRequesting: true,
   })),
-  on(loginSuccess, (state, { user }) => ({
+  on(loginSuccess, (state, { userId }) => ({
     ...state,
-    user,
+    userId,
     isRequesting: false,
   })),
   on(loginFail, (state) => ({
@@ -64,7 +58,7 @@ export const selectRequestingStatus = createSelector(
   selectAuthFeature,
   (state: IAuthState) => state.isRequesting,
 );
-export const selectUserRole = createSelector(
+export const selectUserId = createSelector(
   selectAuthFeature,
-  (state: IAuthState) => state.user.roles[0].id,
+  (state: IAuthState) => state.userId,
 );

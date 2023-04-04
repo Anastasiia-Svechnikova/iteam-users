@@ -36,7 +36,7 @@ export class AuthEffects {
               loginResponseData.tokens.accessToken,
             );
             this.router.navigateByUrl('');
-            return loginSuccess({ user: loginResponseData.user });
+            return loginSuccess({ userId: loginResponseData.user.id });
           }),
           catchError((err) => {
             this.snackbarService.openSnackBar(
