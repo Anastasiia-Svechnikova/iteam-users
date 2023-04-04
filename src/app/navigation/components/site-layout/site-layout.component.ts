@@ -1,10 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { UserRoles } from 'src/app/shared/constants/constants';
-import {
-  headerTitles,
-  sideNavigationLinksData,
-} from '../../constants/navigation-list';
+import { sideNavigationLinksData } from '../../constants/constants';
 
 @Component({
   selector: 'app-site-layout',
@@ -18,12 +15,13 @@ export class SiteLayoutComponent implements AfterViewInit {
   // the role will be selected from the store user data
   role = UserRoles.Admin;
 
-  constructor(private route: Router, private cdref: ChangeDetectorRef) {}
+  constructor(
+    private route: ActivatedRoute,
+    private cdref: ChangeDetectorRef,
+  ) {}
 
   setHeader(): void {
-    const path = this.route.url.split('/')[1];
-    const decodedPath = decodeURIComponent(path);
-    this.title = headerTitles.get(decodedPath) as string;
+    this.title = this.route.snapshot.firstChild?.data['header'];
   }
   ngAfterViewInit(): void {
     this.cdref.detectChanges();

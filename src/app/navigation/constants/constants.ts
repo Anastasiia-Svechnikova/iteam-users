@@ -27,9 +27,9 @@ export const sideNavigationLinksData = [
   },
 ];
 
-export const headerTitles = new Map<string, string>([
-  ['home', 'Home Page'],
-  ['admin', 'Admin page'],
-  ['user-profile', 'User Profile Page'],
-  ['projects', 'Projects Page'],
-]);
+export enum HeaderTitles {
+  home = 'Home Page',
+  admin = 'Admin Page',
+  user = 'User Page',
+  projects = 'Projects Page',
+}
