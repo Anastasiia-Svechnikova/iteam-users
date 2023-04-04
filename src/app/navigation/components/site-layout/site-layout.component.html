@@ -10,7 +10,7 @@
     mode="side">
     <ng-container *ngFor="let link of sideNavigationData">
       <button
-        *ngIf="link.accessRoles.includes(role)"
+        *ngIf="isAdmin || link.access === accessOptions.full"
         mat-icon-button
         routerLinkActive="active"
         class="nav-btn"

@@ -1,29 +1,31 @@
-import { UserRoles } from 'src/app/shared/constants/constants';
-
+export enum AccessOptions {
+  full = 'full',
+  adminOnly = 'admin only',
+}
 export const sideNavigationLinksData = [
   {
     path: '/home',
     iconName: 'home',
     title: 'home',
-    accessRoles: [UserRoles.Admin, UserRoles.Guest],
+    access: AccessOptions.full,
   },
   {
     path: '/user-profile',
     iconName: 'people',
     title: 'profile',
-    accessRoles: [UserRoles.Admin, UserRoles.Guest],
+    access: AccessOptions.full,
   },
   {
     path: '/projects',
     iconName: 'dashboard',
     title: 'projects',
-    accessRoles: [UserRoles.Admin, UserRoles.Guest],
+    access: AccessOptions.full,
   },
   {
     path: '/admin',
     iconName: 'bar_chart',
     title: 'admin',
-    accessRoles: [UserRoles.Admin],
+    access: AccessOptions.adminOnly,
   },
 ];
 

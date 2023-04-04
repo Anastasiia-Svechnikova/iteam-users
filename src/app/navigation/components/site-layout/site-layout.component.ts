@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { UserRoles } from 'src/app/shared/constants/constants';
-import { sideNavigationLinksData } from '../../constants/constants';
+import {
+  AccessOptions,
+  sideNavigationLinksData,
+} from 'src/app/navigation/constants/constants';
 
 @Component({
   selector: 'app-site-layout',
@@ -11,11 +13,12 @@ import { sideNavigationLinksData } from '../../constants/constants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SiteLayoutComponent implements OnInit {
+  accessOptions = AccessOptions;
   sideNavigationData = sideNavigationLinksData;
   title = '';
 
-  // the role will be selected from the store user data
-  role = UserRoles.Admin;
+  // isAdmin will be selected from the store user data
+  isAdmin = false;
 
   constructor(private route: ActivatedRoute) {}
 
