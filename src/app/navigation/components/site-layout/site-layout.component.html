@@ -13,6 +13,7 @@
         *ngIf="link.accessRoles.includes(role)"
         mat-icon-button
         [routerLink]="link.path"
+        [routerLinkActiveOptions]="{ exact: true }"
         routerLinkActive="active"
         class="nav-btn"
         attr.aria-label="Go to {{ link.title }} page">

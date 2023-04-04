@@ -12,18 +12,18 @@ const routes: Routes = [
     path: '',
     canActivate: [],
     component: SiteLayoutComponent,
-
     children: [
       {
         path: 'home',
         component: HomeComponent,
         data: { header: HeaderTitles.home },
+        pathMatch: 'full',
       },
     ],
   },
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'home',
   },
 ];
 
