@@ -8,7 +8,7 @@ import {
   login,
   loginFail,
   loginSuccess,
-  register,
+  register, registerFail,
   registerSuccess,
 } from './actions';
 import { AuthService } from '../services/auth.service';
@@ -63,7 +63,7 @@ export class AuthEffects {
             this.snackbarService.openSnackBar(
               `Register Failed: ${err.error.message}`,
             );
-            return of(loginFail());
+            return of(registerFail());
           }),
         ),
       ),
