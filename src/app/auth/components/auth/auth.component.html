@@ -1,58 +1,71 @@
 <div class="wrapper">
-  <form
-    [formGroup]="form"
-    (ngSubmit)="onLogin()">
-    <mat-form-field>
-      <input
-        matInput
-        type="email"
-        placeholder="Email"
-        formControlName="email" />
-      <mat-error *ngIf="email.touched && email.hasError('required')">
-        Email is required
-      </mat-error>
-      <mat-error *ngIf="email.touched && email.hasError('email')">
-        Email must be valid
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input
-        matInput
-        type="password"
-        placeholder="Password"
-        formControlName="password" />
-      <mat-error *ngIf="password.touched && password.hasError('required')">
-        Password is required
-      </mat-error>
-    </mat-form-field>
-    <mat-checkbox
-      *ngIf="!isRegister"
-      formControlName="rememberMe">
-      Remember Me
-    </mat-checkbox>
-    <button
-      mat-raised-button
-      type="submit"
-      color="primary"
-      [disabled]="!form.valid">
-      {{ activatedRoute.snapshot.url[0].path }}
-    </button>
-  </form>
-  <div class="links">
-    <a
-      routerLink="/register"
-      *ngIf="!isRegister">
-      Forgot password?
-    </a>
-    <a
-      routerLink="/register"
-      *ngIf="!isRegister">
-      Sign Up!
-    </a>
-    <a
-      routerLink="/login"
-      *ngIf="isRegister">
-      Login
-    </a>
-  </div>
+  <mat-spinner *ngIf="isRequesting | async"></mat-spinner>
+  <mat-card
+    *ngIf="(isRequesting | async) === false"
+    class="card-inner">
+    <mat-card-header>
+      <mat-card-title>
+        {{ title }}
+      </mat-card-title>
+      <mat-icon color="accent">lock</mat-icon>
+    </mat-card-header>
+    <mat-card-content>
+      <form
+        [formGroup]="form"
+        (ngSubmit)="onLogin()">
+        <mat-form-field>
+          <input
+            matInput
+            type="email"
+            placeholder="Email"
+            formControlName="email" />
+          <mat-error *ngIf="email.touched && email.hasError('required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="email.touched && email.hasError('email')">
+            Email must be valid
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="password"
+            placeholder="Password"
+            formControlName="password" />
+          <mat-error *ngIf="password.touched && password.hasError('required')">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+        <mat-checkbox
+          *ngIf="!isRegister"
+          formControlName="rememberMe">
+          Remember Me
+        </mat-checkbox>
+        <button
+          mat-raised-button
+          type="submit"
+          color="primary"
+          [disabled]="!form.valid">
+          {{ title }}
+        </button>
+      </form>
+      <div class="links">
+        <a
+          routerLink="/register"
+          *ngIf="!isRegister">
+          Forgot password?
+        </a>
+        <a
+          routerLink="/register"
+          *ngIf="!isRegister">
+          Sign Up!
+        </a>
+        <a
+          routerLink="/login"
+          *ngIf="isRegister">
+          Login
+        </a>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

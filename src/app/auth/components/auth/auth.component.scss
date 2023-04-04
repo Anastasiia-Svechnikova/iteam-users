@@ -1,15 +1,27 @@
 .wrapper {
   margin: 20vh auto;
-  width: 25%;
+  width: 40%;
+  display: flex;
+  justify-content: center;
 
-  form {
-    display: flex;
-    flex-direction: column;
-  }
+  mat-card {
+    width: 100%;
 
-  .links {
-    margin-top: 1vh;
-    display: flex;
-    justify-content: space-between;
+    mat-card-header {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .links {
+      margin-top: 1vh;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }

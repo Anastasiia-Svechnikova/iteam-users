@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { CurrentPath } from '../../models/current-path';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+
+import { login, register } from '../../state/actions';
+import { selectRequestingStatus } from '../../state/reducer';
 
 @Component({
   selector: 'app-auth',
@@ -10,28 +13,34 @@ import { CurrentPath } from '../../models/current-path';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent {
+  isRequesting: Observable<boolean>;
   isRegister: boolean;
+  title: string;
   form: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [Validators.required]),
     rememberMe: new FormControl(false),
   });
-
   constructor(
     private router: Router,
-    private authService: AuthService,
+    private store: Store,
     public activatedRoute: ActivatedRoute,
   ) {
-    this.isRegister =
-      activatedRoute.snapshot.url[0].path === CurrentPath.Register;
+    this.isRequesting = store.select(selectRequestingStatus);
+    this.isRegister = activatedRoute.snapshot.data['isRegister'];
+    this.title = activatedRoute.snapshot.data['title'];
   }
 
   onLogin(): void {
     if (this.form.valid) {
-      if (this.isRegister) {
-        this.authService.register(this.email.value, this.password.value).subscribe();
+      if (this.activatedRoute.snapshot.data['isRegister']) {
+        this.store.dispatch(
+          register({ email: this.email.value, password: this.password.value }),
+        );
       } else {
-        this.authService.login(this.email.value, this.password.value).subscribe();
+        this.store.dispatch(
+          login({ email: this.email.value, password: this.password.value }),
+        );
       }
     }
   }
