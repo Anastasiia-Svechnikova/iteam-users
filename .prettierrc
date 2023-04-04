@@ -5,6 +5,7 @@
   "singleQuote": true,
   "bracketSpacing": true,
   "bracketSameLine": true,
+  "htmlWhitespaceSensitivity": "ignore",
   "arrowParens": "always",
   "printWidth": 80,
   "proseWrap": "always",
