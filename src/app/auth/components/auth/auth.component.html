@@ -47,18 +47,18 @@
       </form>
       <div class="links">
         <a
-          routerLink="/register"
-          *ngIf="!isRegister">
+          *ngIf="!isRegister"
+          routerLink="/register">
           Forgot password?
         </a>
         <a
-          routerLink="/register"
-          *ngIf="!isRegister">
+          *ngIf="!isRegister"
+          routerLink="/register">
           Sign Up!
         </a>
         <a
-          routerLink="/login"
-          *ngIf="isRegister">
+          *ngIf="isRegister"
+          routerLink="/login">
           Login
         </a>
       </div>

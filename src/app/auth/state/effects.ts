@@ -27,7 +27,7 @@ export class AuthEffects {
       switchMap((action: ReturnType<typeof AuthActions.login>) =>
         this.authService.login(action.credentials).pipe(
           concatMap((loginResponseData: ILoginResponseData) => {
-            this.snackbarService.openSnackBar('Login Successfully');
+            this.snackbarService.openSnackBar('Welcome to I Team! You can start with editing your profile.');
             this.localService.saveData(
               'accessToken',
               loginResponseData.tokens.accessToken,
