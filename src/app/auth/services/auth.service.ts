@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { ILoginResponseData } from '../models/user';
+import { ILoginResponseData } from '../models/login-response-data';
 import { environment } from '../../../environments/environment';
+import { ICredentials } from '../models/credentials';
 
 @Injectable({
   providedIn: 'root',
@@ -11,23 +12,17 @@ import { environment } from '../../../environments/environment';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<ILoginResponseData> {
+  login(credentials: ICredentials): Observable<ILoginResponseData> {
     return this.http.post<ILoginResponseData>(
       `${environment.apiUrl}/auth/sign-in`,
-      {
-        email: email,
-        password: password,
-      },
+      credentials,
     );
   }
 
-  register(email: string, password: string): Observable<ILoginResponseData> {
+  register(credentials: ICredentials): Observable<ILoginResponseData> {
     return this.http.post<ILoginResponseData>(
       `${environment.apiUrl}/auth/registration`,
-      {
-        email: email,
-        password: password,
-      },
+      credentials,
     );
   }
 }

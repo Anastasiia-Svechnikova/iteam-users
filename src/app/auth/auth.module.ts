@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,10 +17,29 @@ import { AuthService } from './services/auth.service';
 import { AuthEffects } from './state/effects';
 import { AuthReducer } from './state/reducer';
 
+const routes: Routes = [
+  {
+    path: 'register',
+    component: AuthComponent,
+    data: {
+      title: 'Sign Up',
+      isRegister: true,
+    },
+  },
+  {
+    path: 'login',
+    component: AuthComponent,
+    data: {
+      title: 'Sign In',
+    },
+  },
+];
+
 @NgModule({
   declarations: [AuthComponent],
   imports: [
     CommonModule,
+    RouterModule.forChild(routes),
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,

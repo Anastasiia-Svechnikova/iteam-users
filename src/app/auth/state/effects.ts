@@ -2,18 +2,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { catchError, from, map, Observable, of, switchMap } from 'rxjs';
+import { catchError, concatMap, map, Observable, of, switchMap } from 'rxjs';
 
-import {
-  login,
-  loginFail,
-  loginSuccess,
-  register, registerFail,
-  registerSuccess,
-} from './actions';
+import * as AuthActions from './actions';
 import { AuthService } from '../services/auth.service';
-import { ILoginResponseData } from '../models/user';
+import { ILoginResponseData } from '../models/login-response-data';
 import { SnackbarService } from '../../shared/services/snackbar.service';
+import { LocalService } from '../../shared/services/local.service';
+import { loadUser } from '../../main/state/actions';
 
 @Injectable()
 export class AuthEffects {
@@ -22,48 +18,52 @@ export class AuthEffects {
     private authService: AuthService,
     private snackbarService: SnackbarService,
     private router: Router,
+    private localService: LocalService,
   ) {}
 
-  Login$: Observable<Action> = createEffect(() => {
+  login$: Observable<Action> = createEffect(() => {
     return this.actions$.pipe(
-      ofType(login),
-      switchMap((action: ReturnType<typeof login>) =>
-        from(this.authService.login(action.email, action.password)).pipe(
-          map((loginResponseData: ILoginResponseData) => {
-            this.snackbarService.openSnackBar('Login Success');
-            localStorage.setItem(
+      ofType(AuthActions.login),
+      switchMap((action: ReturnType<typeof AuthActions.login>) =>
+        this.authService.login(action.credentials).pipe(
+          concatMap((loginResponseData: ILoginResponseData) => {
+            this.snackbarService.openSnackBar('Login Successfully');
+            this.localService.saveData(
               'accessToken',
               loginResponseData.tokens.accessToken,
             );
             this.router.navigateByUrl('');
-            return loginSuccess({ userId: loginResponseData.user.id });
+            return [
+              AuthActions.loginSuccess(),
+              loadUser({ user: loginResponseData.user }),
+            ];
           }),
           catchError((err) => {
             this.snackbarService.openSnackBar(
               `Login Failed: ${err.error.message}`,
             );
-            return of(loginFail());
+            return of(AuthActions.loginFail());
           }),
         ),
       ),
     );
   });
 
-  Register$: Observable<Action> = createEffect(() => {
+  register$: Observable<Action> = createEffect(() => {
     return this.actions$.pipe(
-      ofType(register),
-      switchMap((action: ReturnType<typeof register>) =>
-        from(this.authService.register(action.email, action.password)).pipe(
+      ofType(AuthActions.register),
+      switchMap((action: ReturnType<typeof AuthActions.register>) =>
+        this.authService.register(action.credentials).pipe(
           map(() => {
             this.snackbarService.openSnackBar('Register Success');
             this.router.navigateByUrl('login');
-            return registerSuccess();
+            return AuthActions.registerSuccess();
           }),
           catchError((err) => {
             this.snackbarService.openSnackBar(
               `Register Failed: ${err.error.message}`,
             );
-            return of(registerFail());
+            return of(AuthActions.registerFail());
           }),
         ),
       ),

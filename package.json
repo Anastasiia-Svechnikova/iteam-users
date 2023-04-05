@@ -8,8 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prettier:all": "prettier --write .",
-    "eslint:all": "eslint \"src/**/*.{ts,html,css}\" --quiet --fix",
-    "stylelint:all": "stylelint \"src/**/*.css\"",
+    "eslint:all": "eslint \"src/**/*.{ts,html,scss}\" --quiet --fix",
+    "stylelint:all": "stylelint \"src/**/*.scss\"",
     "stylelint:fix": "npm run stylelint:all -- --config .stylelintrc.fix.js --fix"
   },
   "private": true,
@@ -26,6 +26,7 @@
     "@angular/router": "^15.1.0",
     "@ngrx/effects": "^15.4.0",
     "@ngrx/store": "^15.4.0",
+    "@ngrx/store-devtools": "^15.4.0",
     "ag-grid-angular": "^29.2.0",
     "ag-grid-community": "^29.2.0",
     "ci": "^2.2.0",

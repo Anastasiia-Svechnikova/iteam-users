@@ -1,4 +1,4 @@
 export const environment = {
-  apiUrl:'https://iteam-be-nest.onrender.com',
-  production:false,
+  apiUrl: 'https://iteam-be-nest.onrender.com',
+  production: false,
 };
