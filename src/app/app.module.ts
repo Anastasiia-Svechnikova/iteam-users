@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { SiteLayoutComponent } from './site-layout/site-layout.component';
+
+import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { NavigationModule } from './navigation/navigation.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, SiteLayoutComponent],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    NavigationModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
   ],
