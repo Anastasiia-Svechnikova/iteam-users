@@ -1,5 +1,7 @@
+@import '/src/styles/_variables.scss';
+
 .spacer {
-  width: var(--m-spacer-width);
+  width: $m-spacer;
 }
 
 .user-btn {
