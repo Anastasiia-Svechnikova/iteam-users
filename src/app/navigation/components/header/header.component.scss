@@ -1,20 +1,23 @@
+@import '/src/styles/_variables.scss';
+
 .spacer {
-  width: 30px;
+  width: $m-spacer;
 }
 
 .user-btn {
   margin-left: auto;
 }
 
-.user-menu {
-  width: 200px;
-}
 .menu-link {
-  width: 130px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .icon {
+    margin-right: 0;
+  }
 }
+
 .logout .mat-icon {
   margin: 0;
 }

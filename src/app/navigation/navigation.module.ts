@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { AppRoutingModule } from '../app-routing.module';
 
+import { AppRoutingModule } from '../app-routing.module';
 import { SiteLayoutComponent } from './components/site-layout/site-layout.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SharedModule } from '../shared/shared.module';

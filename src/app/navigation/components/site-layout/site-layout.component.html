@@ -2,8 +2,8 @@
   [title]="title"
   (toggleSideNav)="drawer.toggle()"></app-header>
 <mat-drawer-container
-  class="main-layout"
-  autosize>
+  autosize
+  class="main-layout">
   <mat-drawer
     #drawer
     class="sidenav"
@@ -12,11 +12,11 @@
       <button
         *ngIf="link.accessRoles.includes(role)"
         mat-icon-button
-        [routerLink]="link.path"
-        [routerLinkActiveOptions]="{ exact: true }"
         routerLinkActive="active"
         class="nav-btn"
-        attr.aria-label="Go to {{ link.title }} page">
+        attr.aria-label="Go to {{ link.title }} page"
+        [routerLink]="link.path"
+        [routerLinkActiveOptions]="{ exact: true }">
         <mat-icon>{{ link.iconName }}</mat-icon>
       </button>
     </ng-container>
