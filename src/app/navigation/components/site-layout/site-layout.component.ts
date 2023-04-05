@@ -18,7 +18,7 @@ export class SiteLayoutComponent implements OnInit {
   title = '';
 
   // isAdmin will be selected from the store user data
-  isAdmin = false;
+  isAdmin = true;
 
   constructor(private route: ActivatedRoute) {}
 
