@@ -9,6 +9,8 @@ import { selectRequestingStatus } from '../state/selectors';
 })
 export abstract class AbstractAuthComponent {
   isRequesting = this.store.select(selectRequestingStatus);
+  abstract title:string;
+  abstract isRegister:boolean;
   form: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [Validators.required]),
