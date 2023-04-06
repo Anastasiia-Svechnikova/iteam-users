@@ -1,0 +1,21 @@
+@import '/src/styles/_variables.scss';
+@import '/src/styles/_color-palette.scss';
+
+.main-layout {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.sidenav {
+  width: fit-content;
+  padding: $xs-padding;
+}
+
+.nav-btn {
+  display: block;
+}
+
+.active {
+  color: $primary-color;
+}
