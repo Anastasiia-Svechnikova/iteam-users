@@ -1,0 +1,65 @@
+<div class="wrapper">
+  <mat-spinner *ngIf="isRequesting | async"></mat-spinner>
+  <mat-card
+    *ngIf="(isRequesting | async) === false"
+    class="card-inner">
+    <mat-card-header class="card-header">
+      <mat-card-title>{{ title }}</mat-card-title>
+      <mat-icon color="accent">lock</mat-icon>
+    </mat-card-header>
+    <mat-card-content>
+      <form
+        class="login-form"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <input
+            matInput
+            type="email"
+            placeholder="Email"
+            formControlName="email" />
+          <mat-error *ngIf="email.touched && email.hasError('required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="email.touched && email.hasError('email')">
+            Email must be valid
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="password"
+            placeholder="Password"
+            formControlName="password" />
+          <mat-error *ngIf="password.touched && password.hasError('required')">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          type="submit"
+          color="primary"
+          [disabled]="!form.valid">
+          {{ title }}
+        </button>
+      </form>
+      <div class="links">
+        <a
+          *ngIf="isRegister"
+          routerLink="/login">
+          Login
+        </a>
+        <a
+          *ngIf="!isRegister"
+          routerLink="/register">
+          Forgot password?
+        </a>
+        <a
+          *ngIf="!isRegister"
+          routerLink="/register">
+          Sign Up!
+        </a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
