@@ -10,7 +10,6 @@ import { ILoginResponseData } from '../models/login-response-data';
 import { SnackbarService } from '../../shared/services/snackbar.service';
 import { LocalStorageService } from '../../shared/services/local-storage.service';
 import { loadUser } from '../../main/state/actions';
-import { UserRoles } from '../../shared/constants/constants';
 
 @Injectable()
 export class AuthEffects {
@@ -36,12 +35,9 @@ export class AuthEffects {
               loginResponseData.tokens.accessToken,
             );
             this.router.navigateByUrl('home');
-            const isAdmin = loginResponseData.user.roles.some(
-              (role) => role.value === UserRoles.Admin,
-            );
             return [
               AuthActions.loginSuccess(),
-              loadUser({ user: loginResponseData.user, isAdmin: isAdmin }),
+              loadUser({ user: loginResponseData.user}),
             ];
           }),
           catchError((err) => {

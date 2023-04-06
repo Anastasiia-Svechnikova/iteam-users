@@ -9,7 +9,13 @@ export const selectUser = createSelector(
   (state: IMainState) => state.user,
 );
 
-export const selectUserAdminStatus = createSelector(
+export const selectUserHasRole = createSelector(
   selectAuthFeature,
-  (state: IMainState) => state.isAdmin,
+  (state: IMainState, props: string) => {
+    if (!state.user?.roles) {
+      return false;
+    } else {
+      return state.user?.roles.some((role) => role.value === props);
+    }
+  },
 );
