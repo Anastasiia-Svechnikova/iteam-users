@@ -1,0 +1,61 @@
+<div class="left-section">
+  <div
+    *ngFor="let education of user.educationInfo"
+    class="contacts-tile">
+    <h3 class="subtitle-accent">Education</h3>
+    <p>{{ education.universityName }}</p>
+    <p class="years">
+      {{ education.startDate | date : 'y' }}-
+      {{ education.endDate | date : 'y' }}
+    </p>
+    <p>{{ education.pricingModel }}</p>
+  </div>
+  <div class="contacts-tile">
+    <h3 class="subtitle-accent">Address</h3>
+    <p>{{ user.address || 'User address' }}</p>
+    <h4 class="subtitle-base">Postal Code</h4>
+    <p>{{ user.address || 'User address' }}</p>
+  </div>
+  <div class="contacts-tile">
+    <h3 class="subtitle-accent">Invoice Address Info</h3>
+    <p>{{ user.individualEntrepreneurName || 'Name' }}</p>
+    <p>{{ user.individualEntrepreneurAddress || 'Address' }}</p>
+    <p>
+      {{
+        user.individualEntrepreneurIndividualTaxNumber ||
+          'Individual Tax Number'
+      }}
+    </p>
+    <p>
+      {{ user.individualEntrepreneurBankAccounNumber || 'Bank account number' }}
+    </p>
+    <p>{{ user.individualEntrepreneurBankName || 'Bank Name' }}</p>
+    <p>{{ user.individualEntrepreneurBankCode || 'Bank Code' }}</p>
+    <p>
+      {{ user.individualEntrepreneurBeneficiaryBank || 'Beneficiary Bank' }}
+    </p>
+    <p>{{ user.individualEntrepreneurSwiftCode || 'SWIFT Code' }}</p>
+  </div>
+  <div class="contacts-tile">
+    <h3 class="subtitle-accent">Social Links</h3>
+    <p>{{ user.address || 'User address' }}</p>
+    <h4 class="subtitle-base">Postal Code</h4>
+    <p>{{ user.address || 'User address' }}</p>
+  </div>
+  <div class="contacts-tile">
+    <div
+      *ngFor="let socialLink of socialLinks"
+      class="socials">
+      <mat-icon
+        *ngIf="user[socialLink]"
+        [svgIcon]="socialLink"></mat-icon>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        class="link"
+        [href]="user[socialLink]">
+        {{ socialLink | titlecase }}
+      </a>
+    </div>
+  </div>
+</div>

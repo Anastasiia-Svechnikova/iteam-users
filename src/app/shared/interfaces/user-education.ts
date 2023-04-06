@@ -7,5 +7,5 @@ export interface IUserEducationDetails {
   universityName: string;
   specialization: string;
   pricingModel: string;
-  user: IUserDetails;
+  user?: IUserDetails;
 }

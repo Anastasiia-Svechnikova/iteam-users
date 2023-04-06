@@ -5,5 +5,5 @@ export interface IClientDetailsData {
   name: string;
   link: string;
   communicationType: string;
-  projects: IProjectDetailsData[] | [null];
+  projects: IProjectDetailsData[] | null[];
 }

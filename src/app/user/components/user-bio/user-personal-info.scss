@@ -1,0 +1,45 @@
+@import '/src/styles/_variables.scss';
+@import '/src/styles/_color-palette.scss';
+
+.upper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.bio {
+  display: flex;
+  gap: $l-spacer;
+  align-items: center;
+}
+.avatar {
+  height: $avatar-width;
+  width: $avatar-width;
+  background-color: $base-color;
+  border-radius: 50%;
+}
+.name {
+  font-weight: $base-header-font-weight;
+  font-size: $base-header-font-size;
+  color: $base-text-color;
+}
+.detail {
+  display: flex;
+  align-items: center;
+  gap: $xs-spacer;
+}
+
+.term {
+  flex: 1 1 auto;
+}
+
+%status {
+  display: flex;
+  align-items: center;
+}
+.unarchived {
+  @extend %status;
+  color: $primary-color;
+}
+.status-icon {
+  color: inherit;
+}

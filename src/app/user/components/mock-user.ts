@@ -9,7 +9,8 @@ export const user = {
     password: '$2a$05$TcAYQZ8iKQ3zR34.v5qX6.V7FNrC0KjquHeKd8FMT9wvZDMKytNFG',
     name: null,
     surname: null,
-    positionDescription: null,
+    positionDescription:
+      'I am an experienced (3 years) Front-End developer with preferences for Angular2+, JavaScript, TypeScript, NgRx, RxJS, and other libraries. I have experience making sites - Web applications, building UI with Angular, developing features, bug fixes. I write high-quality code; I use suitable solutions and programming patterns. Looking for long-term project. My timezone is UTC+2',
     language: null,
     endReason: 'won lottery',
     avatarUrl:
@@ -18,7 +19,7 @@ export const user = {
     city: null,
     salary: 0,
     address: null,
-    skills: null,
+    skills: 'JS TS NODE.JS REACT ANGULAR',
     experience: null,
     isBanned: false,
     banReason: null,
@@ -28,10 +29,10 @@ export const user = {
     endDate: '2023-04-05T13:09:36.463Z',
     workTypeId: null,
     status: 'unarchived',
-    upwork: null,
-    github: null,
-    linkedin: null,
-    telegramTag: null,
+    upwork: 'https://www.upwork.com/',
+    github: 'gfdg',
+    linkedin: 'gdfg',
+    telegramTag: 'fdgfdg',
     individualEntrepreneurName: null,
     individualEntrepreneurAddress: null,
     individualEntrepreneurIndividualTaxNumber: null,
@@ -72,7 +73,41 @@ export const user = {
     attachedAttachments: [],
     publishedAttachments: [],
     techStack: [],
-    educationInfo: [],
-    workHistory: [],
+    educationInfo: [
+      {
+        id: 333,
+        startDate: '2013-04-05T13:37:49.173Z',
+        endDate: '2018-04-05T13:37:49.173Z',
+        universityName: 'Columbia University',
+        specialization: 'Designer',
+        pricingModel: 'Bachelor of Arts',
+      },
+    ],
+    workHistory: [
+      {
+        id: 1,
+        project: 'New Project',
+        user: 'string',
+        startDate:
+          'Sat Feb 04 2023 14:02:55 GMT+0200 (Eastern European Standard Time)',
+        endDate:
+          'Sat Feb 04 2023 14:02:55 GMT+0200 (Eastern European Standard Time)',
+        positionOnProject: 'Full stack developer',
+        responsibility: 'auth integration, database schema designing',
+        showCaseAttachments: [null],
+      },
+      {
+        id: 1,
+        project: 'New Project',
+        user: 'string',
+        startDate:
+          'Sat Feb 04 2023 14:02:55 GMT+0200 (Eastern European Standard Time)',
+        endDate:
+          'Sat Feb 04 2023 14:02:55 GMT+0200 (Eastern European Standard Time)',
+        positionOnProject: 'Full stack developer',
+        responsibility: 'auth integration, database schema designing',
+        showCaseAttachments: [null],
+      },
+    ],
   },
 };

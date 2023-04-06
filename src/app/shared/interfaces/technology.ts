@@ -7,6 +7,6 @@ export interface ITechnologyUsedInProject {
   description: string;
   officialDocsHref: string;
   icon: string;
-  projects: IProjectDetailsData[] | [null];
+  projects: IProjectDetailsData[] | null[];
   users: IUserDetails[];
 }

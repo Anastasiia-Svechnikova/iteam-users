@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CustomIconService } from './shared/services/custom-icons.service';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(private iconsService: CustomIconService) {
+    this.iconsService.loadIcons();
+  }
+}

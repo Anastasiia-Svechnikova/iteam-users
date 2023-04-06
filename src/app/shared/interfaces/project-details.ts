@@ -29,6 +29,6 @@ export interface IProjectDetailsData {
   demoCredentialsPassword: string;
   createdAt: string;
   updatedAt: string;
-  attachedAttachments: IUserOrProjectAttachment[] | [null];
+  attachedAttachments: IUserOrProjectAttachment[] | null[];
   workHistories: IUserWorkHistory[];
 }
