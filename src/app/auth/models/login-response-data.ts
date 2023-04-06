@@ -1,8 +1,8 @@
-import { IUser } from '../../shared/models/user';
+import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 
 export interface ILoginResponseData {
   tokens: {
     accessToken: string;
   };
-  user: IUser;
+  user: IUserDetails;
 }

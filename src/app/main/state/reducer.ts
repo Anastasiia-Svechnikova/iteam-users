@@ -1,10 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
+import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 
-import { IUser } from '../../shared/models/user';
 import { loadUser } from './actions';
 
 export interface IMainState {
-  user: IUser | null;
+  user: IUserDetails | null;
 }
 
 const initialState: IMainState = {

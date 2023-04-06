@@ -1,7 +1,7 @@
-export interface IAccessToken {
-  id: number;
-  userId: number;
-  token: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+// export interface IAccessToken {
+//   id: number;
+//   userId: number;
+//   token: string;
+//   createdAt: string;
+//   updatedAt: string;
+// }

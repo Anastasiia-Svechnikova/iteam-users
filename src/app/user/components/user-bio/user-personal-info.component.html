@@ -1,0 +1,40 @@
+<div class="upper">
+  <div class="bio">
+    <div class="avatar"></div>
+    <div class="info">
+      <p class="name">{{ user.name || 'Name Surname' }}</p>
+      <p class="detail">
+        Status:
+        <span [ngClass]="user.status">
+          {{ user.status | titlecase }}
+          <mat-icon class="status-icon">unarchived</mat-icon>
+        </span>
+      </p>
+      <p class="detail">
+        <mat-icon class="status-icon">card_giftcard</mat-icon>
+        <span>{{ user.birthday || 'Birthday' }}</span>
+      </p>
+      <p class="detail">
+        {{ user.phone || 'Phone Number' }}
+      </p>
+      <p class="detail">
+        {{ user.email || 'Email' }}
+      </p>
+    </div>
+  </div>
+  <div class="terms">
+    <p class="detail">
+      <span class="term">Start Date:</span>
+
+      <span class="term-detail">{{ user.startDate | date }}</span>
+    </p>
+    <p class="detail">
+      <span class="term">End Date:</span>
+      <span class="term-detail">{{ user.endDate | date }}</span>
+    </p>
+    <p class="detail">
+      <span class="term">Reason:</span>
+      <span class="term-detail">{{ user.endReason }}</span>
+    </p>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { UserComponent } from './components/user.component';
 import { EditModalComponent } from './components/edit-modal/edit-modal.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { UserPersonalInfoComponent } from './components/user-bio/user-personal-info.component';
 
 const routes = [
   {
@@ -15,7 +16,7 @@ const routes = [
 ];
 
 @NgModule({
-  declarations: [UserComponent, EditModalComponent],
+  declarations: [UserComponent, EditModalComponent, UserPersonalInfoComponent],
   imports: [
     SharedModule,
     HttpClientModule,
