@@ -48,29 +48,4 @@ export class TokenInterceptor implements HttpInterceptor {
       },
     });
   }
-
-  // handle401Error<T, U>(
-  //   request: HttpRequest<T>,
-  //   next: HttpHandler,
-  // ): Observable<HttpEvent<U>> {
-  //   return this.authService.refresh().pipe(
-  //     switchMap((loginResponseData: ILoginResponseData) => {
-  //       this.localStorageService.saveData(
-  //         'Authorization',
-  //         loginResponseData.tokens.accessToken,
-  //       );
-  //       const processedReq = this.addToken(
-  //         request,
-  //         loginResponseData.tokens.accessToken,
-  //       );
-  //       return next.handle(processedReq);
-  //     }),
-  //     catchError((error) => {
-  //       this.authService.logout();
-  //       this.localStorageService.removeData('Authorization');
-  //       this.router.navigateByUrl('auth/login');
-  //       return throwError(error);
-  //     }),
-  //   );
-  // }
 }
