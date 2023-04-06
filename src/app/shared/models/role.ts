@@ -1,4 +1,4 @@
-export interface IRole {
+export interface IUserPermissionsRole {
   id: number;
   value: string;
   description: string;

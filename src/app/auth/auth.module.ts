@@ -12,31 +12,25 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { AuthComponent } from './components/auth/auth.component';
 import { AuthService } from './services/auth.service';
 import { AuthEffects } from './state/effects';
 import { AuthReducer } from './state/reducer';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {
     path: 'register',
-    component: AuthComponent,
-    data: {
-      title: 'Sign Up',
-      isRegister: true,
-    },
+    component: RegisterComponent,
   },
   {
     path: 'login',
-    component: AuthComponent,
-    data: {
-      title: 'Sign In',
-    },
+    component: LoginComponent,
   },
 ];
 
 @NgModule({
-  declarations: [AuthComponent],
+  declarations: [LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

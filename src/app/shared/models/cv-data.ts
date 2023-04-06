@@ -1,4 +1,4 @@
-export interface ICV {
+export interface IUserAssignedCvData {
   id: number;
   originalName: string;
   fileUrl: string;

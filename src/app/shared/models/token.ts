@@ -1,4 +1,4 @@
-export interface IToken {
+export interface IAccessToken {
   id: number;
   userId: number;
   token: string;

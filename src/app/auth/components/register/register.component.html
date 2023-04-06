@@ -4,9 +4,7 @@
     *ngIf="(isRequesting | async) === false"
     class="card-inner">
     <mat-card-header class="card-header">
-      <mat-card-title>
-        {{ title }}
-      </mat-card-title>
+      <mat-card-title> Sign Up </mat-card-title>
       <mat-icon color="accent">lock</mat-icon>
     </mat-card-header>
     <mat-card-content>
@@ -42,25 +40,11 @@
           type="submit"
           color="primary"
           [disabled]="!form.valid">
-          {{ title }}
+          Sign Up
         </button>
       </form>
       <div class="links">
-        <a
-          *ngIf="!isRegister"
-          routerLink="/register">
-          Forgot password?
-        </a>
-        <a
-          *ngIf="!isRegister"
-          routerLink="/register">
-          Sign Up!
-        </a>
-        <a
-          *ngIf="isRegister"
-          routerLink="/login">
-          Login
-        </a>
+        <a routerLink="/login">Login</a>
       </div>
     </mat-card-content>
   </mat-card>

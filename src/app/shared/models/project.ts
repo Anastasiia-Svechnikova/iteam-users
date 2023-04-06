@@ -1,4 +1,4 @@
-export interface IProject {
+export interface IProjectDetailsData {
   id: number;
   name: string;
   description: string;

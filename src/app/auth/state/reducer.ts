@@ -13,33 +13,19 @@ const initialState: IAuthState = {
 export const AuthReducer = createReducer(
   initialState,
 
-  on(AuthActions.login, (state) => ({
+  on(AuthActions.login, AuthActions.register, (state) => ({
     ...state,
     isRequesting: true,
   })),
 
-  on(AuthActions.loginSuccess, (state) => ({
-    ...state,
-    isRequesting: false,
-  })),
-
-  on(AuthActions.loginFail, (state) => ({
-    ...state,
-    isRequesting: false,
-  })),
-
-  on(AuthActions.register, (state) => ({
-    ...state,
-    isRequesting: true,
-  })),
-
-  on(AuthActions.registerSuccess, (state) => ({
-    ...state,
-    isRequesting: false,
-  })),
-
-  on(AuthActions.registerFail, (state) => ({
-    ...state,
-    isRequesting: false,
-  })),
+  on(
+    AuthActions.loginSuccess,
+    AuthActions.loginFail,
+    AuthActions.registerSuccess,
+    AuthActions.registerFail,
+    (state) => ({
+      ...state,
+      isRequesting: false,
+    }),
+  ),
 );

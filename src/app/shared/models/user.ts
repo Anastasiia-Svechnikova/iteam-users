@@ -1,7 +1,7 @@
-import { ICV } from './cv';
-import { IRole } from './role';
-import { IToken } from './token';
-import { IProject } from './project';
+import { IUserAssignedCvData } from './cv-data';
+import { IUserPermissionsRole } from './role';
+import { IAccessToken } from './token';
+import { IProjectDetailsData } from './project';
 
 export interface IUser {
   id: number;
@@ -42,10 +42,10 @@ export interface IUser {
   defaultCoverLetter: string;
   createdAt: Date;
   updatedAt: Date;
-  cv: ICV;
+  cv: IUserAssignedCvData;
   workType: string;
-  roles: IRole[];
-  token: IToken;
-  leadingInProjects: IProject[];
-  participatingInProjects: IProject[];
+  roles: IUserPermissionsRole[];
+  token: IAccessToken;
+  leadingInProjects: IProjectDetailsData[];
+  participatingInProjects: IProjectDetailsData[];
 }
