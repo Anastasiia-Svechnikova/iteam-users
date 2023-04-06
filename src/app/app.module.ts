@@ -9,10 +9,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthModule } from './auth/auth.module';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { AuthGuard } from './shared/guards/auth.guard';
-import { NavigationModule } from './navigation/navigation.module';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -23,11 +21,9 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    NavigationModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    AuthModule,
   ],
   providers: [
     AuthGuard,

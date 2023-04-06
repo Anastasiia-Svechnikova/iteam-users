@@ -46,17 +46,17 @@
       <div class="links">
         <a
           *ngIf="isRegister"
-          routerLink="/login">
+          routerLink="/auth/login">
           Login
         </a>
         <a
           *ngIf="!isRegister"
-          routerLink="/register">
+          routerLink="/auth/register">
           Forgot password?
         </a>
         <a
           *ngIf="!isRegister"
-          routerLink="/register">
+          routerLink="/auth/register">
           Sign Up!
         </a>
       </div>
