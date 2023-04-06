@@ -1,1 +1,37 @@
-<p>user works!</p>
+<div class="wrapper">
+  <div class="upper">
+    <div class="bio">
+      <div class="avatar"></div>
+      <div class="info">
+        <p class="name">{{ user.name || 'Name Surname' }}</p>
+        <p class="detail">
+          Status:
+          <span [ngClass]="user.status">
+            {{ user.status | titlecase }}
+            <mat-icon class="status-icon">unarchived</mat-icon>
+          </span>
+        </p>
+        <p class="detail">
+          <mat-icon class="status-icon">card_giftcard</mat-icon>
+          <span>{{ user.birthday || 'Birthday' }}</span>
+        </p>
+        <p class="detail">
+          {{ user.phone || 'Phone Number' }}
+        </p>
+        <p class="detail">
+          {{ user.email || 'Email' }}
+        </p>
+      </div>
+    </div>
+    <div class="terms">fg</div>
+  </div>
+  <div class="middle">
+    <div class="left-section">2</div>
+    <div class="right-section">
+      <div class="tile">3</div>
+      <div class="tile">4</div>
+      <div class="tile">5</div>
+    </div>
+  </div>
+  <div class="bottom">6</div>
+</div>

@@ -17,6 +17,12 @@ const routes: Routes = [
         data: { header: HeaderTitles.home },
       },
       {
+        path: 'user-profile',
+        loadChildren: () =>
+          import('./user/user.module').then((m) => m.UserModule),
+        data: { header: HeaderTitles.user },
+      },
+      {
         path: 'admin',
         component: HomeComponent,
         data: { header: HeaderTitles.admin },

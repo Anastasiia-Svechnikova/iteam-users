@@ -1,5 +1,11 @@
+@use '@angular/material' as mat;
+
 @import '/src/styles/_color-palette.scss';
 @import '/src/styles/_variables.scss';
+@import '/src/styles/_theme.scss';
+
+@include mat.core();
+@include mat.all-component-themes($theme);
 
 html,
 body {
@@ -7,5 +13,4 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }

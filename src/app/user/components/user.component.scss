@@ -1,0 +1,70 @@
+@import '/src/styles/_variables.scss';
+@import '/src/styles/_color-palette.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $xxxl-spacer;
+  padding: $m-padding;
+}
+
+////////////////////////////////////////////////////////////////
+.upper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.bio {
+  display: flex;
+  gap: $l-spacer;
+  align-items: center;
+}
+.avatar {
+  height: $avatar-width;
+  width: $avatar-width;
+  background-color: $base-color;
+  border-radius: 50%;
+}
+.name {
+  font-weight: $base-header-font-weight;
+  font-size: $base-header-font-size;
+  color: $base-text-color;
+}
+.detail {
+  display: flex;
+  align-items: center;
+  gap: $xs-spacer;
+
+  font-size: $base-font-size;
+}
+%status {
+  display: flex;
+  align-items: center;
+}
+.unarchived {
+  @extend %status;
+  color: $primary-color;
+}
+.status-icon {
+  color: inherit;
+}
+////////////////////////////////////////////////////////////////
+.middle {
+  width: 100%;
+  display: flex;
+}
+.left-section {
+  width: 40%;
+  padding: 0 $l-padding;
+}
+.right-section {
+  width: 60%;
+  padding: 0 $xxl-padding;
+  border-left: $primary-border;
+}
+.tile {
+  padding: $xl-padding 0;
+  &:not(:last-of-type) {
+    border-bottom: $primary-border;
+  }
+}
