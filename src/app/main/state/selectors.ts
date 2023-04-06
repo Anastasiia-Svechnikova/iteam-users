@@ -8,3 +8,8 @@ export const selectUser = createSelector(
   selectAuthFeature,
   (state: IMainState) => state.user,
 );
+
+export const selectUserAdminStatus = createSelector(
+  selectAuthFeature,
+  (state: IMainState) => state.isAdmin,
+);
