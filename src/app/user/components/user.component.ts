@@ -10,4 +10,5 @@ import { user } from './mock-user';
 })
 export class UserComponent {
   user = user.user;
+  skills = this.user.skills.split(' ');
 }

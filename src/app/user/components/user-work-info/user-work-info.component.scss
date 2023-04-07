@@ -1,0 +1,26 @@
+@import '/src/styles/_variables.scss';
+@import '/src/styles/_color-palette.scss';
+
+.subtitle-accent {
+  font-size: $accent-header-font-size;
+  font-weight: $accent-header-font-weight;
+  color: $primary-color;
+  text-transform: uppercase;
+}
+.subtitle-bold {
+  font-weight: $base-header-font-weight;
+}
+.subtitle-base {
+  color: $base-header-color;
+}
+.years {
+  color: $base-header-color;
+  font-size: $s-font-size;
+}
+.work-item {
+  padding-top: $xl-padding;
+  &:not(:last-of-type) {
+    padding-top: 0;
+    border-bottom: $base-border;
+  }
+}

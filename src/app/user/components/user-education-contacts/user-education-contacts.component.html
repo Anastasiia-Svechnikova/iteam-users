@@ -4,7 +4,7 @@
     class="contacts-tile">
     <h3 class="subtitle-accent">Education</h3>
     <p>{{ education.universityName }}</p>
-    <p class="years">
+    <p class="base-detail">
       {{ education.startDate | date : 'y' }}-
       {{ education.endDate | date : 'y' }}
     </p>
@@ -13,38 +13,26 @@
   <div class="contacts-tile">
     <h3 class="subtitle-accent">Address</h3>
     <p>{{ user.address || 'User address' }}</p>
-    <h4 class="subtitle-base">Postal Code</h4>
-    <p>{{ user.address || 'User address' }}</p>
+    <h4 class="base-detail">Postal Code</h4>
+    <p>{{ user.city || 'User city' }}</p>
   </div>
   <div class="contacts-tile">
     <h3 class="subtitle-accent">Invoice Address Info</h3>
-    <p>{{ user.individualEntrepreneurName || 'Name' }}</p>
-    <p>{{ user.individualEntrepreneurAddress || 'Address' }}</p>
-    <p>
-      {{
-        user.individualEntrepreneurIndividualTaxNumber ||
-          'Individual Tax Number'
-      }}
-    </p>
-    <p>
-      {{ user.individualEntrepreneurBankAccounNumber || 'Bank account number' }}
-    </p>
-    <p>{{ user.individualEntrepreneurBankName || 'Bank Name' }}</p>
-    <p>{{ user.individualEntrepreneurBankCode || 'Bank Code' }}</p>
-    <p>
-      {{ user.individualEntrepreneurBeneficiaryBank || 'Beneficiary Bank' }}
-    </p>
-    <p>{{ user.individualEntrepreneurSwiftCode || 'SWIFT Code' }}</p>
+    <ng-container *ngFor="let detail of bankInvoiceDataKeys">
+      <p
+        *ngIf="user[detail]"
+        class="base-detail">
+        {{ bankInvoiceDataMap.get(detail) }}:
+      </p>
+      <p>{{ user[detail] }}</p>
+    </ng-container>
   </div>
   <div class="contacts-tile">
     <h3 class="subtitle-accent">Social Links</h3>
-    <p>{{ user.address || 'User address' }}</p>
-    <h4 class="subtitle-base">Postal Code</h4>
-    <p>{{ user.address || 'User address' }}</p>
   </div>
   <div class="contacts-tile">
     <div
-      *ngFor="let socialLink of socialLinks"
+      *ngFor="let socialLink of socialLinksData"
       class="socials">
       <mat-icon
         *ngIf="user[socialLink]"

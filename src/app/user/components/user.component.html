@@ -9,24 +9,18 @@
         <h4 class="subtitle-accent">Position Description</h4>
         <p>{{ user.positionDescription || 'No description' }}</p>
       </div>
-      <div class="tile">4</div>
-      <div
-        *ngFor="let work of user.workHistory; let i = index"
-        class="tile">
-        <h4
-          *ngIf="i === 0"
-          class="subtitle-accent">
-          Work History
-        </h4>
-        <p class="subtitle-bold">{{ work.project }}</p>
-        <p class="years">
-          {{ work.startDate | date }}-
-          {{ work.endDate | date }}
-        </p>
-        <p class="subtitle-base">Position on Project</p>
-        <p>{{ work.positionOnProject }}</p>
-        <p class="subtitle-base">Responsibilities</p>
-        <p>{{ work.responsibility }}</p>
+      <div class="tile">
+        <h4 class="subtitle-accent">Skills</h4>
+        <mat-chip-listbox aria-label="User skills">
+          <mat-chip
+            *ngFor="let skill of skills"
+            class="chips">
+            {{ skill }}
+          </mat-chip>
+        </mat-chip-listbox>
+      </div>
+      <div class="tile">
+        <app-user-work-info [user]="user"></app-user-work-info>
       </div>
       <div class="tile">
         <h4 class="subtitle-accent">Portfolio</h4>

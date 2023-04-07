@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { userDetailsIconIndexedType } from 'src/app/shared/constants/constants';
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
+import { bankInvoiceData } from '../../constants/bank-invoice-data';
+import { socialLinks } from '../../constants/social-links';
 
 @Component({
   selector: 'app-user-education-contacts',
@@ -10,10 +11,7 @@ import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 })
 export class UserEducationContactsComponent {
   @Input() user!: IUserDetails;
-  socialLinks: userDetailsIconIndexedType[] = [
-    'upwork',
-    'github',
-    'linkedin',
-    'telegramTag',
-  ];
+  bankInvoiceDataMap = bankInvoiceData;
+  bankInvoiceDataKeys = Array.from(this.bankInvoiceDataMap.keys());
+  socialLinksData = socialLinks;
 }

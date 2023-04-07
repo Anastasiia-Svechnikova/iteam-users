@@ -34,7 +34,7 @@ export const user = {
     linkedin: 'gdfg',
     telegramTag: 'fdgfdg',
     individualEntrepreneurName: null,
-    individualEntrepreneurAddress: null,
+    individualEntrepreneurAddress: 'fgdfg',
     individualEntrepreneurIndividualTaxNumber: null,
     individualEntrepreneurBankAccounNumber: null,
     individualEntrepreneurBankName: null,

@@ -14,33 +14,29 @@
 .left {
   min-width: fit-content;
 }
-////////////////////////////////////////////////
+
 .subtitle-accent {
   font-size: $accent-header-font-size;
   font-weight: $accent-header-font-weight;
   color: $primary-color;
   text-transform: uppercase;
 }
-.subtitle-bold {
-  font-weight: $base-header-font-weight;
+
+.tile .chips {
+  background-color: $primary-color-light;
+  border: $primary-border;
+  pointer-events: none;
 }
-.subtitle-base {
-  color: $base-header-color;
-}
-.years {
-  color: $base-header-color;
-  font-size: $s-font-size;
-}
-////////////////////////////////////////////////////////////////
+
 .right-section {
   padding: 0 $xxl-padding;
-  border-left: $primary-border;
+  border-left: $base-border;
 }
 .tile {
   padding: $xl-padding 0;
 
   &:not(:last-of-type) {
-    border-bottom: $primary-border;
+    border-bottom: $base-border;
   }
 
   &:first-of-type {

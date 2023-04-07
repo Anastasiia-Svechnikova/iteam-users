@@ -1,20 +1,12 @@
 @import '/src/styles/_variables.scss';
 @import '/src/styles/_color-palette.scss';
 
-%subtitle {
+.subtitle-accent {
   font-size: $accent-header-font-size;
   font-weight: $accent-header-font-weight;
   color: $primary-color;
   text-transform: uppercase;
-}
-.subtitle-accent {
-  @extend %subtitle;
   color: $primary-color;
-}
-.subtitle-base {
-  @extend %subtitle;
-  color: $base-header-color;
-  font-size: $base-font-size;
 }
 .left-section {
   display: flex;
@@ -22,7 +14,8 @@
   gap: $l-spacer;
   padding: 0 $l-padding;
 }
-.years {
+
+.base-detail {
   color: $base-header-color;
 }
 .socials {
