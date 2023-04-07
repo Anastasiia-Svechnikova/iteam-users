@@ -4,7 +4,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 
 import { MainReducer } from './state/reducer';
-import { MainPageComponent } from './components/main-page/main-page.component';
 import { NavigationModule } from '../navigation/navigation.module';
 import { HeaderTitles } from '../navigation/constants/constants';
 import { SiteLayoutComponent } from '../navigation/components/site-layout/site-layout.component';
@@ -39,7 +38,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [MainPageComponent],
+  declarations: [],
   imports: [
     SharedModule,
     NavigationModule,

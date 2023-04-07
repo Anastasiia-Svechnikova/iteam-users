@@ -12,10 +12,6 @@ export const selectUser = createSelector(
 export const selectUserHasRole = createSelector(
   selectAuthFeature,
   (state: IMainState, props: string) => {
-    if (!state.user?.roles) {
-      return false;
-    } else {
-      return state.user?.roles.some((role) => role.value === props);
-    }
+    return state.user?.roles?.some((role) => role.value === props) || false;
   },
 );
