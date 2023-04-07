@@ -11,10 +11,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { AuthGuard } from './shared/guards/auth.guard';
-import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent],
 
   imports: [
     BrowserModule,
