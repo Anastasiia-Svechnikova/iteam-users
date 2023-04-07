@@ -34,10 +34,10 @@ export class AuthEffects {
               'Authorization',
               loginResponseData.tokens.accessToken,
             );
-            this.router.navigateByUrl('');
+            this.router.navigateByUrl('home');
             return [
               AuthActions.loginSuccess(),
-              loadUser({ user: loginResponseData.user }),
+              loadUser({ user: loginResponseData.user}),
             ];
           }),
           catchError((err) => {

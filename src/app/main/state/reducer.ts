@@ -16,6 +16,6 @@ export const MainReducer = createReducer(
 
   on(loadUser, (state, { user }) => ({
     ...state,
-    user: user,
+    user,
   })),
 );
