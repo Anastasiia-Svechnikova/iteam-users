@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 
-import { loadUser } from './actions';
+import { loadUser, mainUserActions } from './actions';
 
 export interface IMainState {
   user: IUserDetails | null;
@@ -15,6 +15,10 @@ export const MainReducer = createReducer(
   initialState,
 
   on(loadUser, (state, { user }) => ({
+    ...state,
+    user: user,
+  })),
+  on(mainUserActions.loadedCurrentUser, (state, { user }) => ({
     ...state,
     user: user,
   })),

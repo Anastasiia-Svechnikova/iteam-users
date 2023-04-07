@@ -34,6 +34,10 @@ export class AuthEffects {
               'Authorization',
               loginResponseData.tokens.accessToken,
             );
+            this.localStorageService.saveData(
+              'id',
+              String(loginResponseData.user.id),
+            );
             this.router.navigateByUrl('home');
             return [
               AuthActions.loginSuccess(),

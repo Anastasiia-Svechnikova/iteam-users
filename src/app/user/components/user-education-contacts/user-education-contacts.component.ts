@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IUserDetails } from 'src/app/shared/interfaces/user-details';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectCurrentUser } from 'src/app/main/state/selectors';
 import { bankInvoiceData } from '../../constants/bank-invoice-data';
 import { socialLinks } from '../../constants/social-links';
 
@@ -10,8 +11,11 @@ import { socialLinks } from '../../constants/social-links';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserEducationContactsComponent {
-  @Input() user!: IUserDetails;
+  user$ = this.store.select(selectCurrentUser);
+
   bankInvoiceDataMap = bankInvoiceData;
   bankInvoiceDataKeys = Array.from(this.bankInvoiceDataMap.keys());
   socialLinksData = socialLinks;
+
+  constructor(private store: Store) {}
 }

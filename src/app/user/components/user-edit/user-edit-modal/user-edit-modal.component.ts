@@ -6,9 +6,10 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { UserDataEditSections } from 'src/app/user/models.ts/user-data-edit-sections';
 
 export interface DialogData {
-  data: any;
+  data: UserDataEditSections;
 }
 @Component({
   selector: 'app-user-edit-modal',
@@ -17,7 +18,7 @@ export interface DialogData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserEditModalComponent implements OnInit {
-  messageForm!: FormGroup;
+  userEditForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -29,13 +30,13 @@ export class UserEditModalComponent implements OnInit {
   }
 
   private createForm(): void {
-    this.messageForm = this.fb.group({
+    this.userEditForm = this.fb.group({
       customControl: ['', Validators.required],
     });
   }
 
   onSubmit(): void {
-    const newMessage = 'ok';
+    const newMessage = this.userEditForm.value;
     this.dialogRef.close(newMessage);
   }
 }

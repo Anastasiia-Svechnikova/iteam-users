@@ -15,7 +15,7 @@ import { UserPersonalInfoComponent } from './components/user-personal-info/user-
 import { UserWorkInfoComponent } from './components/user-work-info/user-work-info.component';
 import { UserEditModalComponent } from './components/user-edit/user-edit-modal/user-edit-modal.component';
 import { StartEditComponent } from './components/user-edit/start-edit/start-edit.component';
-import { UserEditFormComponent } from './components/user-edit/user-edit-form/user-edit-form.component';
+import { EmptyMessageComponent } from './components/empty-message/empty-message.component';
 
 const routes = [
   {
@@ -32,7 +32,7 @@ const routes = [
     UserEducationContactsComponent,
     UserWorkInfoComponent,
     StartEditComponent,
-    UserEditFormComponent,
+    EmptyMessageComponent,
   ],
   imports: [
     MatInputModule,

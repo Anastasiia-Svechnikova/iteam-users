@@ -12,9 +12,9 @@
 
   <form
     class="form"
-    [formGroup]="messageForm">
+    [formGroup]="userEditForm">
     <mat-form-field appearance="fill">
-      <mat-label>Name</mat-label>
+      <mat-label>Custom Control</mat-label>
       <input
         matInput
         formControlName="customControl" />
@@ -23,7 +23,7 @@
       <button
         mat-button
         type="submit"
-        [disabled]="!messageForm.valid"
+        [disabled]="!userEditForm.valid"
         (click)="onSubmit()">
         Submit
       </button>

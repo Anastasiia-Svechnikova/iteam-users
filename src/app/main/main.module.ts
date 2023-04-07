@@ -8,6 +8,8 @@ import { HeaderTitles } from '../navigation/constants/constants';
 import { SiteLayoutComponent } from '../navigation/components/site-layout/site-layout.component';
 import { HomeComponent } from '../home/home.component';
 import { SharedModule } from '../shared/shared.module';
+import { EffectsModule } from '@ngrx/effects';
+import { MainUserEffects } from './state/effects';
 
 const routes: Routes = [
   {
@@ -45,6 +47,7 @@ const routes: Routes = [
     SharedModule,
     NavigationModule,
     StoreModule.forFeature('main', MainReducer),
+    EffectsModule.forFeature([MainUserEffects]),
     RouterModule.forChild(routes),
   ],
 })

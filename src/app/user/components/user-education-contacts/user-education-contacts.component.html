@@ -1,49 +1,51 @@
-<div class="left-section">
-  <div
-    *ngFor="let education of user.educationInfo"
-    class="contacts-tile">
-    <h3 class="subtitle-accent">Education</h3>
-    <p>{{ education.universityName }}</p>
-    <p class="base-detail">
-      {{ education.startDate | date : 'y' }}-
-      {{ education.endDate | date : 'y' }}
-    </p>
-    <p>{{ education.pricingModel }}</p>
-  </div>
-  <div class="contacts-tile">
-    <h3 class="subtitle-accent">Address</h3>
-    <p>{{ user.address || 'User address' }}</p>
-    <h4 class="base-detail">Postal Code</h4>
-    <p>{{ user.city || 'User city' }}</p>
-  </div>
-  <div class="contacts-tile">
-    <h3 class="subtitle-accent">Invoice Address Info</h3>
-    <ng-container *ngFor="let detail of bankInvoiceDataKeys">
-      <p
-        *ngIf="user[detail]"
-        class="base-detail">
-        {{ bankInvoiceDataMap.get(detail) }}:
-      </p>
-      <p>{{ user[detail] }}</p>
-    </ng-container>
-  </div>
-  <div class="contacts-tile">
-    <h3 class="subtitle-accent">Social Links</h3>
-  </div>
-  <div class="contacts-tile">
+<div class="wrapper">
+  <div *ngIf="user$ | async as user">
     <div
-      *ngFor="let socialLink of socialLinksData"
-      class="socials">
-      <mat-icon
-        *ngIf="user[socialLink]"
-        [svgIcon]="socialLink"></mat-icon>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        class="link"
-        [href]="user[socialLink]">
-        {{ socialLink | titlecase }}
-      </a>
+      *ngFor="let education of user.educationInfo"
+      class="contacts-tile">
+      <h3 class="subtitle-accent">Education</h3>
+      <p>{{ education.universityName }}</p>
+      <p class="base-detail">
+        {{ education.startDate | date : 'y' }}-
+        {{ education.endDate | date : 'y' }}
+      </p>
+      <p>{{ education.pricingModel }}</p>
+    </div>
+    <div class="contacts-tile">
+      <h3 class="subtitle-accent">Address</h3>
+      <p>{{ user.address || 'No address information' }}</p>
+      <h4 class="base-detail">Postal Code</h4>
+      <p>{{ user.city || 'No city information' }}</p>
+    </div>
+    <div class="contacts-tile">
+      <h3 class="subtitle-accent">Invoice Address Info</h3>
+      <ng-container *ngFor="let detail of bankInvoiceDataKeys">
+        <p
+          *ngIf="user[detail]"
+          class="base-detail">
+          {{ bankInvoiceDataMap.get(detail) }}:
+        </p>
+        <p>{{ user[detail] }}</p>
+      </ng-container>
+    </div>
+    <div class="contacts-tile">
+      <h3 class="subtitle-accent">Social Links</h3>
+    </div>
+    <div class="contacts-tile">
+      <div
+        *ngFor="let socialLink of socialLinksData"
+        class="socials">
+        <div *ngIf="user[socialLink]">
+          <mat-icon [svgIcon]="socialLink"></mat-icon>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link"
+            [href]="user[socialLink]">
+            {{ socialLink | titlecase }}
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

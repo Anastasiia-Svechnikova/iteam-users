@@ -40,6 +40,10 @@
   @extend %status;
   color: $primary-color;
 }
+.archived {
+  @extend %status;
+  color: $base-color;
+}
 .status-icon {
   color: inherit;
 }

@@ -1,4 +1,6 @@
-<div class="upper">
+<div
+  class="upper"
+  *ngIf="user$ | async as user">
   <div class="bio">
     <div class="avatar"></div>
     <div class="info">
@@ -25,14 +27,17 @@
   <div class="terms">
     <p class="detail">
       <span class="term">Start Date:</span>
-
       <span class="term-detail">{{ user.startDate | date }}</span>
     </p>
-    <p class="detail">
+    <p
+      *ngIf="user.endDate"
+      class="detail">
       <span class="term">End Date:</span>
       <span class="term-detail">{{ user.endDate | date }}</span>
     </p>
-    <p class="detail">
+    <p
+      *ngIf="user.endReason"
+      class="detail">
       <span class="term">Reason:</span>
       <span class="term-detail">{{ user.endReason }}</span>
     </p>

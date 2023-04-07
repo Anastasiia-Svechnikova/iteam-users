@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IUserDetails } from 'src/app/shared/interfaces/user-details';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectCurrentUser } from 'src/app/main/state/selectors';
 
 @Component({
   selector: 'app-user-work-info',
@@ -8,5 +9,7 @@ import { IUserDetails } from 'src/app/shared/interfaces/user-details';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserWorkInfoComponent {
-  @Input() user!: IUserDetails;
+  user$ = this.store.select(selectCurrentUser);
+
+  constructor(private store: Store) {}
 }

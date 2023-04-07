@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntil } from 'rxjs';
 import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
+import { UserDataEditSections } from 'src/app/user/models.ts/user-data-edit-sections';
 import { UserEditModalComponent } from '../user-edit-modal/user-edit-modal.component';
 
 @Component({
@@ -11,7 +12,7 @@ import { UserEditModalComponent } from '../user-edit-modal/user-edit-modal.compo
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StartEditComponent extends UnSubscriberComponent {
-  @Input() dataToEdit!: any;
+  @Input() dataToEdit!: UserDataEditSections;
   constructor(public dialog: MatDialog) {
     super();
   }
@@ -22,9 +23,6 @@ export class StartEditComponent extends UnSubscriberComponent {
       data: { data: this.dataToEdit },
     });
 
-    dialogRef
-      .afterClosed()
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(console.log);
+    dialogRef.afterClosed().pipe(takeUntil(this.destroyed$)).subscribe();
   }
 }

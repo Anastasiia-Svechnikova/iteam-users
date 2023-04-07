@@ -1,27 +1,39 @@
 <div class="wrapper">
-  <app-user-personal-info [user]="user"></app-user-personal-info>
+  <app-user-personal-info></app-user-personal-info>
   <div class="middle">
     <div class="left">
-      <app-user-education-contacts [user]="user"></app-user-education-contacts>
+      <app-user-education-contacts></app-user-education-contacts>
     </div>
     <div class="right-section">
       <div class="tile">
-        <h4 class="subtitle-accent">Position Description</h4>
-        <app-start-edit dataToEdit="description"></app-start-edit>
-        <p>{{ user.positionDescription || 'No description' }}</p>
+        <div class="title-edit-bar">
+          <h4 class="subtitle-accent">Position Description</h4>
+          <app-start-edit
+            class="edit-btn"
+            [dataToEdit]="dataToEditSections.Description"></app-start-edit>
+        </div>
+
+        <p>
+          {{
+            (user$ | async)?.positionDescription || 'There is no description'
+          }}
+        </p>
       </div>
       <div class="tile">
         <h4 class="subtitle-accent">Skills</h4>
         <mat-chip-listbox aria-label="User skills">
           <mat-chip
-            *ngFor="let skill of skills"
+            *ngFor="let skill of skills$ | async"
             class="chips">
             {{ skill }}
           </mat-chip>
         </mat-chip-listbox>
+        <app-empty-message
+          *ngIf="!(user$ | async)?.skills"
+          [title]="'skills'"></app-empty-message>
       </div>
       <div class="tile">
-        <app-user-work-info [user]="user"></app-user-work-info>
+        <app-user-work-info></app-user-work-info>
       </div>
       <div class="tile">
         <h4 class="subtitle-accent">Portfolio</h4>
