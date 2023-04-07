@@ -1,0 +1,32 @@
+<div mat-dialog-content>
+  <div class="container">
+    <div class="close">
+      <button
+        mat-mini-fab
+        aria-label="Close"
+        (click)="dialogRef.close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <form
+    class="form"
+    [formGroup]="messageForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        formControlName="customControl" />
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button
+        mat-button
+        type="submit"
+        [disabled]="!messageForm.valid"
+        (click)="onSubmit()">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

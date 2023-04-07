@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
@@ -6,11 +6,12 @@ import { selectRequestingStatus } from '../state/selectors';
 
 @Component({
   template: '',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export abstract class AbstractAuthComponent {
   isRequesting = this.store.select(selectRequestingStatus);
-  abstract title:string;
-  abstract isRegister:boolean;
+  abstract title: string;
+  abstract isRegister: boolean;
   form: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [Validators.required]),
