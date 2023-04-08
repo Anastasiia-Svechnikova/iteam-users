@@ -4,7 +4,10 @@
   <div class="bio">
     <div class="avatar"></div>
     <div class="info">
-      <p class="name">{{ user.name || 'Name Surname' }}</p>
+      <p class="name">{{ user.name || 'No Name ' }}</p>
+      <app-start-edit
+        [mode]="upperBarModes.full"
+        [section]="sectionTypes.personalDetails"></app-start-edit>
       <p class="detail">
         Status:
         <span [ngClass]="user.status">
@@ -13,14 +16,20 @@
         </span>
       </p>
       <p class="detail">
-        <mat-icon class="status-icon">card_giftcard</mat-icon>
-        <span>{{ user.birthday || 'Birthday' }}</span>
+        <mat-icon
+          *ngIf="user.birthday"
+          class="status-icon">
+          card_giftcard
+        </mat-icon>
+        <span>{{ user.birthday }}</span>
+      </p>
+      <p
+        *ngIf="user.phone"
+        class="detail">
+        {{ user.phone }}
       </p>
       <p class="detail">
-        {{ user.phone || 'Phone Number' }}
-      </p>
-      <p class="detail">
-        {{ user.email || 'Email' }}
+        {{ user.email }}
       </p>
     </div>
   </div>

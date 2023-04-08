@@ -6,10 +6,10 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UserDataEditSections } from 'src/app/user/models.ts/user-data-edit-sections';
+import { UserProfileInfoSections } from 'src/app/user/models.ts/user-profile-info-sections';
 
 export interface DialogData {
-  data: UserDataEditSections;
+  data: UserProfileInfoSections;
 }
 @Component({
   selector: 'app-user-edit-modal',

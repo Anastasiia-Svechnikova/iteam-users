@@ -16,7 +16,7 @@
         "prettier"
       ],
       "rules": {
-        "change-detection-strategy/on-push": "error" ,
+        "change-detection-strategy/on-push": "error",
         "@angular-eslint/directive-selector": [
           "error",
           {
@@ -83,5 +83,5 @@
       }
     }
   ],
-  "plugins": [ "change-detection-strategy" ]
+  "plugins": ["change-detection-strategy"]
 }

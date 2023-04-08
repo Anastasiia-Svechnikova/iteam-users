@@ -1,4 +1,4 @@
-export enum UserEditFormTypes {
+export enum UserEditFormFieldsTypes {
   'chips' = 'chips',
-  'text' = 'text',
+  'textInputs' = 'textInputs',
 }

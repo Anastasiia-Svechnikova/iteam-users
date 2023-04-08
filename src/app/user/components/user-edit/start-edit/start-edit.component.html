@@ -1,7 +1,21 @@
-<button
-  mat-icon-button
-  class="edit-btn"
-  aria-label="Example icon button with a vertical three dot icon"
-  (click)="openDialog()">
-  <mat-icon>edit</mat-icon>
-</button>
+<div class="wrapper">
+  <h3 class="subtitle-accent">
+    {{ title }}
+  </h3>
+  <button
+    *ngIf="mode !== modeTypes.noControls"
+    mat-icon-button
+    class="icon-btn"
+    aria-label="Edit content button"
+    (click)="openDialog()">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button
+    *ngIf="mode !== modeTypes.noControls"
+    mat-icon-button
+    class="icon-btn"
+    aria-label="Copy content button"
+    (click)="openDialog()">
+    <mat-icon>content_copy</mat-icon>
+  </button>
+</div>

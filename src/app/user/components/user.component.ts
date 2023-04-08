@@ -3,9 +3,8 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { mainUserActions } from 'src/app/main/state/actions';
 import { selectCurrentUser } from 'src/app/main/state/selectors';
-import { UserDataEditSections } from '../models.ts/user-data-edit-sections';
-
-import { user } from './mock-user';
+import { UserProfileInfoSections } from '../models.ts/user-profile-info-sections';
+import { UserProfileSectionsUpperBarMode } from '../models.ts/user-profile-sections-upper-bar-modes';
 
 @Component({
   selector: 'app-user',
@@ -14,11 +13,10 @@ import { user } from './mock-user';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent implements OnInit {
-  user = user.user;
   user$ = this.store.select(selectCurrentUser);
   skills$ = this.user$.pipe(map((user) => user?.skills?.split(' ')));
-  skills = this.user.skills.split(' ');
-  dataToEditSections = UserDataEditSections;
+  sectionTypes = UserProfileInfoSections;
+  upperBarModes = UserProfileSectionsUpperBarMode;
 
   constructor(private store: Store) {}
   ngOnInit(): void {

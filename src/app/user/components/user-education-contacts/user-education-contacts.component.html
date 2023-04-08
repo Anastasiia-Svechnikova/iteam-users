@@ -1,9 +1,11 @@
 <div class="wrapper">
   <div *ngIf="user$ | async as user">
+    <app-start-edit
+      [mode]="upperBarModes.full"
+      [section]="sectionTypes.education"></app-start-edit>
     <div
       *ngFor="let education of user.educationInfo"
       class="contacts-tile">
-      <h3 class="subtitle-accent">Education</h3>
       <p>{{ education.universityName }}</p>
       <p class="base-detail">
         {{ education.startDate | date : 'y' }}-
@@ -12,13 +14,17 @@
       <p>{{ education.pricingModel }}</p>
     </div>
     <div class="contacts-tile">
-      <h3 class="subtitle-accent">Address</h3>
+      <app-start-edit
+        [mode]="upperBarModes.full"
+        [section]="sectionTypes.address"></app-start-edit>
       <p>{{ user.address || 'No address information' }}</p>
       <h4 class="base-detail">Postal Code</h4>
       <p>{{ user.city || 'No city information' }}</p>
     </div>
     <div class="contacts-tile">
-      <h3 class="subtitle-accent">Invoice Address Info</h3>
+      <app-start-edit
+        [mode]="upperBarModes.full"
+        [section]="sectionTypes.invoiceDetails"></app-start-edit>
       <ng-container *ngFor="let detail of bankInvoiceDataKeys">
         <p
           *ngIf="user[detail]"
@@ -29,7 +35,9 @@
       </ng-container>
     </div>
     <div class="contacts-tile">
-      <h3 class="subtitle-accent">Social Links</h3>
+      <app-start-edit
+        [mode]="upperBarModes.full"
+        [section]="sectionTypes.socials"></app-start-edit>
     </div>
     <div class="contacts-tile">
       <div

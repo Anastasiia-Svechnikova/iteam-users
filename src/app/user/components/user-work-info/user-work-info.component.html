@@ -1,4 +1,6 @@
-<h4 class="subtitle-accent">Work History</h4>
+<app-start-edit
+  [mode]="upperBarModes.full"
+  [section]="sectionTypes.workHistory"></app-start-edit>
 <ng-container *ngIf="user$ | async as user">
   <div
     *ngFor="let work of user.workHistory; let i = index"

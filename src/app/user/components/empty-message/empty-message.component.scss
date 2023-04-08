@@ -1,0 +1,7 @@
+@import '/src/styles/_variables.scss';
+@import '/src/styles/_color-palette.scss';
+
+.empty {
+  margin: $s-spacer 0;
+  color: $base-color;
+}

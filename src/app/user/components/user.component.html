@@ -7,20 +7,21 @@
     <div class="right-section">
       <div class="tile">
         <div class="title-edit-bar">
-          <h4 class="subtitle-accent">Position Description</h4>
           <app-start-edit
-            class="edit-btn"
-            [dataToEdit]="dataToEditSections.Description"></app-start-edit>
+            [mode]="upperBarModes.full"
+            [section]="sectionTypes.description"></app-start-edit>
         </div>
-
         <p>
-          {{
-            (user$ | async)?.positionDescription || 'There is no description'
-          }}
+          {{ (user$ | async)?.positionDescription }}
         </p>
+        <app-empty-message
+          *ngIf="!(user$ | async)?.positionDescription"
+          [title]="'description'"></app-empty-message>
       </div>
       <div class="tile">
-        <h4 class="subtitle-accent">Skills</h4>
+        <app-start-edit
+          [mode]="upperBarModes.full"
+          [section]="sectionTypes.skills"></app-start-edit>
         <mat-chip-listbox aria-label="User skills">
           <mat-chip
             *ngFor="let skill of skills$ | async"
@@ -36,7 +37,9 @@
         <app-user-work-info></app-user-work-info>
       </div>
       <div class="tile">
-        <h4 class="subtitle-accent">Portfolio</h4>
+        <app-start-edit
+          [mode]="upperBarModes.noControls"
+          [section]="sectionTypes.portfolio"></app-start-edit>
       </div>
     </div>
   </div>
