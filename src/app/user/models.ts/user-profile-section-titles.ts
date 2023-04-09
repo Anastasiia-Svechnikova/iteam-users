@@ -5,7 +5,7 @@ export enum UserProfileInfoSectionTitles {
   'invoiceDetails' = 'Bank Invoice Details',
   'description' = 'Description',
   'skills' = 'Skills',
-  'workHistory' = 'WorkHistory',
+  'workHistory' = 'Work History',
   'portfolio' = 'Portfolio',
   'socials' = 'Social Links',
 }

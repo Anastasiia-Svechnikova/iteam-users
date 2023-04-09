@@ -3,7 +3,7 @@
     {{ title }}
   </h3>
   <button
-    *ngIf="mode !== modeTypes.noControls"
+    *ngIf="mode !== 'noControls'"
     mat-icon-button
     class="icon-btn"
     aria-label="Edit content button"
@@ -11,7 +11,7 @@
     <mat-icon>edit</mat-icon>
   </button>
   <button
-    *ngIf="mode !== modeTypes.noControls"
+    *ngIf="mode !== 'noControls'"
     mat-icon-button
     class="icon-btn"
     aria-label="Copy content button"

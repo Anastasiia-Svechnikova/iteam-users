@@ -5,10 +5,7 @@
   display: flex;
   flex-direction: column;
   gap: $xxl-spacer;
-  padding: $m-padding;
-}
-.edit-btn {
-  display: inline-block;
+  padding: $xl-padding $m-padding;
 }
 .middle {
   width: 100%;
@@ -17,21 +14,11 @@
 .left {
   min-width: fit-content;
 }
-.title-edit-bar {
-  display: flex;
-  align-items: baseline;
-}
 .subtitle-accent {
   font-size: $accent-header-font-size;
   font-weight: $accent-header-font-weight;
   color: $primary-color;
   text-transform: uppercase;
-}
-
-.tile .chips {
-  background-color: $primary-color-light;
-  border: $primary-border;
-  pointer-events: none;
 }
 
 .right-section {

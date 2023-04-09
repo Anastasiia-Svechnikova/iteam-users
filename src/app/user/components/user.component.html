@@ -1,4 +1,6 @@
-<div class="wrapper">
+<div
+  *ngIf="user$ | async as user"
+  class="wrapper">
   <app-user-personal-info></app-user-personal-info>
   <div class="middle">
     <div class="left">
@@ -6,40 +8,26 @@
     </div>
     <div class="right-section">
       <div class="tile">
-        <div class="title-edit-bar">
-          <app-start-edit
-            [mode]="upperBarModes.full"
-            [section]="sectionTypes.description"></app-start-edit>
-        </div>
+        <app-section-upper-bar
+          mode="full"
+          [section]="sectionTypes.description"></app-section-upper-bar>
         <p>
-          {{ (user$ | async)?.positionDescription }}
+          {{ user.positionDescription }}
         </p>
         <app-empty-message
-          *ngIf="!(user$ | async)?.positionDescription"
+          *ngIf="!user.positionDescription"
           [title]="'description'"></app-empty-message>
       </div>
       <div class="tile">
-        <app-start-edit
-          [mode]="upperBarModes.full"
-          [section]="sectionTypes.skills"></app-start-edit>
-        <mat-chip-listbox aria-label="User skills">
-          <mat-chip
-            *ngFor="let skill of skills$ | async"
-            class="chips">
-            {{ skill }}
-          </mat-chip>
-        </mat-chip-listbox>
-        <app-empty-message
-          *ngIf="!(user$ | async)?.skills"
-          [title]="'skills'"></app-empty-message>
+        <app-user-skills></app-user-skills>
       </div>
       <div class="tile">
         <app-user-work-info></app-user-work-info>
       </div>
       <div class="tile">
-        <app-start-edit
-          [mode]="upperBarModes.noControls"
-          [section]="sectionTypes.portfolio"></app-start-edit>
+        <app-section-upper-bar
+          mode="noControls"
+          [section]="sectionTypes.portfolio"></app-section-upper-bar>
       </div>
     </div>
   </div>

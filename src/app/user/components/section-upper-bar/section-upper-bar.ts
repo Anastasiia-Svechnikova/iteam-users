@@ -7,24 +7,22 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntil } from 'rxjs';
 import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
-import { UserProfileInfoSectionTitles } from 'src/app/user/constants/user-profile-section-titles';
 import { UserProfileInfoSections } from 'src/app/user/models.ts/user-profile-info-sections';
-import { UserProfileSectionsUpperBarMode } from 'src/app/user/models.ts/user-profile-sections-upper-bar-modes';
-import { UserEditModalComponent } from '../user-edit-modal/user-edit-modal.component';
+import { UserProfileInfoSectionTitles } from '../../models.ts/user-profile-section-titles';
+import { UserEditModalComponent } from '../user-edit/user-edit-modal/user-edit-modal.component';
 
 @Component({
-  selector: 'app-start-edit',
-  templateUrl: './start-edit.component.html',
-  styleUrls: ['./start-edit.component.scss'],
+  selector: 'app-section-upper-bar',
+  templateUrl: './section-upper-bar.component.html',
+  styleUrls: ['./section-upper-bar.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StartEditComponent
+export class SectionUpperBarComponent
   extends UnSubscriberComponent
   implements OnInit
 {
   @Input() section!: UserProfileInfoSections;
-  @Input() mode!: UserProfileSectionsUpperBarMode;
-  modeTypes = UserProfileSectionsUpperBarMode;
+  @Input() mode!: 'full' | 'noControls';
   title!: string;
 
   constructor(public dialog: MatDialog) {
@@ -37,7 +35,7 @@ export class StartEditComponent
   openDialog(): void {
     const dialogRef = this.dialog.open(UserEditModalComponent, {
       autoFocus: false,
-      data: { data: this.section },
+      data: { section: this.section },
     });
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroyed$)).subscribe();

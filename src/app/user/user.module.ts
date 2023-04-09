@@ -14,8 +14,9 @@ import { UserEducationContactsComponent } from './components/user-education-cont
 import { UserPersonalInfoComponent } from './components/user-personal-info/user-personal-info.component';
 import { UserWorkInfoComponent } from './components/user-work-info/user-work-info.component';
 import { UserEditModalComponent } from './components/user-edit/user-edit-modal/user-edit-modal.component';
-import { StartEditComponent } from './components/user-edit/start-edit/start-edit.component';
+import { SectionUpperBarComponent } from './components/section-upper-bar/section-upper-bar';
 import { EmptyMessageComponent } from './components/empty-message/empty-message.component';
+import { UserSkillsComponent } from './components/user-skills/user-skills.component';
 
 const routes = [
   {
@@ -31,8 +32,9 @@ const routes = [
     UserPersonalInfoComponent,
     UserEducationContactsComponent,
     UserWorkInfoComponent,
-    StartEditComponent,
+    SectionUpperBarComponent,
     EmptyMessageComponent,
+    UserSkillsComponent,
   ],
   imports: [
     MatInputModule,

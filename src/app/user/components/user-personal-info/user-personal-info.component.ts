@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectCurrentUser } from 'src/app/main/state/selectors';
+import { UserPersonalInfoStatusIcons } from '../../constants/user-personal-info-status-icons';
 import { UserProfileInfoSections } from '../../models.ts/user-profile-info-sections';
-import { UserProfileSectionsUpperBarMode } from '../../models.ts/user-profile-sections-upper-bar-modes';
 
 @Component({
   selector: 'app-user-personal-info',
@@ -11,8 +11,8 @@ import { UserProfileSectionsUpperBarMode } from '../../models.ts/user-profile-se
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserPersonalInfoComponent {
-  sectionTypes = UserProfileInfoSections;
-  upperBarModes = UserProfileSectionsUpperBarMode;
   user$ = this.store.select(selectCurrentUser);
+  sectionTypes = UserProfileInfoSections;
+  statusIconTypes = UserPersonalInfoStatusIcons;
   constructor(private store: Store) {}
 }

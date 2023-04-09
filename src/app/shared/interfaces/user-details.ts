@@ -50,7 +50,7 @@ export interface IUserDetails {
   cv: null | IUserAssignedCvData;
   workType: IUserWorkType | null;
   roles: IUserPermissionsRole[];
-  token: IAccessToken;
+  token?: IAccessToken;
   leadingInProjects: IProjectDetailsData[];
   participatingInProjects: IProjectDetailsData[];
   attachedAttachments: IUserOrProjectAttachment[];

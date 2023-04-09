@@ -1,26 +1,31 @@
 <div
-  class="upper"
+  class="wrapper"
   *ngIf="user$ | async as user">
   <div class="bio">
     <div class="avatar"></div>
     <div class="info">
-      <p class="name">{{ user.name || 'No Name ' }}</p>
-      <app-start-edit
-        [mode]="upperBarModes.full"
-        [section]="sectionTypes.personalDetails"></app-start-edit>
-      <p class="detail">
+      <div class="name-wrapper">
+        <p class="name">{{ user.name || 'No Name' }}</p>
+        <span class="spacer"></span>
+        <app-section-upper-bar
+          mode="full"
+          [section]="sectionTypes.personalDetails"></app-section-upper-bar>
+      </div>
+      <p
+        *ngIf="user.status"
+        class="detail">
         Status:
         <span [ngClass]="user.status">
           {{ user.status | titlecase }}
-          <mat-icon class="status-icon">unarchived</mat-icon>
+          <mat-icon class="status-icon">
+            {{ statusIconTypes.get(user.status) }}
+          </mat-icon>
         </span>
       </p>
-      <p class="detail">
-        <mat-icon
-          *ngIf="user.birthday"
-          class="status-icon">
-          card_giftcard
-        </mat-icon>
+      <p
+        *ngIf="user.birthday"
+        class="detail">
+        <mat-icon class="status-icon">card_giftcard</mat-icon>
         <span>{{ user.birthday }}</span>
       </p>
       <p
@@ -33,7 +38,9 @@
       </p>
     </div>
   </div>
-  <div class="terms">
+  <div
+    *ngIf="user.startDate"
+    class="terms">
     <p class="detail">
       <span class="term">Start Date:</span>
       <span class="term-detail">{{ user.startDate | date }}</span>

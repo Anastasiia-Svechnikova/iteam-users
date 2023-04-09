@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectCurrentUser } from 'src/app/main/state/selectors';
-import { bankInvoiceData } from '../../constants/bank-invoice-data';
+import { userBankInfoTitles } from '../../constants/bank-invoice-data';
 import { socialLinks } from '../../constants/social-links';
 import { UserProfileInfoSections } from '../../models.ts/user-profile-info-sections';
-import { UserProfileSectionsUpperBarMode } from '../../models.ts/user-profile-sections-upper-bar-modes';
+import {
+  selectIsCurrentUserBankDataEmpty,
+  selectIsCurrentUserLinksDataEmpty,
+} from '../../state/selectors';
 
 @Component({
   selector: 'app-user-education-contacts',
@@ -14,10 +17,15 @@ import { UserProfileSectionsUpperBarMode } from '../../models.ts/user-profile-se
 })
 export class UserEducationContactsComponent {
   user$ = this.store.select(selectCurrentUser);
-  sectionTypes = UserProfileInfoSections;
-  upperBarModes = UserProfileSectionsUpperBarMode;
-  bankInvoiceDataMap = bankInvoiceData;
-  bankInvoiceDataKeys = Array.from(this.bankInvoiceDataMap.keys());
+  isUserBankDataEmpty$ = this.store.select(selectIsCurrentUserBankDataEmpty);
+  isCurrentUserLinksDataEmpty$ = this.store.select(
+    selectIsCurrentUserLinksDataEmpty,
+  );
+
+  userProfileInfoSections = UserProfileInfoSections;
+
+  userBankInfoTitles = userBankInfoTitles;
+  userBankInfoTitlesKeys = Array.from(userBankInfoTitles.keys());
   socialLinksData = socialLinks;
 
   constructor(private store: Store) {}

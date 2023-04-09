@@ -9,7 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserProfileInfoSections } from 'src/app/user/models.ts/user-profile-info-sections';
 
 export interface DialogData {
-  data: UserProfileInfoSections;
+  section: UserProfileInfoSections;
 }
 @Component({
   selector: 'app-user-edit-modal',
@@ -31,12 +31,11 @@ export class UserEditModalComponent implements OnInit {
 
   private createForm(): void {
     this.userEditForm = this.fb.group({
-      customControl: ['', Validators.required],
+      customControl: [this.data.section, Validators.required],
     });
   }
 
   onSubmit(): void {
-    const newMessage = this.userEditForm.value;
-    this.dialogRef.close(newMessage);
+    this.dialogRef.close();
   }
 }

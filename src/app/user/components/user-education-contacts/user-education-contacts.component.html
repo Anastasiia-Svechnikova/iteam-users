@@ -1,49 +1,68 @@
 <div class="wrapper">
   <div *ngIf="user$ | async as user">
-    <app-start-edit
-      [mode]="upperBarModes.full"
-      [section]="sectionTypes.education"></app-start-edit>
+    <app-section-upper-bar
+      mode="full"
+      [section]="userProfileInfoSections.education"></app-section-upper-bar>
     <div
       *ngFor="let education of user.educationInfo"
       class="contacts-tile">
       <p>{{ education.universityName }}</p>
-      <p class="base-detail">
+      <p
+        *ngIf="education.startDate"
+        class="base-detail">
         {{ education.startDate | date : 'y' }}-
         {{ education.endDate | date : 'y' }}
       </p>
       <p>{{ education.pricingModel }}</p>
     </div>
+    <app-empty-message
+      *ngIf="!user.educationInfo.length"
+      [title]="'skills'"></app-empty-message>
+
     <div class="contacts-tile">
-      <app-start-edit
-        [mode]="upperBarModes.full"
-        [section]="sectionTypes.address"></app-start-edit>
-      <p>{{ user.address || 'No address information' }}</p>
+      <app-section-upper-bar
+        mode="full"
+        [section]="userProfileInfoSections.address"></app-section-upper-bar>
+      <p>{{ user.address }}</p>
+      <app-empty-message
+        *ngIf="!user.address"
+        [title]="'address'"></app-empty-message>
       <h4 class="base-detail">Postal Code</h4>
-      <p>{{ user.city || 'No city information' }}</p>
+      <p>{{ user.city }}</p>
+      <app-empty-message
+        *ngIf="!user.city"
+        [title]="'city'"></app-empty-message>
     </div>
+
     <div class="contacts-tile">
-      <app-start-edit
-        [mode]="upperBarModes.full"
-        [section]="sectionTypes.invoiceDetails"></app-start-edit>
-      <ng-container *ngFor="let detail of bankInvoiceDataKeys">
+      <app-section-upper-bar
+        mode="full"
+        [section]="
+          userProfileInfoSections.invoiceDetails
+        "></app-section-upper-bar>
+      <ng-container *ngFor="let title of userBankInfoTitlesKeys">
         <p
-          *ngIf="user[detail]"
+          *ngIf="user[title]"
           class="base-detail">
-          {{ bankInvoiceDataMap.get(detail) }}:
+          {{ userBankInfoTitles.get(title) }}:
         </p>
-        <p>{{ user[detail] }}</p>
+        <p>{{ user[title] }}</p>
       </ng-container>
+
+      <app-empty-message
+        *ngIf="isUserBankDataEmpty$ | async"
+        [title]="'bank invoice info'"></app-empty-message>
     </div>
     <div class="contacts-tile">
-      <app-start-edit
-        [mode]="upperBarModes.full"
-        [section]="sectionTypes.socials"></app-start-edit>
+      <app-section-upper-bar
+        mode="full"
+        [section]="userProfileInfoSections.socials"></app-section-upper-bar>
     </div>
     <div class="contacts-tile">
-      <div
+      <ng-container
         *ngFor="let socialLink of socialLinksData"
         class="socials">
-        <div *ngIf="user[socialLink]">
+        <ng-container *ngIf="user[socialLink]">
           <mat-icon [svgIcon]="socialLink"></mat-icon>
           <a
             target="_blank"
@@ -52,8 +71,11 @@
             [href]="user[socialLink]">
             {{ socialLink | titlecase }}
           </a>
-        </div>
-      </div>
+        </ng-container>
+      </ng-container>
+      <app-empty-message
+        *ngIf="isCurrentUserLinksDataEmpty$ | async"
+        [title]="'social links'"></app-empty-message>
     </div>
   </div>
 </div>
