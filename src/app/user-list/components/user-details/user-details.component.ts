@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs';
 
-import { UserDetailsStore } from './user-details.component.store';
-import { UnSubscriberComponent } from '../../../shared/classes/unsubscriber';
+import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
+import { UserDetailsStore } from 'src/app/user-list/components/user-details/user-details.component.store';
+import { SocialLinks } from 'src/app/user-list/constants/social-links';
 
 @Component({
   selector: 'app-user-details',
@@ -14,6 +15,7 @@ import { UnSubscriberComponent } from '../../../shared/classes/unsubscriber';
 })
 export class UserDetailsComponent extends UnSubscriberComponent {
   user$ = this.userDetailsStore.user$;
+  socialLinks = SocialLinks;
 
   constructor(
     private userDetailsStore: UserDetailsStore,

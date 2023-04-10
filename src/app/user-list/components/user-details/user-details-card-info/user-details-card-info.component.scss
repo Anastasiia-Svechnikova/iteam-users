@@ -1,0 +1,38 @@
+@import '/src/styles/_variables.scss';
+
+.user-details-card-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 5vh;
+  padding: $xl-padding;
+  gap: $xxl-spacer;
+
+  .card-info-col {
+    flex: 1;
+
+    .category {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .category-title {
+        color: #717171;
+        font-weight: 500;
+      }
+
+      .category-body {
+        width: 100%;
+      }
+
+      .skill {
+        margin-bottom: $s-spacer;
+      }
+
+      .education-term {
+        color: #717171;
+        font-size: 16px;
+      }
+    }
+  }
+}

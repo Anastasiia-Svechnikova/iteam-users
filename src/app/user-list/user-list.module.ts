@@ -3,12 +3,14 @@ import { RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
-import { UserDetailsComponent } from './components/user-details/user-details.component';
-import { SharedModule } from '../shared/shared.module';
-import { UserService } from './services/user.service';
-import { UserListComponent } from './components/user-list/user-list.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { UserDetailsCardInfoComponent } from 'src/app/user-list/components/user-details/user-details-card-info/user-details-card-info.component';
+import { UserDetailsHeaderComponent } from 'src/app/user-list/components/user-details/user-details-header/user-details-header.component';
+import { UserDetailsComponent } from 'src/app/user-list/components/user-details/user-details.component';
+import { UserListComponent } from 'src/app/user-list/components/user-list/user-list.component';
+import { UserService } from 'src/app/user-list/services/user.service';
 
-const routes= [
+const routes = [
   { path: '', component: UserListComponent },
   {
     path: ':id',
@@ -17,7 +19,12 @@ const routes= [
 ];
 
 @NgModule({
-  declarations: [UserDetailsComponent, UserListComponent],
+  declarations: [
+    UserDetailsComponent,
+    UserListComponent,
+    UserDetailsHeaderComponent,
+    UserDetailsCardInfoComponent,
+  ],
   imports: [
     SharedModule,
     RouterModule.forChild(routes),

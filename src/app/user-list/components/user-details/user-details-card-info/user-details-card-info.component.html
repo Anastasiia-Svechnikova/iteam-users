@@ -1,0 +1,42 @@
+<mat-card class="user-details-card-info">
+  <div class="card-info-col">
+    <div class="education category">
+      <p class="category-title">EDUCATION</p>
+      <div
+        *ngFor="let university of user.educationInfo"
+        class="category-body">
+        <p>{{ university.universityName }}</p>
+        <p class="education-term">
+          {{ university.startDate }}-{{ university.endDate }}
+        </p>
+        <p>{{ university.specialization }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-info-col">
+    <div class="skills category">
+      <p class="category-title">SKILLS</p>
+      <ul class="category-body">
+        <li
+          *ngFor="let skill of user.skills?.split('')"
+          class="skill">
+          {{ skill }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-info-col">
+    <div class="address category">
+      <p class="category-title">ADDRESS</p>
+      <p *ngIf="user.address">{{ user.city }},{{ user.address }}</p>
+    </div>
+    <div class="invoice-address-info category">
+      <p class="category-title">INVOICE ADDRESS INFO</p>
+      <p *ngFor="let element of individualEntrepreneurData | keyvalue">
+        {{ user[element.value] }}
+      </p>
+    </div>
+  </div>
+</mat-card>

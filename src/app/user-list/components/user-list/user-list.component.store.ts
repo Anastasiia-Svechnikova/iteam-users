@@ -4,7 +4,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { catchError, of, switchMap, tap } from 'rxjs';
 
 import { IUser } from 'src/app/shared/models/user';
-import { UserService } from 'src/app/user-list/services/user.service';
+import {UserService} from "src/app/user-list/services/user.service";
 
 export interface UserDetailsState {
   user: IUser | null;
@@ -15,10 +15,10 @@ const initialState: UserDetailsState = {
 };
 
 @Injectable()
-export class UserDetailsStore extends ComponentStore<UserDetailsState> {
-  user$ = this.select((state) => state.user);
+export class UsersListStore extends ComponentStore<UserDetailsState> {
+  users$ = this.select((state) => state.user);
 
-  getUser = this.effect<number>((userId$) =>
+  getUserList = this.effect<number>((userId$) =>
     userId$.pipe(
       switchMap((userId) => this.userService.getUserById(userId)),
       tap((updatedUser) => this.patchState({ user: updatedUser })),
