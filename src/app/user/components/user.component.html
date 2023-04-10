@@ -6,7 +6,7 @@
     <div class="left">
       <app-user-education-contacts></app-user-education-contacts>
     </div>
-    <div class="right-section">
+    <div class="right">
       <div class="tile">
         <app-section-upper-bar
           mode="full"
@@ -16,7 +16,7 @@
         </p>
         <app-empty-message
           *ngIf="!user.positionDescription"
-          [title]="'description'"></app-empty-message>
+          title="description"></app-empty-message>
       </div>
       <div class="tile">
         <app-user-skills></app-user-skills>

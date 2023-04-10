@@ -7,4 +7,4 @@ export const socialLinks: userDetailsIconIndexedType[] = [
   'telegramTag',
 ];
 
-export type userDetailsIconIndexedType = keyof IUserDetails;
+type userDetailsIconIndexedType = keyof IUserDetails;

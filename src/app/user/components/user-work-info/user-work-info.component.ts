@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+
 import { UserProfileInfoSections } from '../../models.ts/user-profile-info-sections';
 import { selectCurrentUserWorkHistory } from '../../state/selectors';
 

@@ -6,9 +6,10 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntil } from 'rxjs';
+
 import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
 import { UserProfileInfoSections } from 'src/app/user/models.ts/user-profile-info-sections';
-import { UserProfileInfoSectionTitles } from '../../models.ts/user-profile-section-titles';
+import { UserProfileInfoSectionTitles } from '../../constants/user-profile-section-titles';
 import { UserEditModalComponent } from '../user-edit/user-edit-modal/user-edit-modal.component';
 
 @Component({
@@ -23,13 +24,16 @@ export class SectionUpperBarComponent
 {
   @Input() section!: UserProfileInfoSections;
   @Input() mode!: 'full' | 'noControls';
-  title!: string;
+  title = '';
 
   constructor(public dialog: MatDialog) {
     super();
   }
+
   ngOnInit(): void {
-    this.title = UserProfileInfoSectionTitles[this.section];
+    if (this.section) {
+      this.title = UserProfileInfoSectionTitles.get(this.section) as string;
+    }
   }
 
   openDialog(): void {

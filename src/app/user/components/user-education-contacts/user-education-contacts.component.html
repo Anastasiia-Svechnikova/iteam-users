@@ -9,7 +9,7 @@
       <p>{{ education.universityName }}</p>
       <p
         *ngIf="education.startDate"
-        class="base-detail">
+        class="detail">
         {{ education.startDate | date : 'y' }}-
         {{ education.endDate | date : 'y' }}
       </p>
@@ -17,8 +17,7 @@
     </div>
     <app-empty-message
       *ngIf="!user.educationInfo.length"
-      [title]="'skills'"></app-empty-message>
-
+      title="skills"></app-empty-message>
     <div class="contacts-tile">
       <app-section-upper-bar
         mode="full"
@@ -26,14 +25,13 @@
       <p>{{ user.address }}</p>
       <app-empty-message
         *ngIf="!user.address"
-        [title]="'address'"></app-empty-message>
-      <h4 class="base-detail">Postal Code</h4>
+        title="address"></app-empty-message>
+      <h4 class="detail">Postal Code</h4>
       <p>{{ user.city }}</p>
       <app-empty-message
         *ngIf="!user.city"
-        [title]="'city'"></app-empty-message>
+        title="city"></app-empty-message>
     </div>
-
     <div class="contacts-tile">
       <app-section-upper-bar
         mode="full"
@@ -43,15 +41,14 @@
       <ng-container *ngFor="let title of userBankInfoTitlesKeys">
         <p
           *ngIf="user[title]"
-          class="base-detail">
+          class="detail">
           {{ userBankInfoTitles.get(title) }}:
         </p>
         <p>{{ user[title] }}</p>
       </ng-container>
-
       <app-empty-message
         *ngIf="isUserBankDataEmpty$ | async"
-        [title]="'bank invoice info'"></app-empty-message>
+        title="bank invoice info"></app-empty-message>
     </div>
     <div class="contacts-tile">
       <app-section-upper-bar
@@ -75,7 +72,7 @@
       </ng-container>
       <app-empty-message
         *ngIf="isCurrentUserLinksDataEmpty$ | async"
-        [title]="'social links'"></app-empty-message>
+        title="social links"></app-empty-message>
     </div>
   </div>
 </div>

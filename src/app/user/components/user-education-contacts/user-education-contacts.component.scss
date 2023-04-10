@@ -1,13 +1,6 @@
 @import '/src/styles/_variables.scss';
 @import '/src/styles/_color-palette.scss';
 
-.subtitle-accent {
-  font-size: $accent-header-font-size;
-  font-weight: $accent-header-font-weight;
-  color: $primary-color;
-  text-transform: uppercase;
-  color: $primary-color;
-}
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -15,15 +8,17 @@
   padding: 0 $l-padding;
 }
 
-.base-detail {
+.detail {
   color: $base-header-color;
 }
+
 .socials {
   display: flex;
   align-items: center;
   gap: $m-spacer;
   margin-bottom: $xs-spacer;
 }
+
 .link {
   color: inherit;
   text-decoration: none;

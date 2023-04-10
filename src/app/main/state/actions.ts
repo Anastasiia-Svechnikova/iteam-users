@@ -1,10 +1,5 @@
-import { createAction, props } from '@ngrx/store';
+import { props } from '@ngrx/store';
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
-
-export const loadUser = createAction(
-  '[User] Load User',
-  props<{ user: IUserDetails }>(),
-);
 
 import { createActionGroup, emptyProps } from '@ngrx/store';
 

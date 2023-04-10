@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { HttpClientModule } from '@angular/common/http';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatChipsModule } from '@angular/material/chips';
@@ -43,7 +42,6 @@ const routes = [
     MatChipsModule,
     SharedModule,
     HttpClientModule,
-    MatGridListModule,
     ClipboardModule,
     RouterModule.forChild(routes),
   ],

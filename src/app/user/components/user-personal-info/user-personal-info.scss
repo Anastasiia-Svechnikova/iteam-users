@@ -7,11 +7,13 @@
   align-items: center;
   padding: 0 $l-padding;
 }
+
 .bio {
   display: flex;
   gap: $l-spacer;
   align-items: center;
 }
+
 .avatar {
   height: $avatar-width;
   width: $avatar-width;
@@ -33,6 +35,7 @@
   font-size: $base-header-font-size;
   color: $base-text-color;
 }
+
 .detail {
   display: flex;
   align-items: center;
@@ -47,18 +50,22 @@
   display: flex;
   align-items: center;
 }
+
 .unarchived {
   @extend %status;
   color: $primary-color;
 }
+
 .archived {
   @extend %status;
   color: $base-color;
 }
+
 .active {
   @extend %status;
   color: $green-color;
 }
+
 .status-icon {
   color: inherit;
 }

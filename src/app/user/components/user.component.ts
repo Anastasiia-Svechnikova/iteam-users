@@ -16,6 +16,7 @@ export class UserComponent implements OnInit {
   sectionTypes = UserProfileInfoSections;
 
   constructor(private store: Store) {}
+
   ngOnInit(): void {
     this.store.dispatch(mainUserActions.loadCurrentUser());
   }

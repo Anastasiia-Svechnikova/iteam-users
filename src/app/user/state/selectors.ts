@@ -1,4 +1,5 @@
 import { createSelector } from '@ngrx/store';
+
 import { IMainState } from 'src/app/main/state/reducer';
 import { selectMainFeature } from 'src/app/main/state/selectors';
 import { userBankInfoTitles } from '../constants/bank-invoice-data';

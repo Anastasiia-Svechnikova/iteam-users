@@ -1,7 +1,6 @@
 import { IUserOrProjectAttachment } from './attachments-details';
 import { IClientDetailsData } from './client-details';
 import { ITechnologyUsedInProject } from './technology';
-
 import { IUserDetails } from './user-details';
 import { IUserWorkHistory } from './user-work-history';
 

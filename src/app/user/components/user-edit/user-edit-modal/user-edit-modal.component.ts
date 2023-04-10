@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { UserProfileInfoSections } from 'src/app/user/models.ts/user-profile-info-sections';
 
 export interface DialogData {
@@ -25,6 +26,7 @@ export class UserEditModalComponent implements OnInit {
     public dialogRef: MatDialogRef<UserEditModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {}
+
   ngOnInit(): void {
     this.createForm();
   }

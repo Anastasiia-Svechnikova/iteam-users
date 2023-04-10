@@ -7,25 +7,22 @@
   gap: $xxl-spacer;
   padding: $xl-padding $m-padding;
 }
+
 .middle {
   width: 100%;
   display: flex;
 }
+
 .left {
   min-width: fit-content;
 }
-.subtitle-accent {
-  font-size: $accent-header-font-size;
-  font-weight: $accent-header-font-weight;
-  color: $primary-color;
-  text-transform: uppercase;
-}
 
-.right-section {
+.right {
   flex-grow: 1;
   padding: 0 $xxl-padding;
   border-left: $base-border;
 }
+
 .tile {
   padding: $xl-padding 0;
 
