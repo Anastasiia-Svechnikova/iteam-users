@@ -4,7 +4,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { catchError, of, switchMap, tap } from 'rxjs';
 
 import { IUser } from 'src/app/shared/models/user';
-import {UserService} from "src/app/user-list/services/user.service";
+import { UserService } from 'src/app/user-list/services/user.service';
 
 export interface UserDetailsState {
   user: IUser | null;

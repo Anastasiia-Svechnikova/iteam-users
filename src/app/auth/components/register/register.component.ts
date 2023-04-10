@@ -7,6 +7,7 @@ import { register } from '../../state/actions';
   selector: 'app-register',
   templateUrl: '../../auth-base/auth.html',
   styleUrls: ['./register.component.scss', '../../auth-base/auth.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent extends AbstractAuthComponent {
   title = 'Sign Up';

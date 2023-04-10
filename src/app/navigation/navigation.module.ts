@@ -9,11 +9,6 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [HeaderComponent, SiteLayoutComponent],
-  imports: [
-    SharedModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatSidenavModule,
-  ],
+  imports: [SharedModule, MatToolbarModule, MatMenuModule, MatSidenavModule],
 })
 export class NavigationModule {}

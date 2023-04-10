@@ -37,7 +37,7 @@ export class AuthEffects {
             this.router.navigateByUrl('home');
             return [
               AuthActions.loginSuccess(),
-              loadUser({ user: loginResponseData.user}),
+              loadUser({ user: loginResponseData.user }),
             ];
           }),
           catchError((err) => {

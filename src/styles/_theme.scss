@@ -10,12 +10,12 @@ $typography: mat.define-typography-config(
 @include mat.typography-hierarchy($typography);
 
 $theme: mat.define-light-theme(
-    (
-      color: (
-        primary: $palette-primary,
-        accent: $palette-accent,
-      ),
-      typography: $typography,
-      density: 0,
-    )
+  (
+    color: (
+      primary: $palette-primary,
+      accent: $palette-accent,
+    ),
+    typography: $typography,
+    density: 0,
+  )
 );

@@ -7,6 +7,7 @@ import { login } from '../../state/actions';
   selector: 'app-login',
   templateUrl: '../../auth-base/auth.html',
   styleUrls: ['./login.component.scss', '../../auth-base/auth.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent extends AbstractAuthComponent {
   title = 'Sign in';
