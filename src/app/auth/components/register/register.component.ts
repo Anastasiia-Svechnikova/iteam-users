@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 
 import { AbstractAuthComponent } from '../../auth-base/abstract-auth.component';
 import { register } from '../../state/actions';
