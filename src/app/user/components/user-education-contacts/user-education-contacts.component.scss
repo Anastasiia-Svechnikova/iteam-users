@@ -18,8 +18,14 @@
   gap: $m-spacer;
   margin-bottom: $xs-spacer;
 }
+.social-links {
+  display: flex;
+  gap: $xs-spacer;
+  margin-bottom: $xs-spacer;
+}
 
 .link {
+  align-self: center;
   color: inherit;
   text-decoration: none;
   border-bottom: 1px solid $base-text-color;

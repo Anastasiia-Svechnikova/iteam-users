@@ -18,6 +18,7 @@ export class UserComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(mainUserActions.loadCurrentUser());
+    console.log;
+    // this.store.dispatch(mainUserActions.loadCurrentUser());
   }
 }

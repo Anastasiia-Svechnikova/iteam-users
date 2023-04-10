@@ -1,6 +1,6 @@
 <div class="wrapper">
   <h3 class="subtitle-accent">
-    {{ title }}
+    {{ UserProfileInfoSectionTitles.get(section) }}
   </h3>
   <button
     *ngIf="mode !== 'noControls'"
@@ -15,7 +15,7 @@
     mat-icon-button
     class="icon-btn"
     aria-label="Copy content button"
-    (click)="openDialog()">
+    (click)="copyToClipBoard()">
     <mat-icon>content_copy</mat-icon>
   </button>
 </div>

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { selectCurrentUser } from 'src/app/main/state/selectors';
 import { userBankInfoTitles } from '../../constants/bank-invoice-data';
-import { socialLinks } from '../../constants/social-links';
+import { UserSocialLinksTitles } from '../../constants/social-links';
 import { UserProfileInfoSections } from '../../models.ts/user-profile-info-sections';
 import {
   selectIsCurrentUserBankDataEmpty,
@@ -25,8 +25,8 @@ export class UserEducationContactsComponent {
 
   userProfileInfoSections = UserProfileInfoSections;
   userBankInfoTitles = userBankInfoTitles;
-  userBankInfoTitlesKeys = Array.from(userBankInfoTitles.keys());
-  socialLinksData = socialLinks;
+
+  socialLinksData = UserSocialLinksTitles;
 
   constructor(private store: Store) {}
 }

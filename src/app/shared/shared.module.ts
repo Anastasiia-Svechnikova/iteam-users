@@ -7,9 +7,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 
+import { CustomIconComponent } from './components/custom-icon/custom-icon.component';
+
 @NgModule({
-  declarations: [],
+  declarations: [CustomIconComponent],
   exports: [
+    CustomIconComponent,
     RouterModule,
     CommonModule,
     MatCardModule,

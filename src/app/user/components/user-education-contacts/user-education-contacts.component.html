@@ -10,7 +10,7 @@
       <p
         *ngIf="education.startDate"
         class="detail">
-        {{ education.startDate | date : 'y' }}-
+        {{ education.startDate | date : 'y' }} -
         {{ education.endDate | date : 'y' }}
       </p>
       <p>{{ education.pricingModel }}</p>
@@ -38,13 +38,13 @@
         [section]="
           userProfileInfoSections.invoiceDetails
         "></app-section-upper-bar>
-      <ng-container *ngFor="let title of userBankInfoTitlesKeys">
+      <ng-container *ngFor="let title of userBankInfoTitles | keyvalue">
         <p
-          *ngIf="user[title]"
+          *ngIf="user[title.key]"
           class="detail">
-          {{ userBankInfoTitles.get(title) }}:
+          {{ title.value }}:
         </p>
-        <p>{{ user[title] }}</p>
+        <p>{{ user[title.key] }}</p>
       </ng-container>
       <app-empty-message
         *ngIf="isUserBankDataEmpty$ | async"
@@ -57,17 +57,19 @@
     </div>
     <div class="contacts-tile">
       <ng-container
-        *ngFor="let socialLink of socialLinksData"
+        *ngFor="let socialLink of socialLinksData | keyvalue"
         class="socials">
-        <ng-container *ngIf="user[socialLink]">
-          <mat-icon [svgIcon]="socialLink"></mat-icon>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            class="link"
-            [href]="user[socialLink]">
-            {{ socialLink | titlecase }}
-          </a>
+        <ng-container *ngIf="user[socialLink.key]">
+          <div class="social-links">
+            <app-custom-icon [name]="socialLink.key"></app-custom-icon>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              class="link"
+              [href]="user[socialLink.key]">
+              {{ socialLink.value | titlecase }}
+            </a>
+          </div>
         </ng-container>
       </ng-container>
       <app-empty-message
