@@ -8,7 +8,7 @@ export const sideNavigationLinksData = [
     accessRoles: [UserRoles.Admin, UserRoles.Guest],
   },
   {
-    path: '/user-profile',
+    path: '/users',
     iconName: 'people',
     title: 'profile',
     accessRoles: [UserRoles.Admin, UserRoles.Guest],

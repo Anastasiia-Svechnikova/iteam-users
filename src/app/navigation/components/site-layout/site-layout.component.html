@@ -21,7 +21,9 @@
       </button>
     </ng-container>
   </mat-drawer>
-  <div class="sidenav-content">
-    <router-outlet (activate)="setHeader()"></router-outlet>
-  </div>
+  <mat-drawer-content>
+    <div class="sidenav-content">
+      <router-outlet (activate)="setHeader()"></router-outlet>
+    </div>
+  </mat-drawer-content>
 </mat-drawer-container>

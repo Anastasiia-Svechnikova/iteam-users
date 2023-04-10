@@ -19,9 +19,9 @@ const routes: Routes = [
     component: SiteLayoutComponent,
     children: [
       {
-        path: 'user',
+        path: 'users',
         loadChildren: () =>
-          import('../user-details/user-details.module').then((m) => m.UserDetailsModule),
+          import('../user-list/user-list.module').then((m) => m.UserListModule),
       },
       {
         path: 'home',

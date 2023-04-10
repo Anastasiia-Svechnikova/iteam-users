@@ -1,0 +1,160 @@
+<div
+  *ngIf="user$ | async as user; else spinner"
+  class="wrapper">
+  <div class="user-details-header">
+    <div class="user-details-header-column">
+      <div class="image-container">
+        <img
+          class="avatar-image"
+          src="{{ user.avatarUrl }}"
+          alt="" />
+      </div>
+      <p class="birthday">
+        <mat-icon class="gift-icon">card_giftcard</mat-icon>
+        {{ user.birthday }}
+      </p>
+      <hr class="line" />
+      <span>
+        Start Date: {{ user.startDate ? user.startDate : 'N/A' }}
+        <br />
+        End Date: {{ user.endDate ? user.endDate : 'N/A' }}
+        <br />
+        Reason: {{ user.endReason ? user.endReason : 'N/A' }}
+      </span>
+    </div>
+    <div class="user-details-header-column">
+      <p class="full-name">
+        <span>
+          <b>
+            {{ user.name }}
+            <br />
+            {{ user.surname }}
+          </b>
+        </span>
+      </p>
+      <p>
+        <b>Position Description</b>
+        <mat-icon
+          class="copy-icon"
+          [cdkCopyToClipboard]="user.linkedin">
+          file_copy
+        </mat-icon>
+        <br />
+        {{
+          user.positionDescription
+            ? user.positionDescription
+            : 'No description yet'
+        }}
+      </p>
+    </div>
+    <div class="user-details-header-column">
+      <p>Status: {{ user.status }}</p>
+      <span>
+        {{ user.phone ? user.phone : 'phone: N/A' }}
+        <br />
+        {{ user.email ? user.email : 'email: N/A' }}
+      </span>
+    </div>
+  </div>
+
+  <mat-card class="user-details-card-info">
+    <div class="card-info-col">
+      <div class="education category">
+        <p class="category-title">EDUCATION</p>
+        <div
+          *ngFor="let university of user.educationInfo"
+          class="category-body">
+          <p>{{ university.universityName }}</p>
+          <p class="education-term">
+            {{ university.startDate }}-{{ university.endDate }}
+          </p>
+          <p>{{ university.specialization }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-info-col">
+      <div class="skills category">
+        <p class="category-title">SKILLS</p>
+        <ul class="category-body">
+          <li
+            *ngFor="let skill of user.skills?.split('')"
+            class="skill">
+            {{ skill }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card-info-col">
+      <div class="address category">
+        <p class="category-title">ADDRESS</p>
+        <p *ngIf="user.address">{{ user.city }},{{ user.address }}</p>
+      </div>
+      <div class="invoice-address-info category">
+        <p class="category-title">INVOICE ADDRESS INFO</p>
+        <span>
+          {{ user.individualEntrepreneurName }}
+          <br />
+          {{ user.individualEntrepreneurAddress }}
+          <br />
+          {{ user.individualEntrepreneurBeneficiaryBank }}
+          <br />
+          {{ user.individualEntrepreneurIndividualTaxNumber }}
+          <br />
+          {{ user.individualEntrepreneurBankAccounNumber }}
+          <br />
+          {{ user.individualEntrepreneurSwiftCode }}
+        </span>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="social-links-container">
+    <p class="social-links-title">SOCIAL LINKS</p>
+    <div class="social-links">
+      <div *ngIf="user.upwork">
+        <a
+          href="{{ user.upwork }}"
+          class="social-link hyperlink">
+          UpWork
+        </a>
+        <mat-icon class="copy-icon">file_copy</mat-icon>
+      </div>
+      <div *ngIf="user.github">
+        <a
+          href="{{ user.github }}"
+          class="social-link hyperlink">
+          GitHub
+        </a>
+        <mat-icon class="copy-icon">file_copy</mat-icon>
+      </div>
+      <div *ngIf="user.linkedin">
+        <a
+          href="{{ user.linkedin }}"
+          class="social-link hyperlink">
+          Linkedin
+        </a>
+        <mat-icon
+          class="copy-icon"
+          [cdkCopyToClipboard]="user.linkedin">
+          file_copy
+        </mat-icon>
+      </div>
+      <div *ngIf="user.telegramTag">
+        <a
+          href="{{ user.telegramTag }}"
+          class="social-link hyperlink">
+          Telegram
+        </a>
+        <mat-icon class="copy-icon">file_copy</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #spinner>
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

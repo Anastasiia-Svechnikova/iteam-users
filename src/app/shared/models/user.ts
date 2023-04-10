@@ -2,6 +2,7 @@ import { IUserAssignedCvData } from './cv-data';
 import { IUserPermissionsRole } from './role';
 import { IAccessToken } from './token';
 import { IProjectDetailsData } from './project';
+import { IEducationInfo } from './education-info';
 
 export interface IUser {
   id: number;
@@ -48,4 +49,5 @@ export interface IUser {
   token: IAccessToken;
   leadingInProjects: IProjectDetailsData[];
   participatingInProjects: IProjectDetailsData[];
+  educationInfo: IEducationInfo[];
 }
