@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { selectCurrentUser } from 'src/app/main/state/selectors';
 import { UserPersonalInfoStatusIcons } from 'src/app/user/constants/user-personal-info-status-icons';
-import { UserProfileInfoSections } from 'src/app/user/models.ts/user-profile-info-sections';
+import { selectCurrentUserPersonalData } from 'src/app/user/state/selectors';
 
 @Component({
   selector: 'app-user-personal-info',
@@ -12,9 +11,8 @@ import { UserProfileInfoSections } from 'src/app/user/models.ts/user-profile-inf
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserPersonalInfoComponent {
-  user$ = this.store.select(selectCurrentUser);
+  userPersonalInfo$ = this.store.select(selectCurrentUserPersonalData);
 
-  sectionTypes = UserProfileInfoSections;
   statusIconTypes = UserPersonalInfoStatusIcons;
 
   constructor(private store: Store) {}

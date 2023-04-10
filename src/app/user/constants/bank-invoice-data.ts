@@ -1,6 +1,6 @@
-import { IUserDetails } from 'src/app/shared/interfaces/user-details';
+import { IUserBankInvoiceData } from 'src/app/shared/interfaces/user-bank-invoice-data';
 
-export const userBankInfoTitles = new Map<keyof IUserDetails, string>([
+export const userBankInfoTitles = new Map<keyof IUserBankInvoiceData, string>([
   ['individualEntrepreneurName', 'Name'],
   ['individualEntrepreneurAddress', 'Address'],
   ['individualEntrepreneurIndividualTaxNumber', 'Individual Tax Number'],

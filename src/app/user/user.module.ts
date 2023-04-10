@@ -16,6 +16,7 @@ import { UserEditModalComponent } from './components/user-edit/user-edit-modal/u
 import { SectionUpperBarComponent } from './components/section-upper-bar/section-upper-bar';
 import { EmptyMessageComponent } from './components/empty-message/empty-message.component';
 import { UserSkillsComponent } from './components/user-skills/user-skills.component';
+import { UserBankAndSocialsInfoComponent } from './components/user-bank-and-socials-info/user-bank-and-socials-info.component';
 
 const routes = [
   {
@@ -34,6 +35,7 @@ const routes = [
     SectionUpperBarComponent,
     EmptyMessageComponent,
     UserSkillsComponent,
+    UserBankAndSocialsInfoComponent,
   ],
   imports: [
     MatInputModule,

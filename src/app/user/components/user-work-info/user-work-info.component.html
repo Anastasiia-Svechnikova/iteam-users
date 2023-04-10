@@ -1,6 +1,8 @@
-<app-section-upper-bar
-  mode="full"
-  [section]="sectionTypes.workHistory"></app-section-upper-bar>
+<div class="upper-wrapper">
+  <h3 class="subtitle-accent">Work History</h3>
+  <app-section-upper-bar
+    [data]="userWorkHistory$ | async"></app-section-upper-bar>
+</div>
 <div
   *ngFor="let work of userWorkHistory$ | async; let i = index"
   class="work-item">

@@ -1,6 +1,9 @@
-import { IUserDetails } from 'src/app/shared/interfaces/user-details';
+import { IUserSocialLinksData } from 'src/app/shared/interfaces/user-social-links-data';
 
-export const UserSocialLinksTitles = new Map<keyof IUserDetails, string>([
+export const UserSocialLinksTitles = new Map<
+  keyof IUserSocialLinksData,
+  string
+>([
   ['upwork', 'upwork'],
   ['github', 'github'],
   ['linkedin', 'linkedin'],

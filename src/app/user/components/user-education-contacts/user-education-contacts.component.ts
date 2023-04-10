@@ -5,10 +5,6 @@ import { selectCurrentUser } from 'src/app/main/state/selectors';
 import { userBankInfoTitles } from '../../constants/bank-invoice-data';
 import { UserSocialLinksTitles } from '../../constants/social-links';
 import { UserProfileInfoSections } from '../../models.ts/user-profile-info-sections';
-import {
-  selectIsCurrentUserBankDataEmpty,
-  selectIsCurrentUserLinksDataEmpty,
-} from '../../state/selectors';
 
 @Component({
   selector: 'app-user-education-contacts',
@@ -18,10 +14,6 @@ import {
 })
 export class UserEducationContactsComponent {
   user$ = this.store.select(selectCurrentUser);
-  isUserBankDataEmpty$ = this.store.select(selectIsCurrentUserBankDataEmpty);
-  isCurrentUserLinksDataEmpty$ = this.store.select(
-    selectIsCurrentUserLinksDataEmpty,
-  );
 
   userProfileInfoSections = UserProfileInfoSections;
   userBankInfoTitles = userBankInfoTitles;

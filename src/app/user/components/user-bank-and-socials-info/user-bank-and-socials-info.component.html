@@ -1,0 +1,50 @@
+<div class="wrapper">
+  <ng-container *ngIf="userBankData$ | async as userBankData">
+    <div class="tile">
+      <div class="upper-wrapper">
+        <h3 class="subtitle-accent">Bank Invoice Info</h3>
+        <app-section-upper-bar [data]="userBankData"></app-section-upper-bar>
+      </div>
+      <ng-container *ngFor="let title of userBankInfoTitles | keyvalue">
+        <p
+          *ngIf="userBankData[title.key]"
+          class="detail">
+          {{ title.value }}:
+        </p>
+        <p>{{ userBankData[title.key] }}</p>
+      </ng-container>
+      <app-empty-message
+        *ngIf="isUserBankDataEmpty$ | async"
+        title="bank invoice info"></app-empty-message>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="userSocialsData$ | async as userSocialsData">
+    <div class="tile">
+      <div class="upper-wrapper">
+        <h3 class="subtitle-accent">Social Links</h3>
+        <app-section-upper-bar [data]="userSocialsData"></app-section-upper-bar>
+      </div>
+    </div>
+    <div class="tile">
+      <ng-container
+        *ngFor="let socialLink of socialLinksData | keyvalue"
+        class="socials">
+        <ng-container *ngIf="userSocialsData[socialLink.key]">
+          <div class="social-links">
+            <app-custom-icon [name]="socialLink.key"></app-custom-icon>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              class="link"
+              [href]="userSocialsData[socialLink.key]">
+              {{ socialLink.value | titlecase }}
+            </a>
+          </div>
+        </ng-container>
+      </ng-container>
+      <app-empty-message
+        *ngIf="isUserSocialsDataEmpty$ | async"
+        title="social links"></app-empty-message>
+    </div>
+  </ng-container>
+</div>

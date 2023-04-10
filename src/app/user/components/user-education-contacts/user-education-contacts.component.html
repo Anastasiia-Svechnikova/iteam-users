@@ -1,8 +1,10 @@
 <div class="wrapper">
   <div *ngIf="user$ | async as user">
-    <app-section-upper-bar
-      mode="full"
-      [section]="userProfileInfoSections.education"></app-section-upper-bar>
+    <div class="upper-wrapper">
+      <h3 class="subtitle-accent">Education</h3>
+      <app-section-upper-bar
+        [data]="{ educationInfo: user.educationInfo }"></app-section-upper-bar>
+    </div>
     <div
       *ngFor="let education of user.educationInfo"
       class="contacts-tile">
@@ -19,9 +21,15 @@
       *ngIf="!user.educationInfo.length"
       title="skills"></app-empty-message>
     <div class="contacts-tile">
-      <app-section-upper-bar
-        mode="full"
-        [section]="userProfileInfoSections.address"></app-section-upper-bar>
+      <div class="upper-wrapper">
+        <h3 class="subtitle-accent">Address</h3>
+        <app-section-upper-bar
+          [data]="{
+            city: user.city,
+            address: user.address
+          }"></app-section-upper-bar>
+      </div>
+
       <p>{{ user.address }}</p>
       <app-empty-message
         *ngIf="!user.address"
@@ -31,50 +39,6 @@
       <app-empty-message
         *ngIf="!user.city"
         title="city"></app-empty-message>
-    </div>
-    <div class="contacts-tile">
-      <app-section-upper-bar
-        mode="full"
-        [section]="
-          userProfileInfoSections.invoiceDetails
-        "></app-section-upper-bar>
-      <ng-container *ngFor="let title of userBankInfoTitles | keyvalue">
-        <p
-          *ngIf="user[title.key]"
-          class="detail">
-          {{ title.value }}:
-        </p>
-        <p>{{ user[title.key] }}</p>
-      </ng-container>
-      <app-empty-message
-        *ngIf="isUserBankDataEmpty$ | async"
-        title="bank invoice info"></app-empty-message>
-    </div>
-    <div class="contacts-tile">
-      <app-section-upper-bar
-        mode="full"
-        [section]="userProfileInfoSections.socials"></app-section-upper-bar>
-    </div>
-    <div class="contacts-tile">
-      <ng-container
-        *ngFor="let socialLink of socialLinksData | keyvalue"
-        class="socials">
-        <ng-container *ngIf="user[socialLink.key]">
-          <div class="social-links">
-            <app-custom-icon [name]="socialLink.key"></app-custom-icon>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              class="link"
-              [href]="user[socialLink.key]">
-              {{ socialLink.value | titlecase }}
-            </a>
-          </div>
-        </ng-container>
-      </ng-container>
-      <app-empty-message
-        *ngIf="isCurrentUserLinksDataEmpty$ | async"
-        title="social links"></app-empty-message>
     </div>
   </div>
 </div>

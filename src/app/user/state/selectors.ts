@@ -2,9 +2,6 @@ import { createSelector } from '@ngrx/store';
 
 import { IMainState } from 'src/app/main/state/reducer';
 import { selectMainFeature } from 'src/app/main/state/selectors';
-import { IUserDetails } from 'src/app/shared/interfaces/user-details';
-import { UserProfileInfoSections } from 'src/app/user/models.ts/user-profile-info-sections';
-import { userBankInfoTitles } from '../constants/bank-invoice-data';
 
 export const selectCurrentUserSkills = createSelector(
   selectMainFeature,
@@ -16,61 +13,45 @@ export const selectCurrentUserWorkHistory = createSelector(
   (state: IMainState) => state.user?.workHistory,
 );
 
-export const selectIsCurrentUserBankDataEmpty = createSelector(
+export const selectCurrentUserPersonalData = createSelector(
   selectMainFeature,
-  (state: IMainState) => {
-    return Array.from(userBankInfoTitles.keys()).every((title) => {
-      if (state.user) {
-        return !state.user[title];
-      } else {
-        return true;
-      }
-    });
-  },
+  (state: IMainState) => ({
+    name: state.user?.name,
+    surname: state.user?.surname,
+    email: state.user?.email,
+    phone: state.user?.phone,
+    status: state.user?.status,
+    birthday: state.user?.birthday,
+    startDate: state.user?.startDate,
+    endDate: state.user?.endDate,
+    endReason: state.user?.endReason,
+  }),
 );
 
-export const selectIsCurrentUserLinksDataEmpty = createSelector(
+export const selectCurrentUserBankInvoiceData = createSelector(
   selectMainFeature,
-  () => true,
+  (state: IMainState) => ({
+    individualEntrepreneurName: state.user?.individualEntrepreneurName,
+    individualEntrepreneurAddress: state.user?.individualEntrepreneurAddress,
+    individualEntrepreneurIndividualTaxNumber:
+      state.user?.individualEntrepreneurIndividualTaxNumber,
+    individualEntrepreneurBankAccounNumber:
+      state.user?.individualEntrepreneurBankAccounNumber,
+    individualEntrepreneurBankName: state.user?.individualEntrepreneurBankName,
+    individualEntrepreneurBankCode: state.user?.individualEntrepreneurBankCode,
+    individualEntrepreneurBeneficiaryBank:
+      state.user?.individualEntrepreneurBeneficiaryBank,
+    individualEntrepreneurSwiftCode:
+      state.user?.individualEntrepreneurSwiftCode,
+  }),
 );
 
-export const UserInterfacePropertiesBySection = new Map<string, string[]>([
-  ['education', ['education']],
-  ['skills', ['skills']],
-  [
-    'personalDetails',
-    ['name', 'surname', 'email', 'birthday', 'phone', 'status'],
-  ],
-  ['description', ['description']],
-  ['workHistory', ['workHistory']],
-  ['portfolio', ['portfolio']],
-  ['address', ['city', 'address']],
-  ['socials', ['github', 'linkedin', 'telegramTag', 'upwork']],
-  [
-    'invoiceDetails',
-    [
-      'individualEntrepreneurName',
-      'individualEntrepreneurAddress',
-      'individualEntrepreneurIndividualTaxNumber',
-      'individualEntrepreneurBankAccounNumber',
-      'individualEntrepreneurBankName',
-      'individualEntrepreneurBankCode',
-      'individualEntrepreneurBeneficiaryBank',
-      'individualEntrepreneurSwiftCode',
-    ],
-  ],
-]);
-
-export const selectUserInfoBySection = <T, U>(
-  section: UserProfileInfoSections,
-): ((state: object) => U) => {
-  return createSelector(selectMainFeature, (state: IMainState) => {
-    const selectedUserInterfaceProperties =
-      UserInterfacePropertiesBySection.get(section);
-    const data: { [key: string]: T } = {};
-    selectedUserInterfaceProperties.forEach(
-      (item) => (data[item] = state?.user[item as keyof IUserDetails] as T),
-    );
-    return data as U;
-  });
-};
+export const selectCurrentUserSocialsData = createSelector(
+  selectMainFeature,
+  (state: IMainState) => ({
+    github: state.user?.github,
+    linkedin: state.user?.linkedin,
+    telegramTag: state.user?.telegramTag,
+    upwork: state.user?.upwork,
+  }),
+);

@@ -5,12 +5,15 @@
   <div class="middle">
     <div class="left">
       <app-user-education-contacts></app-user-education-contacts>
+      <app-user-bank-and-socials-info></app-user-bank-and-socials-info>
     </div>
     <div class="right">
       <div class="tile">
-        <app-section-upper-bar
-          mode="full"
-          [section]="sectionTypes.description"></app-section-upper-bar>
+        <div class="upper-wrapper">
+          <h3 class="subtitle-accent">Description</h3>
+          <app-section-upper-bar
+            [data]="user.positionDescription"></app-section-upper-bar>
+        </div>
         <p>
           {{ user.positionDescription }}
         </p>
@@ -24,11 +27,7 @@
       <div class="tile">
         <app-user-work-info></app-user-work-info>
       </div>
-      <div class="tile">
-        <app-section-upper-bar
-          mode="noControls"
-          [section]="sectionTypes.portfolio"></app-section-upper-bar>
-      </div>
+      <div class="tile"></div>
     </div>
   </div>
   <div class="bottom"></div>

@@ -7,10 +7,11 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { UserProfileInfoSections } from 'src/app/user/models.ts/user-profile-info-sections';
+import { IUserSocialLinksData } from 'src/app/shared/interfaces/user-social-links-data';
+import { IUserWorkHistory } from 'src/app/shared/interfaces/user-work-history';
 
 export interface DialogData {
-  section: UserProfileInfoSections;
+  data: string[] | IUserWorkHistory[] | IUserSocialLinksData;
 }
 @Component({
   selector: 'app-user-edit-modal',
@@ -33,7 +34,7 @@ export class UserEditModalComponent implements OnInit {
 
   private createForm(): void {
     this.userEditForm = this.fb.group({
-      customControl: [this.data.section, Validators.required],
+      customControl: [this.data.data, Validators.required],
     });
   }
 
