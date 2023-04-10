@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
@@ -12,7 +12,7 @@ export class MainUserEffects {
   loadCurrentUser$ = createEffect(() => {
     return this.actions.pipe(
       ofType(mainUserActions.loadCurrentUser),
-      mergeMap(() => {
+      switchMap(() => {
         return this.mainUserService.getUserById().pipe(
           map((user: IUserDetails) =>
             mainUserActions.loadedCurrentUser({ user }),

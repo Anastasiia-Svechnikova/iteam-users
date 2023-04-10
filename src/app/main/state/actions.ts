@@ -1,6 +1,6 @@
 import { props } from '@ngrx/store';
-import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 
+import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { createActionGroup, emptyProps } from '@ngrx/store';
 
 export const mainUserActions = createActionGroup({
