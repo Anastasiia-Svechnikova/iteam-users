@@ -14,10 +14,14 @@ body {
 
 body {
   margin: 0;
+  .mat-headline-5.mb-0 {
+    margin: 0;
+  }
+
   .mat-subtitle-2.primary {
     text-transform: uppercase;
     color: $primary-color;
-    margin: 0 0 $l-spacer;
+    margin: 0;
   }
   .mat-subtitle-1 {
     color: $light-subtitle-color;
@@ -26,7 +30,7 @@ body {
     color: $primary-color;
   }
   .mat-caption.light {
-    color: $light-subtitle-color;
+    color: $light-caption-color;
     font-size: $s-font-size;
   }
 }

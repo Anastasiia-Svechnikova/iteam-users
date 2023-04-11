@@ -8,30 +8,11 @@
   padding: $xl-padding $m-padding;
 }
 
-.subtitle-accent {
-  margin-bottom: 0;
-  font-size: $accent-header-font-size;
-  font-weight: $accent-header-font-weight;
-  color: $primary-color;
-  text-transform: uppercase;
-}
-
 .upper-wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: $s-spacer;
-}
-
-.subtitle-base {
-  color: $base-header-color;
-}
-
-.subtitle-accent {
-  margin-bottom: 0;
-  font-size: $accent-header-font-size;
-  font-weight: $accent-header-font-weight;
-  color: $primary-color;
-  text-transform: uppercase;
+  margin-bottom: $xs-spacer;
+  gap: $xs-spacer;
 }
 
 .middle {
@@ -57,13 +38,8 @@
   border-left: $base-border;
 }
 
-.years {
-  color: $base-header-color;
-  font-size: $s-font-size;
-}
-
 .tile {
-  padding: $xl-padding 0;
+  padding: $s-padding 0 $xl-padding 0;
 
   &:not(:last-of-type) {
     border-bottom: $base-border;

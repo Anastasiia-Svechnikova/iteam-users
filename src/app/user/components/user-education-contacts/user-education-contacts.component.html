@@ -1,17 +1,15 @@
 <div *ngIf="user$ | async as user">
   <div class="left-inner">
     <div class="upper-wrapper">
-      <h3 class="subtitle-accent">Education</h3>
+      <h3 class="mat-subtitle-2 primary">Education</h3>
       <app-section-upper-bar
         [data]="{ educationInfo: user.educationInfo }"></app-section-upper-bar>
     </div>
-    <div
-      *ngFor="let education of user.educationInfo"
-      class="contacts-tile">
-      <p>{{ education.universityName }}</p>
+    <div *ngFor="let education of user.educationInfo">
+      <p>{{ education.universityName | uppercase }}</p>
       <p
         *ngIf="education.startDate"
-        class="years">
+        class="mat-caption light">
         {{ education.startDate | date : 'y' }} -
         {{ education.endDate | date : 'y' }}
       </p>
@@ -23,7 +21,7 @@
   </div>
   <div class="left-inner">
     <div class="upper-wrapper">
-      <h3 class="subtitle-accent">Address</h3>
+      <h3 class="mat-subtitle-2 primary">Address</h3>
       <app-section-upper-bar
         [data]="{
           city: user.city,
@@ -34,10 +32,11 @@
     <app-empty-message
       *ngIf="!user.address"
       title="address"></app-empty-message>
-    <h4 class="subtitle-base">Postal Code</h4>
+    <h4
+      *ngIf="user.city"
+      class="mat-subtitle-1">
+      Postal Code:
+    </h4>
     <p>{{ user.city }}</p>
-    <app-empty-message
-      *ngIf="!user.city"
-      title="city"></app-empty-message>
   </div>
 </div>

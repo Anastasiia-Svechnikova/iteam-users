@@ -18,6 +18,6 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
-    // this.store.dispatch(userActions.loadUserById({ id }));
+    this.store.dispatch(userActions.loadUserById({ id }));
   }
 }

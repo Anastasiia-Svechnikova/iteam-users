@@ -23,10 +23,10 @@ export class UserBankAndSocialsInfoComponent {
   userSocialsData$ = this.store.select(selectCurrentUserSocialsData);
 
   isUserBankDataEmpty$ = this.userBankData$.pipe(
-    map((data) => !Object.values(data).length),
+    map((data) => !Object.values(data).every((item) => item)),
   );
   isUserSocialsDataEmpty$ = this.userSocialsData$.pipe(
-    map((data) => !Object.values(data).length),
+    map((data) => !Object.values(data).every((item) => item)),
   );
 
   userBankInfoTitles = userBankInfoTitles;

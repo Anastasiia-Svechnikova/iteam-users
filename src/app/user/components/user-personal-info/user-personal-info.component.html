@@ -3,13 +3,12 @@
   class="wrapper">
   <div class="bio">
     <div class="avatar"></div>
-    <div class="info">
+    <div>
       <div class="name-wrapper">
-        <p class="name">
+        <p class="mat-headline-5 mb-0">
           {{ userPersonalInfo.name || 'No Name' }}
           {{ userPersonalInfo.surname }}
         </p>
-        <span class="spacer"></span>
         <app-section-upper-bar
           [data]="userPersonalInfo"></app-section-upper-bar>
       </div>
@@ -19,7 +18,7 @@
         Status:
         <span [ngClass]="userPersonalInfo.status">
           {{ userPersonalInfo.status | titlecase }}
-          <mat-icon class="status-icon">
+          <mat-icon class="icon">
             {{ statusIconTypes.get(userPersonalInfo.status) }}
           </mat-icon>
         </span>
@@ -27,7 +26,7 @@
       <p
         *ngIf="userPersonalInfo.birthday"
         class="detail">
-        <mat-icon class="status-icon">card_giftcard</mat-icon>
+        <mat-icon class="icon">card_giftcard</mat-icon>
         <span>{{ userPersonalInfo.birthday | date }}</span>
       </p>
       <p
@@ -40,24 +39,22 @@
       </p>
     </div>
   </div>
-  <div
-    *ngIf="userPersonalInfo.startDate"
-    class="terms">
+  <div *ngIf="userPersonalInfo.startDate">
     <p class="detail">
       <span class="term">Start Date:</span>
-      <span class="term-detail">{{ userPersonalInfo.startDate | date }}</span>
+      <span>{{ userPersonalInfo.startDate | date }}</span>
     </p>
     <p
       *ngIf="userPersonalInfo.endDate"
       class="detail">
       <span class="term">End Date:</span>
-      <span class="term-detail">{{ userPersonalInfo.endDate | date }}</span>
+      <span>{{ userPersonalInfo.endDate | date }}</span>
     </p>
     <p
       *ngIf="userPersonalInfo.endReason"
       class="detail">
       <span class="term">Reason:</span>
-      <span class="term-detail">{{ userPersonalInfo.endReason }}</span>
+      <span>{{ userPersonalInfo.endReason }}</span>
     </p>
   </div>
 </div>

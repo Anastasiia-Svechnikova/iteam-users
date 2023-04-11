@@ -1,14 +1,15 @@
 @import '/src/styles/_variables.scss';
 @import '/src/styles/_color-palette.scss';
 
-.subtitle-bold {
-  font-weight: $base-header-font-weight;
-}
-
 .work-item {
   padding-top: $xl-padding;
+
   &:not(:last-of-type) {
-    padding-top: 0;
+    padding: 0 0 $xl-padding 0;
     border-bottom: $base-border;
+  }
+
+  .project-name {
+    margin-bottom: $xxs-spacer;
   }
 }

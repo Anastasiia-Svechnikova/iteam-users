@@ -2,13 +2,13 @@
   <ng-container *ngIf="userBankData$ | async as userBankData">
     <div>
       <div class="upper-wrapper">
-        <h3 class="subtitle-accent">Bank Invoice Info</h3>
+        <h3 class="mat-subtitle-2 primary">Bank Invoice Info</h3>
         <app-section-upper-bar [data]="userBankData"></app-section-upper-bar>
       </div>
       <ng-container *ngFor="let title of userBankInfoTitles | keyvalue">
         <p
           *ngIf="userBankData[title.key]"
-          class="subtitle-base">
+          class="mat-subtitle-1">
           {{ title.value }}:
         </p>
         <p>{{ userBankData[title.key] }}</p>
@@ -23,14 +23,12 @@
   <ng-container *ngIf="userSocialsData$ | async as userSocialsData">
     <div>
       <div class="upper-wrapper">
-        <h3 class="subtitle-accent">Social Links</h3>
+        <h3 class="mat-subtitle-2 primary">Social Links</h3>
         <app-section-upper-bar [data]="userSocialsData"></app-section-upper-bar>
       </div>
     </div>
     <div>
-      <ng-container
-        *ngFor="let socialLink of socialLinksData | keyvalue"
-        class="socials">
+      <ng-container *ngFor="let socialLink of socialLinksData | keyvalue">
         <ng-container *ngIf="userSocialsData[socialLink.key]">
           <div class="social-links">
             <app-custom-icon [name]="socialLink.key"></app-custom-icon>

@@ -23,23 +23,18 @@
 
 .name-wrapper {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
-
-.spacer {
-  width: $s-spacer;
-}
-
-.name {
-  font-weight: $base-header-font-weight;
-  font-size: $base-header-font-size;
-  color: $base-text-color;
+.icon {
+  color: inherit;
+  transform: scale(0.9);
 }
 
 .detail {
   display: flex;
   align-items: center;
   gap: $xs-spacer;
+  margin-bottom: $xxs-spacer;
 }
 
 .term {
@@ -64,8 +59,4 @@
 .active {
   @extend %status;
   color: $green-color;
-}
-
-.status-icon {
-  color: inherit;
 }

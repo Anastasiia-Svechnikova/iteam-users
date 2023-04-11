@@ -18,7 +18,6 @@ export class UserEducationContactsComponent {
   user$ = this.store.select(selectUser);
 
   userBankInfoTitles = userBankInfoTitles;
-
   socialLinksData = UserSocialLinksTitles;
 
   constructor(private store: Store) {}

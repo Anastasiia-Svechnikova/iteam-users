@@ -1,17 +1,6 @@
 @import '/src/styles/_variables.scss';
 @import '/src/styles/_color-palette.scss';
 
-.detail {
-  color: $base-header-color;
-}
-
-.socials {
-  display: flex;
-  align-items: center;
-  gap: $m-spacer;
-  margin-bottom: $xs-spacer;
-}
-
 .social-links {
   display: flex;
   gap: $xs-spacer;

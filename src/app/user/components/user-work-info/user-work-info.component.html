@@ -1,5 +1,5 @@
 <div class="upper-wrapper">
-  <h3 class="subtitle-accent">Work History</h3>
+  <h3 class="mat-subtitle-2 primary">Work History</h3>
   <app-section-upper-bar
     [data]="{
       userWorkHistory: (userWorkHistory$ | async)
@@ -8,20 +8,14 @@
 <div
   *ngFor="let work of userWorkHistory$ | async; let i = index"
   class="work-item">
-  <p class="mat-headline-5">{{ work.project }}</p>
-  <p class="mat-headline-6">{{ work.project }}</p>
-  <p class="mat-subtitle-1">{{ work.project }}</p>
-  <p class="mat-subtitle-2 primary">{{ work.project }}</p>
-  <p class="mat-caption primary">{{ work.project }}</p>
-  <p class="mat-caption light">{{ work.project }}</p>
-
-  <p class="years">
+  <p class="mat-headline-6 project-name">{{ work.project }}</p>
+  <p class="mat-caption light">
     {{ work.startDate | date }}-
     {{ work.endDate | date }}
   </p>
-  <p class="subtitle-base">Position on Project</p>
+  <p class="mat-subtitle-1">Position on Project</p>
   <p>{{ work.positionOnProject }}</p>
-  <p class="subtitle-base">Responsibilities</p>
+  <p class="mat-subtitle-1">Responsibilities</p>
   <p>{{ work.responsibility }}</p>
 </div>
 <app-empty-message
