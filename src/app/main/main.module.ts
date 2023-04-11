@@ -13,7 +13,7 @@ import { MainUserEffects } from './state/effects';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'dashboard',
     canActivate: [],
     component: SiteLayoutComponent,
     children: [
@@ -23,7 +23,7 @@ const routes: Routes = [
         data: { header: HeaderTitles.home },
       },
       {
-        path: 'user-profile',
+        path: 'user-profile/:id',
         loadChildren: () =>
           import('../user/user.module').then((m) => m.UserModule),
         data: { header: HeaderTitles.user },
@@ -33,11 +33,16 @@ const routes: Routes = [
         component: HomeComponent,
         data: { header: HeaderTitles.admin },
       },
+      {
+        path: 'projects',
+        component: HomeComponent,
+        data: { header: HeaderTitles.projects },
+      },
     ],
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'dashboard/home',
   },
 ];
 

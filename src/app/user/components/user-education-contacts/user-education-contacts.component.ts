@@ -9,7 +9,10 @@ import { UserProfileInfoSections } from '../../models.ts/user-profile-info-secti
 @Component({
   selector: 'app-user-education-contacts',
   templateUrl: './user-education-contacts.component.html',
-  styleUrls: ['./user-education-contacts.component.scss'],
+  styleUrls: [
+    './user-education-contacts.component.scss',
+    '../user.component.scss',
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserEducationContactsComponent {

@@ -24,12 +24,10 @@ export class SectionUpperBarComponent extends UnSubscriberComponent {
       autoFocus: false,
       data: { data: this.data },
     });
-
     dialogRef.afterClosed().pipe(takeUntil(this.destroyed$)).subscribe();
   }
 
   copyToClipBoard(): void {
-    console.log(this.data);
     this.clipboard.copy(JSON.stringify(this.data));
   }
 }

@@ -1,26 +1,26 @@
 import { UserRoles } from 'src/app/shared/constants/constants';
 
-export const sideNavigationLinksData = [
+export const siteNavigationLinksData = [
   {
-    path: '/home',
+    path: ['/dashboard', 'home'],
     iconName: 'home',
     title: 'home',
     accessRoles: [UserRoles.Admin, UserRoles.Guest],
   },
   {
-    path: '/user-profile',
-    iconName: 'people',
+    path: ['/dashboard', 'user-profile', localStorage.getItem('id')],
+    iconName: 'person',
     title: 'profile',
     accessRoles: [UserRoles.Admin, UserRoles.Guest],
   },
   {
-    path: '/projects',
+    path: ['/dashboard', 'projects'],
     iconName: 'dashboard',
     title: 'projects',
     accessRoles: [UserRoles.Admin, UserRoles.Guest],
   },
   {
-    path: '/admin',
+    path: ['/dashboard', 'admin'],
     iconName: 'bar_chart',
     title: 'admin',
     accessRoles: [UserRoles.Admin],

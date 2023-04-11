@@ -12,7 +12,9 @@
         <div class="upper-wrapper">
           <h3 class="subtitle-accent">Description</h3>
           <app-section-upper-bar
-            [data]="user.positionDescription"></app-section-upper-bar>
+            [data]="{
+              positionDescription: user.positionDescription
+            }"></app-section-upper-bar>
         </div>
         <p>
           {{ user.positionDescription }}

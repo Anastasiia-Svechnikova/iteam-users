@@ -1,9 +1,9 @@
-<div class="wrapper">
+<div class="skills-wrapper">
   <div class="upper-wrapper">
     <h3 class="subtitle-accent">Skills</h3>
-    <app-section-upper-bar [data]="skills$ | async"></app-section-upper-bar>
+    <app-section-upper-bar
+      [data]="{ skills: (skills$ | async) }"></app-section-upper-bar>
   </div>
-
   <mat-chip-listbox aria-label="User skills">
     <mat-chip
       *ngFor="let skill of skills$ | async"

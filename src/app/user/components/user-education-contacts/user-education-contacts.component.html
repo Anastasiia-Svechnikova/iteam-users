@@ -1,5 +1,5 @@
-<div class="wrapper">
-  <div *ngIf="user$ | async as user">
+<div *ngIf="user$ | async as user">
+  <div class="left-inner">
     <div class="upper-wrapper">
       <h3 class="subtitle-accent">Education</h3>
       <app-section-upper-bar
@@ -11,7 +11,7 @@
       <p>{{ education.universityName }}</p>
       <p
         *ngIf="education.startDate"
-        class="detail">
+        class="years">
         {{ education.startDate | date : 'y' }} -
         {{ education.endDate | date : 'y' }}
       </p>
@@ -20,25 +20,24 @@
     <app-empty-message
       *ngIf="!user.educationInfo.length"
       title="skills"></app-empty-message>
-    <div class="contacts-tile">
-      <div class="upper-wrapper">
-        <h3 class="subtitle-accent">Address</h3>
-        <app-section-upper-bar
-          [data]="{
-            city: user.city,
-            address: user.address
-          }"></app-section-upper-bar>
-      </div>
-
-      <p>{{ user.address }}</p>
-      <app-empty-message
-        *ngIf="!user.address"
-        title="address"></app-empty-message>
-      <h4 class="detail">Postal Code</h4>
-      <p>{{ user.city }}</p>
-      <app-empty-message
-        *ngIf="!user.city"
-        title="city"></app-empty-message>
+  </div>
+  <div class="left-inner">
+    <div class="upper-wrapper">
+      <h3 class="subtitle-accent">Address</h3>
+      <app-section-upper-bar
+        [data]="{
+          city: user.city,
+          address: user.address
+        }"></app-section-upper-bar>
     </div>
+    <p>{{ user.address }}</p>
+    <app-empty-message
+      *ngIf="!user.address"
+      title="address"></app-empty-message>
+    <h4 class="subtitle-base">Postal Code</h4>
+    <p>{{ user.city }}</p>
+    <app-empty-message
+      *ngIf="!user.city"
+      title="city"></app-empty-message>
   </div>
 </div>

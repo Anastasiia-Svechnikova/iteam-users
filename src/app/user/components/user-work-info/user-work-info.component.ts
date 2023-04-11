@@ -7,7 +7,7 @@ import { selectCurrentUserWorkHistory } from '../../state/selectors';
 @Component({
   selector: 'app-user-work-info',
   templateUrl: './user-work-info.component.html',
-  styleUrls: ['./user-work-info.component.scss'],
+  styleUrls: ['./user-work-info.component.scss', '../user.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserWorkInfoComponent {

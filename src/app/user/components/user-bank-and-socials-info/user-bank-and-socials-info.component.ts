@@ -11,7 +11,10 @@ import {
 @Component({
   selector: 'app-user-bank-and-socials-info',
   templateUrl: './user-bank-and-socials-info.component.html',
-  styleUrls: ['./user-bank-and-socials-info.component.scss'],
+  styleUrls: [
+    './user-bank-and-socials-info.component.scss',
+    '../user.component.scss',
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBankAndSocialsInfoComponent {

@@ -1,16 +1,12 @@
 @import '/src/styles/_variables.scss';
 @import '/src/styles/_color-palette.scss';
 
-.wrapper .chips {
+.skills-wrapper .chips {
   background-color: $primary-color-light;
   border: $primary-border;
   pointer-events: none;
 }
 
-.subtitle-accent {
-  margin-bottom: 0;
-  font-size: $accent-header-font-size;
-  font-weight: $accent-header-font-weight;
-  color: $primary-color;
-  text-transform: uppercase;
+.controls {
+  display: inline-flex;
 }

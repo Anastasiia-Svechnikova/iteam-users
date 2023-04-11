@@ -16,19 +16,50 @@
   text-transform: uppercase;
 }
 
+.upper-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: $s-spacer;
+}
+
+.subtitle-base {
+  color: $base-header-color;
+}
+
+.subtitle-accent {
+  margin-bottom: 0;
+  font-size: $accent-header-font-size;
+  font-weight: $accent-header-font-weight;
+  color: $primary-color;
+  text-transform: uppercase;
+}
+
 .middle {
   width: 100%;
   display: flex;
+  gap: 3%;
 }
 
 .left {
   min-width: fit-content;
 }
 
+.left-inner {
+  display: flex;
+  flex-direction: column;
+  padding: 0 $xl-padding;
+  margin-bottom: $m-spacer;
+}
+
 .right {
   flex-grow: 1;
   padding: 0 $xxl-padding;
   border-left: $base-border;
+}
+
+.years {
+  color: $base-header-color;
+  font-size: $s-font-size;
 }
 
 .tile {
