@@ -6,7 +6,7 @@ import { createActionGroup, emptyProps } from '@ngrx/store';
 export const mainUserActions = createActionGroup({
   source: 'Main',
   events: {
-    'Load Current User': emptyProps(),
+    'Load User By Id': props<{ id: string }>(),
     'Loaded Current User': props<{ user: IUserDetails }>(),
     'Loaded Error': emptyProps(),
   },

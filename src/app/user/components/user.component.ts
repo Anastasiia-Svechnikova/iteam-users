@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { mainUserActions } from 'src/app/main/state/actions';
@@ -15,10 +16,10 @@ export class UserComponent implements OnInit {
   user$ = this.store.select(selectCurrentUser);
   sectionTypes = UserProfileInfoSections;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    console.log;
-    this.store.dispatch(mainUserActions.loadCurrentUser());
+    const id = this.route.snapshot.params['id'];
+    this.store.dispatch(mainUserActions.loadUserById({ id }));
   }
 }

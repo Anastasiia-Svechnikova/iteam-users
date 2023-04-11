@@ -11,9 +11,9 @@ import { mainUserActions } from './actions';
 export class MainUserEffects {
   loadCurrentUser$ = createEffect(() => {
     return this.actions.pipe(
-      ofType(mainUserActions.loadCurrentUser),
-      switchMap(() => {
-        return this.mainUserService.getUserById().pipe(
+      ofType(mainUserActions.loadUserById),
+      switchMap((action) => {
+        return this.mainUserService.getUserById(action.id).pipe(
           map((user: IUserDetails) =>
             mainUserActions.loadedCurrentUser({ user }),
           ),
