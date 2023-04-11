@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 import { ILoginResponseData } from '../models/login-response-data';
 import { SnackbarService } from '../../shared/services/snackbar.service';
 import { LocalStorageService } from '../../shared/services/local-storage.service';
-import { mainUserActions } from '../../main/state/actions';
+import { userActions } from '../../user/state/actions';
 
 @Injectable()
 export class AuthEffects {
@@ -41,7 +41,7 @@ export class AuthEffects {
             this.router.navigateByUrl('home');
             return [
               AuthActions.loginSuccess(),
-              mainUserActions.loadedCurrentUser({
+              userActions.loadedUser({
                 user: loginResponseData.user,
               }),
             ];

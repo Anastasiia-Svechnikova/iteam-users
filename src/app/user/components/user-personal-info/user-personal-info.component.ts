@@ -12,7 +12,6 @@ import { selectCurrentUserPersonalData } from 'src/app/user/state/selectors';
 })
 export class UserPersonalInfoComponent {
   userPersonalInfo$ = this.store.select(selectCurrentUserPersonalData);
-
   statusIconTypes = UserPersonalInfoStatusIcons;
 
   constructor(private store: Store) {}

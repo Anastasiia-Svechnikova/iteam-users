@@ -13,11 +13,13 @@ import { AuthModule } from './auth/auth.module';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { HomeComponent } from './home/home.component';
+import { NavigationModule } from 'src/app/navigation/navigation.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
 
   imports: [
+    NavigationModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

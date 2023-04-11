@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
+
 import { userBankInfoTitles } from 'src/app/user/constants/bank-invoice-data';
 import { UserSocialLinksTitles } from 'src/app/user/constants/social-links';
 import {
@@ -13,7 +14,7 @@ import {
   templateUrl: './user-bank-and-socials-info.component.html',
   styleUrls: [
     './user-bank-and-socials-info.component.scss',
-    '../user.component.scss',
+    '../user/user.component.scss',
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

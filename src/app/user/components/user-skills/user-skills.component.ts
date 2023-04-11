@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { selectCurrentUserSkills } from '../../state/selectors';
+import { selectCurrentUserSkills } from 'src/app/user/state/selectors';
 
 @Component({
   selector: 'app-user-skills',
   templateUrl: './user-skills.component.html',
-  styleUrls: ['./user-skills.component.scss', '../user.component.scss'],
+  styleUrls: ['./user-skills.component.scss', '../user/user.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserSkillsComponent {

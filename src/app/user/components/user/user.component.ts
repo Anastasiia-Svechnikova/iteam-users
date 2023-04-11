@@ -2,9 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { mainUserActions } from 'src/app/main/state/actions';
-import { selectCurrentUser } from 'src/app/main/state/selectors';
-import { UserProfileInfoSections } from '../models.ts/user-profile-info-sections';
+import { userActions } from 'src/app/user/state/actions';
+import { selectUser } from 'src/app/user/state/selectors';
 
 @Component({
   selector: 'app-user',
@@ -13,13 +12,12 @@ import { UserProfileInfoSections } from '../models.ts/user-profile-info-sections
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent implements OnInit {
-  user$ = this.store.select(selectCurrentUser);
-  sectionTypes = UserProfileInfoSections;
+  user$ = this.store.select(selectUser);
 
   constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
-    this.store.dispatch(mainUserActions.loadUserById({ id }));
+    this.store.dispatch(userActions.loadUserById({ id }));
   }
 }

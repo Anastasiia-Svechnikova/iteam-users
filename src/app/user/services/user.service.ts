@@ -8,7 +8,7 @@ import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 @Injectable({
   providedIn: 'root',
 })
-export class MainUserService {
+export class UserService {
   constructor(private http: HttpClient) {}
 
   getUserById(id: string): Observable<IUserDetails> {

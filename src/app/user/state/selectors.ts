@@ -1,20 +1,26 @@
-import { createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { IMainState } from 'src/app/main/state/reducer';
-import { selectMainFeature } from 'src/app/main/state/selectors';
+import { IMainState } from './reducer';
+
+export const selectUserFeature = createFeatureSelector<IMainState>('user');
+
+export const selectUser = createSelector(
+  selectUserFeature,
+  (state: IMainState) => state.user,
+);
 
 export const selectCurrentUserSkills = createSelector(
-  selectMainFeature,
+  selectUserFeature,
   (state: IMainState) => state.user?.skills?.split(' '),
 );
 
 export const selectCurrentUserWorkHistory = createSelector(
-  selectMainFeature,
+  selectUserFeature,
   (state: IMainState) => state.user?.workHistory,
 );
 
 export const selectCurrentUserPersonalData = createSelector(
-  selectMainFeature,
+  selectUserFeature,
   (state: IMainState) => ({
     name: state.user?.name,
     surname: state.user?.surname,
@@ -29,7 +35,7 @@ export const selectCurrentUserPersonalData = createSelector(
 );
 
 export const selectCurrentUserBankInvoiceData = createSelector(
-  selectMainFeature,
+  selectUserFeature,
   (state: IMainState) => ({
     individualEntrepreneurName: state.user?.individualEntrepreneurName,
     individualEntrepreneurAddress: state.user?.individualEntrepreneurAddress,
@@ -47,7 +53,7 @@ export const selectCurrentUserBankInvoiceData = createSelector(
 );
 
 export const selectCurrentUserSocialsData = createSelector(
-  selectMainFeature,
+  selectUserFeature,
   (state: IMainState) => ({
     github: state.user?.github,
     linkedin: state.user?.linkedin,
