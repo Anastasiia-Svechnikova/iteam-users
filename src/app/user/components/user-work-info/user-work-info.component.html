@@ -1,9 +1,17 @@
 <div class="upper-wrapper">
   <h3 class="mat-subtitle-2 primary">Work History</h3>
-  <app-section-upper-bar
-    [data]="{
-      userWorkHistory: (userWorkHistory$ | async)
-    }"></app-section-upper-bar>
+  <button
+    mat-icon-button
+    class="icon-btn"
+    aria-label="Edit content button">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="icon-btn"
+    aria-label="Copy content button">
+    <mat-icon>content_copy</mat-icon>
+  </button>
 </div>
 <div
   *ngFor="let work of userWorkHistory$ | async; let i = index"

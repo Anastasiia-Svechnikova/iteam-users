@@ -7,7 +7,7 @@ import { selectCurrentUserPersonalData } from 'src/app/user/state/selectors';
 @Component({
   selector: 'app-user-personal-info',
   templateUrl: './user-personal-info.component.html',
-  styleUrls: ['./user-personal-info.scss'],
+  styleUrls: ['./user-personal-info.scss', '../user/user.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserPersonalInfoComponent {

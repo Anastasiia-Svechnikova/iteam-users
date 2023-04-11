@@ -1,6 +1,6 @@
 <div
   *ngIf="userPersonalInfo$ | async as userPersonalInfo"
-  class="wrapper">
+  class="personal-wrapper">
   <div class="bio">
     <div class="avatar"></div>
     <div>
@@ -9,8 +9,18 @@
           {{ userPersonalInfo.name || 'No Name' }}
           {{ userPersonalInfo.surname }}
         </p>
-        <app-section-upper-bar
-          [data]="userPersonalInfo"></app-section-upper-bar>
+        <button
+          mat-icon-button
+          class="icon-btn"
+          aria-label="Edit content button">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          class="icon-btn"
+          aria-label="Copy content button">
+          <mat-icon>content_copy</mat-icon>
+        </button>
       </div>
       <p
         *ngIf="userPersonalInfo.status"

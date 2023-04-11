@@ -11,10 +11,18 @@
       <div class="tile">
         <div class="upper-wrapper">
           <h3 class="mat-subtitle-2 primary">Description</h3>
-          <app-section-upper-bar
-            [data]="{
-              positionDescription: user.positionDescription
-            }"></app-section-upper-bar>
+          <button
+            mat-icon-button
+            class="icon-btn"
+            aria-label="Edit content button">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="icon-btn"
+            aria-label="Copy content button">
+            <mat-icon>content_copy</mat-icon>
+          </button>
         </div>
         <p>
           {{ user.positionDescription }}

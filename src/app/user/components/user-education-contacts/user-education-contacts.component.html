@@ -2,8 +2,18 @@
   <div class="left-inner">
     <div class="upper-wrapper">
       <h3 class="mat-subtitle-2 primary">Education</h3>
-      <app-section-upper-bar
-        [data]="{ educationInfo: user.educationInfo }"></app-section-upper-bar>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Edit content button">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Copy content button">
+        <mat-icon>content_copy</mat-icon>
+      </button>
     </div>
     <div *ngFor="let education of user.educationInfo">
       <p>{{ education.universityName | uppercase }}</p>
@@ -22,11 +32,18 @@
   <div class="left-inner">
     <div class="upper-wrapper">
       <h3 class="mat-subtitle-2 primary">Address</h3>
-      <app-section-upper-bar
-        [data]="{
-          city: user.city,
-          address: user.address
-        }"></app-section-upper-bar>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Edit content button">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Copy content button">
+        <mat-icon>content_copy</mat-icon>
+      </button>
     </div>
     <p>{{ user.address }}</p>
     <app-empty-message
