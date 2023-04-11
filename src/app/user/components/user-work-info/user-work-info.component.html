@@ -8,7 +8,13 @@
 <div
   *ngFor="let work of userWorkHistory$ | async; let i = index"
   class="work-item">
-  <p class="subtitle-bold">{{ work.project }}</p>
+  <p class="mat-headline-5">{{ work.project }}</p>
+  <p class="mat-headline-6">{{ work.project }}</p>
+  <p class="mat-subtitle-1">{{ work.project }}</p>
+  <p class="mat-subtitle-2 primary">{{ work.project }}</p>
+  <p class="mat-caption primary">{{ work.project }}</p>
+  <p class="mat-caption light">{{ work.project }}</p>
+
   <p class="years">
     {{ work.startDate | date }}-
     {{ work.endDate | date }}

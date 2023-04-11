@@ -14,7 +14,19 @@ body {
 
 body {
   margin: 0;
-}
-p {
-  font-size: $base-font-size;
+  .mat-subtitle-2.primary {
+    text-transform: uppercase;
+    color: $primary-color;
+    margin: 0 0 $l-spacer;
+  }
+  .mat-subtitle-1 {
+    color: $light-subtitle-color;
+  }
+  .mat-caption.primary {
+    color: $primary-color;
+  }
+  .mat-caption.light {
+    color: $light-subtitle-color;
+    font-size: $s-font-size;
+  }
 }
