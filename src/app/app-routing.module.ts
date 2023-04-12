@@ -22,7 +22,7 @@ const routes: Routes = [
         data: { header: HeaderTitles.home },
       },
       {
-        path: 'user-profile/:id',
+        path: 'users',
         loadChildren: () =>
           import('./user/user.module').then((m) => m.UserModule),
         data: { header: HeaderTitles.user },

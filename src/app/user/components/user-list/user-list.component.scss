@@ -1,0 +1,14 @@
+@import '/src/styles/_variables.scss';
+@import '/src/styles/_color-palette.scss';
+
+.wrapper {
+  margin: $xxl-padding auto;
+  height: 70vh;
+  width: 90%;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}

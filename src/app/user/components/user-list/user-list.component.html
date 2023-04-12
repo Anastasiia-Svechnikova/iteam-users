@@ -1,0 +1,25 @@
+<div
+  *ngIf="users$ | async as users; else spinner"
+  class="wrapper">
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Filter..."
+      (input)="onFilterChanged()"
+      [(ngModel)]="filterValue" />
+  </mat-form-field>
+  <ag-grid-angular
+    class="ag-theme-alpine users-grid"
+    domLayout="autoHeight"
+    [rowData]="users"
+    [enableCellTextSelection]="true"
+    [columnDefs]="colDefs"
+    [pagination]="true"
+    [paginationPageSize]="10"
+    (gridReady)="onGridReady($event)"></ag-grid-angular>
+</div>
+<ng-template #spinner>
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
