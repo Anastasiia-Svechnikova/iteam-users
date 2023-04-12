@@ -1,0 +1,36 @@
+<div mat-dialog-content>
+  <h3 class="mat-headline-5 title">Edit Description</h3>
+  <div class="wrapper">
+    <form
+      class="form"
+      [formGroup]="descriptionForm">
+      <mat-form-field
+        class="textarea-field"
+        appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          class="textarea"
+          formControlName="positionDescription"></textarea>
+      </mat-form-field>
+      <div
+        mat-dialog-actions
+        class="actions">
+        <button
+          mat-button
+          type="button"
+          color="primary"
+          (click)="dialogRef.close()">
+          Cancel
+        </button>
+        <button
+          mat-flat-button
+          type="submit"
+          color="primary"
+          (click)="onSubmit()">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

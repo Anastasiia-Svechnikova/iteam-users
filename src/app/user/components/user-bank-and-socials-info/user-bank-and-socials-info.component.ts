@@ -1,13 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
-import { userBankInfoTitles } from 'src/app/user/constants/bank-invoice-data';
+import { IUserDetails } from 'src/app/shared/interfaces/user-details';
+import { UserStore } from 'src/app/user/components/user/user.store';
 import { UserSocialLinksTitles } from 'src/app/user/constants/social-links';
-import {
-  selectCurrentUserBankInvoiceData,
-  selectCurrentUserSocialsData,
-} from 'src/app/user/state/selectors';
+import { userBankInfoTitles } from 'src/app/user/constants/user-bank-info-titles';
 
 @Component({
   selector: 'app-user-bank-and-socials-info',
@@ -19,18 +16,26 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBankAndSocialsInfoComponent {
-  userBankData$ = this.store.select(selectCurrentUserBankInvoiceData);
-  userSocialsData$ = this.store.select(selectCurrentUserSocialsData);
-
-  isUserBankDataEmpty$ = this.userBankData$.pipe(
-    map((data) => !Object.values(data).every((item) => item)),
-  );
-  isUserSocialsDataEmpty$ = this.userSocialsData$.pipe(
-    map((data) => !Object.values(data).every((item) => item)),
-  );
+  userVm$ = this._userStore.vm$;
 
   userBankInfoTitles = userBankInfoTitles;
-  socialLinksData = UserSocialLinksTitles;
+  UserSocialLinksTitles = UserSocialLinksTitles;
 
-  constructor(private store: Store) {}
+  isUserBankDataEmpty$ = this.checkDataByPropertiesEmpty([
+    ...this.userBankInfoTitles.keys(),
+  ]);
+
+  isSocialsDataEmpty$ = this.checkDataByPropertiesEmpty([
+    ...this.UserSocialLinksTitles.keys(),
+  ]);
+
+  constructor(private readonly _userStore: UserStore) {}
+
+  checkDataByPropertiesEmpty(properties: string[]): Observable<boolean> {
+    return this.userVm$.pipe(
+      map(({ user }) =>
+        properties.every((key) => !user?.[key as keyof IUserDetails]),
+      ),
+    );
+  }
 }

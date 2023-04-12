@@ -18,7 +18,6 @@
 .middle {
   width: 100%;
   display: flex;
-  gap: 3%;
 }
 
 .left {
@@ -28,6 +27,7 @@
 .left-inner {
   display: flex;
   flex-direction: column;
+  max-width: 17em;
   padding: 0 $xl-padding;
   margin-bottom: $m-spacer;
 }

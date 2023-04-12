@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Store } from '@ngrx/store';
 
-import { selectUser } from 'src/app/user/state/selectors';
-import { userBankInfoTitles } from '../../constants/bank-invoice-data';
-import { UserSocialLinksTitles } from '../../constants/social-links';
+import { UserStore } from 'src/app/user/components/user/user.store';
+import { userBankInfoTitles } from 'src/app/user/constants/user-bank-info-titles';
+import { UserSocialLinksTitles } from 'src/app/user/constants/social-links';
 
 @Component({
   selector: 'app-user-education-contacts',
@@ -15,10 +14,10 @@ import { UserSocialLinksTitles } from '../../constants/social-links';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserEducationContactsComponent {
-  user$ = this.store.select(selectUser);
+  userVm$ = this._userStore.vm$;
 
   userBankInfoTitles = userBankInfoTitles;
   socialLinksData = UserSocialLinksTitles;
 
-  constructor(private store: Store) {}
+  constructor(private readonly _userStore: UserStore) {}
 }

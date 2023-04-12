@@ -1,13 +1,13 @@
 <div
-  *ngIf="userPersonalInfo$ | async as userPersonalInfo"
+  *ngIf="(userVm$ | async)?.user as user"
   class="personal-wrapper">
   <div class="bio">
     <div class="avatar"></div>
     <div>
       <div class="name-wrapper">
         <p class="mat-headline-5 mb-0">
-          {{ userPersonalInfo.name || 'No Name' }}
-          {{ userPersonalInfo.surname }}
+          {{ user.name || 'No Name' }}
+          {{ user.surname }}
         </p>
         <button
           mat-icon-button
@@ -23,48 +23,48 @@
         </button>
       </div>
       <p
-        *ngIf="userPersonalInfo.status"
+        *ngIf="user.status"
         class="detail">
         Status:
-        <span [ngClass]="userPersonalInfo.status">
-          {{ userPersonalInfo.status | titlecase }}
+        <span [ngClass]="user.status">
+          {{ user.status | titlecase }}
           <mat-icon class="icon">
-            {{ statusIconTypes.get(userPersonalInfo.status) }}
+            {{ statusIconTypes.get(user.status) }}
           </mat-icon>
         </span>
       </p>
       <p
-        *ngIf="userPersonalInfo.birthday"
+        *ngIf="user.birthday"
         class="detail">
         <mat-icon class="icon">card_giftcard</mat-icon>
-        <span>{{ userPersonalInfo.birthday | date }}</span>
+        <span>{{ user.birthday | date }}</span>
       </p>
       <p
-        *ngIf="userPersonalInfo.phone"
+        *ngIf="user.phone"
         class="detail">
-        {{ userPersonalInfo.phone }}
+        {{ user.phone }}
       </p>
       <p class="detail">
-        {{ userPersonalInfo.email }}
+        {{ user.email }}
       </p>
     </div>
   </div>
-  <div *ngIf="userPersonalInfo.startDate">
+  <div *ngIf="user.startDate">
     <p class="detail">
       <span class="term">Start Date:</span>
-      <span>{{ userPersonalInfo.startDate | date }}</span>
+      <span>{{ user.startDate | date }}</span>
     </p>
     <p
-      *ngIf="userPersonalInfo.endDate"
+      *ngIf="user.endDate"
       class="detail">
       <span class="term">End Date:</span>
-      <span>{{ userPersonalInfo.endDate | date }}</span>
+      <span>{{ user.endDate | date }}</span>
     </p>
     <p
-      *ngIf="userPersonalInfo.endReason"
+      *ngIf="user.endReason"
       class="detail">
       <span class="term">Reason:</span>
-      <span>{{ userPersonalInfo.endReason }}</span>
+      <span>{{ user.endReason }}</span>
     </p>
   </div>
 </div>

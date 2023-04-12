@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Store } from '@ngrx/store';
 
-import { selectCurrentUserWorkHistory } from 'src/app/user/state/selectors';
+import { UserStore } from 'src/app/user/components/user/user.store';
 
 @Component({
   selector: 'app-user-work-info',
@@ -10,7 +9,7 @@ import { selectCurrentUserWorkHistory } from 'src/app/user/state/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserWorkInfoComponent {
-  userWorkHistory$ = this.store.select(selectCurrentUserWorkHistory);
+  userVm$ = this._userStore.vm$;
 
-  constructor(private store: Store) {}
+  constructor(private readonly _userStore: UserStore) {}
 }

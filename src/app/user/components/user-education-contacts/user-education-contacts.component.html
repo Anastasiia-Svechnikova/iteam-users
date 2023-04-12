@@ -1,4 +1,4 @@
-<div *ngIf="user$ | async as user">
+<div *ngIf="(userVm$ | async)?.user as user">
   <div class="left-inner">
     <div class="upper-wrapper">
       <h3 class="mat-subtitle-2 primary">Education</h3>

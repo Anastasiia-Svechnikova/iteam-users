@@ -17,9 +17,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { UserSkillsComponent } from 'src/app/user/components/user-skills/user-skills.component';
 import { EmptyMessageComponent } from 'src/app/user/components/empty-message/empty-message.component';
 import { UserBankAndSocialsInfoComponent } from 'src/app/user/components/user-bank-and-socials-info/user-bank-and-socials-info.component';
-import { UserEditModalComponent } from 'src/app/user/components/user-edit/user-edit-modal/user-edit-modal.component';
 import { UserEducationContactsComponent } from 'src/app/user/components/user-education-contacts/user-education-contacts.component';
 import { UserComponent } from 'src/app/user/components/user/user.component';
+import { EditDescriptionModalComponent } from './components/user-edit/edit-description-modal/edit-description-modal.component';
 
 const routes = [
   {
@@ -30,13 +30,13 @@ const routes = [
 @NgModule({
   declarations: [
     UserComponent,
-    UserEditModalComponent,
     UserPersonalInfoComponent,
     UserEducationContactsComponent,
     UserWorkInfoComponent,
     EmptyMessageComponent,
     UserSkillsComponent,
     UserBankAndSocialsInfoComponent,
+    EditDescriptionModalComponent,
   ],
   imports: [
     MatInputModule,

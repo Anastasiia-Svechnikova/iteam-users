@@ -1,31 +1,28 @@
-<ng-container *ngIf="skills$ | async as skills">
-  <div class="skills-wrapper">
-    <div class="upper-wrapper">
-      <h3 class="mat-subtitle-2 primary">Skills</h3>
-      <button
-        mat-icon-button
-        class="icon-btn"
-        aria-label="Edit content button"
-        (click)="openModal()">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        class="icon-btn"
-        aria-label="Copy content button"
-        (click)="copyContent()">
-        <mat-icon>content_copy</mat-icon>
-      </button>
-    </div>
-    <mat-chip-listbox aria-label="User skills">
-      <mat-chip
-        *ngFor="let skill of skills"
-        class="chips">
-        {{ skill }}
-      </mat-chip>
-    </mat-chip-listbox>
-    <app-empty-message
-      *ngIf="!skills.length"
-      title="skills"></app-empty-message>
+<div class="skills-wrapper">
+  <div class="upper-wrapper">
+    <h3 class="mat-subtitle-2 primary">Skills</h3>
+    <button
+      mat-icon-button
+      class="icon-btn"
+      aria-label="Edit content button">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="icon-btn"
+      aria-label="Copy content button"
+      (click)="copyContent()">
+      <mat-icon>content_copy</mat-icon>
+    </button>
   </div>
-</ng-container>
+  <mat-chip-listbox aria-label="User skills">
+    <mat-chip
+      *ngFor="let skill of userSkills$ | async"
+      class="chips">
+      {{ skill }}
+    </mat-chip>
+  </mat-chip-listbox>
+  <app-empty-message
+    *ngIf="!(userSkills$ | async)?.length"
+    title="skills"></app-empty-message>
+</div>

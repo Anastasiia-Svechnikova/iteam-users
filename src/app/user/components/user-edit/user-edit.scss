@@ -1,0 +1,21 @@
+@import '/src/styles/_variables.scss';
+@import '/src/styles/_color-palette.scss';
+
+.wrapper {
+  width: 300px;
+}
+
+.form {
+  padding: $xs-spacer;
+}
+
+.title {
+  color: $base-text-color;
+  margin-bottom: $m-spacer;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $xs-spacer;
+}

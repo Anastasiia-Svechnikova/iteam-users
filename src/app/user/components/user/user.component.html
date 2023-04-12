@@ -1,5 +1,5 @@
 <div
-  *ngIf="user$ | async as user"
+  *ngIf="(user$ | async)?.user as user"
   class="wrapper">
   <app-user-personal-info></app-user-personal-info>
   <div class="middle">
@@ -14,7 +14,8 @@
           <button
             mat-icon-button
             class="icon-btn"
-            aria-label="Edit content button">
+            aria-label="Edit content button"
+            (click)="onEditDescription()">
             <mat-icon>edit</mat-icon>
           </button>
           <button
