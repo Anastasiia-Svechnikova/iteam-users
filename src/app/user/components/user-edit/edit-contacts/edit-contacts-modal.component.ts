@@ -2,25 +2,25 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, takeUntil } from 'rxjs';
-
 import { AbstractEditModalComponent } from 'src/app/user/components/user-edit/abstract-edit-modal-component';
 
 export interface DialogData {
-  positionDescription: string;
+  address: string;
+  city: string;
 }
 
 @Component({
-  selector: 'app-edit-description-modal',
-  templateUrl: './edit-description-modal.component.html',
-  styleUrls: ['./edit-description-modal.component.scss', '../user-edit.scss'],
+  selector: 'app-edit-contacts',
+  templateUrl: './edit-contacts-modal.component.html',
+  styleUrls: ['./edit-contacts-modal.component.scss', '../user-edit.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditDescriptionModalComponent extends AbstractEditModalComponent {
-  formData!: string;
+export class EditContactsModalComponent extends AbstractEditModalComponent {
+  formData!: DialogData;
 
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<EditDescriptionModalComponent>,
+    public dialogRef: MatDialogRef<EditContactsModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Observable<DialogData>,
   ) {
     super(dialogRef);
@@ -29,14 +29,13 @@ export class EditDescriptionModalComponent extends AbstractEditModalComponent {
   setFormData(): void {
     this.data
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(
-        ({ positionDescription }) => (this.formData = positionDescription),
-      );
+      .subscribe(({ address, city }) => (this.formData = { address, city }));
   }
 
   createForm(): void {
     this.form = this.fb.group({
-      positionDescription: [this.formData, Validators.required],
+      address: [this.formData.address, Validators.required],
+      city: [this.formData.city, Validators.required],
     });
   }
 }

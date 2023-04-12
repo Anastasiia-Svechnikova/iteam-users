@@ -31,11 +31,9 @@ export class UserComponent implements OnInit {
     const dialogRef = this.dialog.open(EditDescriptionModalComponent, {
       restoreFocus: false,
       autoFocus: false,
-      data: {
-        positionDescription: this.user$.pipe(
-          map(({ user }) => user?.positionDescription),
-        ),
-      },
+      data: this.user$.pipe(
+        map(({ user }) => ({ positionDescription: user?.positionDescription })),
+      ),
     });
     dialogRef
       .afterClosed()

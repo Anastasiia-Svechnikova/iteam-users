@@ -1,4 +1,4 @@
-<div *ngIf="(userVm$ | async)?.user as user">
+<div *ngIf="(user$ | async)?.user as user">
   <div class="left-inner">
     <div class="upper-wrapper">
       <h3 class="mat-subtitle-2 primary">Education</h3>
@@ -35,7 +35,8 @@
       <button
         mat-icon-button
         class="icon-btn"
-        aria-label="Edit content button">
+        aria-label="Edit content button"
+        (click)="onEditContacts()">
         <mat-icon>edit</mat-icon>
       </button>
       <button
@@ -52,7 +53,7 @@
     <h4
       *ngIf="user.city"
       class="mat-subtitle-1">
-      Postal Code:
+      City:
     </h4>
     <p>{{ user.city }}</p>
   </div>

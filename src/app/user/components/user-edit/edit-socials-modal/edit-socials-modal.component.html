@@ -4,15 +4,17 @@
     <form
       class="form"
       [formGroup]="form">
-      <mat-form-field
-        class="textarea-field"
-        appearance="outline">
-        <mat-label>Description</mat-label>
-        <textarea
-          matInput
-          class="textarea"
-          formControlName="positionDescription"></textarea>
-      </mat-form-field>
+      <ng-container *ngFor="let socialLink of UserSocialLinksTitles | keyvalue">
+        <mat-form-field
+          class="input-field"
+          appearance="outline">
+          <mat-label>{{ socialLink.value | titlecase }}</mat-label>
+          <input
+            matInput
+            class="input"
+            formControlName="{{ socialLink.key }}" />
+        </mat-form-field>
+      </ng-container>
       <div
         mat-dialog-actions
         class="actions">

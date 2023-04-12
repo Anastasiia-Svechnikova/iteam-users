@@ -1,4 +1,4 @@
-<ng-container *ngIf="(userVm$ | async)?.user as user">
+<ng-container *ngIf="(user$ | async)?.user as user">
   <div class="left-inner">
     <div>
       <div class="upper-wrapper">
@@ -36,7 +36,8 @@
         <button
           mat-icon-button
           class="icon-btn"
-          aria-label="Edit content button">
+          aria-label="Edit content button"
+          (click)="onEditSocials()">
           <mat-icon>edit</mat-icon>
         </button>
         <button

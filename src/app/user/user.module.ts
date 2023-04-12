@@ -20,6 +20,8 @@ import { UserBankAndSocialsInfoComponent } from 'src/app/user/components/user-ba
 import { UserEducationContactsComponent } from 'src/app/user/components/user-education-contacts/user-education-contacts.component';
 import { UserComponent } from 'src/app/user/components/user/user.component';
 import { EditDescriptionModalComponent } from './components/user-edit/edit-description-modal/edit-description-modal.component';
+import { EditContactsModalComponent } from './components/user-edit/edit-contacts/edit-contacts-modal.component';
+import { EditSocialsModalComponent } from './components/user-edit/edit-socials-modal/edit-socials-modal.component';
 
 const routes = [
   {
@@ -37,6 +39,8 @@ const routes = [
     UserSkillsComponent,
     UserBankAndSocialsInfoComponent,
     EditDescriptionModalComponent,
+    EditContactsModalComponent,
+    EditSocialsModalComponent,
   ],
   imports: [
     MatInputModule,
