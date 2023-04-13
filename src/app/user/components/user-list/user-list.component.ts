@@ -36,21 +36,34 @@ export class UserListComponent {
       flex: 2,
     },
     {
-      field: 'status',
+      headerName: 'Status',
       flex: 1,
+      cellRenderer: (params: ICellRendererParams): string => {
+        return params.data.status === 'archived' ? `Deactivated` : `Active`;
+      },
       cellStyle: (params): CellStyle => {
-        if (params.value === 'archived') {
-          return { color: 'orange' };
-        }
-        return { color: 'green' };
+        return params.data.status === 'archived'
+          ? { color: 'orange' }
+          : { color: 'green' };
       },
     },
     {
       headerName: 'CV',
       cellRenderer: (params: ICellRendererParams): string => {
-        return params.data.cv
-          ? `<a href="${params.data.cv.fileUrl}">${params.data.cv.originalName}</a>`
-          : `N/A`;
+        if (params.data.cv) {
+          const uploadIdx = params.data.cv.fileUrl.indexOf('upload');
+          let fileUrl = params.data.cv.fileUrl;
+          if (uploadIdx !== -1) {
+            fileUrl =
+              params.data.cv.fileUrl.slice(0, uploadIdx + 'upload'.length) +
+              `/fl_attachment:${params.data.cv.originalName
+                .substring(0, params.data.cv.originalName.lastIndexOf(' '))
+                .replace(' ', '')}` +
+              params.data.cv.fileUrl.slice(uploadIdx + 'upload'.length);
+          }
+
+          return `<a  href="${fileUrl}">${params.data.cv.originalName}</a>`;
+        } else return `N/A`;
       },
       getQuickFilterText: (params): string => params.data.cv?.originalName,
       flex: 1,
@@ -67,7 +80,7 @@ export class UserListComponent {
   }
 
   getFullName = function (name: string, surname: string): string {
-    return name || surname ? name + ' ' + surname : 'N/A';
+    return name || surname ? `${name} ${surname}` : 'N/A';
   };
 
   onFilterChanged(): void {

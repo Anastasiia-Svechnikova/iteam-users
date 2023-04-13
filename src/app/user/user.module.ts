@@ -6,7 +6,6 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
@@ -63,7 +62,6 @@ const routes = [
     ClipboardModule,
     [RouterModule.forChild(routes)],
     AgGridModule,
-    MatProgressSpinnerModule,
     FormsModule,
   ],
 })
