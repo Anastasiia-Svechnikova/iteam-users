@@ -2,11 +2,16 @@
 @import '/src/styles/_color-palette.scss';
 
 .wrapper {
-  width: 300px;
+  padding: $xs-spacer $xs-spacer 0;
+  width: 25em;
 }
 
 .form {
   padding: $xs-spacer;
+}
+
+.input-field {
+  width: 100%;
 }
 
 .title {

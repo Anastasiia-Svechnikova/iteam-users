@@ -22,6 +22,7 @@ import { UserComponent } from 'src/app/user/components/user/user.component';
 import { EditDescriptionModalComponent } from './components/user-edit/edit-description-modal/edit-description-modal.component';
 import { EditContactsModalComponent } from './components/user-edit/edit-contacts/edit-contacts-modal.component';
 import { EditSocialsModalComponent } from './components/user-edit/edit-socials-modal/edit-socials-modal.component';
+import { EditBankInfoModalComponent } from './components/user-edit/edit-bank-info-modal/edit-bank-info-modal.component';
 
 const routes = [
   {
@@ -41,6 +42,7 @@ const routes = [
     EditDescriptionModalComponent,
     EditContactsModalComponent,
     EditSocialsModalComponent,
+    EditBankInfoModalComponent,
   ],
   imports: [
     MatInputModule,

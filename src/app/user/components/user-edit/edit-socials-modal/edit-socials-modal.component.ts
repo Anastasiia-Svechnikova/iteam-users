@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, takeUntil } from 'rxjs';
 import { AbstractEditModalComponent } from 'src/app/user/components/user-edit/abstract-edit-modal-component';
@@ -40,11 +40,10 @@ export class EditSocialsModalComponent extends AbstractEditModalComponent {
   }
 
   createForm(): void {
-    this.form = this.fb.group({
-      upwork: [this.formData.upwork, Validators.required],
-      linkedin: [this.formData.linkedin, Validators.required],
-      github: [this.formData.github, Validators.required],
-      telegramTag: [this.formData.telegramTag, Validators.required],
+    this.form = this.fb.group({});
+    const properties = [...UserSocialLinksTitles.keys()];
+    properties.forEach((property) => {
+      this.form.addControl(property, this.fb.control(this.formData[property]));
     });
   }
 }

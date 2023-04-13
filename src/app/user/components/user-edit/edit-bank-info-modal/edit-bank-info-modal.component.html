@@ -1,18 +1,18 @@
 <div mat-dialog-content>
-  <h3 class="mat-headline-5 title">Edit Social Links</h3>
+  <h3 class="mat-headline-5 title">Edit Bank Invoice Info</h3>
   <div class="wrapper">
     <form
       class="form"
       [formGroup]="form">
-      <ng-container *ngFor="let socialLink of UserSocialLinksTitles | keyvalue">
+      <ng-container *ngFor="let bankInfoItem of userBankInfoTitles | keyvalue">
         <mat-form-field
           class="input-field"
           appearance="outline">
-          <mat-label>{{ socialLink.value | titlecase }}</mat-label>
+          <mat-label>{{ bankInfoItem.value | titlecase }}</mat-label>
           <input
             matInput
             class="input"
-            formControlName="{{ socialLink.key }}" />
+            formControlName="{{ bankInfoItem.key }}" />
         </mat-form-field>
       </ng-container>
       <div

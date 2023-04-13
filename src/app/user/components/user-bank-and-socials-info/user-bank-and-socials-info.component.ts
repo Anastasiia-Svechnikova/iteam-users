@@ -1,8 +1,10 @@
+import { ComponentType } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { map, Observable, take } from 'rxjs';
 
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
+import { EditBankInfoModalComponent } from 'src/app/user/components/user-edit/edit-bank-info-modal/edit-bank-info-modal.component';
 import { EditSocialsModalComponent } from 'src/app/user/components/user-edit/edit-socials-modal/edit-socials-modal.component';
 import { UserStore } from 'src/app/user/components/user/user.store';
 import { UserSocialLinksTitles } from 'src/app/user/constants/social-links';
@@ -37,16 +39,31 @@ export class UserBankAndSocialsInfoComponent {
   ) {}
 
   onEditSocials(): void {
-    const dialogRef = this.dialog.open(EditSocialsModalComponent, {
+    this.setDialog('socials');
+  }
+
+  onEditBankInfo(): void {
+    this.setDialog('bank');
+  }
+
+  setDialog<T>(section: 'bank' | 'socials'): void {
+    const modalComponent =
+      section === 'bank'
+        ? EditBankInfoModalComponent
+        : EditSocialsModalComponent;
+    const dataSet =
+      section === 'bank' ? userBankInfoTitles : UserSocialLinksTitles;
+
+    const dialogRef = this.dialog.open(modalComponent as ComponentType<T>, {
       restoreFocus: false,
       autoFocus: false,
       data: this.user$.pipe(
-        map(({ user }) => ({
-          github: user?.github,
-          linkedin: user?.linkedin,
-          upwork: user?.upwork,
-          telegramTag: user?.telegramTag,
-        })),
+        map(({ user }) => {
+          const result: { [key: string]: string | number | undefined | null } =
+            {};
+          [...dataSet.keys()].forEach((key) => (result[key] = user?.[key]));
+          return result;
+        }),
       ),
     });
     dialogRef
