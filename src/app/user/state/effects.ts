@@ -11,11 +11,12 @@ import { userActions } from './actions';
 export class UserEffects {
   loadCurrentUser$ = createEffect(() => {
     return this.actions.pipe(
-      ofType(userActions.loadUserById),
-      switchMap((action) => {
-        return this.mainUserService.getUserById(action.id).pipe(
-          map((user: IUserDetails) => userActions.loadedUser({ user })),
-
+      ofType(userActions.loadCurrentUser),
+      switchMap(() => {
+        return this.mainUserService.getCurrentUser().pipe(
+          map((user: IUserDetails) =>
+            userActions.loadedCurrentUser({ user: { id: user.id } }),
+          ),
           catchError((error) => {
             this.snackbarService.openSnackBar(
               `User Loading Failed: ${error.message}`,

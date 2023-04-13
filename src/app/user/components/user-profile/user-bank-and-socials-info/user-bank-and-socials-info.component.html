@@ -1,0 +1,73 @@
+<ng-container *ngIf="user$ | async as user">
+  <div class="left-inner">
+    <div>
+      <div class="upper-wrapper">
+        <h3 class="mat-subtitle-2 primary">Bank Invoice Info</h3>
+        <button
+          mat-icon-button
+          class="icon-btn"
+          aria-label="Edit content button"
+          (click)="onEditBankInfo()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          class="icon-btn"
+          aria-label="Copy content button">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </div>
+      <ng-container *ngFor="let title of userBankInfoTitles | keyvalue">
+        <p
+          *ngIf="user[title.key]"
+          class="mat-subtitle-1">
+          {{ title.value }}:
+        </p>
+        <p>{{ user[title.key] }}</p>
+      </ng-container>
+
+      <app-empty-message
+        *ngIf="isUserBankDataEmpty$ | async"
+        title="bank invoice info"></app-empty-message>
+    </div>
+  </div>
+  <div class="left-inner">
+    <div>
+      <div class="upper-wrapper">
+        <h3 class="mat-subtitle-2 primary">Social Links</h3>
+        <button
+          mat-icon-button
+          class="icon-btn"
+          aria-label="Edit content button"
+          (click)="onEditSocials()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          class="icon-btn"
+          aria-label="Copy content button">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div>
+      <ng-container *ngFor="let socialLink of UserSocialLinksTitles | keyvalue">
+        <ng-container *ngIf="user[socialLink.key]">
+          <div class="social-links">
+            <app-custom-icon [name]="socialLink.key"></app-custom-icon>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              [href]="user[socialLink.key]">
+              {{ socialLink.value | titlecase }}
+            </a>
+          </div>
+        </ng-container>
+      </ng-container>
+      <app-empty-message
+        *ngIf="isSocialsDataEmpty$ | async"
+        title="social links"></app-empty-message>
+    </div>
+  </div>
+</ng-container>

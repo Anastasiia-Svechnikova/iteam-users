@@ -1,0 +1,60 @@
+<div *ngIf="user$ | async as user">
+  <div class="left-inner">
+    <div class="upper-wrapper">
+      <h3 class="mat-subtitle-2 primary">Education</h3>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Edit content button">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Copy content button">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+    </div>
+    <div *ngFor="let education of user.educationInfo">
+      <p>{{ education.universityName | uppercase }}</p>
+      <p
+        *ngIf="education.startDate"
+        class="mat-caption light">
+        {{ education.startDate | date : 'y' }} -
+        {{ education.endDate | date : 'y' }}
+      </p>
+      <p>{{ education.pricingModel }}</p>
+    </div>
+    <app-empty-message
+      *ngIf="!user.educationInfo.length"
+      title="skills"></app-empty-message>
+  </div>
+  <div class="left-inner">
+    <div class="upper-wrapper">
+      <h3 class="mat-subtitle-2 primary">Address</h3>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Edit content button"
+        (click)="onEditContacts()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Copy content button">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+    </div>
+    <p>{{ user.address }}</p>
+    <app-empty-message
+      *ngIf="!user.address"
+      title="address"></app-empty-message>
+    <h4
+      *ngIf="user.city"
+      class="mat-subtitle-1">
+      City:
+    </h4>
+    <p>{{ user.city }}</p>
+  </div>
+</div>
