@@ -5,8 +5,7 @@
     <input
       matInput
       placeholder="Filter..."
-      (input)="onFilterChanged()"
-      [(ngModel)]="filterValue" />
+      [formControl]="filter" />
   </mat-form-field>
   <ag-grid-angular
     class="ag-theme-alpine users-grid"

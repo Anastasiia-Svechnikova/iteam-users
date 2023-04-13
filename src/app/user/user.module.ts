@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { FormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,8 +10,8 @@ import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
 import { AgGridModule } from 'ag-grid-angular';
 
-import { EmailCellComponent } from 'src/app/user/components/user-list/email-cell/email-cell.component';
-import { SettingsCellComponent } from 'src/app/user/components/user-list/settings-cell/settings-cell.component';
+import { EmailCellComponent } from 'src/app/user/components/user-list/cell-components/email-cell/email-cell.component';
+import { SettingsCellComponent } from 'src/app/user/components/user-list/cell-components/settings-cell/settings-cell.component';
 import { UserListComponent } from 'src/app/user/components/user-list/user-list.component';
 import { UserReducer } from 'src/app/user/state/reducer';
 import { UserEffects } from 'src/app/user/state/effects';
@@ -32,8 +31,12 @@ import { EditBankInfoModalComponent } from './components/user-edit/edit-bank-inf
 const routes = [
   {
     path: '',
-    component: UserComponent,
+    component: UserListComponent,
   },
+  {
+    path: ':id',
+    component: UserComponent,
+  }
 ];
 @NgModule({
   declarations: [
@@ -64,7 +67,6 @@ const routes = [
     ClipboardModule,
     [RouterModule.forChild(routes)],
     AgGridModule,
-    FormsModule,
   ],
 })
 export class UserModule {}

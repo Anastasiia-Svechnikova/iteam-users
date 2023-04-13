@@ -2,17 +2,17 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 
+import { IUserDetails } from 'src/app/shared/interfaces/user-details';
+
 @Component({
-  selector: 'app-email-cell',
-  templateUrl: './email-cell.component.html',
-  styleUrls: ['./email-cell.component.scss'],
+  template:'',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmailCellComponent implements ICellRendererAngularComp {
-  email!: string;
+export abstract class BaseCellComponent implements ICellRendererAngularComp {
+  data!: IUserDetails;
 
   agInit(params: ICellRendererParams): void {
-    this.email = params.data.email;
+    this.data = params.data;
   }
 
   refresh(): boolean {

@@ -19,7 +19,7 @@ export class UserListStore extends ComponentStore<UserListState> {
   users$ = this.select((state) => state.users);
 
   getUserList = this.effect((trigger$) =>
-      trigger$.pipe(
+    trigger$.pipe(
       switchMap(() => this.userService.getAllUsers()),
       tap((users) => this.patchState({ users: users.data })),
       catchError((error) => {
