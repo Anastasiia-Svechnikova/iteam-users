@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 import { siteNavigationLinksData } from 'src/app/navigation/constants/constants';
 import { UserRoles } from 'src/app/shared/constants/constants';
+import { userActions } from 'src/app/user/state/actions';
 
 @Component({
   selector: 'app-site-layout',
@@ -16,10 +18,11 @@ export class SiteLayoutComponent implements OnInit {
 
   role = UserRoles.Admin;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private store: Store) {}
 
   ngOnInit(): void {
     this.setHeader();
+    this.store.dispatch(userActions.loadCurrentUser());
   }
 
   setHeader(): void {
