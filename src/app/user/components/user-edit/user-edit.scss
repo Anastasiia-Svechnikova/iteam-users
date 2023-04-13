@@ -1,0 +1,26 @@
+@import '/src/styles/_variables.scss';
+@import '/src/styles/_color-palette.scss';
+
+.wrapper {
+  padding: $xs-spacer $xs-spacer 0;
+  width: 25em;
+}
+
+.form {
+  padding: $xs-spacer;
+}
+
+.input-field {
+  width: 100%;
+}
+
+.title {
+  color: $base-text-color;
+  margin-bottom: $m-spacer;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $xs-spacer;
+}

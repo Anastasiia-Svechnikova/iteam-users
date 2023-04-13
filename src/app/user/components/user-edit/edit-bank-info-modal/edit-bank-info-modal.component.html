@@ -1,0 +1,38 @@
+<div mat-dialog-content>
+  <h3 class="mat-headline-5 title">Edit Bank Invoice Info</h3>
+  <div class="wrapper">
+    <form
+      class="form"
+      [formGroup]="form">
+      <ng-container *ngFor="let bankInfoItem of userBankInfoTitles | keyvalue">
+        <mat-form-field
+          class="input-field"
+          appearance="outline">
+          <mat-label>{{ bankInfoItem.value | titlecase }}</mat-label>
+          <input
+            matInput
+            class="input"
+            formControlName="{{ bankInfoItem.key }}" />
+        </mat-form-field>
+      </ng-container>
+      <div
+        mat-dialog-actions
+        class="actions">
+        <button
+          mat-button
+          type="button"
+          color="primary"
+          (click)="dialogRef.close()">
+          Cancel
+        </button>
+        <button
+          mat-flat-button
+          type="submit"
+          color="primary"
+          (click)="onSubmit()">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

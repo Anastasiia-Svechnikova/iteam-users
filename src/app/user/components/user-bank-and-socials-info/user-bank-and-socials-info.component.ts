@@ -1,13 +1,14 @@
+import { ComponentType } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { map, Observable, take } from 'rxjs';
 
-import { userBankInfoTitles } from 'src/app/user/constants/bank-invoice-data';
+import { IUserDetails } from 'src/app/shared/interfaces/user-details';
+import { EditBankInfoModalComponent } from 'src/app/user/components/user-edit/edit-bank-info-modal/edit-bank-info-modal.component';
+import { EditSocialsModalComponent } from 'src/app/user/components/user-edit/edit-socials-modal/edit-socials-modal.component';
+import { UserStore } from 'src/app/user/components/user/user.store';
 import { UserSocialLinksTitles } from 'src/app/user/constants/social-links';
-import {
-  selectCurrentUserBankInvoiceData,
-  selectCurrentUserSocialsData,
-} from 'src/app/user/state/selectors';
+import { userBankInfoTitles } from 'src/app/user/constants/user-bank-info-titles';
 
 @Component({
   selector: 'app-user-bank-and-socials-info',
@@ -19,18 +20,67 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBankAndSocialsInfoComponent {
-  userBankData$ = this.store.select(selectCurrentUserBankInvoiceData);
-  userSocialsData$ = this.store.select(selectCurrentUserSocialsData);
-
-  isUserBankDataEmpty$ = this.userBankData$.pipe(
-    map((data) => !Object.values(data).every((item) => item)),
-  );
-  isUserSocialsDataEmpty$ = this.userSocialsData$.pipe(
-    map((data) => !Object.values(data).every((item) => item)),
-  );
+  user$ = this._userStore.vm$;
 
   userBankInfoTitles = userBankInfoTitles;
-  socialLinksData = UserSocialLinksTitles;
+  UserSocialLinksTitles = UserSocialLinksTitles;
 
-  constructor(private store: Store) {}
+  isUserBankDataEmpty$ = this.checkDataByPropertiesEmpty([
+    ...this.userBankInfoTitles.keys(),
+  ]);
+
+  isSocialsDataEmpty$ = this.checkDataByPropertiesEmpty([
+    ...this.UserSocialLinksTitles.keys(),
+  ]);
+
+  constructor(
+    private readonly _userStore: UserStore,
+    private dialog: MatDialog,
+  ) {}
+
+  onEditSocials(): void {
+    this.setDialog('socials');
+  }
+
+  onEditBankInfo(): void {
+    this.setDialog('bank');
+  }
+
+  setDialog<T>(section: 'bank' | 'socials'): void {
+    const modalComponent =
+      section === 'bank'
+        ? EditBankInfoModalComponent
+        : EditSocialsModalComponent;
+    const dataSet =
+      section === 'bank' ? userBankInfoTitles : UserSocialLinksTitles;
+
+    const dialogRef = this.dialog.open(modalComponent as ComponentType<T>, {
+      restoreFocus: false,
+      autoFocus: false,
+      data: this.user$.pipe(
+        map(({ user }) => {
+          const result: { [key: string]: string | number | undefined | null } =
+            {};
+          [...dataSet.keys()].forEach((key) => (result[key] = user?.[key]));
+          return result;
+        }),
+      ),
+    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((data) => {
+        if (data) {
+          this._userStore.updateUserInfo(data);
+        }
+      });
+  }
+
+  checkDataByPropertiesEmpty(properties: string[]): Observable<boolean> {
+    return this.user$.pipe(
+      map(({ user }) =>
+        properties.every((key) => !user?.[key as keyof IUserDetails]),
+      ),
+    );
+  }
 }

@@ -1,0 +1,45 @@
+<div mat-dialog-content>
+  <h3 class="mat-headline-5 title">Edit Address</h3>
+  <div class="wrapper">
+    <form
+      class="form"
+      [formGroup]="form">
+      <mat-form-field
+        class="input-field"
+        appearance="outline">
+        <mat-label>City</mat-label>
+        <input
+          matInput
+          class="input"
+          formControlName="city" />
+      </mat-form-field>
+      <mat-form-field
+        class="input-field"
+        appearance="outline">
+        <mat-label>Address</mat-label>
+        <input
+          matInput
+          class="input"
+          formControlName="address" />
+      </mat-form-field>
+      <div
+        mat-dialog-actions
+        class="actions">
+        <button
+          mat-button
+          type="button"
+          color="primary"
+          (click)="dialogRef.close()">
+          Cancel
+        </button>
+        <button
+          mat-flat-button
+          type="submit"
+          color="primary"
+          (click)="onSubmit()">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

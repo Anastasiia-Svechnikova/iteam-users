@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { map } from 'rxjs';
 
-import { takeUntil } from 'rxjs';
-import { AbstractUserInfoComponent } from 'src/app/user/components/abstract-user-components.ts/abstract-user-component';
-import { UserEditModalComponent } from 'src/app/user/components/user-edit/user-edit-modal/user-edit-modal.component';
-import { selectCurrentUserSkills } from 'src/app/user/state/selectors';
+import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
+import { UserStore } from 'src/app/user/components/user/user.store';
 
 @Component({
   selector: 'app-user-skills',
@@ -11,18 +10,27 @@ import { selectCurrentUserSkills } from 'src/app/user/state/selectors';
   styleUrls: ['./user-skills.component.scss', '../user/user.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserSkillsComponent extends AbstractUserInfoComponent {
-  skills$ = this.store.select(selectCurrentUserSkills);
+export class UserSkillsComponent extends UnSubscriberComponent {
+  userSkills$ = this._userStore.vm$.pipe(
+    map(({ user }) => user?.skills?.split(' ')),
+  );
 
-  openModal(): void {
-    const dialogRef = this.dialog.open(UserEditModalComponent, {
-      autoFocus: false,
-      data: { data: this.skills$ },
-    });
-    dialogRef.afterClosed().pipe(takeUntil(this.destroyed$)).subscribe();
+  constructor(
+    private readonly _userStore: UserStore,
+  ) {
+    super();
   }
 
   copyContent(): void {
-    this.clipboard.copy('hello');
+    // const obj = {
+    //   name: 'bill',
+    //   surname: 'perry',
+    //   age: 25,
+    // };
+    // const keys = Object.keys(obj);
+    //   const str = keys.reduce((acc, key) => {
+    //     return acc.concat(`${key}: ${obj[key]}\n`);
+    //   }, '');
+    //   this.clipboard.copy(str);
   }
 }
