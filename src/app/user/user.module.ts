@@ -26,7 +26,7 @@ import { EditBankInfoModalComponent } from './components/user-edit/edit-bank-inf
 
 const routes = [
   {
-    path: '',
+    path: ':id',
     component: UserComponent,
   },
 ];

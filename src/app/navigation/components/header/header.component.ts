@@ -19,7 +19,7 @@ export class HeaderComponent {
   @Input() title = '';
 
   currentUserLinkPath = siteNavigationLinksData.find((link) =>
-    link.path.includes('user-profile'),
+    link.path.includes('users'),
   )?.path;
 
   onToggleSideNav(): void {

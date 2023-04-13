@@ -8,7 +8,7 @@ export const siteNavigationLinksData = [
     accessRoles: [UserRoles.Admin, UserRoles.Guest],
   },
   {
-    path: ['/dashboard', 'user-profile', localStorage.getItem('id')],
+    path: ['/dashboard', 'users', localStorage.getItem('id')],
     iconName: 'person',
     title: 'profile',
     accessRoles: [UserRoles.Admin, UserRoles.Guest],
