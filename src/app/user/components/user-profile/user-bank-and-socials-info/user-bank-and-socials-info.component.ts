@@ -65,11 +65,11 @@ export class UserBankAndSocialsInfoComponent {
   ) {}
 
   onEditSocials(): void {
-    this.setDialog('socials');
+    this.setDialog<EditBankInfoModalComponent>('socials');
   }
 
   onEditBankInfo(): void {
-    this.setDialog('bank');
+    this.setDialog<EditSocialsModalComponent>('bank');
   }
 
   setDialog<T>(section: 'bank' | 'socials'): void {

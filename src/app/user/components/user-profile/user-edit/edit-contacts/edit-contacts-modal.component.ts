@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, takeUntil } from 'rxjs';
+
 import { AbstractEditModalComponent } from 'src/app/user/components/user-profile/user-edit/abstract-edit-modal-component';
 
 export interface DialogData {
@@ -12,10 +13,10 @@ export interface DialogData {
 @Component({
   selector: 'app-edit-contacts',
   templateUrl: './edit-contacts-modal.component.html',
-  styleUrls: ['./edit-contacts-modal.component.scss', '../user-edit.scss'],
+  styleUrls: ['../user-edit.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditContactsModalComponent extends AbstractEditModalComponent {
+export class EditContactsModalComponent extends AbstractEditModalComponent<EditContactsModalComponent> {
   formData!: DialogData;
 
   constructor(
@@ -34,8 +35,8 @@ export class EditContactsModalComponent extends AbstractEditModalComponent {
 
   createForm(): void {
     this.form = this.fb.group({
-      address: [this.formData.address, Validators.required],
-      city: [this.formData.city, Validators.required],
+      address: [this.formData.address],
+      city: [this.formData.city],
     });
   }
 }

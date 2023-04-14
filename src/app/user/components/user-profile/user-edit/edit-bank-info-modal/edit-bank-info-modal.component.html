@@ -15,6 +15,18 @@
             matInput
             class="input"
             formControlName="{{ bankInfoItem.key }}" />
+
+          <mat-error
+            *ngIf="
+              form.controls['individualEntrepreneurBankCode'].hasError(
+                'pattern'
+              ) ||
+              form.controls[
+                'individualEntrepreneurIndividualTaxNumber'
+              ].hasError('pattern')
+            ">
+            Only numbers
+          </mat-error>
         </mat-form-field>
       </ng-container>
       <div
@@ -31,6 +43,7 @@
           mat-flat-button
           type="submit"
           color="primary"
+          [disabled]="!form.valid"
           (click)="onSubmit()">
           Save
         </button>

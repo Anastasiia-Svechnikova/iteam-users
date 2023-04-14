@@ -26,6 +26,7 @@
   align-items: center;
   gap: $xs-spacer;
 }
+
 .icon {
   color: inherit;
   transform: scale(0.9);
@@ -45,19 +46,15 @@
 %status {
   display: flex;
   align-items: center;
+  gap: $xxs-spacer;
 }
 
 .unarchived {
   @extend %status;
-  color: $primary-color;
+  color: $green-color;
 }
 
 .archived {
   @extend %status;
   color: $base-color;
-}
-
-.active {
-  @extend %status;
-  color: $green-color;
 }

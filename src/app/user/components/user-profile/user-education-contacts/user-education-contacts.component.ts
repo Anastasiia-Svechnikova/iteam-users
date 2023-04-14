@@ -1,19 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { map, take } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
-import { userBankInfoTitles } from 'src/app/user/components/user-profile/constants/user-bank-info-titles';
-import { UserSocialLinksTitles } from 'src/app/user/components/user-profile/constants/social-links';
-import { MatDialog } from '@angular/material/dialog';
 import { EditContactsModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-contacts/edit-contacts-modal.component';
-import { map, take } from 'rxjs';
 
 @Component({
   selector: 'app-user-education-contacts',
   templateUrl: './user-education-contacts.component.html',
-  styleUrls: [
-    './user-education-contacts.component.scss',
-    '../user-profile.component.scss',
-  ],
+  styleUrls: ['../user-profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserEducationContactsComponent {
@@ -28,9 +23,6 @@ export class UserEducationContactsComponent {
       city: user?.city,
     })),
   );
-
-  userBankInfoTitles = userBankInfoTitles;
-  socialLinksData = UserSocialLinksTitles;
 
   constructor(
     private readonly _userStore: UserStore,

@@ -9,12 +9,12 @@ import { updateUserDtoNumericProperties } from 'src/app/user/components/user-pro
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export abstract class AbstractEditModalComponent
+export abstract class AbstractEditModalComponent<T>
   extends UnSubscriberComponent
   implements OnInit
 {
   form!: FormGroup;
-  constructor(private dRef: MatDialogRef<unknown>) {
+  constructor(private _dialogRef: MatDialogRef<T>) {
     super();
   }
 
@@ -25,8 +25,9 @@ export abstract class AbstractEditModalComponent
 
   onSubmit(): void {
     this.checkForNumberValues();
-    this.dRef.close(this.form.value);
+    this._dialogRef.close(this.form.value);
   }
+
   abstract setFormData(): void;
   abstract createForm(): void;
 

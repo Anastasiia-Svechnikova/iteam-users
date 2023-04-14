@@ -25,7 +25,7 @@ export class UserPersonalInfoComponent {
     })),
   );
 
-  statusIconTypes = UserPersonalInfoStatusIcons;
+  statusIcons = UserPersonalInfoStatusIcons;
 
   constructor(private readonly _userStore: UserStore) {}
 }

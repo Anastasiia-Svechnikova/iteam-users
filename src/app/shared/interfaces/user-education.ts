@@ -8,4 +8,6 @@ export interface IUserEducationDetails {
   specialization: string;
   pricingModel: string;
   user?: IUserDetails;
+  createdAt: string;
+  updatedAt: string;
 }

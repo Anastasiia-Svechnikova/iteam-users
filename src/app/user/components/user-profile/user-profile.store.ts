@@ -8,6 +8,7 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs';
+
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { IUpdateUserDTO } from 'src/app/user/components/user-profile/interfaces/update-user-dto';
@@ -27,7 +28,7 @@ const defaultState = {
 @Injectable()
 export class UserStore extends ComponentStore<IUserState> {
   constructor(
-    private readonly userService: UserService,
+    private readonly _userService: UserService,
     private _snackBarService: SnackbarService,
   ) {
     super(defaultState);
@@ -42,7 +43,7 @@ export class UserStore extends ComponentStore<IUserState> {
       tap((id) => this.setUserId(id)),
       switchMap((id) => {
         this.setLoading(true);
-        return this.userService.getUserById(id).pipe(
+        return this._userService.getUserById(id).pipe(
           tap({
             next: (user: IUserDetails) => {
               this.setLoading(false);
@@ -68,7 +69,7 @@ export class UserStore extends ComponentStore<IUserState> {
         withLatestFrom(this.userId$),
         switchMap(([updatedData, id]) => {
           this.setLoading(true);
-          return this.userService.updateUserById(id, updatedData).pipe(
+          return this._userService.updateUserById(id, updatedData).pipe(
             tap({
               next: (updatedData) => {
                 this.setLoading(false);

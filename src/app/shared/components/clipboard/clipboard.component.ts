@@ -1,5 +1,7 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
+import { propertiesHiddenInClipboardText } from 'src/app/shared/constants/properties-hidden-in-clipboard-text';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { IUpdateUserDTO } from 'src/app/user/components/user-profile/interfaces/update-user-dto';
 
@@ -32,9 +34,7 @@ export class ClipboardComponent {
     function formatDataHelper(dataToCopy: T): string {
       const keys = Object.keys(dataToCopy);
       const formattedData = keys.reduce((acc, dataToCopyKey) => {
-        if (
-          ['createdAt', 'updatedAt', 'id', 'userId'].includes(dataToCopyKey)
-        ) {
+        if (propertiesHiddenInClipboardText.includes(dataToCopyKey)) {
           return acc.concat('');
         }
         const dataToCopyItem = dataToCopy[dataToCopyKey as keyof T];

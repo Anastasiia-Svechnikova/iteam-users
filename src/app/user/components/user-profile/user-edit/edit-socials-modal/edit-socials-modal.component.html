@@ -29,6 +29,7 @@
           mat-flat-button
           type="submit"
           color="primary"
+          [disabled]="!form.valid"
           (click)="onSubmit()">
           Save
         </button>
