@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { map, Observable, take } from 'rxjs';
 
-import { IUserDetails } from 'src/app/shared/interfaces/user-details';
+import { IUserSocialLinksData } from 'src/app/shared/interfaces/user-social-links-data';
+import { IUserBankInvoiceData } from 'src/app/shared/interfaces/user-bank-invoice-data';
 import { EditBankInfoModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-bank-info-modal/edit-bank-info-modal.component';
 import { EditSocialsModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-socials-modal/edit-socials-modal.component';
 import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
@@ -20,18 +21,43 @@ import { userBankInfoTitles } from 'src/app/user/components/user-profile/constan
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBankAndSocialsInfoComponent {
-  user$ = this._userStore.user$;
+  userBankData$ = this._userStore.user$.pipe(
+    map(
+      (user) =>
+        ({
+          individualEntrepreneurName: user?.individualEntrepreneurName,
+          individualEntrepreneurAddress: user?.individualEntrepreneurAddress,
+          individualEntrepreneurIndividualTaxNumber:
+            user?.individualEntrepreneurIndividualTaxNumber,
+          individualEntrepreneurBankAccounNumber:
+            user?.individualEntrepreneurBankAccounNumber,
+          individualEntrepreneurBankName: user?.individualEntrepreneurBankName,
+          individualEntrepreneurBankCode: user?.individualEntrepreneurBankCode,
+          individualEntrepreneurBeneficiaryBank:
+            user?.individualEntrepreneurBeneficiaryBank,
+          individualEntrepreneurSwiftCode:
+            user?.individualEntrepreneurSwiftCode,
+        } as IUserBankInvoiceData),
+    ),
+  );
+
+  userSocialsData$ = this._userStore.user$.pipe(
+    map(
+      (user) =>
+        ({
+          upwork: user?.upwork,
+          github: user?.github,
+          linkedin: user?.linkedin,
+          telegramTag: user?.telegramTag,
+        } as IUserSocialLinksData),
+    ),
+  );
 
   userBankInfoTitles = userBankInfoTitles;
   UserSocialLinksTitles = UserSocialLinksTitles;
 
-  isUserBankDataEmpty$ = this.checkDataByPropertiesEmpty([
-    ...this.userBankInfoTitles.keys(),
-  ]);
-
-  isSocialsDataEmpty$ = this.checkDataByPropertiesEmpty([
-    ...this.UserSocialLinksTitles.keys(),
-  ]);
+  isUserBankDataEmpty$ = this.checkDataEmpty(this.userBankData$);
+  isSocialsDataEmpty$ = this.checkDataEmpty(this.userSocialsData$);
 
   constructor(
     private readonly _userStore: UserStore,
@@ -51,20 +77,10 @@ export class UserBankAndSocialsInfoComponent {
       section === 'bank'
         ? EditBankInfoModalComponent
         : EditSocialsModalComponent;
-    const dataSet =
-      section === 'bank' ? userBankInfoTitles : UserSocialLinksTitles;
-
     const dialogRef = this.dialog.open(modalComponent as ComponentType<T>, {
       restoreFocus: false,
       autoFocus: false,
-      data: this.user$.pipe(
-        map((user) => {
-          const result: { [key: string]: string | number | undefined | null } =
-            {};
-          [...dataSet.keys()].forEach((key) => (result[key] = user?.[key]));
-          return result;
-        }),
-      ),
+      data: section === 'bank' ? this.userBankData$ : this.userSocialsData$,
     });
     dialogRef
       .afterClosed()
@@ -76,11 +92,11 @@ export class UserBankAndSocialsInfoComponent {
       });
   }
 
-  checkDataByPropertiesEmpty(properties: string[]): Observable<boolean> {
-    return this.user$.pipe(
-      map((user) =>
-        properties.every((key) => !user?.[key as keyof IUserDetails]),
-      ),
+  checkDataEmpty(
+    data$: Observable<IUserBankInvoiceData | IUserSocialLinksData>,
+  ): Observable<boolean> {
+    return data$.pipe(
+      map((data) => Object.values(data).every((value) => !value)),
     );
   }
 }

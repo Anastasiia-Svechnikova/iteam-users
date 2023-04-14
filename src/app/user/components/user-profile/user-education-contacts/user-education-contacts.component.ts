@@ -17,7 +17,17 @@ import { map, take } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserEducationContactsComponent {
-  user$ = this._userStore.user$;
+  userEducationData$ = this._userStore.user$.pipe(
+    map((user) => ({
+      educationInfo: user?.educationInfo,
+    })),
+  );
+  userContactsData$ = this._userStore.user$.pipe(
+    map((user) => ({
+      address: user?.address,
+      city: user?.city,
+    })),
+  );
 
   userBankInfoTitles = userBankInfoTitles;
   socialLinksData = UserSocialLinksTitles;
@@ -31,9 +41,7 @@ export class UserEducationContactsComponent {
     const dialogRef = this.dialog.open(EditContactsModalComponent, {
       restoreFocus: false,
       autoFocus: false,
-      data: this.user$.pipe(
-        map((user) => ({ city: user?.city, address: user?.address })),
-      ),
+      data: this.userContactsData$,
     });
     dialogRef
       .afterClosed()

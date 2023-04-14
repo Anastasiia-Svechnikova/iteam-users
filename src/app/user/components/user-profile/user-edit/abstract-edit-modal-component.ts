@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
+import { updateUserDtoNumericProperties } from 'src/app/user/components/user-profile/constants/update-user-dto-numeric-properties';
 
 @Component({
   template: '',
@@ -22,20 +23,15 @@ export abstract class AbstractEditModalComponent
     this.createForm();
   }
 
-  abstract setFormData(): void;
-  abstract createForm(): void;
-
   onSubmit(): void {
     this.checkForNumberValues();
     this.dRef.close(this.form.value);
   }
+  abstract setFormData(): void;
+  abstract createForm(): void;
 
   protected checkForNumberValues(): void {
-    const updateUserDTONumericProperties = [
-      'individualEntrepreneurIndividualTaxNumber',
-      'individualEntrepreneurBankCode',
-    ];
-    updateUserDTONumericProperties.forEach((property) => {
+    updateUserDtoNumericProperties.forEach((property) => {
       if (this.form.value[property]) {
         this.form.value[property] = Number(this.form.value[property]);
       } else if (this.form.value[property] === '') {
