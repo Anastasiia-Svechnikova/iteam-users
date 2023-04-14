@@ -32,6 +32,8 @@ import { ClipboardComponent } from './components/clipboard/clipboard.component';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    MatSnackBarModule,
   ],
+  providers: [],
 })
 export class SharedModule {}

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -31,7 +30,6 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes),
     MatInputModule,
-    MatSnackBarModule,
     MatCheckboxModule,
     StoreModule.forFeature('auth', AuthReducer),
     EffectsModule.forFeature([AuthEffects]),

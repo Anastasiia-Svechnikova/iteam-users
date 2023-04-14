@@ -14,7 +14,7 @@ import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 import { TokenInterceptor } from 'src/app/shared/interceptors/token.interceptor';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
-import { AuthModule } from 'src/app/auth/auth.module';
+// import { AuthModule } from 'src/app/auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -28,7 +28,6 @@ import { AuthModule } from 'src/app/auth/auth.module';
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    AuthModule,
   ],
   providers: [
     AuthGuard,
