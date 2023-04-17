@@ -21,7 +21,6 @@ export class UserService {
     return this.http.get<IUserDetails>(`${environment.apiUrl}/users/${id}`);
   }
 
-
   getAllUsers(): Observable<IGetUsersResponse> {
     return this.http.get<IGetUsersResponse>(`${environment.apiUrl}/users`);
   }

@@ -8,4 +8,13 @@ import { BaseCellComponent } from 'src/app/user/components/user-list/cell-compon
   styleUrls: ['../base-cell/base-cell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SettingsCellComponent extends BaseCellComponent {}
+export class SettingsCellComponent extends BaseCellComponent {
+  onToggleStatus(userId: string, status: string): void {
+    this.params.context.componentParent.toggleUserStatus({
+      userId: userId,
+      updatedUser: {
+        status: status === 'archived' ? 'unarchived' : 'archived',
+      },
+    });
+  }
+}

@@ -14,6 +14,12 @@ import { ClipboardComponent } from './components/clipboard/clipboard.component';
 
 @NgModule({
   declarations: [CustomIconComponent, ClipboardComponent],
+  imports: [
+    MatProgressSpinnerModule,
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+  ],
   exports: [
     MatProgressSpinnerModule,
     CustomIconComponent,

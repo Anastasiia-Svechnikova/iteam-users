@@ -5,14 +5,16 @@ import { ICellRendererParams } from 'ag-grid-community';
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 
 @Component({
-  template:'',
+  template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export abstract class BaseCellComponent implements ICellRendererAngularComp {
   data!: IUserDetails;
+  params!: ICellRendererParams;
 
   agInit(params: ICellRendererParams): void {
     this.data = params.data;
+    this.params = params;
   }
 
   refresh(): boolean {
