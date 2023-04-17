@@ -14,8 +14,8 @@ import { TokenInterceptor } from 'src/app/shared/interceptors/token.interceptor'
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
 import { AdminGuard } from 'src/app/shared/guards/admin.guard';
-import { UserReducer } from 'src/app/user/state/reducer';
 import { UserEffects } from 'src/app/user/state/effects';
+import { appState } from 'src/app/app.state';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -25,8 +25,7 @@ import { UserEffects } from 'src/app/user/state/effects';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-
-    StoreModule.forRoot({ main: UserReducer }),
+    StoreModule.forRoot(appState),
     EffectsModule.forRoot([UserEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
