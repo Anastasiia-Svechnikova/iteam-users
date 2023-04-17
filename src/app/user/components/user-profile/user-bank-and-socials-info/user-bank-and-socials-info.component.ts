@@ -21,37 +21,8 @@ import { userBankInfoTitles } from 'src/app/user/components/user-profile/constan
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBankAndSocialsInfoComponent {
-  userBankData$ = this._userStore.user$.pipe(
-    map(
-      (user) =>
-        ({
-          individualEntrepreneurName: user?.individualEntrepreneurName,
-          individualEntrepreneurAddress: user?.individualEntrepreneurAddress,
-          individualEntrepreneurIndividualTaxNumber:
-            user?.individualEntrepreneurIndividualTaxNumber,
-          individualEntrepreneurBankAccounNumber:
-            user?.individualEntrepreneurBankAccounNumber,
-          individualEntrepreneurBankName: user?.individualEntrepreneurBankName,
-          individualEntrepreneurBankCode: user?.individualEntrepreneurBankCode,
-          individualEntrepreneurBeneficiaryBank:
-            user?.individualEntrepreneurBeneficiaryBank,
-          individualEntrepreneurSwiftCode:
-            user?.individualEntrepreneurSwiftCode,
-        } as IUserBankInvoiceData),
-    ),
-  );
-
-  userSocialsData$ = this._userStore.user$.pipe(
-    map(
-      (user) =>
-        ({
-          upwork: user?.upwork,
-          github: user?.github,
-          linkedin: user?.linkedin,
-          telegramTag: user?.telegramTag,
-        } as IUserSocialLinksData),
-    ),
-  );
+  userBankData$ = this._userStore.userBankInfo$;
+  userSocialsData$ = this._userStore.userSocialsInfo$;
 
   userBankInfoTitles = userBankInfoTitles;
   UserSocialLinksTitles = UserSocialLinksTitles;

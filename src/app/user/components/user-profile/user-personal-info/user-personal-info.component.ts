@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
 
+import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
 import { UserPersonalInfoStatusIcons } from 'src/app/user/components/user-profile/constants/user-personal-info-status-icons';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-user-personal-info',
@@ -11,20 +10,7 @@ import { map } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserPersonalInfoComponent {
-  userData$ = this._userStore.user$.pipe(
-    map((user) => ({
-      name: user?.name,
-      surname: user?.surname,
-      status: user?.status,
-      birthday: user?.birthday,
-      email: user?.email,
-      startDate: user?.startDate,
-      endDate: user?.endDate,
-      endReason: user?.endReason,
-      phone: user?.phone,
-    })),
-  );
-
+  userData$ = this._userStore.userPersonalInfo$;
   statusIcons = UserPersonalInfoStatusIcons;
 
   constructor(private readonly _userStore: UserStore) {}

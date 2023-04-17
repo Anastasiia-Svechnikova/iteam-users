@@ -22,7 +22,7 @@
         class="detail">
         Status:
         <span [ngClass]="userData.status">
-          {{ userData.status === 'archived' ? 'Deactivated ' : 'Active ' }}
+          {{ userData.status === 'archived' ? 'Deactivated' : 'Active' }}
           <mat-icon class="icon">
             {{ statusIcons.get(userData.status) }}
           </mat-icon>
