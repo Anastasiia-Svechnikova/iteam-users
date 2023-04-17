@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from 'src/app/home/home.component';
 import { SiteLayoutComponent } from 'src/app/navigation/components/site-layout/site-layout.component';
 import { HeaderTitles } from 'src/app/navigation/constants/constants';
-import { AuthGuard } from './shared/guards/auth.guard';
+import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 
 const routes: Routes = [
   {

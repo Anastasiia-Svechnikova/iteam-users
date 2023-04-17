@@ -1,8 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { IMainState } from './reducer';
+import { IMainState } from 'src/app/user/state/reducer';
 
-export const selectUserFeature = createFeatureSelector<IMainState>('user');
+export const selectUserFeature = createFeatureSelector<IMainState>('main');
 
 export const selectUser = createSelector(
   selectUserFeature,

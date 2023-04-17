@@ -1,26 +1,28 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { map, take } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
-import { userBankInfoTitles } from 'src/app/user/components/user-profile/constants/user-bank-info-titles';
-import { UserSocialLinksTitles } from 'src/app/user/components/user-profile/constants/social-links';
-import { MatDialog } from '@angular/material/dialog';
 import { EditContactsModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-contacts/edit-contacts-modal.component';
-import { map, take } from 'rxjs';
 
 @Component({
   selector: 'app-user-education-contacts',
   templateUrl: './user-education-contacts.component.html',
-  styleUrls: [
-    './user-education-contacts.component.scss',
-    '../user-profile.component.scss',
-  ],
+  styleUrls: ['../user-profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserEducationContactsComponent {
-  user$ = this._userStore.user$;
-
-  userBankInfoTitles = userBankInfoTitles;
-  socialLinksData = UserSocialLinksTitles;
+  userEducationData$ = this._userStore.user$.pipe(
+    map((user) => ({
+      educationInfo: user?.educationInfo,
+    })),
+  );
+  userContactsData$ = this._userStore.user$.pipe(
+    map((user) => ({
+      address: user?.address,
+      city: user?.city,
+    })),
+  );
 
   constructor(
     private readonly _userStore: UserStore,
@@ -31,9 +33,7 @@ export class UserEducationContactsComponent {
     const dialogRef = this.dialog.open(EditContactsModalComponent, {
       restoreFocus: false,
       autoFocus: false,
-      data: this.user$.pipe(
-        map((user) => ({ city: user?.city, address: user?.address })),
-      ),
+      data: this.userContactsData$,
     });
     dialogRef
       .afterClosed()

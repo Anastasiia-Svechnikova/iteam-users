@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, takeUntil } from 'rxjs';
+
 import { AbstractEditModalComponent } from 'src/app/user/components/user-profile/user-edit/abstract-edit-modal-component';
 import { UserSocialLinksTitles } from 'src/app/user/components/user-profile/constants/social-links';
 
@@ -15,10 +16,10 @@ export interface DialogData {
 @Component({
   selector: 'app-edit-socials-modal',
   templateUrl: './edit-socials-modal.component.html',
-  styleUrls: ['./edit-socials-modal.component.scss', '../user-edit.scss'],
+  styleUrls: ['../user-edit.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditSocialsModalComponent extends AbstractEditModalComponent {
+export class EditSocialsModalComponent extends AbstractEditModalComponent<EditSocialsModalComponent> {
   formData!: DialogData;
   UserSocialLinksTitles = UserSocialLinksTitles;
 
@@ -43,7 +44,15 @@ export class EditSocialsModalComponent extends AbstractEditModalComponent {
     this.form = this.fb.group({});
     const properties = [...UserSocialLinksTitles.keys()];
     properties.forEach((property) => {
-      this.form.addControl(property, this.fb.control(this.formData[property]));
+      this.form.addControl(
+        property,
+        this.fb.control(
+          this.formData[property],
+          Validators.pattern(
+            '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?',
+          ),
+        ),
+      );
     });
   }
 }

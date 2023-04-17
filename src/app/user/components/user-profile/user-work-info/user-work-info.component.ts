@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { map } from 'rxjs';
 
 import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
 
@@ -12,7 +13,7 @@ import { UserStore } from 'src/app/user/components/user-profile/user-profile.sto
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserWorkInfoComponent {
-  userVm$ = this._userStore.user$;
+  userData$ = this._userStore.user$.pipe(map((user) => user?.workHistory));
 
   constructor(private readonly _userStore: UserStore) {}
 }

@@ -1,3 +1,6 @@
+import { IUserEducationDetails } from 'src/app/shared/interfaces/user-education';
+import { IUserWorkHistory } from 'src/app/shared/interfaces/user-work-history';
+
 export interface IUpdateUserDTO {
   email?: string;
   password?: string;
@@ -34,4 +37,6 @@ export interface IUpdateUserDTO {
   individualEntrepreneurBeneficiaryBank?: string;
   individualEntrepreneurSwiftCode?: string;
   defaultCoverLetter?: string;
+  educationInfo?: IUserEducationDetails[];
+  workHistory?: IUserWorkHistory[];
 }

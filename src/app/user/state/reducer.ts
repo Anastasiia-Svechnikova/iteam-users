@@ -1,8 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { userActions } from './actions';
+import { userActions } from 'src/app/user/state/actions';
 
-// so far the current user object in global store only contains user id
+// so far the current user object in global state only contains user id
 // if need it will be expanded
 export interface ICurrentUserSoreData {
   id: number;

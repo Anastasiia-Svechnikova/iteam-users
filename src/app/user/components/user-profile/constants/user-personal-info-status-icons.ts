@@ -1,5 +1,4 @@
 export const UserPersonalInfoStatusIcons = new Map<string, string>([
-  ['active', 'active'],
-  ['archived', 'archive'],
-  ['unarchived', 'unarchive'],
+  ['archived', 'person_remove'],
+  ['unarchived', 'how_to_reg'],
 ]);

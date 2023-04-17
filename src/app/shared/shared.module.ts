@@ -10,12 +10,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
 
 import { CustomIconComponent } from './components/custom-icon/custom-icon.component';
+import { ClipboardComponent } from './components/clipboard/clipboard.component';
 
 @NgModule({
-  declarations: [CustomIconComponent],
+  declarations: [CustomIconComponent, ClipboardComponent],
   exports: [
-    CustomIconComponent,
     MatProgressSpinnerModule,
+    CustomIconComponent,
+    ClipboardComponent,
     RouterModule,
     CommonModule,
     MatCardModule,
@@ -24,6 +26,7 @@ import { CustomIconComponent } from './components/custom-icon/custom-icon.compon
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    MatSnackBarModule,
   ],
 })
 export class SharedModule {}

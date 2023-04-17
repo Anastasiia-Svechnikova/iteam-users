@@ -1,4 +1,4 @@
-<div *ngIf="user$ | async as user">
+<ng-container *ngIf="userEducationData$ | async as userEducationData">
   <div class="left-inner">
     <div class="upper-wrapper">
       <h3 class="mat-subtitle-2 primary">Education</h3>
@@ -8,14 +8,9 @@
         aria-label="Edit content button">
         <mat-icon>edit</mat-icon>
       </button>
-      <button
-        mat-icon-button
-        class="icon-btn"
-        aria-label="Copy content button">
-        <mat-icon>content_copy</mat-icon>
-      </button>
+      <app-clipboard [data]="userEducationData"></app-clipboard>
     </div>
-    <div *ngFor="let education of user.educationInfo">
+    <div *ngFor="let education of userEducationData.educationInfo">
       <p>{{ education.universityName | uppercase }}</p>
       <p
         *ngIf="education.startDate"
@@ -26,9 +21,11 @@
       <p>{{ education.pricingModel }}</p>
     </div>
     <app-empty-message
-      *ngIf="!user.educationInfo.length"
-      title="skills"></app-empty-message>
+      *ngIf="!userEducationData.educationInfo?.length"
+      title="education"></app-empty-message>
   </div>
+</ng-container>
+<ng-container *ngIf="userContactsData$ | async as userContactsData">
   <div class="left-inner">
     <div class="upper-wrapper">
       <h3 class="mat-subtitle-2 primary">Address</h3>
@@ -39,22 +36,17 @@
         (click)="onEditContacts()">
         <mat-icon>edit</mat-icon>
       </button>
-      <button
-        mat-icon-button
-        class="icon-btn"
-        aria-label="Copy content button">
-        <mat-icon>content_copy</mat-icon>
-      </button>
+      <app-clipboard [data]="userContactsData"></app-clipboard>
     </div>
-    <p>{{ user.address }}</p>
+    <p>{{ userContactsData.address }}</p>
     <app-empty-message
-      *ngIf="!user.address"
+      *ngIf="!userContactsData.address"
       title="address"></app-empty-message>
     <h4
-      *ngIf="user.city"
+      *ngIf="userContactsData.city"
       class="mat-subtitle-1">
       City:
     </h4>
-    <p>{{ user.city }}</p>
+    <p>{{ userContactsData.city }}</p>
   </div>
-</div>
+</ng-container>

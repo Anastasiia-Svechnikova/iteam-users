@@ -1,4 +1,4 @@
-<ng-container *ngIf="user$ | async as user">
+<ng-container *ngIf="userBankData$ | async as userBankData">
   <div class="left-inner">
     <div>
       <div class="upper-wrapper">
@@ -10,27 +10,23 @@
           (click)="onEditBankInfo()">
           <mat-icon>edit</mat-icon>
         </button>
-        <button
-          mat-icon-button
-          class="icon-btn"
-          aria-label="Copy content button">
-          <mat-icon>content_copy</mat-icon>
-        </button>
+        <app-clipboard [data]="userBankData"></app-clipboard>
       </div>
       <ng-container *ngFor="let title of userBankInfoTitles | keyvalue">
         <p
-          *ngIf="user[title.key]"
+          *ngIf="userBankData[title.key]"
           class="mat-subtitle-1">
           {{ title.value }}:
         </p>
-        <p>{{ user[title.key] }}</p>
+        <p>{{ userBankData[title.key] }}</p>
       </ng-container>
-
       <app-empty-message
         *ngIf="isUserBankDataEmpty$ | async"
         title="bank invoice info"></app-empty-message>
     </div>
   </div>
+</ng-container>
+<ng-container *ngIf="userSocialsData$ | async as userSocialsData">
   <div class="left-inner">
     <div>
       <div class="upper-wrapper">
@@ -42,24 +38,19 @@
           (click)="onEditSocials()">
           <mat-icon>edit</mat-icon>
         </button>
-        <button
-          mat-icon-button
-          class="icon-btn"
-          aria-label="Copy content button">
-          <mat-icon>content_copy</mat-icon>
-        </button>
+        <app-clipboard [data]="userSocialsData"></app-clipboard>
       </div>
     </div>
     <div>
       <ng-container *ngFor="let socialLink of UserSocialLinksTitles | keyvalue">
-        <ng-container *ngIf="user[socialLink.key]">
+        <ng-container *ngIf="userSocialsData[socialLink.key]">
           <div class="social-links">
             <app-custom-icon [name]="socialLink.key"></app-custom-icon>
             <a
               target="_blank"
               rel="noopener noreferrer"
               class="social-link"
-              [href]="user[socialLink.key]">
+              [href]="userSocialsData[socialLink.key]">
               {{ socialLink.value | titlecase }}
             </a>
           </div>

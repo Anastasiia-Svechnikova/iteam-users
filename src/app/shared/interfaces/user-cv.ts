@@ -4,6 +4,6 @@ export interface IUserAssignedCvData {
   fileUrl: string;
   mimetype: string;
   publicId: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }

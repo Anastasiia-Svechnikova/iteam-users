@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, takeUntil } from 'rxjs';
+
 import { AbstractEditModalComponent } from 'src/app/user/components/user-profile/user-edit/abstract-edit-modal-component';
 
 export interface DialogData {
@@ -14,7 +15,7 @@ export interface DialogData {
   styleUrls: ['./edit-description-modal.component.scss', '../user-edit.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditDescriptionModalComponent extends AbstractEditModalComponent {
+export class EditDescriptionModalComponent extends AbstractEditModalComponent<EditDescriptionModalComponent> {
   formData!: string;
 
   constructor(
@@ -35,7 +36,7 @@ export class EditDescriptionModalComponent extends AbstractEditModalComponent {
 
   createForm(): void {
     this.form = this.fb.group({
-      positionDescription: [this.formData, Validators.required],
+      positionDescription: [this.formData],
     });
   }
 }

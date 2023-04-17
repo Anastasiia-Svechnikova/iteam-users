@@ -4,8 +4,8 @@ import { catchError, map, of, switchMap } from 'rxjs';
 
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
-import { UserService } from '../services/user.service';
-import { userActions } from './actions';
+import { UserService } from 'src/app/user/services/user.service';
+import { userActions } from 'src/app/user/state/actions';
 
 @Injectable()
 export class UserEffects {
