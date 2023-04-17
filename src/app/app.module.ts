@@ -14,7 +14,9 @@ import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 import { TokenInterceptor } from 'src/app/shared/interceptors/token.interceptor';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
-// import { AuthModule } from 'src/app/auth/auth.module';
+import { AdminGuard } from 'src/app/shared/guards/admin.guard';
+import { UserReducer } from 'src/app/user/state/reducer';
+import { UserEffects } from 'src/app/user/state/effects';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -25,11 +27,13 @@ import { AppComponent } from 'src/app/app.component';
     MatProgressSpinnerModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+
+    StoreModule.forRoot({ main: UserReducer }),
+    EffectsModule.forRoot([UserEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
+    AdminGuard,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

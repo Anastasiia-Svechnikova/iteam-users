@@ -5,25 +5,22 @@ export const siteNavigationLinksData = [
     path: ['/dashboard', 'home'],
     iconName: 'home',
     title: 'home',
-    accessRoles: [UserRoles.Admin, UserRoles.Guest],
   },
   {
     path: ['/dashboard', 'users', localStorage.getItem('id')],
     iconName: 'person',
     title: 'profile',
-    accessRoles: [UserRoles.Admin, UserRoles.Guest],
   },
   {
     path: ['/dashboard', 'projects'],
     iconName: 'dashboard',
     title: 'projects',
-    accessRoles: [UserRoles.Admin, UserRoles.Guest],
   },
   {
     path: ['/dashboard', 'admin'],
     iconName: 'bar_chart',
     title: 'admin',
-    accessRoles: [UserRoles.Admin],
+    restrictedAccessRoles: [UserRoles.Admin],
   },
 ];
 

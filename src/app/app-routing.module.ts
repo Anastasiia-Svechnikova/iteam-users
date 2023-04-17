@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from 'src/app/home/home.component';
 import { SiteLayoutComponent } from 'src/app/navigation/components/site-layout/site-layout.component';
 import { HeaderTitles } from 'src/app/navigation/constants/constants';
+import { AdminGuard } from 'src/app/shared/guards/admin.guard';
 import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 
 const routes: Routes = [
@@ -28,7 +29,7 @@ const routes: Routes = [
         data: { header: HeaderTitles.user },
       },
       {
-        canActivate: [],
+        canActivate: [AdminGuard],
         path: 'admin',
         component: HomeComponent,
         data: { header: HeaderTitles.admin },
