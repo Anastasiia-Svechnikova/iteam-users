@@ -9,7 +9,9 @@ import {
   withLatestFrom,
 } from 'rxjs';
 
+import { IUserBankInvoiceData } from 'src/app/shared/interfaces/user-bank-invoice-data';
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
+import { IUserSocialLinksData } from 'src/app/shared/interfaces/user-social-links-data';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { IUpdateUserDTO } from 'src/app/user/components/user-profile/interfaces/update-user-dto';
 import { UserService } from 'src/app/user/services/user.service';
@@ -37,6 +39,44 @@ export class UserStore extends ComponentStore<IUserState> {
   readonly userId$ = this.select(({ id }) => id);
   readonly user$ = this.select(({ user }) => user);
   readonly loading$ = this.select(({ loading }) => loading);
+  readonly userBankInfo$ = this.select(
+    ({ user }) =>
+      ({
+        individualEntrepreneurName: user?.individualEntrepreneurName,
+        individualEntrepreneurAddress: user?.individualEntrepreneurAddress,
+        individualEntrepreneurIndividualTaxNumber:
+          user?.individualEntrepreneurIndividualTaxNumber,
+        individualEntrepreneurBankAccounNumber:
+          user?.individualEntrepreneurBankAccounNumber,
+        individualEntrepreneurBankName: user?.individualEntrepreneurBankName,
+        individualEntrepreneurBankCode: user?.individualEntrepreneurBankCode,
+        individualEntrepreneurBeneficiaryBank:
+          user?.individualEntrepreneurBeneficiaryBank,
+        individualEntrepreneurSwiftCode: user?.individualEntrepreneurSwiftCode,
+      } as IUserBankInvoiceData),
+  );
+
+  readonly userSocialsInfo$ = this.select(
+    ({ user }) =>
+      ({
+        upwork: user?.upwork,
+        github: user?.github,
+        linkedin: user?.linkedin,
+        telegramTag: user?.telegramTag,
+      } as IUserSocialLinksData),
+  );
+
+  readonly userPersonalInfo$ = this.select(({ user }) => ({
+    name: user?.name,
+    surname: user?.surname,
+    status: user?.status,
+    birthday: user?.birthday,
+    email: user?.email,
+    startDate: user?.startDate,
+    endDate: user?.endDate,
+    endReason: user?.endReason,
+    phone: user?.phone,
+  }));
 
   readonly getUser = this.effect((userId$: Observable<string>) => {
     return userId$.pipe(

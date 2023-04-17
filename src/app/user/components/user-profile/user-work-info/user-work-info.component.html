@@ -10,7 +10,7 @@
     <app-clipboard [data]="{workHistory}"></app-clipboard>
   </div>
   <div
-    *ngFor="let work of workHistory; let i = index"
+    *ngFor="let work of workHistory"
     class="work-item">
     <p class="mat-headline-6 project-name">{{ work.project }}</p>
     <p class="mat-caption light">

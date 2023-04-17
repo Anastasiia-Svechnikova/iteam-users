@@ -14,9 +14,11 @@ export class UserEffects {
       ofType(userActions.loadCurrentUser),
       switchMap(() => {
         return this.mainUserService.getCurrentUser().pipe(
-          map((user: IUserDetails) =>
-            userActions.loadedCurrentUser({ user: { id: user.id } }),
-          ),
+          map((user: IUserDetails) => {
+            return userActions.loadedCurrentUser({
+              user: { id: user.id, roles: user.roles },
+            });
+          }),
           catchError((error) => {
             this.snackbarService.openSnackBar(
               `User Loading Failed: ${error.message}`,
