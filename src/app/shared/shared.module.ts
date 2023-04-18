@@ -36,6 +36,5 @@ import { ClipboardComponent } from './components/clipboard/clipboard.component';
     MatDialogModule,
     MatSnackBarModule,
   ],
-  providers: [],
 })
 export class SharedModule {}

@@ -1,0 +1,10 @@
+<mat-icon
+  class="action-icon"
+  [routerLink]="data.id.toString()">
+  edit
+</mat-icon>
+<mat-icon
+  class="action-icon"
+  (click)="onToggleStatus(data.id.toString(), data.status)">
+  archive
+</mat-icon>

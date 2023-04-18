@@ -33,7 +33,7 @@ export class ClipboardComponent {
   private formatContent<T extends object>(dataToCopy: T): string {
     function formatDataHelper(dataToCopy: T): string {
       const keys = Object.keys(dataToCopy);
-      const formattedData = keys.reduce((acc, dataToCopyKey) => {
+      return keys.reduce((acc, dataToCopyKey) => {
         if (propertiesHiddenInClipboardText.includes(dataToCopyKey)) {
           return acc.concat('');
         }
@@ -41,16 +41,15 @@ export class ClipboardComponent {
         if (dataToCopyItem instanceof Array) {
           return acc.concat(
             dataToCopyItem?.map((key: T) => formatDataHelper(key)).join('\n') ||
-              'no data',
+            'no data',
           );
         }
         return acc.concat(
-          `${dataToCopyKey}: ${
+          `${ dataToCopyKey }: ${
             dataToCopy[dataToCopyKey as keyof T] || 'no data'
           } \n`,
         );
       }, '');
-      return formattedData;
     }
     return formatDataHelper(dataToCopy);
   }

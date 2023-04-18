@@ -1,4 +1,6 @@
 @use '@angular/material' as mat;
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 @import '/src/styles/_color-palette.scss';
 @import '/src/styles/_variables.scss';
