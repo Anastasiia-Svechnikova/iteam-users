@@ -17,10 +17,11 @@
 </mat-toolbar>
 <mat-menu #menu="matMenu">
   <button
+    *ngFor="let link of linksData"
     mat-menu-item
     class="menu-btn"
-    [routerLink]="currentUserLinkPath">
-    <span class="menu-link">My profile</span>
+    [routerLink]="link.path">
+    <span class="menu-link">{{ link.name | titlecase }}</span>
   </button>
   <button
     mat-menu-item

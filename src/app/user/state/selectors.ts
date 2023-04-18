@@ -1,6 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { siteNavigationLinksData } from 'src/app/navigation/constants/constants';
+import { siteNavigationLinksData } from 'src/app/navigation/constants/site-navigation-links-data';
+import { ISiteNavigationLink } from 'src/app/navigation/models/site-navigation-link';
+import { SiteNavigationLinkNames } from 'src/app/navigation/models/site-navigation-links-names';
 import { UserRoles } from 'src/app/shared/constants/constants';
 import { IMainState } from 'src/app/user/state/reducer';
 
@@ -13,17 +15,25 @@ export const selectUser = createSelector(
 
 export const selectSiteNavigationLinksDataByUserRole = createSelector(
   selectUserFeature,
-  (state: IMainState) => {
-    const userRoles = state.user?.roles.map((role) => role.value as UserRoles);
-    return siteNavigationLinksData.map((link) => {
-      if (link.restrictedAccessRoles) {
-        const accessPermission = link.restrictedAccessRoles.some((role) =>
-          userRoles?.includes(role),
-        );
-        return { ...link, accessPermission };
-      }
-      return { ...link, accessPermission: true };
-    });
+  (state: IMainState): ISiteNavigationLink[] => {
+    if (state.user) {
+      const id = state.user.id;
+      const userRoles = state.user.roles.map((role) => role.value as UserRoles);
+      return siteNavigationLinksData.map((link) => {
+        if (link.name === SiteNavigationLinkNames.currentUser) {
+          link.path.push(id.toString());
+        }
+        if (link.restrictedAccessRoles) {
+          const accessPermission = link.restrictedAccessRoles.some((role) =>
+            userRoles?.includes(role),
+          );
+          return { ...link, accessPermission };
+        }
+        return { ...link, accessPermission: true };
+      });
+    } else {
+      return [];
+    }
   },
 );
 

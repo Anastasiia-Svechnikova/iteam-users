@@ -6,7 +6,8 @@ import {
   Output,
 } from '@angular/core';
 
-import { siteNavigationLinksData } from 'src/app/navigation/constants/constants';
+import { siteNavigationLinksData } from 'src/app/navigation/constants/site-navigation-links-data';
+import { ISiteNavigationLink } from 'src/app/navigation/models/site-navigation-link';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +18,7 @@ import { siteNavigationLinksData } from 'src/app/navigation/constants/constants'
 export class HeaderComponent {
   @Output() toggleSideNav: EventEmitter<void> = new EventEmitter();
   @Input() title = '';
+  @Input() linksData!: ISiteNavigationLink[] | null;
   sideNavOpen = false;
 
   currentUserLinkPath = siteNavigationLinksData.find((link) =>

@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
+import { headerUserNavigationMenuLinks } from 'src/app/navigation/models/header-user-navigation-menu-links';
 
 import { userActions } from 'src/app/user/state/actions';
 import { selectSiteNavigationLinksDataByUserRole } from 'src/app/user/state/selectors';
@@ -14,6 +16,12 @@ import { selectSiteNavigationLinksDataByUserRole } from 'src/app/user/state/sele
 export class SiteLayoutComponent implements OnInit {
   siteNavigationLinksData$ = this.store.select(
     selectSiteNavigationLinksDataByUserRole,
+  );
+
+  headerUserNavigationMenuLinksData$ = this.siteNavigationLinksData$.pipe(
+    map((linksData) =>
+      linksData?.filter((link) => headerUserNavigationMenuLinks.includes(link.name)),
+    ),
   );
 
   showFiller = false;

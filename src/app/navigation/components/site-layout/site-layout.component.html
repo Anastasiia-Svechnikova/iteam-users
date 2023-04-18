@@ -1,6 +1,7 @@
 <ng-container *ngIf="siteNavigationLinksData$ | async as linksData">
   <app-header
     [title]="title"
+    [linksData]="headerUserNavigationMenuLinksData$ | async"
     (toggleSideNav)="showFiller = !showFiller"></app-header>
   <mat-drawer-container
     autosize
@@ -15,13 +16,13 @@
           *ngIf="link.accessPermission"
           routerLinkActive="active"
           class="nav-btn"
-          attr.aria-label="Go to {{ link.title }} page"
+          attr.aria-label="Go to {{ link.name }} page"
           [routerLinkActiveOptions]="{ exact: true }"
           [routerLink]="link.path">
           <mat-icon class="btn-icon">
             {{ link.iconName }}
           </mat-icon>
-          <span *ngIf="showFiller">{{ link.title | titlecase }}</span>
+          <span *ngIf="showFiller">{{ link.name | titlecase }}</span>
         </button>
       </ng-container>
     </mat-drawer>

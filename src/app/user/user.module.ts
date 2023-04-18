@@ -10,7 +10,7 @@ import { EmailCellComponent } from 'src/app/user/components/user-list/cell-compo
 import { SettingsCellComponent } from 'src/app/user/components/user-list/cell-components/settings-cell/settings-cell.component';
 import { UserListComponent } from 'src/app/user/components/user-list/user-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { HeaderTitles } from 'src/app/navigation/constants/constants';
+import { HeaderTitles } from 'src/app/navigation/models/header-titles';
 
 const routes = [
   {
