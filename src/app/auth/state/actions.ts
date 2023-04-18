@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { IAuthCredentials } from '../models/credentials';
+import { IAuthCredentials } from 'src/app/auth/models/credentials';
 
 export const login = createAction(
   '[Auth] Login',

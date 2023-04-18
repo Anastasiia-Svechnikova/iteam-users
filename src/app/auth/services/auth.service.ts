@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { ILoginResponseData } from '../models/login-response-data';
-import { IAuthCredentials } from '../models/credentials';
+import { ILoginResponseData } from 'src/app/auth/models/login-response-data';
+import { IAuthCredentials } from 'src/app/auth/models/credentials';
 
 @Injectable({
   providedIn: 'root',

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { AbstractAuthComponent } from '../../auth-base/abstract-auth.component';
-import { login } from '../../state/actions';
+import { AbstractAuthComponent } from 'src/app/auth/auth-base/abstract-auth.component';
+import { login } from 'src/app/auth/state/actions';
 
 @Component({
   selector: 'app-login',

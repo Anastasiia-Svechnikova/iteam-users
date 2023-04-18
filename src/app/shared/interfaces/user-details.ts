@@ -1,12 +1,12 @@
-import { IAccessToken } from './access-token';
-import { IUserOrProjectAttachment } from './attachments-details';
-import { IProjectDetailsData } from './project-details';
-import { ITechnologyUsedInProject } from './technology';
-import { IUserAssignedCvData } from './user-cv';
-import { IUserEducationDetails } from './user-education';
-import { IUserPermissionsRole } from './user-permissions-role';
-import { IUserWorkHistory } from './user-work-history';
-import { IUserWorkType } from './user-work-type';
+import { IAccessToken } from 'src/app/shared/interfaces/access-token';
+import { IUserOrProjectAttachment } from 'src/app/shared/interfaces/attachments-details';
+import { IProjectDetailsData } from 'src/app/shared/interfaces/project-details';
+import { ITechnologyUsedInProject } from 'src/app/shared/interfaces/technology';
+import { IUserAssignedCvData } from 'src/app/shared/interfaces/user-cv';
+import { IUserEducationDetails } from 'src/app/shared/interfaces/user-education';
+import { IUserPermissionsRole } from 'src/app/shared/interfaces/user-permissions-role';
+import { IUserWorkHistory } from 'src/app/shared/interfaces/user-work-history';
+import { IUserWorkType } from 'src/app/shared/interfaces/user-work-type';
 
 export interface IUserDetails {
   id: number;

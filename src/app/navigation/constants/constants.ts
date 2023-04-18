@@ -7,7 +7,7 @@ export const siteNavigationLinksData = [
     title: 'home',
   },
   {
-    path: ['/dashboard', 'users', localStorage.getItem('id')],
+    path: ['/dashboard', 'user', localStorage.getItem('id')],
     iconName: 'person',
     title: 'profile',
   },
@@ -17,16 +17,16 @@ export const siteNavigationLinksData = [
     title: 'projects',
   },
   {
-    path: ['/dashboard', 'admin'],
+    path: ['/dashboard', 'user', 'all'],
     iconName: 'bar_chart',
-    title: 'admin',
-    restrictedAccessRoles: [UserRoles.Admin],
+    title: 'all users',
+    restrictedAccessRoles: [UserRoles.Guest],
   },
 ];
 
 export enum HeaderTitles {
   home = 'Home Page',
-  admin = 'Admin Page',
+  allUsers = 'All Users Page',
   user = 'User Page',
   projects = 'Projects Page',
 }

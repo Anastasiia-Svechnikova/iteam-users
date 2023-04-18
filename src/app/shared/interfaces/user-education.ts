@@ -1,4 +1,4 @@
-import { IUserDetails } from './user-details';
+import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 
 export interface IUserEducationDetails {
   id: number;

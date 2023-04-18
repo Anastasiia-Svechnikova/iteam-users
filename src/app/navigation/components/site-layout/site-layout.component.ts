@@ -27,6 +27,8 @@ export class SiteLayoutComponent implements OnInit {
   }
 
   setHeader(): void {
-    this.title = this.route.snapshot.firstChild?.data['header'];
+    this.title =
+      this.route.snapshot.firstChild?.data['header'] ||
+      this.route.snapshot.firstChild?.firstChild?.data['header'];
   }
 }

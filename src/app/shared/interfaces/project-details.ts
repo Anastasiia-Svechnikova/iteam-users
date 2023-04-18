@@ -1,8 +1,8 @@
-import { IUserOrProjectAttachment } from './attachments-details';
-import { IClientDetailsData } from './client-details';
-import { ITechnologyUsedInProject } from './technology';
-import { IUserDetails } from './user-details';
-import { IUserWorkHistory } from './user-work-history';
+import { IUserOrProjectAttachment } from 'src/app/shared/interfaces/attachments-details';
+import { IClientDetailsData } from 'src/app/shared/interfaces/client-details';
+import { ITechnologyUsedInProject } from 'src/app/shared/interfaces/technology';
+import { IUserDetails } from 'src/app/shared/interfaces/user-details';
+import { IUserWorkHistory } from 'src/app/shared/interfaces/user-work-history';
 
 export interface IProjectDetailsData {
   id: number;

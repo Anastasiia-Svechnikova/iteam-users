@@ -20,7 +20,7 @@ export class HeaderComponent {
   sideNavOpen = false;
 
   currentUserLinkPath = siteNavigationLinksData.find((link) =>
-    link.path.includes('users'),
+    link.path.includes('user'),
   )?.path;
 
   onToggleSideNav(): void {

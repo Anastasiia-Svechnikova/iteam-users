@@ -1,4 +1,4 @@
-import { IProjectDetailsData } from './project-details';
+import { IProjectDetailsData } from 'src/app/shared/interfaces/project-details';
 
 export interface IClientDetailsData {
   id: number;

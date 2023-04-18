@@ -6,12 +6,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { SharedModule } from '../shared/shared.module';
-import { AuthService } from './services/auth.service';
-import { AuthEffects } from './state/effects';
-import { AuthReducer } from './state/reducer';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from 'src/app/auth/components/login/login.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { AuthReducer } from 'src/app/auth/state/reducer';
+import { AuthEffects } from 'src/app/auth/state/effects';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { RegisterComponent } from 'src/app/auth/components/register/register.component';
 
 const routes: Routes = [
   {

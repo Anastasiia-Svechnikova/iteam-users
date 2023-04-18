@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { selectRequestingStatus } from '../state/selectors';
+import { selectRequestingStatus } from 'src/app/auth/state/selectors';
 
 @Component({
   template: '',

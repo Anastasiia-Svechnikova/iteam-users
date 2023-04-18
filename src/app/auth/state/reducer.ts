@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import * as AuthActions from './actions';
+import * as AuthActions from 'src/app/auth/state/actions';
 
 export interface IAuthState {
   isRequesting: boolean;

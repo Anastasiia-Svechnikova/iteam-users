@@ -10,8 +10,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatRippleModule } from '@angular/material/core';
 import { RouterModule } from '@angular/router';
 
-import { CustomIconComponent } from './components/custom-icon/custom-icon.component';
-import { ClipboardComponent } from './components/clipboard/clipboard.component';
+import { ClipboardComponent } from 'src/app/shared/components/clipboard/clipboard.component';
+import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custom-icon.component';
 
 @NgModule({
   declarations: [CustomIconComponent, ClipboardComponent],

@@ -1,5 +1,5 @@
-import { IProjectDetailsData } from './project-details';
-import { IUserDetails } from './user-details';
+import { IProjectDetailsData } from 'src/app/shared/interfaces/project-details';
+import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 
 export interface ITechnologyUsedInProject {
   id: number;
