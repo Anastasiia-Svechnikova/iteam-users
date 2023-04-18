@@ -6,10 +6,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AuthEffects } from 'src/app/auth/state/effects';
 
 import { HomeComponent } from 'src/app/home/home.component';
 import { NavigationModule } from 'src/app/navigation/navigation.module';
 import { AuthGuard } from 'src/app/shared/guards/auth.guard';
+import { CredentialsInterceptor } from 'src/app/shared/interceptors/credentials.interceptor';
 import { TokenInterceptor } from 'src/app/shared/interceptors/token.interceptor';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
@@ -26,7 +28,7 @@ import { appState } from 'src/app/app.state';
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot(appState),
-    EffectsModule.forRoot([UserEffects]),
+    EffectsModule.forRoot([UserEffects, AuthEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
@@ -35,6 +37,11 @@ import { appState } from 'src/app/app.state';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CredentialsInterceptor,
       multi: true,
     },
   ],

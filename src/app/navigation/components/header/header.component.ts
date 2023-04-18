@@ -5,7 +5,9 @@ import {
   Input,
   Output,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
 
+import { logout } from 'src/app/auth/state/actions';
 import { siteNavigationLinksData } from 'src/app/navigation/constants/site-navigation-links-data';
 import { ISiteNavigationLink } from 'src/app/navigation/models/site-navigation-link';
 
@@ -25,8 +27,15 @@ export class HeaderComponent {
     link.path.includes('user'),
   )?.path;
 
+  constructor(private store:Store) {
+  }
+
   onToggleSideNav(): void {
     this.sideNavOpen = !this.sideNavOpen;
     this.toggleSideNav.emit();
+  }
+
+  onLogout():void {
+    this.store.dispatch(logout())
   }
 }

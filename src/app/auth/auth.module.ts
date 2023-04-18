@@ -4,12 +4,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
 
 import { LoginComponent } from 'src/app/auth/components/login/login.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthReducer } from 'src/app/auth/state/reducer';
-import { AuthEffects } from 'src/app/auth/state/effects';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { RegisterComponent } from 'src/app/auth/components/register/register.component';
 
@@ -32,7 +30,6 @@ const routes: Routes = [
     MatInputModule,
     MatCheckboxModule,
     StoreModule.forFeature('auth', AuthReducer),
-    EffectsModule.forFeature([AuthEffects]),
     MatProgressSpinnerModule,
   ],
   providers: [AuthService],
