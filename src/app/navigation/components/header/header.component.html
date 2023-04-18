@@ -3,7 +3,7 @@
     mat-icon-button
     aria-label="Open main navigation menu"
     (click)="onToggleSideNav()">
-    <mat-icon>menu</mat-icon>
+    <mat-icon>{{ sideNavOpen ? 'close' : 'menu' }}</mat-icon>
   </button>
   <span class="spacer"></span>
   <span class="mat-headline-5 mb-0">{{ title }}</span>

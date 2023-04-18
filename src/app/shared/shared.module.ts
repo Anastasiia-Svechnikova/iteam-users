@@ -7,6 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatRippleModule } from '@angular/material/core';
 import { RouterModule } from '@angular/router';
 
 import { CustomIconComponent } from './components/custom-icon/custom-icon.component';
@@ -21,6 +22,7 @@ import { ClipboardComponent } from './components/clipboard/clipboard.component';
     MatButtonModule,
   ],
   exports: [
+    MatRippleModule,
     MatProgressSpinnerModule,
     CustomIconComponent,
     ClipboardComponent,

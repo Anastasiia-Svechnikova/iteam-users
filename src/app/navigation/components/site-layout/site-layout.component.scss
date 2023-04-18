@@ -9,13 +9,31 @@
 
 .sidenav {
   width: fit-content;
-  padding: $xs-padding;
+  padding: 0 $s-padding;
 }
 
 .nav-btn {
-  display: block;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  gap: $xs-spacer;
+  padding: $xs-spacer;
+  margin: $xs-spacer 0;
+
+  font: inherit;
+  border: none;
+  border-radius: $s-spacer;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    background-color: $primary-color-light;
+  }
 }
 
-.active {
+.nav-btn.active {
   color: $primary-color;
+}
+.btn-icon {
+  font-size: 24px;
 }

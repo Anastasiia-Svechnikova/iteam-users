@@ -1,24 +1,27 @@
 <ng-container *ngIf="siteNavigationLinksData$ | async as linksData">
   <app-header
     [title]="title"
-    (toggleSideNav)="drawer.toggle()"></app-header>
+    (toggleSideNav)="showFiller = !showFiller"></app-header>
   <mat-drawer-container
     autosize
     class="main-layout">
     <mat-drawer
       #drawer
+      opened
       class="sidenav"
       mode="side">
       <ng-container *ngFor="let link of linksData">
         <button
           *ngIf="link.accessPermission"
-          mat-icon-button
           routerLinkActive="active"
           class="nav-btn"
           attr.aria-label="Go to {{ link.title }} page"
-          [routerLink]="link.path"
-          [routerLinkActiveOptions]="{ exact: true }">
-          <mat-icon>{{ link.iconName }}</mat-icon>
+          [routerLinkActiveOptions]="{ exact: true }"
+          [routerLink]="link.path">
+          <mat-icon class="btn-icon">
+            {{ link.iconName }}
+          </mat-icon>
+          <span *ngIf="showFiller">{{ link.title | titlecase }}</span>
         </button>
       </ng-container>
     </mat-drawer>

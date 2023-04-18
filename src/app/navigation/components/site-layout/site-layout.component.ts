@@ -16,6 +16,7 @@ export class SiteLayoutComponent implements OnInit {
     selectSiteNavigationLinksDataByUserRole,
   );
 
+  showFiller = false;
   title = '';
 
   constructor(private route: ActivatedRoute, private store: Store) {}

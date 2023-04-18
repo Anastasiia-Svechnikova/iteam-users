@@ -17,12 +17,14 @@ import { siteNavigationLinksData } from 'src/app/navigation/constants/constants'
 export class HeaderComponent {
   @Output() toggleSideNav: EventEmitter<void> = new EventEmitter();
   @Input() title = '';
+  sideNavOpen = false;
 
   currentUserLinkPath = siteNavigationLinksData.find((link) =>
     link.path.includes('users'),
   )?.path;
 
   onToggleSideNav(): void {
+    this.sideNavOpen = !this.sideNavOpen;
     this.toggleSideNav.emit();
   }
 }
