@@ -4,7 +4,8 @@
   edit
 </mat-icon>
 <mat-icon
+  appConfirmDialog
   class="action-icon"
-  (click)="onToggleStatus(data.id.toString(), data.status)">
+  (confirm)="onToggleStatus(data.id.toString(), data.status)">
   archive
 </mat-icon>

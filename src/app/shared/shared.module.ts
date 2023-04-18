@@ -12,14 +12,17 @@ import { RouterModule } from '@angular/router';
 
 import { ClipboardComponent } from 'src/app/shared/components/clipboard/clipboard.component';
 import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custom-icon.component';
+import { ConfirmDialogDirective } from 'src/app/shared/directives/confirm-dialog.directive';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 
 @NgModule({
-  declarations: [CustomIconComponent, ClipboardComponent],
+  declarations: [CustomIconComponent, ClipboardComponent, ConfirmModalComponent, ConfirmDialogDirective],
   imports: [
     MatProgressSpinnerModule,
     CommonModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule
   ],
   exports: [
     MatRippleModule,
@@ -35,6 +38,8 @@ import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custo
     MatButtonModule,
     MatDialogModule,
     MatSnackBarModule,
+    ConfirmDialogDirective,
+    ConfirmModalComponent,
   ],
 })
 export class SharedModule {}
