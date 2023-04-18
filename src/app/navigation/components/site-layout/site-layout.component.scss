@@ -9,20 +9,20 @@
 
 .sidenav {
   width: fit-content;
-  padding: 0 $s-padding;
+  padding: 0 $xs-size;
 }
 
 .nav-btn {
   display: flex;
   align-items: center;
   background-color: transparent;
-  gap: $xs-spacer;
-  padding: $xs-spacer;
-  margin: $xs-spacer 0;
+  gap: $xs-size;
+  padding: $xs-size;
+  margin: $xs-size 0;
 
   font: inherit;
   border: none;
-  border-radius: $s-spacer;
+  border-radius: $s-size;
   cursor: pointer;
   transition: all 200ms ease-in-out;
 

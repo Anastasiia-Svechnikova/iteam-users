@@ -2,14 +2,14 @@
 @import '/src/styles/_color-palette.scss';
 
 .work-item {
-  padding-top: $xl-padding;
+  padding-top: $l-size;
 
   &:not(:last-of-type) {
-    padding: 0 0 $xl-padding 0;
+    padding: 0 0 $l-size 0;
     border-bottom: $base-border;
   }
 
   .project-name {
-    margin-bottom: $xxs-spacer;
+    margin-bottom: $xxs-size;
   }
 }

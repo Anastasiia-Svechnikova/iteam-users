@@ -1,27 +1,15 @@
 @import './_color-palette.scss';
 // values and range are supposed to be extended and modified
 //  as further details from designers arrive
-$xxs-spacer: 5px;
-$xs-spacer: 10px;
-$s-spacer: 15px;
-$m-spacer: 20px;
-$l-spacer: 30px;
-$xl-spacer: 40px;
-$xxl-spacer: 50px;
-$xxxl-spacer: 100px;
 
-$xs-padding: 5px;
-$s-padding: 10px;
-$m-padding: 15px;
-$l-padding: 20px;
-$xl-padding: 30px;
-$xxl-padding: 50px;
-
-$accent-header-font-size: 16px;
-$accent-header-font-weight: 500;
-
-$base-header-font-weight: 600;
-$base-header-font-size: 20px;
+$xxs-size: 5px;
+$xs-size: 10px;
+$s-size: 15px;
+$m-size: 20px;
+$l-size: 30px;
+$xl-size: 40px;
+$xxl-size: 50px;
+$xxxl-size: 100px;
 
 $l-header-font-size: 18px;
 $m-header-font-size: 16px;

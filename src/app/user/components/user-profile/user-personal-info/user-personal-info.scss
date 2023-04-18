@@ -5,12 +5,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 $l-padding;
+  padding: 0 $m-size;
 }
 
 .bio {
   display: flex;
-  gap: $l-spacer;
+  gap: $l-size;
   align-items: center;
 }
 
@@ -24,7 +24,7 @@
 .name-wrapper {
   display: flex;
   align-items: center;
-  gap: $xs-spacer;
+  gap: $xs-size;
 }
 
 .icon {
@@ -35,8 +35,8 @@
 .detail {
   display: flex;
   align-items: center;
-  gap: $xs-spacer;
-  margin-bottom: $xxs-spacer;
+  gap: $xs-size;
+  margin-bottom: $xxs-size;
 }
 
 .term {
@@ -46,7 +46,7 @@
 %status {
   display: flex;
   align-items: center;
-  gap: $xxs-spacer;
+  gap: $xxs-size;
 }
 
 .unarchived {

@@ -4,15 +4,15 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: $xxl-spacer;
-  padding: $xl-padding $m-padding;
+  gap: $xxl-size;
+  padding: $l-size $s-size;
 }
 
 .upper-wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: $xs-spacer;
-  gap: $xs-spacer;
+  margin-bottom: $xs-size;
+  gap: $xs-size;
 }
 
 .middle {
@@ -28,18 +28,18 @@
   display: flex;
   flex-direction: column;
   max-width: 17em;
-  padding: 0 $xl-padding;
-  margin-bottom: $m-spacer;
+  padding: 0 $l-size;
+  margin-bottom: $m-size;
 }
 
 .right {
   flex-grow: 1;
-  padding: 0 $xxl-padding;
+  padding: 0 $xxl-size;
   border-left: $base-border;
 }
 
 .tile {
-  padding: $s-padding 0 $xl-padding 0;
+  padding: $xs-size 0 $l-size 0;
 
   &:not(:last-of-type) {
     border-bottom: $base-border;

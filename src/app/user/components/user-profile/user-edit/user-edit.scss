@@ -2,12 +2,12 @@
 @import '/src/styles/_color-palette.scss';
 
 .wrapper {
-  padding: $xs-spacer $xs-spacer 0;
+  padding: $xs-size $xs-size 0;
   width: 25em;
 }
 
 .form {
-  padding: $xs-spacer;
+  padding: $xs-size;
 }
 
 .input-field {
@@ -16,11 +16,11 @@
 
 .title {
   color: $base-text-color;
-  margin-bottom: $m-spacer;
+  margin-bottom: $m-size;
 }
 
 .actions {
   display: flex;
   justify-content: flex-end;
-  gap: $xs-spacer;
+  gap: $xs-size;
 }
