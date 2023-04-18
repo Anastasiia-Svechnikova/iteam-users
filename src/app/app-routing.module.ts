@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from './shared/guards/auth.guard';
+import { HomeComponent } from 'src/app/home/home.component';
+import { SiteLayoutComponent } from 'src/app/navigation/components/site-layout/site-layout.component';
+import { HeaderTitles } from 'src/app/navigation/models/header-titles';
+import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -9,13 +12,30 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: '',
+    path: 'dashboard',
+    component: SiteLayoutComponent,
     canActivate: [AuthGuard],
-    loadChildren: () => import('./main/main.module').then((m) => m.MainModule),
+    children: [
+      {
+        path: 'home',
+        component: HomeComponent,
+        data: { header: HeaderTitles.home },
+      },
+      {
+        path: 'user',
+        loadChildren: () =>
+          import('./user/user.module').then((m) => m.UserModule),
+      },
+      {
+        path: 'projects',
+        component: HomeComponent,
+        data: { header: HeaderTitles.projects },
+      },
+    ],
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'dashboard/home',
   },
 ];
 

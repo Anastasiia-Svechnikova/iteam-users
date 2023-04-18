@@ -7,25 +7,30 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { TokenInterceptor } from './shared/interceptors/token.interceptor';
-import { AuthGuard } from './shared/guards/auth.guard';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from 'src/app/home/home.component';
+import { NavigationModule } from 'src/app/navigation/navigation.module';
+import { AuthGuard } from 'src/app/shared/guards/auth.guard';
+import { TokenInterceptor } from 'src/app/shared/interceptors/token.interceptor';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { AppComponent } from 'src/app/app.component';
+import { AdminGuard } from 'src/app/shared/guards/admin.guard';
+import { UserEffects } from 'src/app/user/state/effects';
+import { appState } from 'src/app/app.state';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
-
   imports: [
+    NavigationModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot(appState),
+    EffectsModule.forRoot([UserEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
+    AdminGuard,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

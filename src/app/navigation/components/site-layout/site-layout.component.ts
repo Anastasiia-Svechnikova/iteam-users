@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
+import { headerUserNavigationMenuLinks } from 'src/app/navigation/models/header-user-navigation-menu-links';
 
-import { sideNavigationLinksData } from 'src/app/navigation/constants/constants';
-import { UserRoles } from 'src/app/shared/constants/constants';
+import { userActions } from 'src/app/user/state/actions';
+import { selectSiteNavigationLinksDataByUserRole } from 'src/app/user/state/selectors';
 
 @Component({
   selector: 'app-site-layout',
@@ -11,19 +14,29 @@ import { UserRoles } from 'src/app/shared/constants/constants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SiteLayoutComponent implements OnInit {
-  sideNavigationData = sideNavigationLinksData;
+  siteNavigationLinksData$ = this.store.select(
+    selectSiteNavigationLinksDataByUserRole,
+  );
+
+  headerUserNavigationMenuLinksData$ = this.siteNavigationLinksData$.pipe(
+    map((linksData) =>
+      linksData?.filter((link) => headerUserNavigationMenuLinks.includes(link.name)),
+    ),
+  );
+
+  showFiller = false;
   title = '';
 
-  // the role will be selected from the store user data
-  role = UserRoles.Admin;
-
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private store: Store) {}
 
   ngOnInit(): void {
     this.setHeader();
+    this.store.dispatch(userActions.loadCurrentUser());
   }
 
   setHeader(): void {
-    this.title = this.route.snapshot.firstChild?.data['header'];
+    this.title =
+      this.route.snapshot.firstChild?.data['header'] ||
+      this.route.snapshot.firstChild?.firstChild?.data['header'];
   }
 }

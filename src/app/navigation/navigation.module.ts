@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -14,6 +15,7 @@ import { SharedModule } from '../shared/shared.module';
     MatToolbarModule,
     MatMenuModule,
     MatSidenavModule,
+    RouterModule,
   ],
 })
 export class NavigationModule {}

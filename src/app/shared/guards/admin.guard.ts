@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
+import { Observable, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { selectUserHasRole } from '../../main/state/selectors';
-import { UserRoles } from '../constants/constants';
+import { selectUserHasRole } from 'src/app/user/state/selectors';
+import { UserRoles } from 'src/app/shared/constants/constants';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   canActivate(): Observable<boolean> {
-    return this.store.select(selectUserHasRole, UserRoles.Admin);
+    return this.store.select(selectUserHasRole, UserRoles.Admin).pipe(
+      tap((isAdmin) => {
+        if (!isAdmin) {
+          this.router.navigate(['/dashboard/home']);
+        }
+      }),
+    );
   }
 }

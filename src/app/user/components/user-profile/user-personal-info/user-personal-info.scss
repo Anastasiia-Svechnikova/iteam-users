@@ -1,0 +1,60 @@
+@import '/src/styles/_variables.scss';
+@import '/src/styles/_color-palette.scss';
+
+.personal-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 $m-size;
+}
+
+.bio {
+  display: flex;
+  gap: $l-size;
+  align-items: center;
+}
+
+.avatar {
+  height: $avatar-width;
+  width: $avatar-width;
+  background-color: $base-color;
+  border-radius: 50%;
+}
+
+.name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: $xs-size;
+}
+
+.icon {
+  color: inherit;
+  transform: scale(0.9);
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  gap: $xs-size;
+  margin-bottom: $xxs-size;
+}
+
+.term {
+  flex: 1 1 auto;
+}
+
+%status {
+  display: flex;
+  align-items: center;
+  gap: $xxs-size;
+}
+
+.unarchived {
+  @extend %status;
+  color: $green-color;
+}
+
+.archived {
+  @extend %status;
+  color: $base-color;
+}

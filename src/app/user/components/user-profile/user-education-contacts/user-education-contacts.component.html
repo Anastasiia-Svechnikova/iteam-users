@@ -1,0 +1,52 @@
+<ng-container *ngIf="userEducationData$ | async as userEducationData">
+  <div class="left-inner">
+    <div class="upper-wrapper">
+      <h3 class="mat-subtitle-2 primary">Education</h3>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Edit content button">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <app-clipboard [data]="userEducationData"></app-clipboard>
+    </div>
+    <div *ngFor="let education of userEducationData.educationInfo">
+      <p>{{ education.universityName | uppercase }}</p>
+      <p
+        *ngIf="education.startDate"
+        class="mat-caption light">
+        {{ education.startDate | date : 'y' }} -
+        {{ education.endDate | date : 'y' }}
+      </p>
+      <p>{{ education.pricingModel }}</p>
+    </div>
+    <app-empty-message
+      *ngIf="!userEducationData.educationInfo?.length"
+      title="education"></app-empty-message>
+  </div>
+</ng-container>
+<ng-container *ngIf="userContactsData$ | async as userContactsData">
+  <div class="left-inner">
+    <div class="upper-wrapper">
+      <h3 class="mat-subtitle-2 primary">Address</h3>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Edit content button"
+        (click)="onEditContacts()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <app-clipboard [data]="userContactsData"></app-clipboard>
+    </div>
+    <p>{{ userContactsData.address }}</p>
+    <app-empty-message
+      *ngIf="!userContactsData.address"
+      title="address"></app-empty-message>
+    <h4
+      *ngIf="userContactsData.city"
+      class="mat-subtitle-1">
+      City:
+    </h4>
+    <p>{{ userContactsData.city }}</p>
+  </div>
+</ng-container>

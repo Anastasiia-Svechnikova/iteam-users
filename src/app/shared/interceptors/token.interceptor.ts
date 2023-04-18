@@ -9,8 +9,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
 
-import { LocalStorageService } from '../services/local-storage.service';
-import { AuthService } from '../../auth/services/auth.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

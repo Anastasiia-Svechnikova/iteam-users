@@ -4,12 +4,12 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { catchError, map, Observable, of, switchMap } from 'rxjs';
 
-import * as AuthActions from './actions';
-import { AuthService } from '../services/auth.service';
-import { ILoginResponseData } from '../models/login-response-data';
-import { SnackbarService } from '../../shared/services/snackbar.service';
-import { LocalStorageService } from '../../shared/services/local-storage.service';
-import { loadUser } from '../../main/state/actions';
+import * as AuthActions from 'src/app/auth/state/actions';
+import { userActions } from 'src/app/user/state/actions';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { ILoginResponseData } from 'src/app/auth/models/login-response-data';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Injectable()
 export class AuthEffects {
@@ -34,10 +34,16 @@ export class AuthEffects {
               'Authorization',
               loginResponseData.tokens.accessToken,
             );
+            this.localStorageService.saveData(
+              'id',
+              String(loginResponseData.user.id),
+            );
             this.router.navigateByUrl('home');
             return [
               AuthActions.loginSuccess(),
-              loadUser({ user: loginResponseData.user}),
+              userActions.loadedCurrentUser({
+                user: loginResponseData.user,
+              }),
             ];
           }),
           catchError((err) => {

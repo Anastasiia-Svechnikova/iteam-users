@@ -3,10 +3,10 @@
     mat-icon-button
     aria-label="Open main navigation menu"
     (click)="onToggleSideNav()">
-    <mat-icon>menu</mat-icon>
+    <mat-icon>{{ sideNavOpen ? 'close' : 'menu' }}</mat-icon>
   </button>
   <span class="spacer"></span>
-  <span>{{ title }}</span>
+  <span class="mat-headline-5 mb-0">{{ title }}</span>
   <button
     mat-icon-button
     class="user-btn"
@@ -17,10 +17,11 @@
 </mat-toolbar>
 <mat-menu #menu="matMenu">
   <button
+    *ngFor="let link of linksData"
     mat-menu-item
     class="menu-btn"
-    routerLink="/user-profile">
-    <span class="menu-link">My profile</span>
+    [routerLink]="link.path">
+    <span class="menu-link">{{ link.name | titlecase }}</span>
   </button>
   <button
     mat-menu-item
