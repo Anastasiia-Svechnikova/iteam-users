@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { map } from 'rxjs';
-import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
 
+import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
 import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
 
 @Component({
