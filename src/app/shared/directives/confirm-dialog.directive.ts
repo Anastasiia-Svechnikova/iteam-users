@@ -1,25 +1,28 @@
-import { Directive, HostListener, Output } from '@angular/core';
+import { Directive, HostListener, OnDestroy, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
-import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
 
 @Directive({
   selector: '[appConfirmDialog]',
 })
-export class ConfirmDialogDirective extends UnSubscriberComponent {
+export class ConfirmDialogDirective implements OnDestroy {
   @Output() confirm = new Subject<void>();
+  private confirmedSubscription!: Subscription;
 
-  constructor(private dialog: MatDialog) {
-    super();
-  }
+  constructor(private dialog: MatDialog) {}
 
   @HostListener('click')
   click(): void {
-    this.dialog
+    this.confirmedSubscription = this.dialog
       .open(ConfirmModalComponent)
-      .componentInstance.confirmed.pipe(takeUntil(this.destroyed$))
-      .subscribe(() => this.confirm.next());
+      .componentInstance.confirmed.subscribe(() => this.confirm.next());
+  }
+
+  ngOnDestroy(): void {
+    if (this.confirmedSubscription) {
+      this.confirmedSubscription.unsubscribe();
+    }
   }
 }

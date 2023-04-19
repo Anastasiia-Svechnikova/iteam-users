@@ -1,6 +1,6 @@
 import { CellStyle, ColDef, ICellRendererParams } from 'ag-grid-community';
 
-import { EmailCellComponent } from 'src/app/user/components/user-list/cell-components/email-cell/email-cell.component';
+import { CopyCellComponent } from 'src/app/shared/components/ag-grid/copy-cell/copy-cell.component';
 import { SettingsCellComponent } from 'src/app/user/components/user-list/cell-components/settings-cell/settings-cell.component';
 
 export const UserListColDefs: ColDef[] = [
@@ -15,7 +15,10 @@ export const UserListColDefs: ColDef[] = [
   },
   {
     headerName: 'Email',
-    cellRenderer: EmailCellComponent,
+    cellRenderer: CopyCellComponent,
+    cellRendererParams: {
+      value: (params: ICellRendererParams) => params.data.email,
+    },
     getQuickFilterText: (params): string => params.data.email,
     flex: 2,
   },
