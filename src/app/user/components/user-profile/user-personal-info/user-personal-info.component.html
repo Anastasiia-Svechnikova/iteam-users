@@ -15,7 +15,13 @@
           aria-label="Edit content button">
           <mat-icon>edit</mat-icon>
         </button>
-        <app-clipboard [data]="userData"></app-clipboard>
+        <button
+          mat-icon-button
+          class="icon-btn"
+          aria-label="Copy content button"
+          (click)="clipboardService.copyToClipboard(userData)">
+          <mat-icon>content_copy</mat-icon>
+        </button>
       </div>
       <p
         *ngIf="userData.status"

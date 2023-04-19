@@ -8,7 +8,13 @@
         aria-label="Edit content button">
         <mat-icon>edit</mat-icon>
       </button>
-      <app-clipboard [data]="userEducationData"></app-clipboard>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Copy content button"
+        (click)="clipboardService.copyToClipboard(userEducationData)">
+        <mat-icon>content_copy</mat-icon>
+      </button>
     </div>
     <div *ngFor="let education of userEducationData.educationInfo">
       <p>{{ education.universityName | uppercase }}</p>
@@ -36,7 +42,13 @@
         (click)="onEditContacts()">
         <mat-icon>edit</mat-icon>
       </button>
-      <app-clipboard [data]="userContactsData"></app-clipboard>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Copy content button"
+        (click)="clipboardService.copyToClipboard(userContactsData)">
+        <mat-icon>content_copy</mat-icon>
+      </button>
     </div>
     <p>{{ userContactsData.address }}</p>
     <app-empty-message

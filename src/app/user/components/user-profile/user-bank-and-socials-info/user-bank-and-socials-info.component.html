@@ -10,7 +10,13 @@
           (click)="onEditBankInfo()">
           <mat-icon>edit</mat-icon>
         </button>
-        <app-clipboard [data]="userBankData"></app-clipboard>
+        <button
+          mat-icon-button
+          class="icon-btn"
+          aria-label="Copy content button"
+          (click)="clipboardService.copyToClipboard(userBankData)">
+          <mat-icon>content_copy</mat-icon>
+        </button>
       </div>
       <ng-container *ngFor="let title of userBankInfoTitles | keyvalue">
         <p
@@ -38,7 +44,13 @@
           (click)="onEditSocials()">
           <mat-icon>edit</mat-icon>
         </button>
-        <app-clipboard [data]="userSocialsData"></app-clipboard>
+        <button
+          mat-icon-button
+          class="icon-btn"
+          aria-label="Copy content button"
+          (click)="clipboardService.copyToClipboard(userSocialsData)">
+          <mat-icon>content_copy</mat-icon>
+        </button>
       </div>
     </div>
     <div>

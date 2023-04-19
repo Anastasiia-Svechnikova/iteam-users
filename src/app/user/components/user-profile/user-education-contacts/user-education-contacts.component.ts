@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
 import { EditContactsModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-contacts/edit-contacts-modal.component';
+import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
 
 @Component({
   selector: 'app-user-education-contacts',
@@ -27,6 +28,7 @@ export class UserEducationContactsComponent {
   constructor(
     private readonly _userStore: UserStore,
     private dialog: MatDialog,
+    public clipboardService: ClipboardService,
   ) {}
 
   onEditContacts(): void {

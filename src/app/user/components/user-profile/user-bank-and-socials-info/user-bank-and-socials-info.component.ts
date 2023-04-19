@@ -10,6 +10,7 @@ import { EditSocialsModalComponent } from 'src/app/user/components/user-profile/
 import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
 import { UserSocialLinksTitles } from 'src/app/user/components/user-profile/constants/social-links';
 import { userBankInfoTitles } from 'src/app/user/components/user-profile/constants/user-bank-info-titles';
+import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
 
 @Component({
   selector: 'app-user-bank-and-socials-info',
@@ -33,6 +34,7 @@ export class UserBankAndSocialsInfoComponent {
   constructor(
     private readonly _userStore: UserStore,
     private dialog: MatDialog,
+    public clipboardService: ClipboardService,
   ) {}
 
   onEditSocials(): void {

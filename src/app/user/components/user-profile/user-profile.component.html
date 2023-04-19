@@ -18,10 +18,17 @@
             (click)="onEditDescription()">
             <mat-icon>edit</mat-icon>
           </button>
-          <app-clipboard
-            [data]="{
-              positionDescription: user.positionDescription
-            }"></app-clipboard>
+          <button
+            mat-icon-button
+            class="icon-btn"
+            aria-label="Copy content button"
+            (click)="
+              clipboardService.copyToClipboard({
+                positionDescription: user.positionDescription
+              })
+            ">
+            <mat-icon>content_copy</mat-icon>
+          </button>
         </div>
         <p>
           {{ user.positionDescription }}

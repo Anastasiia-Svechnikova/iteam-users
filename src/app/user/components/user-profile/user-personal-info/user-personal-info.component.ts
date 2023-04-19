@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
 import { UserPersonalInfoStatusIcons } from 'src/app/user/components/user-profile/constants/user-personal-info-status-icons';
+import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
 
 @Component({
   selector: 'app-user-personal-info',
@@ -13,5 +14,8 @@ export class UserPersonalInfoComponent {
   userData$ = this._userStore.userPersonalInfo$;
   statusIcons = UserPersonalInfoStatusIcons;
 
-  constructor(private readonly _userStore: UserStore) {}
+  constructor(
+    private readonly _userStore: UserStore,
+    public clipboardService: ClipboardService,
+  ) {}
 }

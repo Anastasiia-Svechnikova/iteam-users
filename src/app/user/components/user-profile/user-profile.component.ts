@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { map, take } from 'rxjs';
+import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
 
 import { EditDescriptionModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-description-modal/edit-description-modal.component';
 import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
@@ -21,6 +22,7 @@ export class UserProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private readonly _userStore: UserStore,
     private dialog: MatDialog,
+    public clipboardService: ClipboardService,
   ) {}
 
   ngOnInit(): void {

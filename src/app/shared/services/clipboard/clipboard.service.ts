@@ -1,39 +1,40 @@
 import { Clipboard } from '@angular/cdk/clipboard';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { format } from 'date-fns';
-
-import { clipboardPropertyNamesRegistry } from 'src/app/shared/components/clipboard/clipboard-property-names-registry';
+import { formatDate } from '@angular/common';
+import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable, take } from 'rxjs';
+import { clipboardPropertyNamesRegistry } from 'src/app/shared/services/clipboard/clipboard-property-names-registry';
 import {
   OffsetOptions,
   modifyStringByOffsetVariant,
-} from 'src/app/shared/components/clipboard/modify-string-by-offset-variant';
+} from 'src/app/shared/services/clipboard/modify-string-by-offset-variant';
 import { datePropertiesInClipboard } from 'src/app/shared/constants/date-properties-in-clipboard';
 import { propertiesHiddenInClipboardText } from 'src/app/shared/constants/properties-hidden-in-clipboard-text';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
-import { IUpdateUserDTO } from 'src/app/user/components/user-profile/interfaces/update-user-dto';
 
-/**
- * reusable clipboard component,
- * IClipboardData should be extended as union type with other interfaces
- */
-type IClipboardData = IUpdateUserDTO;
-
-@Component({
-  selector: 'app-clipboard',
-  templateUrl: './clipboard.component.html',
-  styleUrls: ['./clipboard.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+@Injectable({
+  providedIn: 'root',
 })
-export class ClipboardComponent {
-  @Input() data!: IClipboardData;
+export class ClipboardService {
   constructor(
-    private _clipboard: Clipboard,
     private _snackBarService: SnackbarService,
+    private _clipboard: Clipboard,
   ) {}
 
-  onCopy(): void {
-    const data = this.formatContent<IClipboardData>(this.data);
-    this._clipboard.copy(data);
+  copyToClipboard<T extends object>(data: T | Observable<T>): void {
+    if (data instanceof Observable) {
+      data.pipe(take(1)).subscribe((data) => {
+        const formattedData = this.formatContent(data);
+        this.copy(formattedData);
+      });
+    } else {
+      this.copy(this.formatContent(data));
+    }
+    return;
+  }
+
+  private copy(formattedData: string): void {
+    this._clipboard.copy(formattedData);
     this._snackBarService.openSnackBar('Copied to clipboard!');
   }
 
@@ -59,11 +60,14 @@ export class ClipboardComponent {
           OffsetOptions.bold,
         );
         let value = '';
-        console.log(dataToCopyItem, typeof dataToCopyItem);
         if (typeof dataToCopyItem === 'boolean') {
           value = dataToCopyItem ? 'yes' : 'no';
         } else if (datePropertiesInClipboard.includes(dataToCopyKey)) {
-          value = format(new Date(dataToCopyItem as string), 'yyyy-MM-dd');
+          value = formatDate(
+            new Date(dataToCopyItem as string),
+            'yyyy-MM-dd',
+            'en-US',
+          );
         } else {
           value = String(dataToCopyItem);
         }

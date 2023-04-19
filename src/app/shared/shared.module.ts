@@ -10,11 +10,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatRippleModule } from '@angular/material/core';
 import { RouterModule } from '@angular/router';
 
-import { ClipboardComponent } from 'src/app/shared/components/clipboard/clipboard.component';
 import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custom-icon.component';
 
 @NgModule({
-  declarations: [CustomIconComponent, ClipboardComponent],
+  declarations: [CustomIconComponent],
   imports: [
     MatProgressSpinnerModule,
     CommonModule,
@@ -25,7 +24,6 @@ import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custo
     MatRippleModule,
     MatProgressSpinnerModule,
     CustomIconComponent,
-    ClipboardComponent,
     RouterModule,
     CommonModule,
     MatCardModule,
