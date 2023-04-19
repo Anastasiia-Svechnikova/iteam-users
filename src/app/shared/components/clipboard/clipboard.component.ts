@@ -1,6 +1,13 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { format } from 'date-fns';
 
+import { clipboardPropertyNamesRegistry } from 'src/app/shared/components/clipboard/clipboard-property-names-registry';
+import {
+  OffsetOptions,
+  modifyStringByOffsetVariant,
+} from 'src/app/shared/components/clipboard/modify-string-by-offset-variant';
+import { datePropertiesInClipboard } from 'src/app/shared/constants/date-properties-in-clipboard';
 import { propertiesHiddenInClipboardText } from 'src/app/shared/constants/properties-hidden-in-clipboard-text';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { IUpdateUserDTO } from 'src/app/user/components/user-profile/interfaces/update-user-dto';
@@ -34,21 +41,33 @@ export class ClipboardComponent {
     function formatDataHelper(dataToCopy: T): string {
       const keys = Object.keys(dataToCopy);
       return keys.reduce((acc, dataToCopyKey) => {
-        if (propertiesHiddenInClipboardText.includes(dataToCopyKey)) {
+        const dataToCopyItem = dataToCopy[dataToCopyKey as keyof T];
+        if (
+          propertiesHiddenInClipboardText.includes(dataToCopyKey) ||
+          (!dataToCopyItem && dataToCopyItem !== false)
+        ) {
           return acc.concat('');
         }
-        const dataToCopyItem = dataToCopy[dataToCopyKey as keyof T];
         if (dataToCopyItem instanceof Array) {
           return acc.concat(
             dataToCopyItem?.map((key: T) => formatDataHelper(key)).join('\n') ||
-            'no data',
+              'no data',
           );
         }
-        return acc.concat(
-          `${ dataToCopyKey }: ${
-            dataToCopy[dataToCopyKey as keyof T] || 'no data'
-          } \n`,
+        const key = modifyStringByOffsetVariant(
+          clipboardPropertyNamesRegistry.get(dataToCopyKey) as string,
+          OffsetOptions.bold,
         );
+        let value = '';
+        console.log(dataToCopyItem, typeof dataToCopyItem);
+        if (typeof dataToCopyItem === 'boolean') {
+          value = dataToCopyItem ? 'yes' : 'no';
+        } else if (datePropertiesInClipboard.includes(dataToCopyKey)) {
+          value = format(new Date(dataToCopyItem as string), 'yyyy-MM-dd');
+        } else {
+          value = String(dataToCopyItem);
+        }
+        return acc.concat(`${key}:  \t${value} \n`);
       }, '');
     }
     return formatDataHelper(dataToCopy);
