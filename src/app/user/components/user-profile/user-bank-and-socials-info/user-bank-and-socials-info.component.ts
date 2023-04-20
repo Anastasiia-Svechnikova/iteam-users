@@ -11,8 +11,6 @@ import { UserStore } from 'src/app/user/components/user-profile/user-profile.sto
 import { UserSocialLinksTitles } from 'src/app/user/components/user-profile/constants/social-links';
 import { userBankInfoTitles } from 'src/app/user/components/user-profile/constants/user-bank-info-titles';
 import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
-import { MediaMatcher } from '@angular/cdk/layout';
-import { MediaWidth } from 'src/app/shared/constants/media-width';
 import { editDialogOptions } from 'src/app/user/components/user-profile/constants/edit-dialog-options';
 
 @Component({
@@ -38,11 +36,7 @@ export class UserBankAndSocialsInfoComponent {
     private readonly _userStore: UserStore,
     private dialog: MatDialog,
     public clipboardService: ClipboardService,
-    mediaMatcher: MediaMatcher,
-  ) {
-    const mediaQueryList = mediaMatcher.matchMedia(MediaWidth.mobile);
-    console.log(mediaQueryList.matches);
-  }
+  ) {}
 
   onEditSocials(): void {
     this.setDialog<EditBankInfoModalComponent>('socials');
