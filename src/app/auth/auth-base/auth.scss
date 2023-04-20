@@ -1,3 +1,5 @@
+@import '/src/styles/_variables.scss';
+
 .wrapper {
   display: flex;
   justify-content: center;
@@ -6,6 +8,7 @@
 
   .card-inner {
     width: 100%;
+    gap: $m-size;
 
     .card-header {
       display: flex;
@@ -16,11 +19,13 @@
     .login-form {
       display: flex;
       flex-direction: column;
+      gap: $xxs-size;
     }
 
     .links {
       display: flex;
       justify-content: space-between;
+      margin-top: $s-size;
     }
   }
 }

@@ -12,7 +12,7 @@
         class="login-form"
         [formGroup]="form"
         (ngSubmit)="onSubmit()">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <input
             matInput
             type="email"
@@ -25,7 +25,7 @@
             Email must be valid
           </mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <input
             matInput
             type="password"
