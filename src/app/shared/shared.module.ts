@@ -16,6 +16,7 @@ import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custo
 import { ConfirmDialogDirective } from 'src/app/shared/directives/confirm-dialog.directive';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { CopyCellComponent } from './components/ag-grid/copy-cell/copy-cell.component';
+import { StatusCellComponent } from './components/ag-grid/status-cell/status-cell.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CopyCellComponent } from './components/ag-grid/copy-cell/copy-cell.comp
     ConfirmModalComponent,
     ConfirmDialogDirective,
     CopyCellComponent,
+    StatusCellComponent,
   ],
   imports: [
     MatProgressSpinnerModule,

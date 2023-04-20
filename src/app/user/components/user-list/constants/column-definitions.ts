@@ -1,6 +1,7 @@
-import { CellStyle, ColDef, ICellRendererParams } from 'ag-grid-community';
+import { ColDef, ICellRendererParams } from 'ag-grid-community';
 
 import { CopyCellComponent } from 'src/app/shared/components/ag-grid/copy-cell/copy-cell.component';
+import { StatusCellComponent } from 'src/app/shared/components/ag-grid/status-cell/status-cell.component';
 import { SettingsCellComponent } from 'src/app/user/components/user-list/cell-components/settings-cell/settings-cell.component';
 
 export const UserListColDefs: ColDef[] = [
@@ -25,13 +26,19 @@ export const UserListColDefs: ColDef[] = [
   {
     headerName: 'Status',
     flex: 1,
-    cellRenderer: (params: ICellRendererParams): string => {
-      return params.data.status === 'archived' ? `Deactivated` : `Active`;
-    },
-    cellStyle: (params): CellStyle => {
-      return params.data.status === 'archived'
-        ? { color: 'orange' }
-        : { color: 'green' };
+    cellRenderer: StatusCellComponent,
+    cellRendererParams: {
+      value: (params: ICellRendererParams) => params.data.status,
+      statusesData: {
+        archived:  {
+          icon: 'person_remove',
+          name: 'Disabled',
+        },
+        unarchived:  {
+          icon: 'how_to_reg',
+          name: 'Active',
+        }
+      },
     },
   },
   {
@@ -41,7 +48,7 @@ export const UserListColDefs: ColDef[] = [
         const { fileUrl, originalName } = params.data.cv;
         const formattedFileName = originalName.replace(/\s*(\(\w*\s*\))*(\.\w+)*/g, '');
         const downloadUrl = fileUrl.replace('upload/', `upload/fl_attachment:${formattedFileName}/`);
-        return `<a  href="${downloadUrl}">${originalName}</a>`;
+        return `<a  href="${downloadUrl}" style="color:black">${originalName}</a>`;
       }
       return 'N/A';
     },

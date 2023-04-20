@@ -1,11 +1,13 @@
-<mat-icon
-  class="action-icon"
-  [routerLink]="['/dashboard/user', data.id.toString()]">
-  edit
-</mat-icon>
-<mat-icon
-  appConfirmDialog
-  class="action-icon"
-  (confirm)="onToggleStatus(data.id.toString(), data.status)">
-  archive
-</mat-icon>
+<div class="wrapper">
+  <mat-icon
+    class="action-icon"
+    [routerLink]="['/dashboard/user', data.id.toString()]">
+    edit
+  </mat-icon>
+  <mat-icon
+    appConfirmDialog
+    class="action-icon"
+    (confirm)="onToggleStatus(data.id.toString(), data.status)">
+    archive
+  </mat-icon>
+</div>
