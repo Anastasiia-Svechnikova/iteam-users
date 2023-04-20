@@ -23,9 +23,12 @@
             class="icon-btn"
             aria-label="Copy content button"
             (click)="
-              clipboardService.copyToClipboard({
-                positionDescription: user.positionDescription
-              })
+              clipboardService.copyToClipboard(
+                {
+                  positionDescription: user.positionDescription
+                },
+                clipboardRegistry
+              )
             ">
             <mat-icon>content_copy</mat-icon>
           </button>

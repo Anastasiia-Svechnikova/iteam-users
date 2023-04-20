@@ -1,4 +1,4 @@
-export function modifyStringByOffsetVariant(string = ''): string {
+export function modifyStringToBold(string = ''): string {
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
   const numbers = '0123456789';
   let result = '';

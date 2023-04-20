@@ -1,11 +1,9 @@
 import { Clipboard } from '@angular/cdk/clipboard';
-import { formatDate } from '@angular/common';
 import { Injectable } from '@angular/core';
 
-import { clipboardPropertyNamesRegistry } from 'src/app/shared/services/clipboard/clipboard-property-names-registry';
-import { modifyStringByOffsetVariant } from 'src/app/shared/services/clipboard/modify-string-by-offset-variant';
-import { datePropertiesInClipboard } from 'src/app/shared/constants/date-properties-in-clipboard';
 import { propertiesHiddenInClipboardText } from 'src/app/shared/constants/properties-hidden-in-clipboard-text';
+import { modifyStringToBold } from 'src/app/shared/services/clipboard/helpers/modify-string-to-bold';
+import { processValue } from 'src/app/shared/services/clipboard/helpers/process-value';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Injectable({
@@ -17,12 +15,18 @@ export class ClipboardService {
     private _clipboard: Clipboard,
   ) {}
 
-  copyToClipboard<T extends object>(data: T): void {
-    this._clipboard.copy(this.formatContent(data));
+  copyToClipboard<T extends object>(
+    data: T,
+    registry: Map<string, string> | null = null,
+  ): void {
+    this._clipboard.copy(this.formatContent(data, registry));
     this._snackBarService.openSnackBar('Copied to clipboard!');
   }
 
-  private formatContent<T extends object>(dataToCopy: T): string {
+  private formatContent<T extends object>(
+    dataToCopy: T,
+    registry: Map<string, string> | null = null,
+  ): string {
     function formatDataHelper(dataToCopy: T): string {
       const keys = Object.keys(dataToCopy);
       return keys.reduce((acc, dataToCopyKey) => {
@@ -41,25 +45,16 @@ export class ClipboardService {
               'no data',
           );
         }
+        const key = registry
+          ? (registry.get(dataToCopyKey) as string)
+          : dataToCopyKey;
+        const formattedKey = modifyStringToBold(key);
+        const formattedValue = processValue(dataToCopyItem, dataToCopyKey);
 
-        const key = modifyStringByOffsetVariant(
-          clipboardPropertyNamesRegistry.get(dataToCopyKey) as string,
-        );
-        let value = '';
-        if (typeof dataToCopyItem === 'boolean') {
-          value = dataToCopyItem ? 'yes' : 'no';
-        } else if (datePropertiesInClipboard.includes(dataToCopyKey)) {
-          value = formatDate(
-            new Date(dataToCopyItem as string),
-            'yyyy-MM-dd',
-            'en-US',
-          );
-        } else {
-          value = String(dataToCopyItem);
-        }
-        return acc.concat(`${key}: \t${value} \n`);
+        return acc.concat(`${formattedKey}:  ${formattedValue} \n`);
       }, '');
     }
+
     return formatDataHelper(dataToCopy);
   }
 }

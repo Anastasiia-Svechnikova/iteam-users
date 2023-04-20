@@ -6,6 +6,7 @@
 }
 .side-menu-btn {
   display: none;
+
   @include media(tablet) {
     display: block;
   }

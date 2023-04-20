@@ -12,6 +12,7 @@ import { UserSocialLinksTitles } from 'src/app/user/components/user-profile/cons
 import { userBankInfoTitles } from 'src/app/user/components/user-profile/constants/user-bank-info-titles';
 import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
 import { editDialogOptions } from 'src/app/user/components/user-profile/constants/edit-dialog-options';
+import { clipboardBankSocialsRegistry } from 'src/app/user/components/user-profile/constants/clipboard-property-names-registries/clipboard-bank-socials-registy';
 
 @Component({
   selector: 'app-user-bank-and-socials-info',
@@ -28,6 +29,7 @@ export class UserBankAndSocialsInfoComponent {
 
   userBankInfoTitles = userBankInfoTitles;
   UserSocialLinksTitles = UserSocialLinksTitles;
+  clipboardRegistry = clipboardBankSocialsRegistry;
 
   isUserBankDataEmpty$ = this.checkDataEmpty(this.userBankData$);
   isSocialsDataEmpty$ = this.checkDataEmpty(this.userSocialsData$);

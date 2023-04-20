@@ -12,7 +12,9 @@
         mat-icon-button
         class="icon-btn"
         aria-label="Copy content button"
-        (click)="clipboardService.copyToClipboard(userEducationData)">
+        (click)="
+          clipboardService.copyToClipboard(userEducationData, clipboardRegistry)
+        ">
         <mat-icon>content_copy</mat-icon>
       </button>
     </div>
@@ -46,7 +48,9 @@
         mat-icon-button
         class="icon-btn"
         aria-label="Copy content button"
-        (click)="clipboardService.copyToClipboard(userContactsData)">
+        (click)="
+          clipboardService.copyToClipboard(userContactsData, clipboardRegistry)
+        ">
         <mat-icon>content_copy</mat-icon>
       </button>
     </div>

@@ -27,6 +27,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+
   @include media(tablet) {
     flex-direction: row;
   }
@@ -39,7 +40,6 @@
 .left-inner {
   display: flex;
   flex-direction: column;
-
   padding: $m-size;
   margin: 0 auto;
   border-bottom: $base-border;

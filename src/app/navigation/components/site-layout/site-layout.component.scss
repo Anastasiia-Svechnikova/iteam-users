@@ -10,6 +10,7 @@
 
 .sidenav {
   display: none;
+
   @include media(tablet) {
     display: block;
     width: fit-content;
@@ -27,6 +28,7 @@
   width: 100%;
   background-color: $white-bg-color;
   border-top: $base-border;
+
   @include media(tablet) {
     display: none;
     padding: 0 $xs-size;
@@ -40,7 +42,6 @@
   gap: $xs-size;
   padding: $xs-size;
   margin: $xs-size 0;
-
   font: inherit;
   border: none;
   border-radius: $s-size;
