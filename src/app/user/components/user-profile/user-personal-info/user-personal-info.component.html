@@ -1,65 +1,75 @@
 <div
   *ngIf="userData$ | async as userData"
   class="personal-wrapper">
-  <div class="bio">
-    <div class="avatar"></div>
-    <div>
-      <div class="name-wrapper">
-        <p class="mat-headline-5 mb-0">
-          {{ userData.name || 'No Name' }}
-          {{ userData.surname }}
-        </p>
-        <button
-          mat-icon-button
-          class="icon-btn"
-          aria-label="Edit content button">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <app-clipboard [data]="userData"></app-clipboard>
-      </div>
-      <p
-        *ngIf="userData.status"
-        class="detail">
-        Status:
-        <span [ngClass]="userData.status">
-          {{ userData.status === 'archived' ? 'Deactivated' : 'Active' }}
-          <mat-icon class="icon">
-            {{ statusIcons.get(userData.status) }}
-          </mat-icon>
-        </span>
+  <div class="avatar"></div>
+  <div class="inner">
+    <div class="name-wrapper">
+      <p class="mat-headline-5 mb-0">
+        {{ userData.name || 'No Name' }}
+        {{ userData.surname }}
       </p>
-      <p
-        *ngIf="userData.birthday"
-        class="detail">
-        <mat-icon class="icon">card_giftcard</mat-icon>
-        <span>{{ userData.birthday | date }}</span>
-      </p>
-      <p
-        *ngIf="userData.phone"
-        class="detail">
-        {{ userData.phone }}
-      </p>
-      <p class="detail">
-        {{ userData.email }}
-      </p>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Edit content button">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Copy content button"
+        (click)="clipboardService.copyToClipboard(userData, clipboardRegistry)">
+        <mat-icon>content_copy</mat-icon>
+      </button>
     </div>
-  </div>
-  <div *ngIf="userData.startDate">
-    <p class="detail">
-      <span class="term">Start Date:</span>
-      <span>{{ userData.startDate | date }}</span>
-    </p>
-    <p
-      *ngIf="userData.endDate"
-      class="detail">
-      <span class="term">End Date:</span>
-      <span>{{ userData.endDate | date }}</span>
-    </p>
-    <p
-      *ngIf="userData.endReason"
-      class="detail">
-      <span class="term">Reason:</span>
-      <span>{{ userData.endReason }}</span>
-    </p>
+    <div class="info">
+      <div class="bio">
+        <p
+          *ngIf="userData.status"
+          class="detail">
+          Status:
+          <span [ngClass]="userData.status">
+            {{ userData.status === 'archived' ? 'Deactivated' : 'Active' }}
+            <mat-icon class="icon">
+              {{ statusIcons.get(userData.status) }}
+            </mat-icon>
+          </span>
+        </p>
+        <p
+          *ngIf="userData.birthday"
+          class="detail">
+          <mat-icon class="icon">card_giftcard</mat-icon>
+          <span>{{ userData.birthday | date }}</span>
+        </p>
+        <p
+          *ngIf="userData.phone"
+          class="detail">
+          {{ userData.phone }}
+        </p>
+        <p class="detail">
+          {{ userData.email }}
+        </p>
+      </div>
+      <div
+        *ngIf="userData.startDate"
+        class="terms">
+        <p class="detail">
+          <span class="term">Start Date:</span>
+          <span>{{ userData.startDate | date }}</span>
+        </p>
+        <p
+          *ngIf="userData.endDate"
+          class="detail">
+          <span class="term">End Date:</span>
+          <span>{{ userData.endDate | date }}</span>
+        </p>
+        <p
+          *ngIf="userData.endReason"
+          class="detail">
+          <span class="term">Reason:</span>
+          <span>{{ userData.endReason }}</span>
+        </p>
+      </div>
+    </div>
   </div>
 </div>

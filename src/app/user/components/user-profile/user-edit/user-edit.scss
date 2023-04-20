@@ -1,13 +1,43 @@
 @import '/src/styles/_variables.scss';
 @import '/src/styles/_color-palette.scss';
+@import '/src/styles/_media-mixins.scss';
 
 .wrapper {
   padding: $xs-size $xs-size 0;
-  width: 25em;
+
+  @include media(tablet) {
+    min-width: 25em;
+  }
+}
+
+.upper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $xs-size;
+  padding: $xs-size 0 0 $xs-size;
+}
+
+.inner {
+  display: grid;
+  column-gap: $m-size;
+  row-gap: $xs-size;
+
+  @include media(tablet) {
+    grid-template-columns: calc($xxxxl-size - $xl-size) calc(
+        $xxxxl-size - $xl-size
+      );
+  }
+
+  @include media(l-tablet) {
+    grid-template-columns: $xxxxl-size $xxxxl-size;
+  }
 }
 
 .form {
-  padding: $xs-size;
+  display: flex;
+  flex-direction: column;
+  gap: $xs-size;
 }
 
 .input-field {
@@ -16,11 +46,12 @@
 
 .title {
   color: $base-text-color;
-  margin-bottom: $m-size;
+  margin-bottom: 0;
 }
 
 .actions {
   display: flex;
   justify-content: flex-end;
   gap: $xs-size;
+  padding: 0;
 }

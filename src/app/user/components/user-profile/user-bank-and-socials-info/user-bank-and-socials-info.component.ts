@@ -10,6 +10,9 @@ import { EditSocialsModalComponent } from 'src/app/user/components/user-profile/
 import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
 import { UserSocialLinksTitles } from 'src/app/user/components/user-profile/constants/social-links';
 import { userBankInfoTitles } from 'src/app/user/components/user-profile/constants/user-bank-info-titles';
+import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
+import { editDialogOptions } from 'src/app/user/components/user-profile/constants/edit-dialog-options';
+import { clipboardBankSocialsRegistry } from 'src/app/user/components/user-profile/constants/clipboard-property-names-registries/clipboard-bank-socials-registy';
 
 @Component({
   selector: 'app-user-bank-and-socials-info',
@@ -26,6 +29,7 @@ export class UserBankAndSocialsInfoComponent {
 
   userBankInfoTitles = userBankInfoTitles;
   UserSocialLinksTitles = UserSocialLinksTitles;
+  clipboardRegistry = clipboardBankSocialsRegistry;
 
   isUserBankDataEmpty$ = this.checkDataEmpty(this.userBankData$);
   isSocialsDataEmpty$ = this.checkDataEmpty(this.userSocialsData$);
@@ -33,6 +37,7 @@ export class UserBankAndSocialsInfoComponent {
   constructor(
     private readonly _userStore: UserStore,
     private dialog: MatDialog,
+    public clipboardService: ClipboardService,
   ) {}
 
   onEditSocials(): void {
@@ -49,8 +54,7 @@ export class UserBankAndSocialsInfoComponent {
         ? EditBankInfoModalComponent
         : EditSocialsModalComponent;
     const dialogRef = this.dialog.open(modalComponent as ComponentType<T>, {
-      restoreFocus: false,
-      autoFocus: false,
+      ...editDialogOptions,
       data: section === 'bank' ? this.userBankData$ : this.userSocialsData$,
     });
     dialogRef

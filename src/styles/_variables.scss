@@ -2,6 +2,11 @@
 // values and range are supposed to be extended and modified
 //  as further details from designers arrive
 
+$mobile: 320px;
+$tablet: 768px;
+$l-tablet: 962px;
+$desktop: 1280px;
+
 $xxs-size: 5px;
 $xs-size: 10px;
 $s-size: 15px;
@@ -10,6 +15,7 @@ $l-size: 30px;
 $xl-size: 40px;
 $xxl-size: 50px;
 $xxxl-size: 100px;
+$xxxxl-size: 300px;
 
 $l-header-font-size: 18px;
 $m-header-font-size: 16px;
@@ -22,8 +28,10 @@ $xxs-font-size: 11px;
 $body-font: 'Inter';
 
 $icon-size: 30px;
+$s-icon-size: 24px;
 $avatar-width: 150px;
-$header-height: 64px;
+$header-height: 60px;
+$mobile-header-height: 52px;
 
 $base-border: 1px solid $base-color;
 $primary-border: 1px solid $primary-color;

@@ -3,7 +3,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { siteNavigationLinksData } from 'src/app/navigation/constants/site-navigation-links-data';
 import { ISiteNavigationLink } from 'src/app/navigation/models/site-navigation-link';
 import { SiteNavigationLinkNames } from 'src/app/navigation/models/site-navigation-links-names';
-import { UserRoles } from 'src/app/shared/constants/constants';
+import { UserRoles } from 'src/app/shared/constants/user-roles';
 import { IMainState } from 'src/app/user/state/reducer';
 
 export const selectUserFeature = createFeatureSelector<IMainState>('main');

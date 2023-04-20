@@ -4,7 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { selectUserHasRole } from 'src/app/user/state/selectors';
-import { UserRoles } from 'src/app/shared/constants/constants';
+import { UserRoles } from 'src/app/shared/constants/user-roles';
 
 @Injectable()
 export class AdminGuard implements CanActivate {

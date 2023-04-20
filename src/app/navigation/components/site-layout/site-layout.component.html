@@ -31,4 +31,21 @@
       <router-outlet (activate)="setHeader()"></router-outlet>
     </div>
   </mat-drawer-container>
+  <div
+    *ngIf="linksData.length"
+    class="mobile-nav">
+    <ng-container *ngFor="let link of linksData">
+      <button
+        *ngIf="link.accessPermission"
+        routerLinkActive="active"
+        class="nav-btn"
+        attr.aria-label="Go to {{ link.name }} page"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLink]="link.path">
+        <mat-icon class="btn-icon">
+          {{ link.iconName }}
+        </mat-icon>
+      </button>
+    </ng-container>
+  </div>
 </ng-container>

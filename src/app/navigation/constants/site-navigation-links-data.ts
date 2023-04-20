@@ -1,6 +1,6 @@
 import { ISiteNavigationLink } from 'src/app/navigation/models/site-navigation-link';
 import { SiteNavigationLinkNames } from 'src/app/navigation/models/site-navigation-links-names';
-import { UserRoles } from 'src/app/shared/constants/constants';
+import { UserRoles } from 'src/app/shared/constants/user-roles';
 
 export const siteNavigationLinksData: ISiteNavigationLink[] = [
   {

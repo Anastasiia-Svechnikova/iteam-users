@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { map } from 'rxjs';
 
+import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
 import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
 
 @Component({
@@ -15,5 +16,8 @@ import { UserStore } from 'src/app/user/components/user-profile/user-profile.sto
 export class UserWorkInfoComponent {
   userData$ = this._userStore.user$.pipe(map((user) => user?.workHistory));
 
-  constructor(private readonly _userStore: UserStore) {}
+  constructor(
+    private readonly _userStore: UserStore,
+    public clipboardService: ClipboardService,
+  ) {}
 }
