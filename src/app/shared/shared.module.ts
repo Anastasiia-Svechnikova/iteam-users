@@ -8,6 +8,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatRippleModule } from '@angular/material/core';
+import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule } from '@angular/router';
 
 import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custom-icon.component';
@@ -21,6 +22,7 @@ import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custo
     MatButtonModule,
   ],
   exports: [
+    LayoutModule,
     MatRippleModule,
     MatProgressSpinnerModule,
     CustomIconComponent,

@@ -1,7 +1,14 @@
 @import '/src/styles/_variables.scss';
+@import '/src/styles/_media-mixins.scss';
 
 .spacer {
   width: $m-size;
+}
+.side-menu-btn {
+  display: none;
+  @include media(tablet) {
+    display: block;
+  }
 }
 
 .user-btn {
