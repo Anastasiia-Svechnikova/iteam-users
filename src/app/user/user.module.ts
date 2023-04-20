@@ -28,6 +28,10 @@ const routes = [
       ),
     data: { header: HeaderTitles.user },
   },
+  {
+    path: '**',
+    redirectTo: '/dashboard/home'
+  }
 ];
 @NgModule({
   declarations: [UserListComponent, EmailCellComponent, SettingsCellComponent],
