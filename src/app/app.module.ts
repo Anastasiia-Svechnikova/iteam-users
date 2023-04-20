@@ -6,6 +6,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AuthEffects } from 'src/app/auth/state/effects';
 
 import { HomeComponent } from 'src/app/home/home.component';
 import { NavigationModule } from 'src/app/navigation/navigation.module';
@@ -26,7 +27,7 @@ import { appState } from 'src/app/app.state';
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot(appState),
-    EffectsModule.forRoot([UserEffects]),
+    EffectsModule.forRoot([UserEffects, AuthEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
