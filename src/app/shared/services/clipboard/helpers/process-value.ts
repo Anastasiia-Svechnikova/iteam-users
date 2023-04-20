@@ -1,4 +1,5 @@
 import { formatDate } from '@angular/common';
+
 import { datePropertiesInClipboard } from 'src/app/shared/constants/date-properties-in-clipboard';
 
 export const processValue = <T>(value: T, key: string): string => {
