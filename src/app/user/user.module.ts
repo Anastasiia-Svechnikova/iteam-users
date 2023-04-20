@@ -11,6 +11,10 @@ import { SettingsCellComponent } from 'src/app/user/components/user-list/cell-co
 import { UserListComponent } from 'src/app/user/components/user-list/user-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HeaderTitles } from 'src/app/navigation/models/header-titles';
+import { StoreModule } from '@ngrx/store';
+import { UserProfileReducer } from 'src/app/user/components/user-profile/state/reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { UserProfileEffects } from 'src/app/user/components/user-profile/state/effects';
 
 const routes = [
   {
@@ -37,6 +41,8 @@ const routes = [
     SharedModule,
     HttpClientModule,
     ClipboardModule,
+    StoreModule.forFeature('user-profile', UserProfileReducer),
+    EffectsModule.forFeature([UserProfileEffects]),
     [RouterModule.forChild(routes)],
     AgGridModule,
   ],

@@ -2,10 +2,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { map, take } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 
-import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
 import { EditContactsModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-contacts/edit-contacts-modal.component';
 import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
 import { clipboardEducationContactsRegistry } from 'src/app/user/components/user-profile/constants/clipboard-property-names-registries/clipboard-education-contacts-registry';
+import { Store } from '@ngrx/store';
+import { selectUser } from 'src/app/user/components/user-profile/state/selectors';
+import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
 
 @Component({
   selector: 'app-user-education-contacts',
@@ -14,22 +16,11 @@ import { clipboardEducationContactsRegistry } from 'src/app/user/components/user
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserEducationContactsComponent {
-  userEducationData$ = this._userStore.user$.pipe(
-    map((user) => ({
-      educationInfo: user?.educationInfo,
-    })),
-  );
-  userContactsData$ = this._userStore.user$.pipe(
-    map((user) => ({
-      address: user?.address,
-      city: user?.city,
-    })),
-  );
-
+  userData$ = this.store.select(selectUser);
   clipboardRegistry = clipboardEducationContactsRegistry;
 
   constructor(
-    private readonly _userStore: UserStore,
+    private store: Store,
     private dialog: MatDialog,
     public clipboardService: ClipboardService,
   ) {}
@@ -38,14 +29,16 @@ export class UserEducationContactsComponent {
     const dialogRef = this.dialog.open(EditContactsModalComponent, {
       restoreFocus: false,
       autoFocus: false,
-      data: this.userContactsData$,
+      data: this.userData$.pipe(
+        map((user) => ({ address: user?.address, city: user?.city })),
+      ),
     });
     dialogRef
       .afterClosed()
       .pipe(take(1))
       .subscribe((data) => {
         if (data) {
-          this._userStore.updateUserInfo(data);
+          this.store.dispatch(userProfileActions.updateUser({ user: data }));
         }
       });
   }

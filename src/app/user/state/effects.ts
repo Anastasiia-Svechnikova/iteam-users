@@ -5,17 +5,17 @@ import { catchError, map, of, switchMap } from 'rxjs';
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { UserService } from 'src/app/user/services/user.service';
-import { userActions } from 'src/app/user/state/actions';
+import { mainUserActions } from 'src/app/user/state/actions';
 
 @Injectable()
 export class UserEffects {
   loadCurrentUser$ = createEffect(() => {
     return this.actions.pipe(
-      ofType(userActions.loadCurrentUser),
+      ofType(mainUserActions.loadCurrentUser),
       switchMap(() => {
         return this.mainUserService.getCurrentUser().pipe(
           map((user: IUserDetails) => {
-            return userActions.loadedCurrentUser({
+            return mainUserActions.loadedCurrentUser({
               user: { id: user.id, roles: user.roles },
             });
           }),
@@ -23,7 +23,7 @@ export class UserEffects {
             this.snackbarService.openSnackBar(
               `User Loading Failed: ${error.message}`,
             );
-            return of(userActions.loadedError());
+            return of(mainUserActions.loadedError());
           }),
         );
       }),

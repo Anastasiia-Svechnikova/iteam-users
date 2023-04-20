@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
 import { UserPersonalInfoStatusIcons } from 'src/app/user/components/user-profile/constants/user-personal-info-status-icons';
 import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
 import { clipboardPersonalInfoRegistry } from 'src/app/user/components/user-profile/constants/clipboard-property-names-registries/clipboard-personal-info-registry';
+import { selectUserPersonalInfo } from 'src/app/user/components/user-profile/state/selectors';
 
 @Component({
   selector: 'app-user-personal-info',
@@ -12,13 +13,13 @@ import { clipboardPersonalInfoRegistry } from 'src/app/user/components/user-prof
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserPersonalInfoComponent {
-  userData$ = this._userStore.userPersonalInfo$;
+  userData$ = this.store.select(selectUserPersonalInfo);
   statusIcons = UserPersonalInfoStatusIcons;
 
   clipboardRegistry = clipboardPersonalInfoRegistry;
 
   constructor(
-    private readonly _userStore: UserStore,
+    private store: Store,
     public clipboardService: ClipboardService,
   ) {}
 }

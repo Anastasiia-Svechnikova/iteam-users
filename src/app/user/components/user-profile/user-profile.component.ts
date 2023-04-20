@@ -2,6 +2,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { map, take } from 'rxjs';
 
 import {
@@ -11,25 +12,28 @@ import {
 import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
 import { clipboardPersonalInfoRegistry } from 'src/app/user/components/user-profile/constants/clipboard-property-names-registries/clipboard-personal-info-registry';
 import { editDialogOptions } from 'src/app/user/components/user-profile/constants/edit-dialog-options';
+import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
+import {
+  selectLoading,
+  selectUser,
+} from 'src/app/user/components/user-profile/state/selectors';
 import { EditDescriptionModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-description-modal/edit-description-modal.component';
-import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [UserStore],
 })
 export class UserProfileComponent implements OnInit {
-  user$ = this._userStore.user$;
-  loading$ = this._userStore.loading$;
+  user$ = this.store.select(selectUser);
+  loading$ = this.store.select(selectLoading);
 
   clipboardRegistry = clipboardPersonalInfoRegistry;
 
   constructor(
     private route: ActivatedRoute,
-    private readonly _userStore: UserStore,
+    private store: Store,
     private dialog: MatDialog,
     public clipboardService: ClipboardService,
     private media: MediaMatcher,
@@ -37,7 +41,9 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
-    this._userStore.getUser(id);
+    if (id) {
+      this.store.dispatch(userProfileActions.loadUser({ id }));
+    }
   }
 
   onEditDescription(): void {
@@ -58,7 +64,7 @@ export class UserProfileComponent implements OnInit {
       .pipe(take(1))
       .subscribe((data) => {
         if (data) {
-          this._userStore.updateUserInfo(data);
+          this.store.dispatch(userProfileActions.updateUser({ user: data }));
         }
       });
   }

@@ -7,12 +7,17 @@ import { IUserSocialLinksData } from 'src/app/shared/interfaces/user-social-link
 import { IUserBankInvoiceData } from 'src/app/shared/interfaces/user-bank-invoice-data';
 import { EditBankInfoModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-bank-info-modal/edit-bank-info-modal.component';
 import { EditSocialsModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-socials-modal/edit-socials-modal.component';
-import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
 import { UserSocialLinksTitles } from 'src/app/user/components/user-profile/constants/social-links';
 import { userBankInfoTitles } from 'src/app/user/components/user-profile/constants/user-bank-info-titles';
 import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
 import { editDialogOptions } from 'src/app/user/components/user-profile/constants/edit-dialog-options';
 import { clipboardBankSocialsRegistry } from 'src/app/user/components/user-profile/constants/clipboard-property-names-registries/clipboard-bank-socials-registy';
+import { Store } from '@ngrx/store';
+import {
+  selectUserBankInfo,
+  selectUserSocialsInfo,
+} from 'src/app/user/components/user-profile/state/selectors';
+import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
 
 @Component({
   selector: 'app-user-bank-and-socials-info',
@@ -24,8 +29,8 @@ import { clipboardBankSocialsRegistry } from 'src/app/user/components/user-profi
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBankAndSocialsInfoComponent {
-  userBankData$ = this._userStore.userBankInfo$;
-  userSocialsData$ = this._userStore.userSocialsInfo$;
+  userBankData$ = this.store.select(selectUserBankInfo);
+  userSocialsData$ = this.store.select(selectUserSocialsInfo);
 
   userBankInfoTitles = userBankInfoTitles;
   UserSocialLinksTitles = UserSocialLinksTitles;
@@ -35,7 +40,7 @@ export class UserBankAndSocialsInfoComponent {
   isSocialsDataEmpty$ = this.checkDataEmpty(this.userSocialsData$);
 
   constructor(
-    private readonly _userStore: UserStore,
+    private store: Store,
     private dialog: MatDialog,
     public clipboardService: ClipboardService,
   ) {}
@@ -62,7 +67,7 @@ export class UserBankAndSocialsInfoComponent {
       .pipe(take(1))
       .subscribe((data) => {
         if (data) {
-          this._userStore.updateUserInfo(data);
+          this.store.dispatch(userProfileActions.updateUser({ user: data }));
         }
       });
   }

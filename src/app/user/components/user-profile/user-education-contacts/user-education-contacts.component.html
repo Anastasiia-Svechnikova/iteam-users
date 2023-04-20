@@ -1,4 +1,4 @@
-<ng-container *ngIf="userEducationData$ | async as userEducationData">
+<ng-container *ngIf="(userData$ | async)?.educationInfo as educationInfo">
   <div class="left-inner">
     <div class="upper-wrapper">
       <h3 class="mat-subtitle-2 primary">Education</h3>
@@ -13,12 +13,12 @@
         class="icon-btn"
         aria-label="Copy content button"
         (click)="
-          clipboardService.copyToClipboard(userEducationData, clipboardRegistry)
+          clipboardService.copyToClipboard({educationInfo}, clipboardRegistry)
         ">
         <mat-icon>content_copy</mat-icon>
       </button>
     </div>
-    <div *ngFor="let education of userEducationData.educationInfo">
+    <div *ngFor="let education of educationInfo">
       <p>{{ education.universityName | uppercase }}</p>
       <p
         *ngIf="education.startDate"
@@ -29,11 +29,11 @@
       <p>{{ education.pricingModel }}</p>
     </div>
     <app-empty-message
-      *ngIf="!userEducationData.educationInfo?.length"
+      *ngIf="!educationInfo?.length"
       title="education"></app-empty-message>
   </div>
 </ng-container>
-<ng-container *ngIf="userContactsData$ | async as userContactsData">
+<ng-container *ngIf="userData$ | async as userContactsData">
   <div class="left-inner">
     <div class="upper-wrapper">
       <h3 class="mat-subtitle-2 primary">Address</h3>

@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 
 import { headerUserNavigationMenuLinks } from 'src/app/navigation/models/header-user-navigation-menu-links';
-import { userActions } from 'src/app/user/state/actions';
+import { mainUserActions } from 'src/app/user/state/actions';
 import { selectSiteNavigationLinksDataByUserRole } from 'src/app/user/state/selectors';
 
 @Component({
@@ -33,7 +33,7 @@ export class SiteLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.setHeader();
-    this.store.dispatch(userActions.loadCurrentUser());
+    this.store.dispatch(mainUserActions.loadCurrentUser());
   }
 
   setHeader(): void {

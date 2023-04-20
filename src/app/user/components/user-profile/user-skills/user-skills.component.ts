@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { map } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
-import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
+import { selectUserSkills } from 'src/app/user/components/user-profile/state/selectors';
 
 @Component({
   selector: 'app-user-skills',
@@ -11,13 +11,9 @@ import { UserStore } from 'src/app/user/components/user-profile/user-profile.sto
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserSkillsComponent extends UnSubscriberComponent {
-  userSkills$ = this._userStore.user$.pipe(
-    map((user) => {
-      return user?.skills?.split(' ') || [];
-    }),
-  );
+  userSkills$ = this.store.select(selectUserSkills);
 
-  constructor(private readonly _userStore: UserStore) {
+  constructor(private store: Store) {
     super();
   }
 }
