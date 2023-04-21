@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, takeUntil } from 'rxjs';
 
 import { AbstractEditModalComponent } from 'src/app/user/components/user-profile/user-edit/abstract-edit-modal-component';
 
-export interface DialogData {
+interface DialogData {
   positionDescription: string;
 }
 
@@ -17,10 +17,7 @@ export interface DialogData {
 export class EditDescriptionModalComponent extends AbstractEditModalComponent<EditDescriptionModalComponent> {
   formData!: string;
 
-  constructor(
-    // public dialogRef: MatDialogRef<EditDescriptionModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Observable<DialogData>,
-  ) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Observable<DialogData>) {
     super();
   }
 

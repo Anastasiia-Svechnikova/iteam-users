@@ -4,29 +4,29 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, takeUntil } from 'rxjs';
 
 import { AbstractEditModalComponent } from 'src/app/user/components/user-profile/user-edit/abstract-edit-modal-component';
-import { IUpdateUserDTO } from 'src/app/user/components/user-profile/interfaces/update-user-dto';
 import { IValidationOptions } from 'src/app/user/components/user-profile/user-edit/interfaces/validation-options';
 
-export type DialogData = {
+export type ISingleLineInputsFormModalData = {
   titles: Map<string, string>;
-  formData: IUpdateUserDTO;
+  formData: object;
   header: string;
-  validationOptions?: Map<string, IValidationOptions>;
   style: 'single-column' | 'double-column';
+  validationOptions?: Map<string, IValidationOptions>;
+  textarea?: boolean;
 };
 
 @Component({
   selector: 'app-edit-bank-info-modal',
-  templateUrl: './edit-bank-info-modal.component.html',
+  templateUrl: './single-line-inputs-form-modal.component.html',
   styleUrls: ['../user-edit.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditBankInfoModalComponent extends AbstractEditModalComponent<EditBankInfoModalComponent> {
-  dialogData!: DialogData;
+export class singleLineInputsFormModalComponent extends AbstractEditModalComponent<singleLineInputsFormModalComponent> {
+  dialogData!: ISingleLineInputsFormModalData;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: Observable<DialogData>,
+    public data: Observable<ISingleLineInputsFormModalData>,
   ) {
     super();
   }

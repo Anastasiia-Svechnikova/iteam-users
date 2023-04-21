@@ -14,17 +14,28 @@
       class="form"
       [formGroup]="form">
       <div [ngClass]="dialogData.style">
-        <ng-container *ngFor="let title of dialogData.titles | keyvalue">
+        <ng-container
+          *ngFor="
+            let title of (dialogData.titles | keyvalue) || [dialogData.formData]
+          ">
           <mat-form-field
             class="input-field"
             appearance="outline">
             <mat-label>
               {{ title.value | titlecase }}
             </mat-label>
-            <input
+            <textarea
+              *ngIf="dialogData.textarea; else input"
               matInput
+              rows="7"
               class="input"
-              formControlName="{{ title.key }}" />
+              formControlName="{{ title.key }}"></textarea>
+            <ng-template #input>
+              <input
+                matInput
+                class="input"
+                formControlName="{{ title.key }}" />
+            </ng-template>
             <mat-error *ngIf="form.controls[title.key].hasError('pattern')">
               {{ dialogData.validationOptions?.get(title.key)?.errorMessage }}
             </mat-error>

@@ -16,9 +16,7 @@ import { UserPersonalInfoComponent } from 'src/app/user/components/user-profile/
 import { UserSkillsComponent } from 'src/app/user/components/user-profile/user-skills/user-skills.component';
 import { UserWorkInfoComponent } from 'src/app/user/components/user-profile/user-work-info/user-work-info.component';
 import { EditDescriptionModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-description-modal/edit-description-modal.component';
-import { EditContactsModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-contacts/edit-contacts-modal.component';
-import { EditSocialsModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-socials-modal/edit-socials-modal.component';
-import { EditBankInfoModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-bank-info-modal/edit-bank-info-modal.component';
+import { singleLineInputsFormModalComponent } from 'src/app/user/components/user-profile/user-edit/single-line-inputs-form-modal/single-line-inputs-form-modal.component';
 
 const routes = [
   {
@@ -36,9 +34,7 @@ const routes = [
     UserSkillsComponent,
     UserBankAndSocialsInfoComponent,
     EditDescriptionModalComponent,
-    EditContactsModalComponent,
-    EditSocialsModalComponent,
-    EditBankInfoModalComponent,
+    singleLineInputsFormModalComponent,
   ],
   imports: [
     MatInputModule,

@@ -31,14 +31,14 @@ export abstract class AbstractEditModalComponent<T>
     this.createForm();
   }
 
+  abstract setFormData(): void;
+  abstract createForm(): void;
+
   onSubmit(): void {
     this.checkForNumberValues();
     this.checkForNullValues();
     this._dialogRef.close(this.form.value);
   }
-
-  abstract setFormData(): void;
-  abstract createForm(): void;
 
   protected checkForNumberValues(): void {
     updateUserDtoNumericProperties.forEach((property) => {

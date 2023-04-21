@@ -11,6 +11,10 @@ import {
   selectUser,
 } from 'src/app/user/components/user-profile/state/selectors';
 import { EditDescriptionModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-description-modal/edit-description-modal.component';
+import {
+  ISingleLineInputsFormModalData,
+  singleLineInputsFormModalComponent,
+} from 'src/app/user/components/user-profile/user-edit/single-line-inputs-form-modal/single-line-inputs-form-modal.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -39,10 +43,19 @@ export class UserProfileComponent
   }
 
   onEdit(): void {
-    this.setModal<EditDescriptionModalComponent, IUpdateUserDTO>(
-      EditDescriptionModalComponent,
+    this.setModal<
+      singleLineInputsFormModalComponent,
+      ISingleLineInputsFormModalData
+    >(
+      singleLineInputsFormModalComponent,
       this.user$.pipe(
-        map((user) => ({ positionDescription: user?.positionDescription })),
+        map((user) => ({
+          titles: new Map([['positionDescription', 'Position Description']]),
+          formData: { positionDescription: user?.positionDescription },
+          header: 'Edit Position Description',
+          style: 'single-column',
+          textarea: true,
+        })),
       ),
     )
       .afterClosed()

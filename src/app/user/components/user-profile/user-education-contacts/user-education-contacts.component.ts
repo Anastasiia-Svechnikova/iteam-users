@@ -1,12 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { map, takeUntil } from 'rxjs';
 
-import { EditContactsModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-contacts/edit-contacts-modal.component';
 import { clipboardEducationContactsRegistry } from 'src/app/user/components/user-profile/constants/clipboard-property-names-registries/clipboard-education-contacts-registry';
 import { selectUser } from 'src/app/user/components/user-profile/state/selectors';
 import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
 import { AbstractUserProfileComponent } from 'src/app/user/components/user-profile/abstract-user-profile-component';
-import { IUpdateUserDTO } from 'src/app/user/components/user-profile/interfaces/update-user-dto';
+import {
+  ISingleLineInputsFormModalData,
+  singleLineInputsFormModalComponent,
+} from 'src/app/user/components/user-profile/user-edit/single-line-inputs-form-modal/single-line-inputs-form-modal.component';
+import { UserContactsInfoTitles } from 'src/app/user/components/user-profile/constants/user-contacts-info-titles';
 
 @Component({
   selector: 'app-user-education-contacts',
@@ -23,10 +26,18 @@ export class UserEducationContactsComponent extends AbstractUserProfileComponent
   }
 
   onEditContacts(): void {
-    this.setModal<EditContactsModalComponent, IUpdateUserDTO>(
-      EditContactsModalComponent,
+    this.setModal<
+      singleLineInputsFormModalComponent,
+      ISingleLineInputsFormModalData
+    >(
+      singleLineInputsFormModalComponent,
       this.userData$.pipe(
-        map((user) => ({ address: user?.address, city: user?.city })),
+        map((user) => ({
+          titles: UserContactsInfoTitles,
+          formData: { city: user?.city, address: user?.address },
+          header: 'Edit Address',
+          style: 'single-column',
+        })),
       ),
     )
       .afterClosed()
