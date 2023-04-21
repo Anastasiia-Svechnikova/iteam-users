@@ -15,3 +15,7 @@ export const register = createAction(
 );
 export const registerSuccess = createAction('[Auth] Register Success');
 export const registerFail = createAction('[Auth] Register Fail');
+
+export const logout = createAction('[Auth] Logout');
+export const logoutSuccess = createAction('[Auth] Logout Success');
+export const logoutFail = createAction('[Auth] Logout Fail');

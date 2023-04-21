@@ -1,5 +1,14 @@
 <div mat-dialog-content>
-  <h3 class="mat-headline-5 title">Edit Address</h3>
+  <div class="upper">
+    <h3 class="mat-headline-5 title">Edit Address</h3>
+    <button
+      mat-icon-button
+      class="close-btn"
+      aria-label="Close modal"
+      (click)="dialogRef.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
   <div class="wrapper">
     <form
       class="form"

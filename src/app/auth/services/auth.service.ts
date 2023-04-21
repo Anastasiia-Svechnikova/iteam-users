@@ -10,12 +10,14 @@ import { IAuthCredentials } from 'src/app/auth/models/credentials';
   providedIn: 'root',
 })
 export class AuthService {
+  options = { withCredentials: true };
   constructor(private http: HttpClient) {}
 
   login(credentials: IAuthCredentials): Observable<ILoginResponseData> {
     return this.http.post<ILoginResponseData>(
       `${environment.apiUrl}/auth/sign-in`,
       credentials,
+      this.options,
     );
   }
 
@@ -27,7 +29,11 @@ export class AuthService {
   }
 
   logout(): Observable<void> {
-    return this.http.post<void>(`${environment.apiUrl}/auth/refresh`, '');
+    return this.http.post<void>(
+      `${environment.apiUrl}/auth/sign-out`,
+      '',
+      this.options,
+    );
   }
 
   refresh(): Observable<ILoginResponseData> {

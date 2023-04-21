@@ -9,9 +9,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatRippleModule } from '@angular/material/core';
+import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule } from '@angular/router';
 
-import { ClipboardComponent } from 'src/app/shared/components/clipboard/clipboard.component';
 import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custom-icon.component';
 import { ConfirmDialogDirective } from 'src/app/shared/directives/confirm-dialog.directive';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
@@ -21,7 +21,6 @@ import { StatusCellComponent } from './components/ag-grid/status-cell/status-cel
 @NgModule({
   declarations: [
     CustomIconComponent,
-    ClipboardComponent,
     ConfirmModalComponent,
     ConfirmDialogDirective,
     CopyCellComponent,
@@ -36,11 +35,11 @@ import { StatusCellComponent } from './components/ag-grid/status-cell/status-cel
     ClipboardModule,
   ],
   exports: [
-    CustomIconComponent,
-    ClipboardComponent,
-    ConfirmModalComponent,
+    LayoutModule,
     MatRippleModule,
     MatProgressSpinnerModule,
+    CustomIconComponent,
+    ConfirmModalComponent,
     RouterModule,
     CommonModule,
     MatCardModule,

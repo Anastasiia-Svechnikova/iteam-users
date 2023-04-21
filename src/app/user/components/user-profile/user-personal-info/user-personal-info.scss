@@ -1,17 +1,51 @@
 @import '/src/styles/_variables.scss';
 @import '/src/styles/_color-palette.scss';
+@import '/src/styles/_media-mixins.scss';
 
 .personal-wrapper {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 0 $m-size;
+  gap: $m-size;
+  border-bottom: $base-border;
+
+  @include media(tablet) {
+    padding: $m-size;
+    flex-direction: row;
+    border: none;
+  }
+}
+.inner {
+  width: 100%;
+
+  @include media(tablet) {
+    width: auto;
+    flex-grow: 1;
+  }
 }
 
 .bio {
+  @include media(tablet) {
+    flex-direction: row;
+    width: auto;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+.info {
   display: flex;
-  gap: $l-size;
-  align-items: center;
+  flex-grow: 1;
+  justify-content: space-between;
+  padding: $m-size;
+
+  @include media(tablet) {
+    padding: 0;
+  }
+}
+
+.terms {
+  align-self: flex-end;
 }
 
 .avatar {
@@ -22,9 +56,15 @@
 }
 
 .name-wrapper {
+  justify-content: center;
   display: flex;
   align-items: center;
   gap: $xs-size;
+  margin-bottom: $xs-size;
+
+  @include media(tablet) {
+    justify-content: flex-start;
+  }
 }
 
 .icon {
@@ -35,8 +75,9 @@
 .detail {
   display: flex;
   align-items: center;
-  gap: $xs-size;
+  gap: $xxs-size;
   margin-bottom: $xxs-size;
+  min-height: 24px;
 }
 
 .term {
