@@ -1,22 +1,22 @@
 <h2
   mat-dialog-title
   class="mat-headline-5 title">
-  Confirm Action
+  {{ data.title }}
 </h2>
 <mat-dialog-content>
-  Are you sure you want to perform this action?
+  {{ data.description }}
 </mat-dialog-content>
 <mat-dialog-actions class="actions">
   <button
     mat-button
     color="warn"
     (click)="cancel()">
-    Cancel
+    {{ data.closeBtnText }}
   </button>
   <button
     mat-button
     color="primary"
     (click)="confirm()">
-    Confirm
+    {{ data.confirmBtnText }}
   </button>
 </mat-dialog-actions>

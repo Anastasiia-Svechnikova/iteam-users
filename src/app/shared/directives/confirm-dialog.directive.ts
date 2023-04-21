@@ -1,14 +1,24 @@
-import { Directive, HostListener, OnDestroy, Output } from '@angular/core';
+import {
+  Directive,
+  HostListener,
+  Input,
+  OnDestroy,
+  Output,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject, Subscription } from 'rxjs';
 
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
+import { confirmDialogDefaultConfig } from 'src/app/shared/constants/confirm-dialog-default-config';
+import { IConfirmDialogConfig } from 'src/app/shared/interfaces/i-confirm-dialog-config';
 
 @Directive({
   selector: '[appConfirmDialog]',
 })
 export class ConfirmDialogDirective implements OnDestroy {
+  @Input() modalConfig: IConfirmDialogConfig = {};
   @Output() confirm = new Subject<void>();
+  defaultConfig = confirmDialogDefaultConfig;
   private confirmedSubscription!: Subscription;
 
   constructor(private dialog: MatDialog) {}
@@ -16,8 +26,13 @@ export class ConfirmDialogDirective implements OnDestroy {
   @HostListener('click')
   click(): void {
     this.confirmedSubscription = this.dialog
-      .open(ConfirmModalComponent)
-      .componentInstance.confirmed.subscribe(() => this.confirm.next());
+      .open(ConfirmModalComponent, {
+        data: { ...this.defaultConfig, ...this.modalConfig },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.confirm.next();
+      });
   }
 
   ngOnDestroy(): void {

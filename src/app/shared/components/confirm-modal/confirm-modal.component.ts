@@ -1,10 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Output,
+  Inject,
 } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
+import { IConfirmDialogConfig } from 'src/app/shared/interfaces/i-confirm-dialog-config';
 
 @Component({
   selector: 'app-confirm-modal',
@@ -13,16 +14,16 @@ import { MatDialogRef } from '@angular/material/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmModalComponent {
-  @Output() confirmed = new EventEmitter<void>();
-
-  constructor(private dialogRef: MatDialogRef<ConfirmModalComponent>) {}
+  constructor(
+    private dialogRef: MatDialogRef<ConfirmModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: IConfirmDialogConfig,
+  ) {}
 
   cancel(): void {
     this.dialogRef.close();
   }
 
   confirm(): void {
-    this.dialogRef.close();
-    this.confirmed.emit();
+    this.dialogRef.close(true);
   }
 }
