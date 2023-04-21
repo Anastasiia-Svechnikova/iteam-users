@@ -1,0 +1,9 @@
+@import '/src/styles/_variables.scss';
+
+.wrapper{
+  padding-top: $xxs-size;
+}
+
+.action-icon {
+  cursor: pointer;
+}
