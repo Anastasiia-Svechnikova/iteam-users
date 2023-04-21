@@ -1,14 +1,19 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, takeUntil } from 'rxjs';
 
-import { IUserBankInvoiceData } from 'src/app/shared/interfaces/user-bank-invoice-data';
 import { AbstractEditModalComponent } from 'src/app/user/components/user-profile/user-edit/abstract-edit-modal-component';
-import { userBankInfoTitles } from 'src/app/user/components/user-profile/constants/user-bank-info-titles';
-import { userBankInfoValidationPatterns } from 'src/app/user/components/user-profile/user-edit/validation-patterns';
+import { IUpdateUserDTO } from 'src/app/user/components/user-profile/interfaces/update-user-dto';
+import { IValidationOptions } from 'src/app/user/components/user-profile/user-edit/interfaces/validation-options';
 
-export type DialogData = IUserBankInvoiceData;
+export type DialogData = {
+  titles: Map<string, string>;
+  formData: IUpdateUserDTO;
+  header: string;
+  validationOptions?: Map<string, IValidationOptions>;
+  style: 'single-column' | 'double-column';
+};
 
 @Component({
   selector: 'app-edit-bank-info-modal',
@@ -17,41 +22,41 @@ export type DialogData = IUserBankInvoiceData;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditBankInfoModalComponent extends AbstractEditModalComponent<EditBankInfoModalComponent> {
-  formData!: DialogData;
-  userBankInfoTitles = userBankInfoTitles;
+  dialogData!: DialogData;
 
   constructor(
-    private fb: FormBuilder,
-    public dialogRef: MatDialogRef<EditBankInfoModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Observable<DialogData>,
+    @Inject(MAT_DIALOG_DATA)
+    public data: Observable<DialogData>,
   ) {
-    super(dialogRef);
+    super();
   }
 
   setFormData(): void {
-    this.data
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((data) => (this.formData = data));
+    this.data.pipe(takeUntil(this.destroyed$)).subscribe((data) => {
+      this.dialogData = data;
+    });
   }
 
   createForm(): void {
+    const { titles, validationOptions, formData } = this.dialogData;
     this.form = this.fb.group({});
-
-    const properties = [...userBankInfoTitles.keys()];
+    const properties = [...titles.keys()];
     properties.forEach((property) => {
-      if (userBankInfoValidationPatterns.get(property)) {
+      if (validationOptions?.get(property)) {
         this.form.addControl(
           property,
           this.fb.control(
-            this.formData[property],
+            formData[property as keyof typeof formData],
             Validators.pattern(
-              userBankInfoValidationPatterns.get(property) as string,
+              validationOptions?.get(property)?.pattern as string,
             ),
           ),
         );
       }
-
-      this.form.addControl(property, this.fb.control(this.formData[property]));
+      this.form.addControl(
+        property,
+        this.fb.control(formData[property as keyof typeof formData]),
+      );
     });
   }
 }

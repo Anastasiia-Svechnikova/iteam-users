@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, takeUntil } from 'rxjs';
 
 import { AbstractEditModalComponent } from 'src/app/user/components/user-profile/user-edit/abstract-edit-modal-component';
 import { UserSocialLinksTitles } from 'src/app/user/components/user-profile/constants/social-links';
-import { socialsUrlPattern } from 'src/app/user/components/user-profile/user-edit/validation-patterns';
 
 export interface DialogData {
   upwork: string;
@@ -24,12 +23,8 @@ export class EditSocialsModalComponent extends AbstractEditModalComponent<EditSo
   formData!: DialogData;
   UserSocialLinksTitles = UserSocialLinksTitles;
 
-  constructor(
-    private fb: FormBuilder,
-    public dialogRef: MatDialogRef<EditSocialsModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Observable<DialogData>,
-  ) {
-    super(dialogRef);
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Observable<DialogData>) {
+    super();
   }
 
   setFormData(): void {
@@ -44,10 +39,7 @@ export class EditSocialsModalComponent extends AbstractEditModalComponent<EditSo
     properties.forEach((property) => {
       this.form.addControl(
         property,
-        this.fb.control(
-          this.formData[property],
-          Validators.pattern(socialsUrlPattern),
-        ),
+        this.fb.control(this.formData[property], Validators.pattern('')),
       );
     });
   }

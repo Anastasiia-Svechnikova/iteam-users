@@ -1,11 +1,11 @@
 <div mat-dialog-content>
   <div class="upper">
-    <h3 class="mat-headline-5 title">Edit Bank Invoice Info</h3>
+    <h3 class="mat-headline-5 title">{{ dialogData.header }}</h3>
     <button
       mat-icon-button
       class="close-btn"
       aria-label="Close modal"
-      (click)="dialogRef.close()">
+      (click)="_dialogRef.close()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
@@ -13,34 +13,20 @@
     <form
       class="form"
       [formGroup]="form">
-      <div class="inner">
-        <ng-container
-          *ngFor="let bankInfoItem of userBankInfoTitles | keyvalue">
+      <div [ngClass]="dialogData.style">
+        <ng-container *ngFor="let title of dialogData.titles | keyvalue">
           <mat-form-field
             class="input-field"
             appearance="outline">
             <mat-label>
-              {{ bankInfoItem.value | titlecase }}
+              {{ title.value | titlecase }}
             </mat-label>
             <input
               matInput
               class="input"
-              formControlName="{{ bankInfoItem.key }}" />
-            <mat-error
-              *ngIf="
-                form.controls['individualEntrepreneurBankCode'].hasError(
-                  'pattern'
-                )
-              ">
-              Valid bank code is 6 digits
-            </mat-error>
-            <mat-error
-              *ngIf="
-                form.controls[
-                  'individualEntrepreneurIndividualTaxNumber'
-                ].hasError('pattern')
-              ">
-              Valid tax number is 10 digits
+              formControlName="{{ title.key }}" />
+            <mat-error *ngIf="form.controls[title.key].hasError('pattern')">
+              {{ dialogData.validationOptions?.get(title.key)?.errorMessage }}
             </mat-error>
           </mat-form-field>
         </ng-container>
@@ -52,7 +38,7 @@
           mat-button
           type="button"
           color="primary"
-          (click)="dialogRef.close()">
+          (click)="_dialogRef.close()">
           Cancel
         </button>
         <button

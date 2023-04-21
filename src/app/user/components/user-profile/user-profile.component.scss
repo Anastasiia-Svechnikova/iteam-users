@@ -45,13 +45,12 @@
   border-bottom: $base-border;
 
   @include media(tablet) {
-    max-width: 14em;
+    max-width: 17em;
     padding: 0 $l-size;
     margin-bottom: $m-size;
     border: none;
   }
   @include media(l-tablet) {
-    max-width: 17em;
     padding: 0 $l-size;
     margin-bottom: $m-size;
     border: none;

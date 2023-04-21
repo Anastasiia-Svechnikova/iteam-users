@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, takeUntil } from 'rxjs';
 
@@ -20,11 +19,10 @@ export class EditContactsModalComponent extends AbstractEditModalComponent<EditC
   formData!: DialogData;
 
   constructor(
-    private fb: FormBuilder,
-    public dialogRef: MatDialogRef<EditContactsModalComponent>,
+    // public dialogRef: MatDialogRef<EditContactsModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Observable<DialogData>,
   ) {
-    super(dialogRef);
+    super();
   }
 
   setFormData(): void {

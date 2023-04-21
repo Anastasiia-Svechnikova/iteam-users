@@ -18,18 +18,16 @@
   padding: $xs-size 0 0 $xs-size;
 }
 
-.inner {
+.single-column {
+  max-width: 25em;
+}
+
+.double-column {
   display: grid;
   column-gap: $m-size;
   row-gap: $xs-size;
 
   @include media(tablet) {
-    grid-template-columns: calc($xxxxl-size - $xl-size) calc(
-        $xxxxl-size - $xl-size
-      );
-  }
-
-  @include media(l-tablet) {
     grid-template-columns: $xxxxl-size $xxxxl-size;
   }
 }

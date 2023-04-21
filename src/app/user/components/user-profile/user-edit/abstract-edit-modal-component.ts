@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
@@ -14,7 +19,10 @@ export abstract class AbstractEditModalComponent<T>
   implements OnInit
 {
   form!: FormGroup;
-  constructor(private _dialogRef: MatDialogRef<T>) {
+  protected fb = inject(FormBuilder);
+  _dialogRef = inject(MatDialogRef<T>);
+
+  constructor() {
     super();
   }
 
@@ -25,6 +33,7 @@ export abstract class AbstractEditModalComponent<T>
 
   onSubmit(): void {
     this.checkForNumberValues();
+    this.checkForNullValues();
     this._dialogRef.close(this.form.value);
   }
 
@@ -35,8 +44,13 @@ export abstract class AbstractEditModalComponent<T>
     updateUserDtoNumericProperties.forEach((property) => {
       if (this.form.value[property]) {
         this.form.value[property] = Number(this.form.value[property]);
-      } else if (this.form.value[property] === '') {
-        this.form.value[property] = null;
+      }
+    });
+  }
+  protected checkForNullValues(): void {
+    Object.keys(this.form.value).forEach((key) => {
+      if (this.form.value[key] === '') {
+        this.form.value[key] = null;
       }
     });
   }
