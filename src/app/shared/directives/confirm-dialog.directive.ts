@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Subject, Subscription } from 'rxjs';
+import { filter, Subject, Subscription } from 'rxjs';
 
 import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
 import { confirmDialogDefaultConfig } from 'src/app/shared/constants/confirm-dialog-default-config';
@@ -30,8 +30,9 @@ export class ConfirmDialogDirective implements OnDestroy {
         data: { ...this.defaultConfig, ...this.modalConfig },
       })
       .afterClosed()
-      .subscribe((result) => {
-        if (result) this.confirm.next();
+      .pipe(filter((result) => result))
+      .subscribe(() => {
+        this.confirm.next();
       });
   }
 
