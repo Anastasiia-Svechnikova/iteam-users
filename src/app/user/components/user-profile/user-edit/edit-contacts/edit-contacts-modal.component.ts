@@ -30,7 +30,7 @@ export class EditContactsModalComponent extends AbstractEditModalComponent<EditC
   setFormData(): void {
     this.data
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(({ address, city }) => (this.formData = { address, city }));
+      .subscribe((data) => (this.formData = data));
   }
 
   createForm(): void {

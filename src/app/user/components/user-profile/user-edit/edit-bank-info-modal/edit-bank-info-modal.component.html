@@ -30,12 +30,17 @@
               *ngIf="
                 form.controls['individualEntrepreneurBankCode'].hasError(
                   'pattern'
-                ) ||
+                )
+              ">
+              Valid bank code is 6 digits
+            </mat-error>
+            <mat-error
+              *ngIf="
                 form.controls[
                   'individualEntrepreneurIndividualTaxNumber'
                 ].hasError('pattern')
               ">
-              Only numbers
+              Valid tax number is 10 digits
             </mat-error>
           </mat-form-field>
         </ng-container>

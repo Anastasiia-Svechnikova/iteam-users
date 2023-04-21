@@ -19,9 +19,10 @@ export class UserProfileEffects {
           map((user: IUserDetails) => {
             return userProfileActions.loadedUser({ user });
           }),
-          catchError(({ error }) => {
+          catchError((error) => {
+            console.log(error.message);
             this._snackbarService.openSnackBar(
-              `Something went wrong when loading the user...: ${error}`,
+              'Something went wrong when loading the user...',
             );
             return of(userProfileActions.loadedError({ error }));
           }),
@@ -42,9 +43,10 @@ export class UserProfileEffects {
             );
             return userProfileActions.updatedUser({ user });
           }),
-          catchError(({ error }) => {
+          catchError((error) => {
+            console.log(error.message);
             this._snackbarService.openSnackBar(
-              `Something went wrong when updating the user...: ${error}`,
+              'Something went wrong when updating the user...',
             );
             return of(userProfileActions.loadedError({ error }));
           }),

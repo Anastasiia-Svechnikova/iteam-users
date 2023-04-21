@@ -29,4 +29,12 @@ export const UserProfileReducer = createReducer(
       user: user,
     }),
   ),
+  on(
+    userProfileActions.loadedError,
+
+    (state) => ({
+      ...state,
+      loading: false,
+    }),
+  ),
 );

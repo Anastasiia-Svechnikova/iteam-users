@@ -5,6 +5,7 @@ import { Observable, takeUntil } from 'rxjs';
 
 import { AbstractEditModalComponent } from 'src/app/user/components/user-profile/user-edit/abstract-edit-modal-component';
 import { UserSocialLinksTitles } from 'src/app/user/components/user-profile/constants/social-links';
+import { socialsUrlPattern } from 'src/app/user/components/user-profile/user-edit/validation-patterns';
 
 export interface DialogData {
   upwork: string;
@@ -34,10 +35,7 @@ export class EditSocialsModalComponent extends AbstractEditModalComponent<EditSo
   setFormData(): void {
     this.data
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(
-        ({ upwork, github, linkedin, telegramTag }) =>
-          (this.formData = { upwork, linkedin, telegramTag, github }),
-      );
+      .subscribe((data) => (this.formData = data));
   }
 
   createForm(): void {
@@ -48,9 +46,7 @@ export class EditSocialsModalComponent extends AbstractEditModalComponent<EditSo
         property,
         this.fb.control(
           this.formData[property],
-          Validators.pattern(
-            '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?',
-          ),
+          Validators.pattern(socialsUrlPattern),
         ),
       );
     });

@@ -27,8 +27,11 @@
   height: $header-height;
   width: 100%;
   background-color: $white-bg-color;
-  border-top: $base-border;
-
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  box-shadow: 1px -2px 13px -2px rgba(0, 0, 0, 0.27);
+  -webkit-box-shadow: 1px -2px 13px -2px rgba(0, 0, 0, 0.27);
+  -moz-box-shadow: 1px -2px 13px -2px rgba(0, 0, 0, 0.27);
   @include media(tablet) {
     display: none;
     padding: 0 $xs-size;

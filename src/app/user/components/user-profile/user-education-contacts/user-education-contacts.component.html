@@ -49,7 +49,10 @@
         class="icon-btn"
         aria-label="Copy content button"
         (click)="
-          clipboardService.copyToClipboard(userContactsData, clipboardRegistry)
+          clipboardService.copyToClipboard(
+            { address: userContactsData.address, city: userContactsData.city },
+            clipboardRegistry
+          )
         ">
         <mat-icon>content_copy</mat-icon>
       </button>

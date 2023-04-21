@@ -6,7 +6,7 @@ import { Observable, takeUntil } from 'rxjs';
 import { IUserBankInvoiceData } from 'src/app/shared/interfaces/user-bank-invoice-data';
 import { AbstractEditModalComponent } from 'src/app/user/components/user-profile/user-edit/abstract-edit-modal-component';
 import { userBankInfoTitles } from 'src/app/user/components/user-profile/constants/user-bank-info-titles';
-import { updateUserDtoNumericProperties } from 'src/app/user/components/user-profile/constants/update-user-dto-numeric-properties';
+import { userBankInfoValidationPatterns } from 'src/app/user/components/user-profile/user-edit/validation-patterns';
 
 export type DialogData = IUserBankInvoiceData;
 
@@ -29,28 +29,9 @@ export class EditBankInfoModalComponent extends AbstractEditModalComponent<EditB
   }
 
   setFormData(): void {
-    this.data.pipe(takeUntil(this.destroyed$)).subscribe(
-      ({
-        individualEntrepreneurName,
-        individualEntrepreneurIndividualTaxNumber,
-        individualEntrepreneurAddress,
-        individualEntrepreneurBankAccounNumber,
-        individualEntrepreneurBankName,
-        individualEntrepreneurBankCode,
-        individualEntrepreneurBeneficiaryBank,
-        individualEntrepreneurSwiftCode,
-      }) =>
-        (this.formData = {
-          individualEntrepreneurName,
-          individualEntrepreneurIndividualTaxNumber,
-          individualEntrepreneurBankAccounNumber,
-          individualEntrepreneurBankCode,
-          individualEntrepreneurBankName,
-          individualEntrepreneurAddress,
-          individualEntrepreneurBeneficiaryBank,
-          individualEntrepreneurSwiftCode,
-        }),
-    );
+    this.data
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((data) => (this.formData = data));
   }
 
   createForm(): void {
@@ -58,15 +39,18 @@ export class EditBankInfoModalComponent extends AbstractEditModalComponent<EditB
 
     const properties = [...userBankInfoTitles.keys()];
     properties.forEach((property) => {
-      if (updateUserDtoNumericProperties.includes(property)) {
+      if (userBankInfoValidationPatterns.get(property)) {
         this.form.addControl(
           property,
           this.fb.control(
             this.formData[property],
-            Validators.pattern('^[0-9]*$'),
+            Validators.pattern(
+              userBankInfoValidationPatterns.get(property) as string,
+            ),
           ),
         );
       }
+
       this.form.addControl(property, this.fb.control(this.formData[property]));
     });
   }

@@ -1,7 +1,7 @@
-import { ComponentType } from '@angular/cdk/portal';
+// import { ComponentType } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { map, Observable, take } from 'rxjs';
+// import { MatDialog } from '@angular/material/dialog';
+import { map, Observable, takeUntil } from 'rxjs';
 
 import { IUserSocialLinksData } from 'src/app/shared/interfaces/user-social-links-data';
 import { IUserBankInvoiceData } from 'src/app/shared/interfaces/user-bank-invoice-data';
@@ -9,15 +9,17 @@ import { EditBankInfoModalComponent } from 'src/app/user/components/user-profile
 import { EditSocialsModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-socials-modal/edit-socials-modal.component';
 import { UserSocialLinksTitles } from 'src/app/user/components/user-profile/constants/social-links';
 import { userBankInfoTitles } from 'src/app/user/components/user-profile/constants/user-bank-info-titles';
-import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
-import { editDialogOptions } from 'src/app/user/components/user-profile/constants/edit-dialog-options';
+// import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
+// import { editDialogOptions } from 'src/app/user/components/user-profile/constants/edit-dialog-options';
 import { clipboardBankSocialsRegistry } from 'src/app/user/components/user-profile/constants/clipboard-property-names-registries/clipboard-bank-socials-registy';
-import { Store } from '@ngrx/store';
+// import { Store } from '@ngrx/store';
 import {
   selectUserBankInfo,
   selectUserSocialsInfo,
 } from 'src/app/user/components/user-profile/state/selectors';
 import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
+import { AbstractUserProfileComponent } from 'src/app/user/components/user-profile/abstract-user-profile-component';
+import { IUpdateUserDTO } from 'src/app/user/components/user-profile/interfaces/update-user-dto';
 
 @Component({
   selector: 'app-user-bank-and-socials-info',
@@ -28,7 +30,7 @@ import { userProfileActions } from 'src/app/user/components/user-profile/state/a
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserBankAndSocialsInfoComponent {
+export class UserBankAndSocialsInfoComponent extends AbstractUserProfileComponent {
   userBankData$ = this.store.select(selectUserBankInfo);
   userSocialsData$ = this.store.select(selectUserSocialsInfo);
 
@@ -39,32 +41,31 @@ export class UserBankAndSocialsInfoComponent {
   isUserBankDataEmpty$ = this.checkDataEmpty(this.userBankData$);
   isSocialsDataEmpty$ = this.checkDataEmpty(this.userSocialsData$);
 
-  constructor(
-    private store: Store,
-    private dialog: MatDialog,
-    public clipboardService: ClipboardService,
-  ) {}
+  constructor() {
+    super();
+  }
 
   onEditSocials(): void {
-    this.setDialog<EditBankInfoModalComponent>('socials');
+    this.setModal<EditSocialsModalComponent, IUpdateUserDTO>(
+      EditSocialsModalComponent,
+      this.userSocialsData$,
+    )
+      .afterClosed()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((data) => {
+        if (data) {
+          this.store.dispatch(userProfileActions.updateUser({ user: data }));
+        }
+      });
   }
 
   onEditBankInfo(): void {
-    this.setDialog<EditSocialsModalComponent>('bank');
-  }
-
-  setDialog<T>(section: 'bank' | 'socials'): void {
-    const modalComponent =
-      section === 'bank'
-        ? EditBankInfoModalComponent
-        : EditSocialsModalComponent;
-    const dialogRef = this.dialog.open(modalComponent as ComponentType<T>, {
-      ...editDialogOptions,
-      data: section === 'bank' ? this.userBankData$ : this.userSocialsData$,
-    });
-    dialogRef
+    this.setModal<EditBankInfoModalComponent, IUpdateUserDTO>(
+      EditBankInfoModalComponent,
+      this.userBankData$,
+    )
       .afterClosed()
-      .pipe(take(1))
+      .pipe(takeUntil(this.destroyed$))
       .subscribe((data) => {
         if (data) {
           this.store.dispatch(userProfileActions.updateUser({ user: data }));

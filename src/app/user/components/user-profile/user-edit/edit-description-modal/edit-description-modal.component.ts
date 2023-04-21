@@ -29,9 +29,7 @@ export class EditDescriptionModalComponent extends AbstractEditModalComponent<Ed
   setFormData(): void {
     this.data
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(
-        ({ positionDescription }) => (this.formData = positionDescription),
-      );
+      .subscribe((data) => (this.formData = data.positionDescription));
   }
 
   createForm(): void {
