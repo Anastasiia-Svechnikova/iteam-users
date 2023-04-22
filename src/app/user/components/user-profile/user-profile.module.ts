@@ -15,8 +15,7 @@ import { UserEducationContactsComponent } from 'src/app/user/components/user-pro
 import { UserPersonalInfoComponent } from 'src/app/user/components/user-profile/user-personal-info/user-personal-info.component';
 import { UserSkillsComponent } from 'src/app/user/components/user-profile/user-skills/user-skills.component';
 import { UserWorkInfoComponent } from 'src/app/user/components/user-profile/user-work-info/user-work-info.component';
-import { EditDescriptionModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-description-modal/edit-description-modal.component';
-import { singleLineInputsFormModalComponent } from 'src/app/user/components/user-profile/user-edit/single-line-inputs-form-modal/single-line-inputs-form-modal.component';
+import { TextInputFormModalComponent } from 'src/app/user/components/user-profile/user-edit/text-input-form-modal/text-input-form-modal.component';
 
 const routes = [
   {
@@ -33,8 +32,7 @@ const routes = [
     EmptyMessageComponent,
     UserSkillsComponent,
     UserBankAndSocialsInfoComponent,
-    EditDescriptionModalComponent,
-    singleLineInputsFormModalComponent,
+    TextInputFormModalComponent,
   ],
   imports: [
     MatInputModule,

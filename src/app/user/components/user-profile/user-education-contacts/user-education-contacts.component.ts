@@ -6,9 +6,9 @@ import { selectUser } from 'src/app/user/components/user-profile/state/selectors
 import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
 import { AbstractUserProfileComponent } from 'src/app/user/components/user-profile/abstract-user-profile-component';
 import {
-  ISingleLineInputsFormModalData,
-  singleLineInputsFormModalComponent,
-} from 'src/app/user/components/user-profile/user-edit/single-line-inputs-form-modal/single-line-inputs-form-modal.component';
+  textInputFormModalData,
+  TextInputFormModalComponent,
+} from 'src/app/user/components/user-profile/user-edit/text-input-form-modal/text-input-form-modal.component';
 import { UserContactsInfoTitles } from 'src/app/user/components/user-profile/constants/user-contacts-info-titles';
 
 @Component({
@@ -26,11 +26,8 @@ export class UserEducationContactsComponent extends AbstractUserProfileComponent
   }
 
   onEditContacts(): void {
-    this.setModal<
-      singleLineInputsFormModalComponent,
-      ISingleLineInputsFormModalData
-    >(
-      singleLineInputsFormModalComponent,
+    this.setModal<TextInputFormModalComponent, textInputFormModalData>(
+      TextInputFormModalComponent,
       this.userData$.pipe(
         map((user) => ({
           titles: UserContactsInfoTitles,

@@ -25,7 +25,7 @@
               {{ title.value | titlecase }}
             </mat-label>
             <textarea
-              *ngIf="dialogData.textarea; else input"
+              *ngIf="dialogData.textareaFields?.includes(title.key); else input"
               matInput
               rows="7"
               class="input"

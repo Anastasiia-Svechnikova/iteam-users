@@ -4,9 +4,9 @@ import { map, Observable, takeUntil } from 'rxjs';
 import { IUserSocialLinksData } from 'src/app/shared/interfaces/user-social-links-data';
 import { IUserBankInvoiceData } from 'src/app/shared/interfaces/user-bank-invoice-data';
 import {
-  ISingleLineInputsFormModalData,
-  singleLineInputsFormModalComponent,
-} from 'src/app/user/components/user-profile/user-edit/single-line-inputs-form-modal/single-line-inputs-form-modal.component';
+  textInputFormModalData,
+  TextInputFormModalComponent,
+} from 'src/app/user/components/user-profile/user-edit/text-input-form-modal/text-input-form-modal.component';
 import { UserSocialLinksTitles } from 'src/app/user/components/user-profile/constants/social-links';
 import { userBankInfoTitles } from 'src/app/user/components/user-profile/constants/user-bank-info-titles';
 import { clipboardBankSocialsRegistry } from 'src/app/user/components/user-profile/constants/clipboard-property-names-registries/clipboard-bank-socials-registy';
@@ -43,46 +43,30 @@ export class UserBankAndSocialsInfoComponent extends AbstractUserProfileComponen
     super();
   }
 
-  onEditSocials(): void {
-    this.setModal<
-      singleLineInputsFormModalComponent,
-      ISingleLineInputsFormModalData
-    >(
-      singleLineInputsFormModalComponent,
-      this.userSocialsData$.pipe(
-        map((userSocialsData) => ({
-          titles: UserSocialLinksTitles,
-          formData: userSocialsData,
-          header: 'Edit Social Links',
-          style: 'single-column',
-          validationOptions: userSocialsValidationOptions,
-        })),
-      ),
-    )
-      .afterClosed()
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((data) => {
-        if (data) {
-          this.store.dispatch(userProfileActions.updateUser({ user: data }));
-        }
-      });
-  }
-
-  onEditBankInfo(): void {
-    this.setModal<
-      singleLineInputsFormModalComponent,
-      ISingleLineInputsFormModalData
-    >(
-      singleLineInputsFormModalComponent,
-      this.userBankData$.pipe(
-        map((userBankData) => ({
-          titles: userBankInfoTitles,
-          formData: userBankData,
-          header: 'Edit Bank Invoice Info',
-          style: 'double-column',
-          validationOptions: userBankInfoValidationOptions,
-        })),
-      ),
+  onEditBySection(section: 'bank' | 'socials'): void {
+    const modalDataSet =
+      section === 'bank'
+        ? this.userBankData$.pipe(
+            map((userBankData) => ({
+              titles: userBankInfoTitles,
+              formData: userBankData,
+              header: 'Edit Bank Invoice Info',
+              style: 'double-column',
+              validationOptions: userBankInfoValidationOptions,
+            })),
+          )
+        : this.userSocialsData$.pipe(
+            map((userSocialsData) => ({
+              titles: UserSocialLinksTitles,
+              formData: userSocialsData,
+              header: 'Edit Social Links',
+              style: 'single-column',
+              validationOptions: userSocialsValidationOptions,
+            })),
+          );
+    this.setModal<TextInputFormModalComponent, textInputFormModalData>(
+      TextInputFormModalComponent,
+      modalDataSet as Observable<textInputFormModalData>,
     )
       .afterClosed()
       .pipe(takeUntil(this.destroyed$))

@@ -4,17 +4,15 @@ import { map, takeUntil } from 'rxjs';
 
 import { AbstractUserProfileComponent } from 'src/app/user/components/user-profile/abstract-user-profile-component';
 import { clipboardPersonalInfoRegistry } from 'src/app/user/components/user-profile/constants/clipboard-property-names-registries/clipboard-personal-info-registry';
-import { IUpdateUserDTO } from 'src/app/user/components/user-profile/interfaces/update-user-dto';
 import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
 import {
   selectLoading,
   selectUser,
 } from 'src/app/user/components/user-profile/state/selectors';
-import { EditDescriptionModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-description-modal/edit-description-modal.component';
 import {
-  ISingleLineInputsFormModalData,
-  singleLineInputsFormModalComponent,
-} from 'src/app/user/components/user-profile/user-edit/single-line-inputs-form-modal/single-line-inputs-form-modal.component';
+  textInputFormModalData,
+  TextInputFormModalComponent,
+} from 'src/app/user/components/user-profile/user-edit/text-input-form-modal/text-input-form-modal.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -43,18 +41,15 @@ export class UserProfileComponent
   }
 
   onEdit(): void {
-    this.setModal<
-      singleLineInputsFormModalComponent,
-      ISingleLineInputsFormModalData
-    >(
-      singleLineInputsFormModalComponent,
+    this.setModal<TextInputFormModalComponent, textInputFormModalData>(
+      TextInputFormModalComponent,
       this.user$.pipe(
         map((user) => ({
           titles: new Map([['positionDescription', 'Position Description']]),
           formData: { positionDescription: user?.positionDescription },
           header: 'Edit Position Description',
           style: 'single-column',
-          textarea: true,
+          textareaFields: ['positionDescription'],
         })),
       ),
     )

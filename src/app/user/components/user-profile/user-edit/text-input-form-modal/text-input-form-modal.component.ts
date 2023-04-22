@@ -6,27 +6,27 @@ import { Observable, takeUntil } from 'rxjs';
 import { AbstractEditModalComponent } from 'src/app/user/components/user-profile/user-edit/abstract-edit-modal-component';
 import { IValidationOptions } from 'src/app/user/components/user-profile/user-edit/interfaces/validation-options';
 
-export type ISingleLineInputsFormModalData = {
+export type textInputFormModalData = {
   titles: Map<string, string>;
   formData: object;
   header: string;
   style: 'single-column' | 'double-column';
   validationOptions?: Map<string, IValidationOptions>;
-  textarea?: boolean;
+  textareaFields?: string[];
 };
 
 @Component({
   selector: 'app-edit-bank-info-modal',
-  templateUrl: './single-line-inputs-form-modal.component.html',
+  templateUrl: './text-input-form-modal.component.html',
   styleUrls: ['../user-edit.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class singleLineInputsFormModalComponent extends AbstractEditModalComponent<singleLineInputsFormModalComponent> {
-  dialogData!: ISingleLineInputsFormModalData;
+export class TextInputFormModalComponent extends AbstractEditModalComponent<TextInputFormModalComponent> {
+  dialogData!: textInputFormModalData;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: Observable<ISingleLineInputsFormModalData>,
+    public data: Observable<textInputFormModalData>,
   ) {
     super();
   }

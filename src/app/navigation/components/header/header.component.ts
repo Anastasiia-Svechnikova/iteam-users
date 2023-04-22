@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { logout } from 'src/app/auth/state/actions';
@@ -18,24 +12,16 @@ import { ISiteNavigationLink } from 'src/app/navigation/models/site-navigation-l
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  @Output() toggleSideNav: EventEmitter<void> = new EventEmitter();
   @Input() title = '';
   @Input() linksData!: ISiteNavigationLink[] | null;
-  sideNavOpen = false;
 
   currentUserLinkPath = siteNavigationLinksData.find((link) =>
     link.path.includes('user'),
   )?.path;
 
-  constructor(private store:Store) {
-  }
+  constructor(private store: Store) {}
 
-  onToggleSideNav(): void {
-    this.sideNavOpen = !this.sideNavOpen;
-    this.toggleSideNav.emit();
-  }
-
-  onLogout():void {
-    this.store.dispatch(logout())
+  onLogout(): void {
+    this.store.dispatch(logout());
   }
 }

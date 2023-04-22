@@ -12,9 +12,11 @@
   display: none;
 
   @include media(tablet) {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: $m-size;
     width: fit-content;
-    padding: 0 $xs-size;
+    padding: $xs-size;
   }
 }
 
@@ -24,6 +26,7 @@
   z-index: 2;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   height: $header-height;
   width: 100%;
   background-color: $white-bg-color;
@@ -38,25 +41,11 @@
   }
 }
 
-.nav-btn {
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-  gap: $xs-size;
-  padding: $xs-size;
-  margin: $xs-size 0;
-  font: inherit;
-  border: none;
-  border-radius: $s-size;
-  cursor: pointer;
-  transition: all 200ms ease-in-out;
-
-  &:hover {
-    background-color: $primary-color-light;
-  }
+.btn {
+  justify-content: flex-start;
 }
 
-.nav-btn.active {
+.btn.active {
   color: $primary-color;
 }
 .btn-icon {
