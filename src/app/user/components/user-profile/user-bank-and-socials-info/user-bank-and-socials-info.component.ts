@@ -39,10 +39,6 @@ export class UserBankAndSocialsInfoComponent extends AbstractUserProfileComponen
   isUserBankDataEmpty$ = this.checkDataEmpty(this.userBankData$);
   isSocialsDataEmpty$ = this.checkDataEmpty(this.userSocialsData$);
 
-  constructor() {
-    super();
-  }
-
   onEditBySection(section: 'bank' | 'socials'): void {
     const modalDataSet =
       section === 'bank'

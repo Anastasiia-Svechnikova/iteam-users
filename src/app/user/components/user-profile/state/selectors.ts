@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { IUserBankInvoiceData } from 'src/app/shared/interfaces/user-bank-invoice-data';
+import { IUserPersonalData } from 'src/app/shared/interfaces/user-personal-info-data';
 import { IUserSocialLinksData } from 'src/app/shared/interfaces/user-social-links-data';
 import { IUserProfileState } from 'src/app/user/components/user-profile/state/reducer';
 
@@ -68,15 +69,16 @@ export const selectUserSocialsInfo = createSelector(
 
 export const selectUserPersonalInfo = createSelector(
   selectUserProfileFeature,
-  ({ user }) => ({
-    name: user?.name,
-    surname: user?.surname,
-    status: user?.status,
-    birthday: user?.birthday,
-    email: user?.email,
-    startDate: user?.startDate,
-    endDate: user?.endDate,
-    endReason: user?.endReason,
-    phone: user?.phone,
-  }),
+  ({ user }) =>
+    ({
+      name: user?.name,
+      surname: user?.surname,
+      status: user?.status,
+      birthday: user?.birthday,
+      email: user?.email,
+      startDate: user?.startDate,
+      endDate: user?.endDate,
+      endReason: user?.endReason,
+      phone: user?.phone,
+    } as IUserPersonalData),
 );

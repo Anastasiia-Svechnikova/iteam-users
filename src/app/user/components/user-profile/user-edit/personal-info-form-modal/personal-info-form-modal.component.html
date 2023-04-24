@@ -1,0 +1,127 @@
+<div mat-dialog-content>
+  <div class="upper">
+    <h3 class="mat-headline-5 title">Edit Personal Info</h3>
+    <button
+      mat-icon-button
+      type="button"
+      class="close-btn"
+      aria-label="Close modal"
+      (click)="_dialogRef.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="wrapper">
+    <form
+      class="form"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()">
+      <mat-form-field
+        class="input-field"
+        appearance="outline">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          class="input"
+          formControlName="name" />
+      </mat-form-field>
+      <mat-form-field
+        class="input-field"
+        appearance="outline">
+        <mat-label>Surname</mat-label>
+        <input
+          matInput
+          class="input"
+          formControlName="surname" />
+      </mat-form-field>
+      <div class="radio-wrapper">
+        <label
+          class="radio-label"
+          id="radio-group-label">
+          Status:
+        </label>
+        <mat-radio-group
+          formControlName="status"
+          aria-labelledby="radio-group-label"
+          aria-label="Select a question type">
+          <mat-radio-button value="unarchived">Active</mat-radio-button>
+          <mat-radio-button value="archived">Deactivated</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Birthday</mat-label>
+        <input
+          matInput
+          formControlName="birthday"
+          [matDatepicker]="birthday" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="birthday">
+          <mat-icon matDatepickerToggleIcon>arrow_drop_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #birthday></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field
+        class="input-field"
+        appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          class="input"
+          formControlName="email" />
+        <mat-error *ngIf="form.controls['email'].hasError('email')">
+          Invalid Email
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <input
+          matInput
+          formControlName="startDate"
+          [matDatepickerFilter]="myFilter2"
+          [matDatepicker]="startDate" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="startDate"></mat-datepicker-toggle>
+        <mat-datepicker #startDate></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>End Date</mat-label>
+        <input
+          matInput
+          formControlName="endDate"
+          [matDatepickerFilter]="myFilter"
+          [matDatepicker]="endDate" />
+
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="endDate"></mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+        <mat-error
+          *ngIf="form.controls['endDate'].hasError('matDatepickerFilter')">
+          End date can't be earlier than start date
+        </mat-error>
+      </mat-form-field>
+      <div
+        mat-dialog-actions
+        class="actions">
+        <button
+          mat-button
+          type="button"
+          color="primary"
+          (click)="_dialogRef.close()">
+          Cancel
+        </button>
+        <button
+          mat-flat-button
+          type="submit"
+          color="primary"
+          [disabled]="!form.valid">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

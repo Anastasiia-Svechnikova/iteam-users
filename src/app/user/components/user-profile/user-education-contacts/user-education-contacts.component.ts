@@ -21,10 +21,6 @@ export class UserEducationContactsComponent extends AbstractUserProfileComponent
   userData$ = this.store.select(selectUser);
   clipboardRegistry = clipboardEducationContactsRegistry;
 
-  constructor() {
-    super();
-  }
-
   onEditContacts(): void {
     this.setModal<TextInputFormModalComponent, textInputFormModalData>(
       TextInputFormModalComponent,

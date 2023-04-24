@@ -4,7 +4,10 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -16,6 +19,7 @@ import { UserPersonalInfoComponent } from 'src/app/user/components/user-profile/
 import { UserSkillsComponent } from 'src/app/user/components/user-profile/user-skills/user-skills.component';
 import { UserWorkInfoComponent } from 'src/app/user/components/user-profile/user-work-info/user-work-info.component';
 import { TextInputFormModalComponent } from 'src/app/user/components/user-profile/user-edit/text-input-form-modal/text-input-form-modal.component';
+import { PersonalInfoFormModalComponent } from 'src/app/user/components/user-profile/user-edit/personal-info-form-modal/personal-info-form-modal.component';
 
 const routes = [
   {
@@ -33,8 +37,12 @@ const routes = [
     UserSkillsComponent,
     UserBankAndSocialsInfoComponent,
     TextInputFormModalComponent,
+    PersonalInfoFormModalComponent,
   ],
   imports: [
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatRadioModule,
     MatInputModule,
     MatFormFieldModule,
     MatDialogModule,

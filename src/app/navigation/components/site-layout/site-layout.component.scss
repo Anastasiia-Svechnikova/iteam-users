@@ -14,7 +14,7 @@
   @include media(tablet) {
     display: flex;
     flex-direction: column;
-    gap: $m-size;
+    gap: $xs-size;
     width: fit-content;
     padding: $xs-size;
   }
@@ -43,6 +43,7 @@
 
 .btn {
   justify-content: flex-start;
+  height: 50px;
 }
 
 .btn.active {

@@ -3,6 +3,7 @@
     <h3 class="mat-headline-5 title">{{ dialogData.header }}</h3>
     <button
       mat-icon-button
+      type="button"
       class="close-btn"
       aria-label="Close modal"
       (click)="_dialogRef.close()">
@@ -12,7 +13,8 @@
   <div class="wrapper">
     <form
       class="form"
-      [formGroup]="form">
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()">
       <div [ngClass]="dialogData.style">
         <ng-container
           *ngFor="
@@ -56,8 +58,7 @@
           mat-flat-button
           type="submit"
           color="primary"
-          [disabled]="!form.valid"
-          (click)="onSubmit()">
+          [disabled]="!form.valid">
           Save
         </button>
       </div>
