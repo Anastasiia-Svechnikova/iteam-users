@@ -1,9 +1,18 @@
 @import '/src/styles/_variables.scss';
+@import '/src/styles/_media-mixins.scss';
 
 .wrapper {
   margin: $xxl-size auto;
   height: 70vh;
-  width: 90%;
+  width: 800px;
+
+  @include media(tablet) {
+    width: 90%
+  }
+}
+
+.option-cell {
+  padding-top: $m-size;
 }
 
 .spinner {

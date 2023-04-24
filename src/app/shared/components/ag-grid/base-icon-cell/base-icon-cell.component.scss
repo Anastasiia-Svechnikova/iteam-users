@@ -1,0 +1,11 @@
+@import '/src/styles/_variables.scss';
+
+.action-icon {
+  cursor: pointer;
+  color: $base-color;
+  padding: $xs-size 0 0 $s-size;
+}
+
+.action-icon:hover {
+  color: black;
+}

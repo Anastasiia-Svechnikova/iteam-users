@@ -5,7 +5,7 @@ import {
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 
-import { IStatusCellParams } from 'src/app/shared/components/ag-grid/status-cell/status-cell-params';
+import { IStatusCellParams } from 'src/app/shared/interfaces/status-cell-params';
 import { IStatusesData } from 'src/app/shared/interfaces/status-data';
 
 @Component({

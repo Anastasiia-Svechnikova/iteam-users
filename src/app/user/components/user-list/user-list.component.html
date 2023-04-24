@@ -10,7 +10,10 @@
   <ag-grid-angular
     class="ag-theme-alpine users-grid"
     domLayout="autoHeight"
+    [suppressHorizontalScroll]="false"
+    [suppressScrollOnNewData]="true"
     [rowData]="users"
+    [suppressDragLeaveHidesColumns]="true"
     [enableCellTextSelection]="true"
     [columnDefs]="colDefs"
     [context]="context"

@@ -9,7 +9,8 @@ import { AgGridModule } from 'ag-grid-angular';
 import { UserListComponent } from 'src/app/user/components/user-list/user-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HeaderTitles } from 'src/app/navigation/models/header-titles';
-import { SettingsCellComponent } from './components/user-list/cell-components/settings-cell/settings-cell.component';
+import { ArchiveCellComponent } from './components/user-list/cell-components/archive-cell/archive-cell.component';
+import { EditUserCellComponent } from './components/user-list/cell-components/edit-user-cell/edit-user-cell.component';
 
 const routes = [
   {
@@ -29,7 +30,7 @@ const routes = [
   },
 ];
 @NgModule({
-  declarations: [UserListComponent, SettingsCellComponent],
+  declarations: [UserListComponent, ArchiveCellComponent, EditUserCellComponent],
   imports: [
     MatInputModule,
     MatFormFieldModule,

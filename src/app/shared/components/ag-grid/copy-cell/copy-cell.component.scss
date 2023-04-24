@@ -1,4 +1,17 @@
+@import '/src/styles/_variables.scss';
+
+.wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .copy-icon {
   cursor: pointer;
-  transform: scale(0.6);
+  color: $base-color;
+  transform: scale(0.9);
+}
+
+.copy-icon:hover {
+  color: black;
 }
