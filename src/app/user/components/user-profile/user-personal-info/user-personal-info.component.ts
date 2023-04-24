@@ -29,8 +29,13 @@ export class UserPersonalInfoComponent extends AbstractUserProfileComponent {
       .afterClosed()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((data) => {
+        console.log(data);
         if (data) {
-          this.store.dispatch(userProfileActions.updateUser({ user: data }));
+          this.store.dispatch(
+            userProfileActions.updateUser({
+              user: { endReason: null, ...data },
+            }),
+          );
         }
       });
   }

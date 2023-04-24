@@ -1,18 +1,20 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Observable, takeUntil } from 'rxjs';
+import { Observable, distinctUntilChanged, startWith, takeUntil } from 'rxjs';
+
 import { IUserPersonalData } from 'src/app/shared/interfaces/user-personal-info-data';
 import { AbstractEditModalComponent } from 'src/app/user/components/user-profile/user-edit/abstract-edit-modal-component';
 
 @Component({
   selector: 'app-personal-info-form-modal',
   templateUrl: './personal-info-form-modal.component.html',
-  styleUrls: ['./personal-info-form-modal.component.scss', '../user-edit.scss'],
+  styleUrls: ['../user-edit.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonalInfoFormModalComponent extends AbstractEditModalComponent<PersonalInfoFormModalComponent> {
   dialogData!: IUserPersonalData;
+
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: Observable<IUserPersonalData>,
@@ -20,20 +22,16 @@ export class PersonalInfoFormModalComponent extends AbstractEditModalComponent<P
     super();
   }
 
-  myFilter = (date: Date | null): boolean => {
-    if (this.form.controls['startDate'].value) {
-      return date
-        ? new Date(date) >= new Date(this.form.controls['startDate'].value)
-        : false;
+  endDateFilter = (date: Date | null): boolean => {
+    if (this.startDate) {
+      return Boolean(date && new Date(date) >= new Date(this.startDate));
     }
     return false;
   };
 
-  myFilter2 = (date: Date | null): boolean => {
-    if (this.form.controls['endDate'].value) {
-      return date
-        ? new Date(date) <= new Date(this.form.controls['endDate'].value)
-        : false;
+  startDateFilter = (date: Date | null): boolean => {
+    if (this.endDate) {
+      return Boolean(date && new Date(date) <= new Date(this.endDate));
     }
     return true;
   };
@@ -43,17 +41,42 @@ export class PersonalInfoFormModalComponent extends AbstractEditModalComponent<P
       this.dialogData = data;
     });
   }
+
   createForm(): void {
     this.form = this.fb.group({
       name: [this.dialogData.name],
       surname: [this.dialogData.surname],
-      status: [this.dialogData.status],
       birthday: [this.dialogData.birthday],
       email: [this.dialogData.email, Validators.email],
-      startDate: [this.dialogData.startDate],
+      startDate: [this.dialogData.startDate, Validators['required']],
       endDate: [this.dialogData.endDate],
-      endReason: [this.dialogData.endReason],
-      phone: [this.dialogData.phone],
+      phone: [this.dialogData.phone, Validators.pattern('^[+]380[0-9]{9}$')],
     });
+
+    this.form
+      .get('endDate')
+      ?.valueChanges.pipe(
+        distinctUntilChanged(),
+        takeUntil(this.destroyed$),
+        startWith(this.dialogData.endReason),
+      )
+      .subscribe((value) => {
+        if (value) {
+          this.form.addControl(
+            'endReason',
+            this.fb.control(this.dialogData.endReason, Validators.required),
+          );
+        } else {
+          this.form.removeControl('endReason');
+        }
+      });
+  }
+
+  get startDate(): Date {
+    return this.form.controls['startDate'].value;
+  }
+
+  get endDate(): Date {
+    return this.form.controls['endDate'].value;
   }
 }
