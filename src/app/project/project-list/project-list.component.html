@@ -1,1 +1,21 @@
-<p>project-list works!</p>
+<div
+  *ngIf="projects$ | async as projects"
+  class="wrapper">
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      placeholder="Filter..."
+      [formControl]="filter" />
+  </mat-form-field>
+  <ag-grid-angular
+    class="ag-theme-alpine users-grid"
+    domLayout="autoHeight"
+    [rowData]="projects"
+    [enableCellTextSelection]="true"
+    [columnDefs]="colDefs"
+    [context]="context"
+    [pagination]="true"
+    [paginationPageSize]="10"
+    (gridReady)="onGridReady($event)"></ag-grid-angular>
+</div>
+<app-loader *ngIf="loading$ | async"></app-loader>

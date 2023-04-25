@@ -12,9 +12,10 @@ import { RouterModule } from '@angular/router';
 
 import { ClipboardComponent } from 'src/app/shared/components/clipboard/clipboard.component';
 import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custom-icon.component';
+import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 
 @NgModule({
-  declarations: [CustomIconComponent, ClipboardComponent],
+  declarations: [CustomIconComponent, ClipboardComponent, LoaderComponent],
   imports: [
     MatProgressSpinnerModule,
     CommonModule,
@@ -35,6 +36,7 @@ import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custo
     MatButtonModule,
     MatDialogModule,
     MatSnackBarModule,
+    LoaderComponent,
   ],
 })
 export class SharedModule {}
