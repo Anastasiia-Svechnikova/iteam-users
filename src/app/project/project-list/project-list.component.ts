@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { GridApi } from 'ag-grid-community';
 import { takeUntil } from 'rxjs';
+import { ProjectListColDefs } from 'src/app/project/project-list/constants/column-definitions';
 
 import { ProjectListStore } from 'src/app/project/project-list/project-list.component.store';
 import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
@@ -13,14 +14,16 @@ import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
   providers: [ProjectListStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProjectListComponent extends UnSubscriberComponent implements OnInit
+export class ProjectListComponent
+  extends UnSubscriberComponent
+  implements OnInit
 {
   projects$ = this.projectListStore.projects$;
   loading$ = this.projectListStore.loading$;
   gridApi!: GridApi;
   filter = new FormControl();
   context = { componentParent: this };
-  colDefs = [];
+  colDefs = ProjectListColDefs;
 
   constructor(private projectListStore: ProjectListStore) {
     projectListStore.getProjectList();
