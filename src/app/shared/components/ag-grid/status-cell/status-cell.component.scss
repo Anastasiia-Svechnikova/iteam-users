@@ -1,0 +1,17 @@
+@import '/src/styles/_variables.scss';
+
+%status {
+  display: flex;
+  align-items: center;
+  gap: $xxs-size;
+}
+
+.unarchived {
+  @extend %status;
+  color: $green-color;
+}
+
+.archived {
+  @extend %status;
+  color: $base-color;
+}

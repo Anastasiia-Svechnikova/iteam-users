@@ -13,6 +13,6 @@ $theme: mat.define-light-theme(
       accent: $palette-accent,
     ),
     typography: $typography,
-    density: 0,
+    density: -1,
   )
 );
