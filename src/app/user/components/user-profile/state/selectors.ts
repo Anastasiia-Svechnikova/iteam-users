@@ -36,7 +36,10 @@ export const selectUserEducation = createSelector(
 
 export const selectUserSkills = createSelector(
   selectUserProfileFeature,
-  (state: IUserProfileState) => state.user?.techStack as ITechnology[],
+  (state: IUserProfileState) => ({
+    techStack: state.user?.techStack as ITechnology[],
+    id: state.user?.id as number,
+  }),
 );
 
 export const selectUserBankInfo = createSelector(

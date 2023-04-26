@@ -5,6 +5,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { AgGridModule } from 'ag-grid-angular';
+import { MatChipsModule } from '@angular/material/chips';
+
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { EmailCellComponent } from 'src/app/user/components/user-list/cell-components/email-cell/email-cell.component';
 import { SettingsCellComponent } from 'src/app/user/components/user-list/cell-components/settings-cell/settings-cell.component';
@@ -15,6 +18,7 @@ import { StoreModule } from '@ngrx/store';
 import { UserProfileReducer } from 'src/app/user/components/user-profile/state/reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { UserProfileEffects } from 'src/app/user/components/user-profile/state/effects';
+import { TechnologiesFormModalComponent } from 'src/app/user/components/technologies-form-modal/technologies-form-modal.component';
 
 const routes = [
   {
@@ -34,9 +38,16 @@ const routes = [
   },
 ];
 @NgModule({
-  declarations: [UserListComponent, EmailCellComponent, SettingsCellComponent],
+  declarations: [
+    TechnologiesFormModalComponent,
+    UserListComponent,
+    EmailCellComponent,
+    SettingsCellComponent,
+  ],
   imports: [
+    MatChipsModule,
     MatInputModule,
+    MatAutocompleteModule,
     MatFormFieldModule,
     SharedModule,
     HttpClientModule,

@@ -34,7 +34,7 @@
           </mat-chip-row>
         </mat-chip-grid>
         <input
-          #fruitInput
+          #skillsInput
           placeholder="New Skill..."
           class="input"
           [formControl]="techSkillsCtrl"
@@ -48,7 +48,7 @@
           <mat-option
             *ngFor="let skill of filteredTechSkills | async"
             [value]="skill">
-            {{ skill }}
+            {{ skill.title }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>

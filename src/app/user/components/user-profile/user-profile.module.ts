@@ -7,7 +7,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatNativeDateModule } from '@angular/material/core';
 import { RouterModule } from '@angular/router';
 
@@ -21,7 +20,6 @@ import { UserSkillsComponent } from 'src/app/user/components/user-profile/user-s
 import { UserWorkInfoComponent } from 'src/app/user/components/user-profile/user-work-info/user-work-info.component';
 import { TextInputFormModalComponent } from 'src/app/user/components/user-profile/user-edit/text-input-form-modal/text-input-form-modal.component';
 import { PersonalInfoFormModalComponent } from 'src/app/user/components/user-profile/user-edit/personal-info-form-modal/personal-info-form-modal.component';
-import { SkillsFormModalComponent } from 'src/app/user/components/user-profile/user-edit/skills-form-modal/skills-form-modal.component';
 
 const routes = [
   {
@@ -31,7 +29,6 @@ const routes = [
 ];
 @NgModule({
   declarations: [
-    SkillsFormModalComponent,
     UserProfileComponent,
     UserPersonalInfoComponent,
     UserEducationContactsComponent,
@@ -43,7 +40,6 @@ const routes = [
     PersonalInfoFormModalComponent,
   ],
   imports: [
-    MatAutocompleteModule,
     MatNativeDateModule,
     MatDatepickerModule,
     MatRadioModule,

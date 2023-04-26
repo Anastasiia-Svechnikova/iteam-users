@@ -6,8 +6,8 @@ import { userProfileActions } from 'src/app/user/components/user-profile/state/a
 import { selectUserSkills } from 'src/app/user/components/user-profile/state/selectors';
 import {
   SkillsFormDialogData,
-  SkillsFormModalComponent,
-} from 'src/app/user/components/user-profile/user-edit/skills-form-modal/skills-form-modal.component';
+  TechnologiesFormModalComponent,
+} from 'src/app/user/components/technologies-form-modal/technologies-form-modal.component';
 
 @Component({
   selector: 'app-user-skills',
@@ -19,9 +19,9 @@ export class UserSkillsComponent extends AbstractUserProfileComponent {
   userSkills$ = this.store.select(selectUserSkills);
 
   onEditSkills(): void {
-    this.setModal<SkillsFormModalComponent, SkillsFormDialogData>(
-      SkillsFormModalComponent,
-      this.userSkills$.pipe(map((techStack) => ({ techStack }))),
+    this.setModal<TechnologiesFormModalComponent, SkillsFormDialogData>(
+      TechnologiesFormModalComponent,
+      this.userSkills$.pipe(map((skills) => ({ ...skills, category: 'user' }))),
     )
       .afterClosed()
       .pipe(takeUntil(this.destroyed$))

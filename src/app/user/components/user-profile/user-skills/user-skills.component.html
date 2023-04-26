@@ -1,4 +1,4 @@
-<ng-container *ngIf="userSkills$ | async as skills">
+<ng-container *ngIf="(userSkills$ | async)?.techStack as skills">
   <div class="skills-wrapper">
     <div class="upper-wrapper">
       <h3 class="mat-subtitle-2 primary">Skills</h3>
