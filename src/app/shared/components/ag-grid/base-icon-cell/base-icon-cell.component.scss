@@ -1,4 +1,5 @@
 @import '/src/styles/_variables.scss';
+@import '/src/styles/color-palette';
 
 .action-icon {
   cursor: pointer;
@@ -7,5 +8,5 @@
 }
 
 .action-icon:hover {
-  color: black;
+  color: $base-text-color;
 }

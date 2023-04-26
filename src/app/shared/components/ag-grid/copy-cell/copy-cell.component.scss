@@ -1,6 +1,7 @@
 @import '/src/styles/_variables.scss';
+@import '/src/styles/color-palette';
 
-.wrapper{
+.wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,5 +14,5 @@
 }
 
 .copy-icon:hover {
-  color: black;
+  color: $base-text-color;
 }
