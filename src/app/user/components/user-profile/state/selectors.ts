@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { ITechnology } from 'src/app/shared/interfaces/technology';
 
 import { IUserBankInvoiceData } from 'src/app/shared/interfaces/user-bank-invoice-data';
 import { IUserPersonalData } from 'src/app/shared/interfaces/user-personal-info-data';
@@ -35,7 +36,7 @@ export const selectUserEducation = createSelector(
 
 export const selectUserSkills = createSelector(
   selectUserProfileFeature,
-  (state: IUserProfileState) => state.user?.skills?.split(' ') || [],
+  (state: IUserProfileState) => state.user?.techStack as ITechnology[],
 );
 
 export const selectUserBankInfo = createSelector(
@@ -80,5 +81,7 @@ export const selectUserPersonalInfo = createSelector(
       endDate: user?.endDate,
       endReason: user?.endReason,
       phone: user?.phone,
+
+      avatarUrl: user?.avatarUrl,
     } as IUserPersonalData),
 );

@@ -5,7 +5,8 @@
       <button
         mat-icon-button
         class="icon-btn"
-        aria-label="Edit content button">
+        aria-label="Edit content button"
+        (click)="onEditSkills()">
         <mat-icon>edit</mat-icon>
       </button>
     </div>
@@ -13,7 +14,7 @@
       <mat-chip
         *ngFor="let skill of skills"
         class="chips">
-        {{ skill }}
+        {{ skill.title }}
       </mat-chip>
     </mat-chip-listbox>
     <app-empty-message

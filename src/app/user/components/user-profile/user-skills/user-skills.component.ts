@@ -1,8 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { map, takeUntil } from 'rxjs';
 
-import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
+import { AbstractUserProfileComponent } from 'src/app/user/components/user-profile/abstract-user-profile-component';
+import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
 import { selectUserSkills } from 'src/app/user/components/user-profile/state/selectors';
+import {
+  SkillsFormDialogData,
+  SkillsFormModalComponent,
+} from 'src/app/user/components/user-profile/user-edit/skills-form-modal/skills-form-modal.component';
 
 @Component({
   selector: 'app-user-skills',
@@ -10,10 +15,26 @@ import { selectUserSkills } from 'src/app/user/components/user-profile/state/sel
   styleUrls: ['./user-skills.component.scss', '../user-profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserSkillsComponent extends UnSubscriberComponent {
+export class UserSkillsComponent extends AbstractUserProfileComponent {
   userSkills$ = this.store.select(selectUserSkills);
 
-  constructor(private store: Store) {
-    super();
+  onEditSkills(): void {
+    this.setModal<SkillsFormModalComponent, SkillsFormDialogData>(
+      SkillsFormModalComponent,
+      this.userSkills$.pipe(map((techStack) => ({ techStack }))),
+    )
+      .afterClosed()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((data) => {
+        if (data) {
+          console.log(data);
+          // this.store.dispatch(
+          //   userProfileActions.updateUser({
+          //     // skills as a string
+          //     user: { ...data},
+          //   }),
+          // );
+        }
+      });
   }
 }

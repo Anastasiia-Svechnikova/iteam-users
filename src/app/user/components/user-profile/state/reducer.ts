@@ -29,7 +29,7 @@ export const UserProfileReducer = createReducer(
       user: user,
     }),
   ),
-  on(userProfileActions.loadedError, (state) => ({
+  on(userProfileActions.error, (state) => ({
     ...state,
     loading: false,
   })),

@@ -24,12 +24,32 @@ export class UserProfileEffects {
             this._snackbarService.openSnackBar(
               'Something went wrong when loading the user...',
             );
-            return of(userProfileActions.loadedError({ error }));
+            return of(userProfileActions.error({ error }));
           }),
         );
       }),
     );
   });
+
+  // loadTechnologies$ = createEffect(() => {
+  //   return this.actions.pipe(
+  //     ofType(userProfileActions.loadAllTechnologies),
+  //     switchMap(() => {
+  //       return this._userService.getUserById().pipe(
+  //         map((user: IUserDetails) => {
+  //           return userProfileActions.loadedUser({ user });
+  //         }),
+  //         catchError((error) => {
+  //           console.log(error.message);
+  //           this._snackbarService.openSnackBar(
+  //             'Something went wrong when loading the user...',
+  //           );
+  //           return of(userProfileActions.error({ error }));
+  //         }),
+  //       );
+  //     }),
+  //   );
+  // });
 
   updateUser$ = createEffect(() => {
     return this.actions.pipe(
@@ -48,7 +68,7 @@ export class UserProfileEffects {
             this._snackbarService.openSnackBar(
               'Something went wrong when updating the user...',
             );
-            return of(userProfileActions.loadedError({ error }));
+            return of(userProfileActions.error({ error }));
           }),
         );
       }),
