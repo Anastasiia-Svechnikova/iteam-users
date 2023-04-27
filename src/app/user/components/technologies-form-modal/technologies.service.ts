@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { ITechnology } from 'src/app/shared/interfaces/technology';
+import { INewTechnology } from 'src/app/user/components/technologies-form-modal/interfaces/new-technology';
 
 @Injectable({
   providedIn: 'root',
@@ -11,14 +12,18 @@ import { ITechnology } from 'src/app/shared/interfaces/technology';
 export class TechnologiesService {
   constructor(private http: HttpClient) {}
 
-  //   updateUserById(id: string, body: IUpdateUserDTO): Observable<IUserDetails> {
-  //     return this.http.patch<IUserDetails>(
-  //       `${environment.apiUrl}/users/${id}`,
-  //       body,
-  //     );
-  //   }
-
   getAllTechnologies(): Observable<ITechnology[]> {
     return this.http.get<ITechnology[]>(`${environment.apiUrl}/technologies`);
+  }
+
+  addNewTechnology(newTechnology: INewTechnology): Observable<ITechnology> {
+    return this.http.post<ITechnology>(
+      `${environment.apiUrl}/technologies`,
+      newTechnology,
+    );
+  }
+
+  deleteTechnologyFromRegistry(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/technologies/${id}`);
   }
 }

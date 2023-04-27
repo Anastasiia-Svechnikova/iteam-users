@@ -1,27 +1,34 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';
-import { catchError, EMPTY, switchMap, tap } from 'rxjs';
+import {
+  ComponentStore,
+  OnStateInit,
+  OnStoreInit,
+} from '@ngrx/component-store';
+import { Store } from '@ngrx/store';
+import { catchError, EMPTY, Observable, switchMap, tap } from 'rxjs';
+
 import { ITechnology } from 'src/app/shared/interfaces/technology';
-
-import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
-import { TechnologiesService } from 'src/app/user/components/technologies-form-modal/technologies-service';
+import { INewTechnology } from 'src/app/user/components/technologies-form-modal/interfaces/new-technology';
+import { TechnologiesService } from 'src/app/user/components/technologies-form-modal/technologies.service';
+import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
 
-interface ISkillsState {
+interface ITechnologiesState {
   allTechnologies: ITechnology[];
-  user: IUserDetails | null;
-  id: number | null;
+  userTechnologies: ITechnology[];
   loading: boolean;
 }
 const defaultState = {
-  user: null,
-  id: null,
   loading: true,
   allTechnologies: [],
+  userTechnologies: [],
 };
 
 @Injectable()
-export class TechnologiesFormStore extends ComponentStore<ISkillsState> {
+export class TechnologiesFormStore
+  extends ComponentStore<ITechnologiesState>
+  implements OnStoreInit
+{
   constructor(
     private readonly _technologiesService: TechnologiesService,
     private _snackBarService: SnackbarService,
@@ -29,21 +36,26 @@ export class TechnologiesFormStore extends ComponentStore<ISkillsState> {
     super(defaultState);
   }
 
-  readonly id$ = this.select(({ id }) => id);
+  ngrxOnStoreInit(): void {
+    this.getAllTechnologies$();
+  }
   readonly loading$ = this.select(({ loading }) => loading);
   readonly allTechnologies$ = this.select(
     ({ allTechnologies }) => allTechnologies,
   );
+  readonly userTechnologies$ = this.select(
+    ({ userTechnologies }) => userTechnologies,
+  );
 
-  readonly getAllTechnologies$ = this.effect((_) => {
-    return _.pipe(
+  readonly getAllTechnologies$ = this.effect((source$) => {
+    return source$.pipe(
       switchMap(() => {
         this.setLoading(true);
         return this._technologiesService.getAllTechnologies().pipe(
           tap({
             next: (technologies: ITechnology[]) => {
               this.setLoading(false);
-              return this.setAllTechnologies(technologies);
+              this.setAllTechnologies(technologies);
             },
             error: (error) => {
               this.setLoading(false);
@@ -59,15 +71,54 @@ export class TechnologiesFormStore extends ComponentStore<ISkillsState> {
     );
   });
 
+  readonly AddTechnology$ = this.effect(
+    (technology$: Observable<INewTechnology>) => {
+      return technology$.pipe(
+        switchMap((newTechnology) => {
+          this.setLoading(true);
+          return this._technologiesService.addNewTechnology(newTechnology).pipe(
+            tap({
+              next: (technology: ITechnology) => {
+                this.setLoading(false);
+                this.addToUserTechnologies(technology);
+                this.addToAllTechnologies(technology);
+              },
+              error: (error) => {
+                this.setLoading(false);
+                this._snackBarService.openSnackBar(
+                  'Something went wrong when adding a new technology..',
+                );
+                console.log(error);
+              },
+            }),
+            catchError(() => EMPTY),
+          );
+        }),
+      );
+    },
+  );
+
+  private addToAllTechnologies(technology: ITechnology): void {
+    this.patchState((state) => ({
+      allTechnologies: [...state.allTechnologies, technology],
+    }));
+  }
+
+  public addToUserTechnologies(technology: ITechnology): void {
+    this.patchState((state) => ({
+      userTechnologies: [...state.userTechnologies, technology],
+    }));
+  }
+
   private setLoading(state: boolean): void {
     this.patchState({ loading: state });
   }
 
-  private setAllTechnologies(state: ITechnology[]): void {
-    this.patchState({ allTechnologies: state });
+  private setAllTechnologies(technologies: ITechnology[]): void {
+    this.patchState({ allTechnologies: technologies });
   }
 
-  private setId(id: number): void {
-    this.patchState({ id });
+  public setUserTechnologies(technologies: ITechnology[]): void {
+    this.patchState({ userTechnologies: technologies });
   }
 }

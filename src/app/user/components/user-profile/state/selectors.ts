@@ -38,7 +38,6 @@ export const selectUserSkills = createSelector(
   selectUserProfileFeature,
   (state: IUserProfileState) => ({
     techStack: state.user?.techStack as ITechnology[],
-    id: state.user?.id as number,
   }),
 );
 

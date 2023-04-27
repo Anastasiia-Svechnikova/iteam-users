@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Observable, map, startWith, takeUntil } from 'rxjs';
+import { Observable, map, startWith, switchMap, takeUntil } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
@@ -16,12 +16,10 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { ITechnology } from 'src/app/shared/interfaces/technology';
 import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
 import { TechnologiesFormStore } from 'src/app/user/components/technologies-form-modal/technologies-form-modal.store';
-
-export interface SkillsFormDialogData {
-  techStack: ITechnology[];
-  category: 'user' | 'project';
-  id: number;
-}
+import { ITechnologiesModalDialogData } from 'src/app/user/components/technologies-form-modal/interfaces/technologies-modal-dialog-data';
+import { Store } from '@ngrx/store';
+import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
+import { provideComponentStore } from '@ngrx/component-store';
 
 interface INewSkill {
   title: string;
@@ -35,7 +33,7 @@ interface INewSkill {
     '../user-profile/user-edit/user-edit.scss',
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [TechnologiesFormStore],
+  providers: [provideComponentStore(TechnologiesFormStore)],
 })
 export class TechnologiesFormModalComponent
   extends UnSubscriberComponent
@@ -43,16 +41,16 @@ export class TechnologiesFormModalComponent
 {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   techSkillsCtrl = new FormControl('');
+  filteredTechSkills$!: Observable<ITechnology[]>;
 
-  filteredTechSkills!: Observable<ITechnology[]>;
-  techSkills: Array<ITechnology | INewSkill> = [];
-  allTechSkills: ITechnology[] = [];
+  allTechnologies$ = this._technologiesFormStore.allTechnologies$;
+  userTechnologies$ = this._technologiesFormStore.userTechnologies$;
 
   @ViewChild('skillsInput') skillsInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: Observable<SkillsFormDialogData>,
+    public data: Observable<ITechnologiesModalDialogData>,
     public _dialogRef: MatDialogRef<TechnologiesFormModalComponent>,
     private _technologiesFormStore: TechnologiesFormStore,
   ) {
@@ -60,58 +58,59 @@ export class TechnologiesFormModalComponent
   }
 
   ngOnInit(): void {
-    this.filteredTechSkills = this.techSkillsCtrl.valueChanges.pipe(
+    this.filteredTechSkills$ = this.techSkillsCtrl.valueChanges.pipe(
       takeUntil(this.destroyed$),
       startWith(null),
-      map((skillTitle: string | null) => {
-        return skillTitle ? this._filter(skillTitle) : [...this.allTechSkills];
+      switchMap((skillTitle: string | null) => {
+        return skillTitle ? this._filter(skillTitle) : this.allTechnologies$;
       }),
     );
-    this.data.pipe(takeUntil(this.destroyed$)).subscribe((data) => {
-      this.techSkills = [...data.techStack];
-    });
 
-    this._technologiesFormStore.getAllTechnologies$();
-    this._technologiesFormStore.allTechnologies$.subscribe(
-      (data) => (this.allTechSkills = [...data]),
-    );
+    this.data.pipe(takeUntil(this.destroyed$)).subscribe((data) => {
+      this._technologiesFormStore.setUserTechnologies([...data.techStack]);
+    });
   }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
     if (value) {
-      this.techSkills.push({ title: value });
+      this._technologiesFormStore.AddTechnology$({ title: value });
     }
     event.chipInput!.clear();
     this._resetInputs();
   }
 
-  remove(skill: ITechnology | INewSkill): void {
-    const index = this.techSkills.findIndex(
-      ({ title }) => title === skill.title,
-    );
-    if (index >= 0) {
-      this.techSkills.splice(index, 1);
-    }
-  }
-
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.techSkills.push({ title: event.option.viewValue });
+    const selectedTechnology = event.option.value;
+    this._technologiesFormStore.addToUserTechnologies(selectedTechnology);
     this._resetInputs();
   }
 
-  onSubmit(): void {
-    this._dialogRef.close({ skills: this.techSkills });
+  remove(technology: ITechnology | INewSkill): void {
+    // const index = this.techSkills.findIndex(
+    //   ({ title }) => title === technology.title,
+    // );
+    // if (index >= 0) {
+    //   this.techSkills.splice(index, 1);
+    // }
   }
 
-  private _filter(value: string | ITechnology): ITechnology[] {
+  onSubmit(): void {
+    // this._dialogRef.close({ addedTechnologies, removedTechnologies });
+  }
+
+  private _filter(value: string | ITechnology): Observable<ITechnology[]> {
     const filterValue =
       typeof value === 'string'
         ? value.toLowerCase()
         : value.title.toLowerCase();
 
-    return this.allTechSkills.filter(({ title }) =>
-      title.toLowerCase().includes(filterValue),
+    return this.allTechnologies$.pipe(
+      map((technologies) => {
+        return technologies.filter(({ title }) =>
+          title.toLowerCase().includes(filterValue),
+        );
+      }),
     );
   }
 

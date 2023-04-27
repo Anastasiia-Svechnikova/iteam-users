@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { IUpdateUserDTO } from 'src/app/user/components/user-profile/interfaces/update-user-dto';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { IGetUsersResponse } from 'src/app/user/components/user-profile/interfaces/get-users-response';
+import { IAssignTechnologyToUserDTO } from 'src/app/user/components/technologies-form-modal/interfaces/assign-technology-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -39,5 +40,22 @@ export class UserService {
     } else {
       throw throwError(() => new Error('Could not get current user id'));
     }
+  }
+
+  assignTechnologyToUser(
+    technology: IAssignTechnologyToUserDTO,
+  ): Observable<IAssignTechnologyToUserDTO> {
+    return this.http.post<IAssignTechnologyToUserDTO>(
+      `${environment.apiUrl}/users/technology`,
+      technology,
+    );
+  }
+
+  removeTechnologyFromUser(
+    technology: IAssignTechnologyToUserDTO,
+  ): Observable<IAssignTechnologyToUserDTO> {
+    // endpoint to remove a technology from a particular user is expected to be used here
+    // return this.http.delete<void>(`${environment.apiUrl}/users/technology`);
+    return of(technology);
   }
 }

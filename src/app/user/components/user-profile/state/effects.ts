@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, concatMap, map, of, switchMap } from 'rxjs';
 
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
@@ -31,26 +31,6 @@ export class UserProfileEffects {
     );
   });
 
-  // loadTechnologies$ = createEffect(() => {
-  //   return this.actions.pipe(
-  //     ofType(userProfileActions.loadAllTechnologies),
-  //     switchMap(() => {
-  //       return this._userService.getUserById().pipe(
-  //         map((user: IUserDetails) => {
-  //           return userProfileActions.loadedUser({ user });
-  //         }),
-  //         catchError((error) => {
-  //           console.log(error.message);
-  //           this._snackbarService.openSnackBar(
-  //             'Something went wrong when loading the user...',
-  //           );
-  //           return of(userProfileActions.error({ error }));
-  //         }),
-  //       );
-  //     }),
-  //   );
-  // });
-
   updateUser$ = createEffect(() => {
     return this.actions.pipe(
       ofType(userProfileActions.updateUser),
@@ -71,6 +51,68 @@ export class UserProfileEffects {
             return of(userProfileActions.error({ error }));
           }),
         );
+      }),
+    );
+  });
+
+  assignTechnologyToUser$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(userProfileActions.assignTechnologyToUser),
+      concatLatestFrom(() => this.store.select(selectUserId)),
+      concatMap(([{ technology }, userId = '']) => {
+        return this._userService
+          .assignTechnologyToUser({
+            userId,
+            technologyId: technology.id.toString(),
+          })
+          .pipe(
+            map(() => {
+              this._snackbarService.openSnackBar(
+                'Technology has been successfully added',
+              );
+              return userProfileActions.assignedTechnologyToUser({
+                technology,
+              });
+            }),
+            catchError((error) => {
+              console.log(error.message);
+              this._snackbarService.openSnackBar(
+                'Something went wrong when attaching a new technology...',
+              );
+              return of(userProfileActions.error({ error }));
+            }),
+          );
+      }),
+    );
+  });
+
+  removeTechnologyFromUser$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(userProfileActions.removeTechnologyFromUser),
+      concatLatestFrom(() => this.store.select(selectUserId)),
+      switchMap(([{ technologyId }, userId = '']) => {
+        return this._userService
+          .removeTechnologyFromUser({
+            userId,
+            technologyId: technologyId,
+          })
+          .pipe(
+            map(() => {
+              this._snackbarService.openSnackBar(
+                'Technology has been successfully removed from user',
+              );
+              return userProfileActions.removedTechnologyFromUser({
+                technologyId,
+              });
+            }),
+            catchError((error) => {
+              console.log(error.message);
+              this._snackbarService.openSnackBar(
+                'Something went wrong when removing the technology...',
+              );
+              return of(userProfileActions.error({ error }));
+            }),
+          );
       }),
     );
   });
