@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { map, takeUntil } from 'rxjs';
+import { map, takeUntil, withLatestFrom } from 'rxjs';
 
 import { AbstractUserProfileComponent } from 'src/app/user/components/user-profile/abstract-user-profile-component';
 import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
@@ -7,6 +7,7 @@ import { selectUserSkills } from 'src/app/user/components/user-profile/state/sel
 import { TechnologiesFormModalComponent } from 'src/app/user/components/technologies-form-modal/technologies-form-modal.component';
 import { ITechnologiesModalDialogData } from 'src/app/user/components/technologies-form-modal/interfaces/technologies-modal-dialog-data';
 import { ITechnology } from 'src/app/shared/interfaces/technology';
+import { INewTechnology } from 'src/app/user/components/technologies-form-modal/interfaces/new-technology';
 
 @Component({
   selector: 'app-user-skills',
@@ -20,33 +21,42 @@ export class UserSkillsComponent extends AbstractUserProfileComponent {
   onEditSkills(): void {
     this.setModal<TechnologiesFormModalComponent, ITechnologiesModalDialogData>(
       TechnologiesFormModalComponent,
-      this.userSkills$.pipe(map((skills) => ({ ...skills, category: 'user' }))),
+      this.userSkills$.pipe(
+        map((skills) => ({ technologies: skills.techStack })),
+      ),
     )
       .afterClosed()
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((data) => {
-        if (data) {
-          console.log(data);
-          const technologies: ITechnology[] = [
-            { id: 3, title: '' },
-            { id: 8, title: '' },
-            { id: 6, title: '' },
-            { id: 7, title: '' },
-            { id: 18, title: '' },
-          ];
-          technologies.forEach((technology) =>
-            this.store.dispatch(
-              userProfileActions.assignTechnologyToUser({
-                technology,
-              }),
-            ),
+      .pipe(takeUntil(this.destroyed$), withLatestFrom(this.userSkills$))
+      .subscribe(([technologiesFromTheModal, { techStack }]) => {
+        if (technologiesFromTheModal) {
+          const technologiesToBeAdded = technologiesFromTheModal.filter(
+            (technology: ITechnology | INewTechnology) => {
+              if ('id' in technology) {
+                return !techStack.includes(technology);
+              }
+              return true;
+            },
           );
-          // this.store.dispatch(
-          //   userProfileActions.updateUser({
-          //     // skills as a string
-          //     user: { ...data},
-          //   }),
-          // );
+          const technologiesToBeRemoved = techStack.filter(
+            (technology: ITechnology) => {
+              return !technologiesFromTheModal.includes(technology);
+            },
+          );
+          technologiesToBeAdded.forEach(
+            (technology: INewTechnology | ITechnology) => {
+              if ('id' in technology) {
+                this.store.dispatch(
+                  userProfileActions.assignTechnologyToUser({ technology }),
+                );
+              } else {
+                this.store.dispatch(
+                  userProfileActions.addNewTechnologyAndAssignToUser({
+                    technology,
+                  }),
+                );
+              }
+            },
+          );
         }
       });
   }

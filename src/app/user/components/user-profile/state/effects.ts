@@ -5,6 +5,7 @@ import { catchError, concatMap, map, of, switchMap } from 'rxjs';
 
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { TechnologiesService } from 'src/app/user/components/technologies-form-modal/technologies.service';
 import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
 import { selectUserId } from 'src/app/user/components/user-profile/state/selectors';
 import { UserService } from 'src/app/user/services/user.service';
@@ -86,6 +87,41 @@ export class UserProfileEffects {
     );
   });
 
+  addNewTechnologyAndAssignToUser$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(userProfileActions.addNewTechnologyAndAssignToUser),
+      concatLatestFrom(() => this.store.select(selectUserId)),
+      concatMap(([{ technology }, userId = '']) => {
+        return this._technologiesService.addNewTechnology(technology).pipe(
+          switchMap((technology) => {
+            return this._userService
+              .assignTechnologyToUser({
+                userId,
+                technologyId: technology.id.toString(),
+              })
+              .pipe(
+                map(() => {
+                  this._snackbarService.openSnackBar(
+                    'Technology has been successfully added',
+                  );
+                  return userProfileActions.assignedTechnologyToUser({
+                    technology,
+                  });
+                }),
+                catchError((error) => {
+                  console.log(error.message);
+                  this._snackbarService.openSnackBar(
+                    'Something went wrong when attaching a new technology...',
+                  );
+                  return of(userProfileActions.error({ error }));
+                }),
+              );
+          }),
+        );
+      }),
+    );
+  });
+
   removeTechnologyFromUser$ = createEffect(() => {
     return this.actions.pipe(
       ofType(userProfileActions.removeTechnologyFromUser),
@@ -120,7 +156,8 @@ export class UserProfileEffects {
   constructor(
     private store: Store,
     private actions: Actions,
-    private readonly _userService: UserService,
+    private _userService: UserService,
     private _snackbarService: SnackbarService,
+    private _technologiesService: TechnologiesService,
   ) {}
 }

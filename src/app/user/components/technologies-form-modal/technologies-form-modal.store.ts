@@ -1,25 +1,17 @@
 import { Injectable } from '@angular/core';
-import {
-  ComponentStore,
-  OnStateInit,
-  OnStoreInit,
-} from '@ngrx/component-store';
-import { Store } from '@ngrx/store';
-import { catchError, EMPTY, Observable, switchMap, tap } from 'rxjs';
+import { ComponentStore, OnStoreInit } from '@ngrx/component-store';
+import { catchError, EMPTY, switchMap, tap } from 'rxjs';
 
 import { ITechnology } from 'src/app/shared/interfaces/technology';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { INewTechnology } from 'src/app/user/components/technologies-form-modal/interfaces/new-technology';
 import { TechnologiesService } from 'src/app/user/components/technologies-form-modal/technologies.service';
-import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
 
 interface ITechnologiesState {
   allTechnologies: ITechnology[];
-  userTechnologies: ITechnology[];
-  loading: boolean;
+  userTechnologies: Array<ITechnology | INewTechnology>;
 }
 const defaultState = {
-  loading: true,
   allTechnologies: [],
   userTechnologies: [],
 };
@@ -39,7 +31,7 @@ export class TechnologiesFormStore
   ngrxOnStoreInit(): void {
     this.getAllTechnologies$();
   }
-  readonly loading$ = this.select(({ loading }) => loading);
+
   readonly allTechnologies$ = this.select(
     ({ allTechnologies }) => allTechnologies,
   );
@@ -50,15 +42,12 @@ export class TechnologiesFormStore
   readonly getAllTechnologies$ = this.effect((source$) => {
     return source$.pipe(
       switchMap(() => {
-        this.setLoading(true);
         return this._technologiesService.getAllTechnologies().pipe(
           tap({
             next: (technologies: ITechnology[]) => {
-              this.setLoading(false);
               this.setAllTechnologies(technologies);
             },
             error: (error) => {
-              this.setLoading(false);
               this._snackBarService.openSnackBar(
                 'Something went wrong when loading all technologies..',
               );
@@ -71,47 +60,23 @@ export class TechnologiesFormStore
     );
   });
 
-  readonly AddTechnology$ = this.effect(
-    (technology$: Observable<INewTechnology>) => {
-      return technology$.pipe(
-        switchMap((newTechnology) => {
-          this.setLoading(true);
-          return this._technologiesService.addNewTechnology(newTechnology).pipe(
-            tap({
-              next: (technology: ITechnology) => {
-                this.setLoading(false);
-                this.addToUserTechnologies(technology);
-                this.addToAllTechnologies(technology);
-              },
-              error: (error) => {
-                this.setLoading(false);
-                this._snackBarService.openSnackBar(
-                  'Something went wrong when adding a new technology..',
-                );
-                console.log(error);
-              },
-            }),
-            catchError(() => EMPTY),
-          );
-        }),
-      );
-    },
-  );
-
-  private addToAllTechnologies(technology: ITechnology): void {
-    this.patchState((state) => ({
-      allTechnologies: [...state.allTechnologies, technology],
-    }));
-  }
-
-  public addToUserTechnologies(technology: ITechnology): void {
+  public addToUserTechnologies(technology: ITechnology | INewTechnology): void {
     this.patchState((state) => ({
       userTechnologies: [...state.userTechnologies, technology],
     }));
   }
 
-  private setLoading(state: boolean): void {
-    this.patchState({ loading: state });
+  public removeFromUserTechnologies(
+    technology: ITechnology | INewTechnology,
+  ): void {
+    this.patchState((state) => {
+      const filteredTechnologies = state.userTechnologies.filter(
+        (userTechnology) => userTechnology.title !== technology.title,
+      );
+      return {
+        userTechnologies: filteredTechnologies,
+      };
+    });
   }
 
   private setAllTechnologies(technologies: ITechnology[]): void {
