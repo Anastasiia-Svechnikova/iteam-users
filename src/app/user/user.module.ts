@@ -10,6 +10,8 @@ import { ArchiveCellComponent }
   from 'src/app/user/components/user-list/cell-components/archive-cell/archive-cell.component';
 import { EditUserCellComponent }
   from 'src/app/user/components/user-list/cell-components/edit-user-cell/edit-user-cell.component';
+import { ProjectsCellComponent }
+  from 'src/app/user/components/user-list/cell-components/projects-cell/projects-cell.component';
 import { UserListComponent } from 'src/app/user/components/user-list/user-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HeaderTitles } from 'src/app/navigation/models/header-titles';
@@ -32,7 +34,7 @@ const routes = [
   },
 ];
 @NgModule({
-  declarations: [UserListComponent, ArchiveCellComponent, EditUserCellComponent],
+  declarations: [UserListComponent, ArchiveCellComponent, EditUserCellComponent, ProjectsCellComponent],
   imports: [
     MatInputModule,
     MatFormFieldModule,

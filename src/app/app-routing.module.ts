@@ -27,7 +27,7 @@ const routes: Routes = [
           import('./user/user.module').then((m) => m.UserModule),
       },
       {
-        path: 'projects',
+        path: 'project',
         component: HomeComponent,
         data: { header: HeaderTitles.projects },
       },

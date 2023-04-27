@@ -4,6 +4,7 @@ import { CopyCellComponent } from 'src/app/shared/components/ag-grid/copy-cell/c
 import { StatusCellComponent } from 'src/app/shared/components/ag-grid/status-cell/status-cell.component';
 import { ArchiveCellComponent } from 'src/app/user/components/user-list/cell-components/archive-cell/archive-cell.component';
 import { EditUserCellComponent } from 'src/app/user/components/user-list/cell-components/edit-user-cell/edit-user-cell.component';
+import { ProjectsCellComponent } from 'src/app/user/components/user-list/cell-components/projects-cell/projects-cell.component';
 
 export const UserListColDefs: ColDef[] = [
   {
@@ -47,8 +48,14 @@ export const UserListColDefs: ColDef[] = [
     cellRenderer: (params: ICellRendererParams): string => {
       if (params.data.cv) {
         const { fileUrl, originalName } = params.data.cv;
-        const formattedFileName = originalName.replace(/\s*(\(\w*\s*\))*(\.\w+)*/g, '');
-        const downloadUrl = fileUrl.replace('upload/', `upload/fl_attachment:${formattedFileName}/`);
+        const formattedFileName = originalName.replace(
+          /\s*(\(\w*\s*\))*(\.\w+)*/g,
+          '',
+        );
+        const downloadUrl = fileUrl.replace(
+          'upload/',
+          `upload/fl_attachment:${formattedFileName}/`,
+        );
         return `<a  href="${downloadUrl}" style="color:black">${originalName}</a>`;
       }
       return 'N/A';
@@ -56,6 +63,7 @@ export const UserListColDefs: ColDef[] = [
     getQuickFilterText: (params): string => params.data.cv?.originalName,
     flex: 2,
   },
+  { headerName: 'Projects', cellRenderer: ProjectsCellComponent },
   {
     headerName: 'Activate',
     cellRenderer: ArchiveCellComponent,
