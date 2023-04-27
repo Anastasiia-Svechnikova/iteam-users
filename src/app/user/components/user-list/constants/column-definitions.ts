@@ -35,10 +35,12 @@ export const UserListColDefs: ColDef[] = [
         archived: {
           icon: 'person',
           name: 'Disabled',
+          color: 'rgba(138, 137, 137, 0.748)',
         },
         unarchived: {
           icon: 'how_to_reg',
           name: 'Active',
+          color: 'rgb(8, 205, 90)',
         },
       },
     },
