@@ -11,6 +11,10 @@
   }
 
   @include media(tablet) {
+    width: 130%;
+  }
+
+  @include media(l-tablet){
     width: 90%;
   }
 }

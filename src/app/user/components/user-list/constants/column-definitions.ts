@@ -65,7 +65,7 @@ export const UserListColDefs: ColDef[] = [
     getQuickFilterText: (params): string => params.data.cv?.originalName,
     flex: 2,
   },
-  { headerName: 'Projects', cellRenderer: ProjectsCellComponent },
+  { headerName: 'Projects', cellRenderer: ProjectsCellComponent, flex: 3 },
   {
     headerName: 'Activate',
     cellRenderer: ArchiveCellComponent,
