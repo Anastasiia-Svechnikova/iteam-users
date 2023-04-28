@@ -1,0 +1,19 @@
+@import '/src/styles/_variables.scss';
+@import '/src/styles/_color-palette.scss';
+@import '/src/styles/_media-mixins.scss';
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $m-size;
+}
+
+.education-upper {
+  display: flex;
+  gap: $xs-size;
+}
+
+.university-name {
+  margin: 0 $xs-size $xxs-size 0;
+  flex-grow: 2;
+}

@@ -15,7 +15,7 @@
 .upper-wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: $xs-size;
+  margin-bottom: $m-size;
   gap: $xs-size;
 
   @include media(tablet) {
@@ -46,14 +46,12 @@
 
   @include media(tablet) {
     max-width: 17em;
-    padding: 0 $l-size;
+    padding: 0 $m-size;
     margin-bottom: $m-size;
     border: none;
   }
   @include media(l-tablet) {
-    padding: 0 $l-size;
-    margin-bottom: $m-size;
-    border: none;
+    max-width: 20em;
   }
 }
 

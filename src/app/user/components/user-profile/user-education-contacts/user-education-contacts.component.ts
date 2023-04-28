@@ -10,11 +10,16 @@ import {
   TextInputFormModalComponent,
 } from 'src/app/user/components/user-profile/user-edit/text-input-form-modal/text-input-form-modal.component';
 import { UserContactsInfoTitles } from 'src/app/user/components/user-profile/constants/user-contacts-info-titles';
+import { IUserEducationDetails } from 'src/app/shared/interfaces/user-education';
+import { EducationFormModalComponent } from 'src/app/user/components/user-profile/user-edit/education-form-modal/education-form-modal.component';
 
 @Component({
   selector: 'app-user-education-contacts',
   templateUrl: './user-education-contacts.component.html',
-  styleUrls: ['../user-profile.component.scss'],
+  styleUrls: [
+    '../user-profile.component.scss',
+    './user-education-contacts.scss',
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserEducationContactsComponent extends AbstractUserProfileComponent {
@@ -38,6 +43,28 @@ export class UserEducationContactsComponent extends AbstractUserProfileComponent
       .subscribe((data) => {
         if (data) {
           this.store.dispatch(userProfileActions.updateUser({ user: data }));
+        }
+      });
+  }
+
+  onEditEducation(id: number): void {
+    this.setModal<EducationFormModalComponent, IUserEducationDetails>(
+      EducationFormModalComponent,
+      this.userData$.pipe(
+        map((user) => {
+          const educationItem = user?.educationInfo.find(
+            (educationItem) => educationItem.id === id,
+          );
+          return educationItem as IUserEducationDetails;
+        }),
+      ),
+    )
+      .afterClosed()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((data) => {
+        if (data) {
+          console.log(data);
+          // this.store.dispatch(userProfileActions.updateUser({ user: data }));
         }
       });
   }

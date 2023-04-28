@@ -20,6 +20,7 @@ import { UserSkillsComponent } from 'src/app/user/components/user-profile/user-s
 import { UserWorkInfoComponent } from 'src/app/user/components/user-profile/user-work-info/user-work-info.component';
 import { TextInputFormModalComponent } from 'src/app/user/components/user-profile/user-edit/text-input-form-modal/text-input-form-modal.component';
 import { PersonalInfoFormModalComponent } from 'src/app/user/components/user-profile/user-edit/personal-info-form-modal/personal-info-form-modal.component';
+import { EducationFormModalComponent } from './user-edit/education-form-modal/education-form-modal.component';
 
 const routes = [
   {
@@ -38,6 +39,7 @@ const routes = [
     UserBankAndSocialsInfoComponent,
     TextInputFormModalComponent,
     PersonalInfoFormModalComponent,
+    EducationFormModalComponent,
   ],
   imports: [
     MatNativeDateModule,

@@ -14,35 +14,39 @@
       <button
         mat-icon-button
         class="icon-btn"
-        aria-label="Edit content button">
+        aria-label="Add education button">
         <mat-icon>add</mat-icon>
       </button>
     </div>
-    <div *ngFor="let education of educationInfo">
-      <p>{{ education.universityName | uppercase }}</p>
-      <button
-        mat-icon-button
-        class="icon-btn"
-        aria-label="Copy content button"
-        (click)="
-          clipboardService.copyToClipboard({educationInfo}, clipboardRegistry)
-        ">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        class="icon-btn"
-        aria-label="Edit content button">
-        <mat-icon>delete_outline</mat-icon>
-      </button>
-      <p
-        *ngIf="education.startDate"
-        class="mat-caption light">
-        {{ education.startDate | date : 'y' }} -
-        {{ education.endDate | date : 'y' }}
-      </p>
-      <p>{{ education.educationLevel }}</p>
-      <p>{{ education.specialization }}</p>
+    <div class="list">
+      <div *ngFor="let education of educationInfo">
+        <div class="education-upper">
+          <p class="university-name">
+            {{ education.universityName | uppercase }}
+          </p>
+          <button
+            mat-icon-button
+            class="icon-btn"
+            aria-label="Edit education button"
+            (click)="onEditEducation(education.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="icon-btn"
+            aria-label="Delete education button">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+        <p
+          *ngIf="education.startDate"
+          class="mat-caption light">
+          {{ education.startDate | date : 'y' }} -
+          {{ education.endDate | date : 'y' }}
+        </p>
+        <p>{{ education.educationLevel | titlecase }}</p>
+        <p>{{ education.specialization | titlecase }}</p>
+      </div>
     </div>
     <app-empty-message
       *ngIf="!educationInfo?.length"
