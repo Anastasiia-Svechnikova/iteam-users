@@ -85,6 +85,11 @@
   color: $light-subtitle-color;
 }
 
+.birthday {
+  font-size: $xs-icon-size;
+  color: $primary-color;
+}
+
 %status {
   display: flex;
   align-items: center;

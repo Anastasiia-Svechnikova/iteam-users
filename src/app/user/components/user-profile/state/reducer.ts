@@ -50,6 +50,17 @@ export const UserProfileReducer = createReducer(
   }),
 
   on(
+    userProfileActions.assignedTechnologiesToUser,
+    (state, { technologies }) => {
+      if (state.user) {
+        const techStack = [...state.user.techStack, ...technologies];
+        return { loading: false, user: { ...state.user, techStack } };
+      }
+      return { ...state, loading: false };
+    },
+  ),
+
+  on(
     userProfileActions.removedTechnologyFromUser,
     (state, { technologyId }) => {
       if (state.user) {

@@ -21,6 +21,7 @@ export const userProfileActions = createActionGroup({
       technology: INewTechnology;
     }>(),
     'Assigned Technology To User': props<{ technology: ITechnology }>(),
+    'Assigned Technologies To User': props<{ technologies: ITechnology[] }>(),
     'Remove Technology From User': props<{ technologyId: string }>(),
     'Removed Technology From User': props<{ technologyId: string }>(),
   },
