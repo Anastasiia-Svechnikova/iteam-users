@@ -44,6 +44,9 @@ export class TechnologiesFormModalComponent
 
   allTechnologies$ = this._technologiesFormStore.allTechnologies$;
   userTechnologies$ = this._technologiesFormStore.userTechnologies$;
+  disabledTechnologiesList$ = this.userTechnologies$.pipe(
+    map((technologies) => technologies.map((technology) => technology.title)),
+  );
 
   @ViewChild('skillsInput') skillsInput!: ElementRef<HTMLInputElement>;
 

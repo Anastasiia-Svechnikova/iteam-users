@@ -61,9 +61,18 @@ export class TechnologiesFormStore
   });
 
   public addToUserTechnologies(technology: ITechnology | INewTechnology): void {
-    this.patchState((state) => ({
-      userTechnologies: [...state.userTechnologies, technology],
-    }));
+    this.patchState((state) => {
+      if (
+        state.userTechnologies.findIndex(
+          (stateTechnology) => stateTechnology.title === technology.title,
+        ) < 0
+      ) {
+        return {
+          userTechnologies: [...state.userTechnologies, technology],
+        };
+      }
+      return state;
+    });
   }
 
   public removeFromUserTechnologies(

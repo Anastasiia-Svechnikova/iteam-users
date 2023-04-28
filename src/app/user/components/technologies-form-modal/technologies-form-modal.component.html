@@ -45,6 +45,9 @@
             (optionSelected)="selected($event)">
             <mat-option
               *ngFor="let skill of filteredTechSkills$ | async"
+              [disabled]="
+                (disabledTechnologiesList$ | async)?.includes(skill.title)
+              "
               [value]="skill">
               {{ skill.title | titlecase }}
             </mat-option>

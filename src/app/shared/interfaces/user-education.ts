@@ -6,7 +6,7 @@ export interface IUserEducationDetails {
   endDate: string;
   universityName: string;
   specialization: string;
-  pricingModel: string;
+  educationLevel: string;
   user?: IUserDetails;
   createdAt: string;
   updatedAt: string;

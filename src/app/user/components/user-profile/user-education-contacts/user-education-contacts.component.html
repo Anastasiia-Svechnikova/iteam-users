@@ -5,9 +5,21 @@
       <button
         mat-icon-button
         class="icon-btn"
-        aria-label="Edit content button">
-        <mat-icon>edit</mat-icon>
+        aria-label="Copy content button"
+        (click)="
+          clipboardService.copyToClipboard({educationInfo}, clipboardRegistry)
+        ">
+        <mat-icon>content_copy</mat-icon>
       </button>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Edit content button">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div *ngFor="let education of educationInfo">
+      <p>{{ education.universityName | uppercase }}</p>
       <button
         mat-icon-button
         class="icon-btn"
@@ -15,18 +27,22 @@
         (click)="
           clipboardService.copyToClipboard({educationInfo}, clipboardRegistry)
         ">
-        <mat-icon>content_copy</mat-icon>
+        <mat-icon>edit</mat-icon>
       </button>
-    </div>
-    <div *ngFor="let education of educationInfo">
-      <p>{{ education.universityName | uppercase }}</p>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Edit content button">
+        <mat-icon>delete_outline</mat-icon>
+      </button>
       <p
         *ngIf="education.startDate"
         class="mat-caption light">
         {{ education.startDate | date : 'y' }} -
         {{ education.endDate | date : 'y' }}
       </p>
-      <p>{{ education.pricingModel }}</p>
+      <p>{{ education.educationLevel }}</p>
+      <p>{{ education.specialization }}</p>
     </div>
     <app-empty-message
       *ngIf="!educationInfo?.length"

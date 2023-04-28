@@ -1,3 +1,4 @@
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,20 +13,33 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule } from '@angular/router';
 
 import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custom-icon.component';
+import { ConfirmDialogDirective } from 'src/app/shared/directives/confirm-dialog.directive';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
+import { CopyCellComponent } from './components/ag-grid/copy-cell/copy-cell.component';
+import { StatusCellComponent } from './components/ag-grid/status-cell/status-cell.component';
 
 @NgModule({
-  declarations: [CustomIconComponent],
+  declarations: [
+    CustomIconComponent,
+    ConfirmModalComponent,
+    ConfirmDialogDirective,
+    CopyCellComponent,
+    StatusCellComponent,
+  ],
   imports: [
     MatProgressSpinnerModule,
     CommonModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
+    ClipboardModule,
   ],
   exports: [
     LayoutModule,
     MatRippleModule,
     MatProgressSpinnerModule,
     CustomIconComponent,
+    ConfirmModalComponent,
     RouterModule,
     CommonModule,
     MatCardModule,
@@ -35,6 +49,7 @@ import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custo
     MatButtonModule,
     MatDialogModule,
     MatSnackBarModule,
+    ConfirmDialogDirective,
   ],
 })
 export class SharedModule {}
