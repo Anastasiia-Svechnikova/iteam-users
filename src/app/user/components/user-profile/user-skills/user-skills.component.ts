@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { map, takeUntil, withLatestFrom } from 'rxjs';
+import { filter, map, takeUntil, withLatestFrom } from 'rxjs';
 
 import { AbstractUserProfileComponent } from 'src/app/user/components/user-profile/abstract-user-profile-component';
 import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
@@ -26,7 +26,11 @@ export class UserSkillsComponent extends AbstractUserProfileComponent {
       ),
     )
       .afterClosed()
-      .pipe(takeUntil(this.destroyed$), withLatestFrom(this.userSkills$))
+      .pipe(
+        takeUntil(this.destroyed$),
+        filter((data) => data),
+        withLatestFrom(this.userSkills$),
+      )
       .subscribe(([technologiesFromTheModal, { techStack }]) => {
         if (technologiesFromTheModal) {
           const technologiesToBeAdded = technologiesFromTheModal.filter(

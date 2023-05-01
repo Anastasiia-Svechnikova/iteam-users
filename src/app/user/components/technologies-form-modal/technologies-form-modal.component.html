@@ -22,6 +22,7 @@
             aria-label="Tech skills selection">
             <mat-chip-row
               *ngFor="let skill of userTechnologies"
+              class="chips"
               (removed)="remove(skill)">
               {{ skill.title }}
               <button

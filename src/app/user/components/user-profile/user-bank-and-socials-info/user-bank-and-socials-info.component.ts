@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { map, Observable, takeUntil } from 'rxjs';
+import { filter, map, Observable, takeUntil } from 'rxjs';
 
 import { IUserSocialLinksData } from 'src/app/shared/interfaces/user-social-links-data';
 import { IUserBankInvoiceData } from 'src/app/shared/interfaces/user-bank-invoice-data';
@@ -65,11 +65,12 @@ export class UserBankAndSocialsInfoComponent extends AbstractUserProfileComponen
       modalDataSet as Observable<textInputFormModalData>,
     )
       .afterClosed()
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(
+        takeUntil(this.destroyed$),
+        filter((data) => data),
+      )
       .subscribe((data) => {
-        if (data) {
-          this.store.dispatch(userProfileActions.updateUser({ user: data }));
-        }
+        this.store.dispatch(userProfileActions.updateUser({ user: data }));
       });
   }
 

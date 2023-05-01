@@ -20,6 +20,9 @@
 
 .single-column {
   max-width: 25em;
+  display: flex;
+  flex-direction: column;
+  gap: $s-size;
 }
 
 .double-column {

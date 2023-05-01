@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, takeUntil } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs';
 
 import { AbstractUserProfileComponent } from 'src/app/user/components/user-profile/abstract-user-profile-component';
 import { clipboardPersonalInfoRegistry } from 'src/app/user/components/user-profile/constants/clipboard-property-names-registries/clipboard-personal-info-registry';
@@ -54,7 +54,10 @@ export class UserProfileComponent
       ),
     )
       .afterClosed()
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(
+        takeUntil(this.destroyed$),
+        filter((data) => data),
+      )
       .subscribe((data) => {
         if (data) {
           this.store.dispatch(userProfileActions.updateUser({ user: data }));

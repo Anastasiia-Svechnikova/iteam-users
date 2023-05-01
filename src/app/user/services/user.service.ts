@@ -8,6 +8,9 @@ import { IUpdateUserDTO } from 'src/app/user/components/user-profile/interfaces/
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { IGetUsersResponse } from 'src/app/user/components/user-profile/interfaces/get-users-response';
 import { IAssignTechnologyToUserDTO } from 'src/app/user/components/technologies-form-modal/interfaces/assign-technology-dto';
+import { IUserEducationFormData } from 'src/app/user/components/user-profile/user-edit/education-form-modal/education-form-modal.component';
+import { IUpdateUserEducationItemDTO } from 'src/app/user/components/user-profile/interfaces/update-user-education-item-dto';
+import { IUserEducationDetails } from 'src/app/shared/interfaces/user-education';
 
 @Injectable({
   providedIn: 'root',
@@ -40,6 +43,15 @@ export class UserService {
     } else {
       throw throwError(() => new Error('Could not get current user id'));
     }
+  }
+
+  addUserEduction(
+    educationItem: IUpdateUserEducationItemDTO,
+  ): Observable<IUserEducationDetails> {
+    return this.http.post<IUserEducationDetails>(
+      `${environment.apiUrl}/education-infos`,
+      educationItem,
+    );
   }
 
   assignTechnologyToUser(

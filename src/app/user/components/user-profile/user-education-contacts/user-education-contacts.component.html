@@ -1,4 +1,4 @@
-<ng-container *ngIf="(userData$ | async)?.educationInfo as educationInfo">
+<ng-container *ngIf="userEducation$ | async as educationInfo">
   <div class="left-inner">
     <div class="upper-wrapper">
       <h3 class="mat-subtitle-2 primary">Education</h3>
@@ -14,7 +14,8 @@
       <button
         mat-icon-button
         class="icon-btn"
-        aria-label="Add education button">
+        aria-label="Add education button"
+        (click)="onEditEducation()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
@@ -34,7 +35,8 @@
           <button
             mat-icon-button
             class="icon-btn"
-            aria-label="Delete education button">
+            aria-label="Delete education button"
+            (click)="onDeleteEducation(education.id)">
             <mat-icon>delete_outline</mat-icon>
           </button>
         </div>

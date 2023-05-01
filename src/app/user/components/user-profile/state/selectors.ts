@@ -1,48 +1,54 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ITechnology } from 'src/app/shared/interfaces/technology';
 
+import { ITechnology } from 'src/app/shared/interfaces/technology';
 import { IUserBankInvoiceData } from 'src/app/shared/interfaces/user-bank-invoice-data';
+import { IUserEducationDetails } from 'src/app/shared/interfaces/user-education';
 import { IUserPersonalData } from 'src/app/shared/interfaces/user-personal-info-data';
 import { IUserSocialLinksData } from 'src/app/shared/interfaces/user-social-links-data';
 import { IUserProfileState } from 'src/app/user/components/user-profile/state/reducer';
 
+export interface IUserProfileFeatureState {
+  user: IUserProfileState;
+  'user-education': IUserEducationDetails[];
+}
+
 export const selectUserProfileFeature =
-  createFeatureSelector<IUserProfileState>('user-profile');
+  createFeatureSelector<IUserProfileFeatureState>('user-profile');
+
+export const selectUserSlice = createSelector(
+  selectUserProfileFeature,
+  (state: IUserProfileFeatureState) => state.user,
+);
 
 export const selectUser = createSelector(
-  selectUserProfileFeature,
+  selectUserSlice,
   (state: IUserProfileState) => state.user,
 );
 
 export const selectLoading = createSelector(
-  selectUserProfileFeature,
+  selectUserSlice,
   (state: IUserProfileState) => state.loading,
 );
 
 export const selectUserId = createSelector(
-  selectUserProfileFeature,
+  selectUserSlice,
   (state: IUserProfileState) => String(state.user?.id),
 );
 
 export const selectUserWorkInfo = createSelector(
-  selectUserProfileFeature,
+  selectUserSlice,
   (state: IUserProfileState) => state.user?.workHistory,
 );
 
-export const selectUserEducation = createSelector(
-  selectUserProfileFeature,
-  (state: IUserProfileState) => state.user?.educationInfo,
-);
-
 export const selectUserSkills = createSelector(
-  selectUserProfileFeature,
+  selectUserSlice,
   (state: IUserProfileState) => ({
     techStack: state.user?.techStack as ITechnology[],
   }),
 );
 
 export const selectUserBankInfo = createSelector(
-  selectUserProfileFeature,
+  selectUserSlice,
   ({ user }) =>
     ({
       individualEntrepreneurName: user?.individualEntrepreneurName,
@@ -60,7 +66,7 @@ export const selectUserBankInfo = createSelector(
 );
 
 export const selectUserSocialsInfo = createSelector(
-  selectUserProfileFeature,
+  selectUserSlice,
   ({ user }) =>
     ({
       upwork: user?.upwork,
@@ -71,7 +77,7 @@ export const selectUserSocialsInfo = createSelector(
 );
 
 export const selectUserPersonalInfo = createSelector(
-  selectUserProfileFeature,
+  selectUserSlice,
   ({ user }) =>
     ({
       name: user?.name,
@@ -83,7 +89,6 @@ export const selectUserPersonalInfo = createSelector(
       endDate: user?.endDate,
       endReason: user?.endReason,
       phone: user?.phone,
-
       avatarUrl: user?.avatarUrl,
     } as IUserPersonalData),
 );

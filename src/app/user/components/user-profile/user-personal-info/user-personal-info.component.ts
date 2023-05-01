@@ -4,7 +4,7 @@ import { UserPersonalInfoStatusIcons } from 'src/app/user/components/user-profil
 import { clipboardPersonalInfoRegistry } from 'src/app/user/components/user-profile/constants/clipboard-property-names-registries/clipboard-personal-info-registry';
 import { selectUserPersonalInfo } from 'src/app/user/components/user-profile/state/selectors';
 import { AbstractUserProfileComponent } from 'src/app/user/components/user-profile/abstract-user-profile-component';
-import { takeUntil } from 'rxjs';
+import { filter, takeUntil } from 'rxjs';
 import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
 import { PersonalInfoFormModalComponent } from 'src/app/user/components/user-profile/user-edit/personal-info-form-modal/personal-info-form-modal.component';
 import { IUserPersonalData } from 'src/app/shared/interfaces/user-personal-info-data';
@@ -27,15 +27,16 @@ export class UserPersonalInfoComponent extends AbstractUserProfileComponent {
       this.userData$,
     )
       .afterClosed()
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(
+        takeUntil(this.destroyed$),
+        filter((data) => data),
+      )
       .subscribe((data) => {
-        if (data) {
-          this.store.dispatch(
-            userProfileActions.updateUser({
-              user: { endReason: null, ...data },
-            }),
-          );
-        }
+        this.store.dispatch(
+          userProfileActions.updateUser({
+            user: { endReason: null, ...data },
+          }),
+        );
       });
   }
 }

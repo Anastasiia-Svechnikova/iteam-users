@@ -17,6 +17,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { UserProfileEffects } from 'src/app/user/components/user-profile/state/effects';
 import { TechnologiesFormModalComponent } from 'src/app/user/components/technologies-form-modal/technologies-form-modal.component';
 import { SettingsCellComponent } from './components/user-list/cell-components/settings-cell/settings-cell.component';
+import { userReducersMap } from 'src/app/user/user-reducers-map';
+import { UserEducationEffects } from 'src/app/user/components/user-profile/user-education-contacts/state/effects';
 
 const routes = [
   {
@@ -49,8 +51,8 @@ const routes = [
     SharedModule,
     HttpClientModule,
     ClipboardModule,
-    StoreModule.forFeature('user-profile', UserProfileReducer),
-    EffectsModule.forFeature([UserProfileEffects]),
+    StoreModule.forFeature('user-profile', userReducersMap),
+    EffectsModule.forFeature([UserProfileEffects, UserEducationEffects]),
     [RouterModule.forChild(routes)],
     AgGridModule,
   ],

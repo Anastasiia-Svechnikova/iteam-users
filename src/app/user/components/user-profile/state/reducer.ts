@@ -3,6 +3,7 @@ import { createReducer, on } from '@ngrx/store';
 import { ITechnology } from 'src/app/shared/interfaces/technology';
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
+import { userEducationActions } from 'src/app/user/components/user-profile/user-education-contacts/state/actions';
 
 export interface IUserProfileState {
   user: IUserDetails | null;
@@ -22,6 +23,9 @@ export const UserProfileReducer = createReducer(
     userProfileActions.updateUser,
     userProfileActions.assignTechnologyToUser,
     userProfileActions.removeTechnologyFromUser,
+    userEducationActions.addUserEducationItem,
+    userEducationActions.updateUserEducationItem,
+    userEducationActions.removeEducationItem,
     (state) => ({
       ...state,
       loading: true,
@@ -36,10 +40,16 @@ export const UserProfileReducer = createReducer(
       user: user,
     }),
   ),
-  on(userProfileActions.error, (state) => ({
-    ...state,
-    loading: false,
-  })),
+  on(
+    userProfileActions.error,
+    userEducationActions.addedUserEducationItem,
+    userEducationActions.updatedUserEducationItem,
+    userEducationActions.removedEducationItem,
+    (state) => ({
+      ...state,
+      loading: false,
+    }),
+  ),
 
   on(userProfileActions.assignedTechnologyToUser, (state, { technology }) => {
     if (state.user) {
