@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 
 import { IUserEducationDetails } from 'src/app/shared/interfaces/user-education';
 import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
-import { userEducationActions } from 'src/app/user/components/user-profile/user-education-contacts/state/actions';
+import { userEducationActions } from 'src/app/user/components/user-profile/user-education/state/actions';
 
 const initialState: IUserEducationDetails[] = [];
 

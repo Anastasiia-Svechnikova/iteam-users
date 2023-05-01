@@ -47,6 +47,14 @@ export const selectUserSkills = createSelector(
   }),
 );
 
+export const selectUserContacts = createSelector(
+  selectUserSlice,
+  (state: IUserProfileState) => ({
+    city: state.user?.city,
+    address: state.user?.address,
+  }),
+);
+
 export const selectUserBankInfo = createSelector(
   selectUserSlice,
   ({ user }) =>

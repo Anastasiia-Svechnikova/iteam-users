@@ -3,7 +3,7 @@ import { createReducer, on } from '@ngrx/store';
 import { ITechnology } from 'src/app/shared/interfaces/technology';
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
-import { userEducationActions } from 'src/app/user/components/user-profile/user-education-contacts/state/actions';
+import { userEducationActions } from 'src/app/user/components/user-profile/user-education/state/actions';
 
 export interface IUserProfileState {
   user: IUserDetails | null;

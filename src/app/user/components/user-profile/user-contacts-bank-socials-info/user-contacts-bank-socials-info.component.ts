@@ -12,57 +12,78 @@ import { userBankInfoTitles } from 'src/app/user/components/user-profile/constan
 import { clipboardBankSocialsRegistry } from 'src/app/user/components/user-profile/constants/clipboard-property-names-registries/clipboard-bank-socials-registy';
 import {
   selectUserBankInfo,
+  selectUserContacts,
   selectUserSocialsInfo,
 } from 'src/app/user/components/user-profile/state/selectors';
 import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
 import { AbstractUserProfileComponent } from 'src/app/user/components/user-profile/abstract-user-profile-component';
 import { userBankInfoValidationOptions } from 'src/app/user/components/user-profile/user-edit/constants/bank-validation-options';
 import { userSocialsValidationOptions } from 'src/app/user/components/user-profile/user-edit/constants/socials-validation-options';
+import { UserContactsInfoTitles } from 'src/app/user/components/user-profile/constants/user-contacts-info-titles';
 
 @Component({
   selector: 'app-user-bank-and-socials-info',
-  templateUrl: './user-bank-and-socials-info.component.html',
+  templateUrl: './user-contacts-bank-socials-info.component.html',
   styleUrls: [
-    './user-bank-and-socials-info.component.scss',
+    './user-contacts-bank-socials-info.component.scss',
     '../user-profile.component.scss',
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserBankAndSocialsInfoComponent extends AbstractUserProfileComponent {
+export class UserContactsBankSocialsInfoComponent extends AbstractUserProfileComponent {
   userBankData$ = this.store.select(selectUserBankInfo);
   userSocialsData$ = this.store.select(selectUserSocialsInfo);
+  userContacts$ = this.store.select(selectUserContacts);
 
   userBankInfoTitles = userBankInfoTitles;
   UserSocialLinksTitles = UserSocialLinksTitles;
-  clipboardRegistry = clipboardBankSocialsRegistry;
+  bankSocialsClipboardRegistry = clipboardBankSocialsRegistry;
 
   isUserBankDataEmpty$ = this.checkDataEmpty(this.userBankData$);
   isSocialsDataEmpty$ = this.checkDataEmpty(this.userSocialsData$);
 
-  onEditBySection(section: 'bank' | 'socials'): void {
-    const modalDataSet =
-      section === 'bank'
-        ? this.userBankData$.pipe(
-            map((userBankData) => ({
-              titles: userBankInfoTitles,
-              formData: userBankData,
-              header: 'Edit Bank Invoice Info',
-              style: 'double-column',
-              validationOptions: userBankInfoValidationOptions,
-            })),
-          )
-        : this.userSocialsData$.pipe(
-            map((userSocialsData) => ({
-              titles: UserSocialLinksTitles,
-              formData: userSocialsData,
-              header: 'Edit Social Links',
-              style: 'single-column',
-              validationOptions: userSocialsValidationOptions,
-            })),
-          );
+  onEditContacts(): void {
+    const dialogData = this.userContacts$.pipe(
+      map((user) => ({
+        titles: UserContactsInfoTitles,
+        formData: user,
+        header: 'Edit Address',
+        style: 'single-column',
+      })),
+    );
+    this.processEditModal(dialogData as Observable<textInputFormModalData>);
+  }
+
+  onEditBank(): void {
+    const dialogData = this.userBankData$.pipe(
+      map((userBankData) => ({
+        titles: userBankInfoTitles,
+        formData: userBankData,
+        header: 'Edit Bank Invoice Info',
+        style: 'double-column',
+        validationOptions: userBankInfoValidationOptions,
+      })),
+    );
+    this.processEditModal(dialogData as Observable<textInputFormModalData>);
+  }
+
+  onEditSocials(): void {
+    const dialogData = this.userSocialsData$.pipe(
+      map((userSocialsData) => ({
+        titles: UserSocialLinksTitles,
+        formData: userSocialsData,
+        header: 'Edit Social Links',
+        style: 'single-column',
+        validationOptions: userSocialsValidationOptions,
+      })),
+    );
+    this.processEditModal(dialogData as Observable<textInputFormModalData>);
+  }
+
+  private processEditModal(data: Observable<textInputFormModalData>): void {
     this.setModal<TextInputFormModalComponent, textInputFormModalData>(
       TextInputFormModalComponent,
-      modalDataSet as Observable<textInputFormModalData>,
+      data as Observable<textInputFormModalData>,
     )
       .afterClosed()
       .pipe(
@@ -74,7 +95,7 @@ export class UserBankAndSocialsInfoComponent extends AbstractUserProfileComponen
       });
   }
 
-  checkDataEmpty(
+  private checkDataEmpty(
     data$: Observable<IUserBankInvoiceData | IUserSocialLinksData>,
   ): Observable<boolean> {
     return data$.pipe(

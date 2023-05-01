@@ -55,39 +55,3 @@
       title="education"></app-empty-message>
   </div>
 </ng-container>
-<ng-container *ngIf="userData$ | async as userContactsData">
-  <div class="left-inner">
-    <div class="upper-wrapper">
-      <h3 class="mat-subtitle-2 primary">Address</h3>
-      <button
-        mat-icon-button
-        class="icon-btn"
-        aria-label="Edit content button"
-        (click)="onEditContacts()">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        class="icon-btn"
-        aria-label="Copy content button"
-        (click)="
-          clipboardService.copyToClipboard(
-            { address: userContactsData.address, city: userContactsData.city },
-            clipboardRegistry
-          )
-        ">
-        <mat-icon>content_copy</mat-icon>
-      </button>
-    </div>
-    <p>{{ userContactsData.address }}</p>
-    <app-empty-message
-      *ngIf="!userContactsData.address"
-      title="address"></app-empty-message>
-    <h4
-      *ngIf="userContactsData.city"
-      class="mat-subtitle-1">
-      City:
-    </h4>
-    <p>{{ userContactsData.city }}</p>
-  </div>
-</ng-container>

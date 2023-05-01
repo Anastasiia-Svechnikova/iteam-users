@@ -12,16 +12,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from 'src/app/shared/shared.module';
-import { UserBankAndSocialsInfoComponent } from 'src/app/user/components/user-profile/user-bank-and-socials-info/user-bank-and-socials-info.component';
 import { UserProfileComponent } from 'src/app/user/components/user-profile/user-profile.component';
 import { EmptyMessageComponent } from 'src/app/user/components/user-profile/empty-message/empty-message.component';
-import { UserEducationContactsComponent } from 'src/app/user/components/user-profile/user-education-contacts/user-education-contacts.component';
 import { UserPersonalInfoComponent } from 'src/app/user/components/user-profile/user-personal-info/user-personal-info.component';
 import { UserSkillsComponent } from 'src/app/user/components/user-profile/user-skills/user-skills.component';
 import { UserWorkInfoComponent } from 'src/app/user/components/user-profile/user-work-info/user-work-info.component';
 import { TextInputFormModalComponent } from 'src/app/user/components/user-profile/user-edit/text-input-form-modal/text-input-form-modal.component';
 import { PersonalInfoFormModalComponent } from 'src/app/user/components/user-profile/user-edit/personal-info-form-modal/personal-info-form-modal.component';
 import { EducationFormModalComponent } from './user-edit/education-form-modal/education-form-modal.component';
+import { UserContactsBankSocialsInfoComponent } from 'src/app/user/components/user-profile/user-contacts-bank-socials-info/user-contacts-bank-socials-info.component';
+import { UserEducationComponent } from 'src/app/user/components/user-profile/user-education/user-education.component';
 
 const routes = [
   {
@@ -33,11 +33,11 @@ const routes = [
   declarations: [
     UserProfileComponent,
     UserPersonalInfoComponent,
-    UserEducationContactsComponent,
+    UserEducationComponent,
     UserWorkInfoComponent,
     EmptyMessageComponent,
     UserSkillsComponent,
-    UserBankAndSocialsInfoComponent,
+    UserContactsBankSocialsInfoComponent,
     TextInputFormModalComponent,
     PersonalInfoFormModalComponent,
     EducationFormModalComponent,

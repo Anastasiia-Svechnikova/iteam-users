@@ -18,7 +18,7 @@ import { UserProfileEffects } from 'src/app/user/components/user-profile/state/e
 import { TechnologiesFormModalComponent } from 'src/app/user/components/technologies-form-modal/technologies-form-modal.component';
 import { SettingsCellComponent } from './components/user-list/cell-components/settings-cell/settings-cell.component';
 import { userReducersMap } from 'src/app/user/user-reducers-map';
-import { UserEducationEffects } from 'src/app/user/components/user-profile/user-education-contacts/state/effects';
+import { UserEducationEffects } from 'src/app/user/components/user-profile/user-education/state/effects';
 
 const routes = [
   {

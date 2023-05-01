@@ -7,8 +7,8 @@ import { IUserEducationDetails } from 'src/app/shared/interfaces/user-education'
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
 import { selectUserId } from 'src/app/user/components/user-profile/state/selectors';
-import { userEducationActions } from 'src/app/user/components/user-profile/user-education-contacts/state/actions';
-import { UserEducationService } from 'src/app/user/components/user-profile/user-education-contacts/user-education.service';
+import { userEducationActions } from 'src/app/user/components/user-profile/user-education/state/actions';
+import { UserEducationService } from 'src/app/user/components/user-profile/user-education/user-education.service';
 
 @Injectable()
 export class UserEducationEffects {

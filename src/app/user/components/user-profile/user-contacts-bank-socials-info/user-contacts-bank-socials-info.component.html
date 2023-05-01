@@ -1,3 +1,34 @@
+<ng-container *ngIf="userContacts$ | async as userContactsData">
+  <div class="left-inner">
+    <div class="upper-wrapper">
+      <h3 class="mat-subtitle-2 primary">Address</h3>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Edit content button"
+        (click)="onEditContacts()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="icon-btn"
+        aria-label="Copy content button"
+        (click)="clipboardService.copyToClipboard(userContactsData)">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+    </div>
+    <p>{{ userContactsData.address }}</p>
+    <app-empty-message
+      *ngIf="!userContactsData.address"
+      title="address"></app-empty-message>
+    <h4
+      *ngIf="userContactsData.city"
+      class="mat-subtitle-1">
+      City:
+    </h4>
+    <p>{{ userContactsData.city }}</p>
+  </div>
+</ng-container>
 <ng-container *ngIf="userBankData$ | async as userBankData">
   <div class="left-inner">
     <div>
@@ -7,7 +38,7 @@
           mat-icon-button
           class="icon-btn"
           aria-label="Edit content button"
-          (click)="onEditBySection('bank')">
+          (click)="onEditBank()">
           <mat-icon>edit</mat-icon>
         </button>
         <button
@@ -15,7 +46,10 @@
           class="icon-btn"
           aria-label="Copy content button"
           (click)="
-            clipboardService.copyToClipboard(userBankData, clipboardRegistry)
+            clipboardService.copyToClipboard(
+              userBankData,
+              bankSocialsClipboardRegistry
+            )
           ">
           <mat-icon>content_copy</mat-icon>
         </button>
@@ -43,7 +77,7 @@
           mat-icon-button
           class="icon-btn"
           aria-label="Edit content button"
-          (click)="onEditBySection('socials')">
+          (click)="onEditSocials()">
           <mat-icon>edit</mat-icon>
         </button>
         <button
@@ -51,7 +85,10 @@
           class="icon-btn"
           aria-label="Copy content button"
           (click)="
-            clipboardService.copyToClipboard(userSocialsData, clipboardRegistry)
+            clipboardService.copyToClipboard(
+              userSocialsData,
+              bankSocialsClipboardRegistry
+            )
           ">
           <mat-icon>content_copy</mat-icon>
         </button>
