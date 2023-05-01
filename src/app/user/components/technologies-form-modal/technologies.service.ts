@@ -23,7 +23,7 @@ export class TechnologiesService {
     );
   }
 
-  deleteTechnologyFromRegistry(id: string): Observable<void> {
+  deleteTechnology(id: string): Observable<void> {
     return this.http.delete<void>(`${environment.apiUrl}/technologies/${id}`);
   }
 }

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 
@@ -36,9 +36,17 @@ export class SiteLayoutComponent implements OnInit {
     this.store.dispatch(mainUserActions.loadCurrentUser());
   }
 
-  setHeader(): void {
-    this.title =
-      this.route.snapshot.firstChild?.data['header'] ||
-      this.route.snapshot.firstChild?.firstChild?.data['header'];
+  private setHeader(): void {
+    const finalChild = this.getFinalRouterChild(this.route.snapshot.firstChild);
+    this.title = finalChild?.data['header'];
+  }
+
+  private getFinalRouterChild(
+    firstChild: ActivatedRouteSnapshot | null,
+  ): ActivatedRouteSnapshot | null {
+    if (!firstChild?.firstChild) {
+      return firstChild;
+    }
+    return this.getFinalRouterChild(firstChild?.firstChild);
   }
 }
