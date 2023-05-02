@@ -2,6 +2,7 @@ import { ColDef, ICellRendererParams } from 'ag-grid-community';
 
 import { EditProjectComponent } from 'src/app/project/project-list/edit-project/edit-project.component';
 import { StatusCellComponent } from 'src/app/shared/components/ag-grid/status-cell/status-cell.component';
+import { colors } from 'src/app/shared/constants/colors';
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 
 export const ProjectListColDefs: ColDef[] = [
@@ -16,7 +17,7 @@ export const ProjectListColDefs: ColDef[] = [
   },
   {
     headerName: 'Status',
-    flex: 2,
+    flex: 3,
     cellRenderer: StatusCellComponent,
     cellRendererParams: {
       value: (params: ICellRendererParams) => params.data.status,
@@ -25,19 +26,19 @@ export const ProjectListColDefs: ColDef[] = [
           status: 'active',
           icon: 'sync',
           name: 'Active',
-          color: 'rgba(25, 118, 211, 1)',
+          color: colors.primaryColor,
         },
         {
           status: 'closed',
           icon: 'check',
           name: 'Finished',
-          color: 'rgb(8, 205, 90)',
+          color: colors.greenColor,
         },
         {
           status: 'on hold',
           icon: 'pause',
           name: 'Frozen',
-          color: 'rgba(138, 137, 137, 0.748)',
+          color: colors.lightCaptionColor,
         },
       ],
     },
