@@ -28,12 +28,11 @@ export class UserEducationService {
   }
 
   updateUserEducationById(
-    id: string,
+    id: number,
     educationItem: IUpdateUserEducationItemDTO,
   ): Observable<IUserEducationDetails> {
-    // PATCH  endpoint will be here
-    return this.http.post<IUserEducationDetails>(
-      `${environment.apiUrl}/education-infos`,
+    return this.http.patch<IUserEducationDetails>(
+      `${environment.apiUrl}/education-infos/${id}`,
       educationItem,
     );
   }

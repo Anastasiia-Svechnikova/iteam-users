@@ -16,7 +16,18 @@ export const UserEducationReducer = createReducer(
     (state, { educationItem }) => [...state, educationItem],
   ),
 
-  on(userEducationActions.removedEducationItem, (state, { educationId }) =>
-    state.filter((item) => item.id !== educationId),
+  on(userEducationActions.removedEducationItem, (state, { id }) =>
+    state.filter((item) => item.id !== id),
+  ),
+
+  on(
+    userEducationActions.updatedUserEducationItem,
+    (state, { educationItem }) =>
+      state.map((item) => {
+        if (item.id === educationItem.id) {
+          return educationItem;
+        }
+        return item;
+      }),
   ),
 );

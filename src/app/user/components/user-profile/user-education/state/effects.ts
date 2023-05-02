@@ -42,14 +42,14 @@ export class UserEducationEffects {
   deleteEducationItem$ = createEffect(() => {
     return this.actions.pipe(
       ofType(userEducationActions.removeEducationItem),
-      switchMap(({ educationId }) => {
-        return this._educationService.removeUserEduction(educationId).pipe(
+      switchMap(({ id }) => {
+        return this._educationService.removeUserEduction(id).pipe(
           map(() => {
             this._snackbarService.openSnackBar(
               'User education has been successfully deleted',
             );
             return userEducationActions.removedEducationItem({
-              educationId,
+              id,
             });
           }),
           catchError((error) => {
@@ -60,6 +60,33 @@ export class UserEducationEffects {
             return of(userProfileActions.error({ error }));
           }),
         );
+      }),
+    );
+  });
+
+  updateEducationItem$ = createEffect(() => {
+    return this.actions.pipe(
+      ofType(userEducationActions.updateUserEducationItem),
+      switchMap(({ id, educationItem }) => {
+        return this._educationService
+          .updateUserEducationById(id, educationItem)
+          .pipe(
+            map((updatedEducationItem: IUserEducationDetails) => {
+              this._snackbarService.openSnackBar(
+                'User education has been successfully updated',
+              );
+              return userEducationActions.updatedUserEducationItem({
+                educationItem: updatedEducationItem,
+              });
+            }),
+            catchError((error) => {
+              console.log(error.message);
+              this._snackbarService.openSnackBar(
+                'Something went wrong when updating user education...',
+              );
+              return of(userProfileActions.error({ error }));
+            }),
+          );
       }),
     );
   });

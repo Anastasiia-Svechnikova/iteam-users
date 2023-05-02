@@ -15,12 +15,12 @@ export const userEducationActions = createActionGroup({
     }>(),
     'Update User Education Item': props<{
       educationItem: IUpdateUserEducationItemDTO;
-      id: string;
+      id: number;
     }>(),
     'Updated User Education Item': props<{
       educationItem: IUserEducationDetails;
     }>(),
-    'Remove Education Item': props<{ educationId: number }>(),
-    'Removed Education Item': props<{ educationId: number }>(),
+    'Remove Education Item': props<{ id: number }>(),
+    'Removed Education Item': props<{ id: number }>(),
   },
 });

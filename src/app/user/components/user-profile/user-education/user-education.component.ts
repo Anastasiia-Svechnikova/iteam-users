@@ -40,7 +40,12 @@ export class UserEducationComponent extends AbstractUserProfileComponent {
       )
       .subscribe((editedData) => {
         if (id) {
-          //  dispatch PATCH
+          this.store.dispatch(
+            userEducationActions.updateUserEducationItem({
+              id,
+              educationItem: editedData,
+            }),
+          );
         } else {
           this.store.dispatch(
             userEducationActions.addUserEducationItem({
@@ -52,8 +57,6 @@ export class UserEducationComponent extends AbstractUserProfileComponent {
   }
 
   onDeleteEducation(id: number): void {
-    this.store.dispatch(
-      userEducationActions.removeEducationItem({ educationId: id }),
-    );
+    this.store.dispatch(userEducationActions.removeEducationItem({ id }));
   }
 }
