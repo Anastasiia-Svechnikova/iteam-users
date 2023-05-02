@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { catchError, of, switchMap, tap } from 'rxjs';
+import { catchError, Observable, of, switchMap, tap } from 'rxjs';
 
 import { ProjectService } from 'src/app/project/services/project.service';
 import { IProjectDetailsData } from 'src/app/shared/interfaces/project-details';
+import { IUpdateProjectDTO } from 'src/app/shared/interfaces/update-project';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 export interface ProjectListState {
@@ -47,6 +48,39 @@ export class ProjectListStore extends ComponentStore<ProjectListState> {
       }),
     );
   });
+
+  updateProject$ = this.effect(
+    (
+      args$: Observable<{
+        projectId: string;
+        updatedProject: IUpdateProjectDTO;
+      }>,
+    ) =>
+      args$.pipe(
+        switchMap((updateOptions) => {
+          this.setLoading(true);
+          return this.projectService.updateProjectById(
+            updateOptions.projectId,
+            updateOptions.updatedProject,
+          );
+        }),
+        tap((updatedProject) => {
+          this.setLoading(false);
+          this.patchState((state) => ({
+            projects: state.projects?.map((project) =>
+              project.id === updatedProject.id ? updatedProject : project,
+            ),
+          }));
+        }),
+        catchError((error) => {
+          this.setLoading(false);
+          this.snackbarService.openSnackBar(
+            `Project Update Failed: ${error.message}`,
+          );
+          return of(null);
+        }),
+      ),
+  );
 
   private setLoading(state: boolean): void {
     this.patchState({ loading: state });

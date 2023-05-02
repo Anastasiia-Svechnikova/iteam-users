@@ -1,6 +1,10 @@
 @import '/src/styles/_variables.scss';
 
 .wrapper {
+  padding-top: 8px;
+}
+
+.selected-option {
   display: flex;
   align-items: center;
   gap: $xxs-size;

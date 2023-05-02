@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 
 import { IStatusCellParams } from 'src/app/shared/interfaces/status-cell-params';
-import { IStatusesData } from 'src/app/shared/interfaces/status-data';
+import { IStatusData } from 'src/app/shared/interfaces/status-data';
 
 @Component({
   selector: 'app-status-cell',
@@ -12,15 +13,29 @@ import { IStatusesData } from 'src/app/shared/interfaces/status-data';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StatusCellComponent implements ICellRendererAngularComp {
-  status!: keyof IStatusesData;
-  statusesData!: IStatusesData;
+  currentStatus?: IStatusData;
+  statusesData!: IStatusData[];
+  statusControl = new FormControl();
+  params!: ICellRendererParams;
 
   agInit(params: ICellRendererParams & IStatusCellParams): void {
-    this.status = params.value(params);
     this.statusesData = params.statusesData;
+    this.params = params;
+    this.currentStatus = this.statusesData.find(
+      (obj) => obj.status === params.value(params),
+    );
+    this.statusControl.setValue(this.currentStatus ? this.currentStatus : '');
   }
 
   refresh(): boolean {
     return false;
+  }
+
+  onChangeStatus(status: string, elementId: string, elementName: string): void {
+    this.params.context.componentParent.changeStatus(
+      status,
+      elementId,
+      elementName,
+    );
   }
 }

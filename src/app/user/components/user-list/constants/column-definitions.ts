@@ -29,20 +29,23 @@ export const UserListColDefs: ColDef[] = [
     cellRenderer: StatusCellComponent,
     cellRendererParams: {
       value: (params: ICellRendererParams) => params.data.status,
-      statusesData: {
-        archived: {
+      statusesData: [
+        {
+          status: 'archived',
           icon: 'person_remove',
           name: 'Disabled',
           color: 'rgba(138, 137, 137, 0.748)',
         },
-        unarchived: {
+        {
+          status: 'unarchived',
           icon: 'how_to_reg',
           name: 'Active',
           color: 'rgb(8, 205, 90)',
         },
-      },
+      ],
     },
   },
+
   {
     headerName: 'CV',
     cellRenderer: (params: ICellRendererParams): string => {

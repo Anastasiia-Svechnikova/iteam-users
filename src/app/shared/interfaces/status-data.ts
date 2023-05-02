@@ -1,12 +1,6 @@
-interface IStatusData {
+export interface IStatusData {
+  status: string;
   icon: string;
   name: string;
   color: string;
-}
-export interface IStatusesData {
-  archived?: IStatusData;
-  unarchived?: IStatusData;
-  active?: IStatusData;
-  'on hold'?: IStatusData;
-  closed?: IStatusData;
 }

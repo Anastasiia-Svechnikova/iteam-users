@@ -2,6 +2,7 @@ import { ColDef, ICellRendererParams } from 'ag-grid-community';
 
 import { EditProjectComponent } from 'src/app/project/project-list/edit-project/edit-project.component';
 import { StatusCellComponent } from 'src/app/shared/components/ag-grid/status-cell/status-cell.component';
+import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 
 export const ProjectListColDefs: ColDef[] = [
   {
@@ -19,34 +20,47 @@ export const ProjectListColDefs: ColDef[] = [
     cellRenderer: StatusCellComponent,
     cellRendererParams: {
       value: (params: ICellRendererParams) => params.data.status,
-      statusesData: {
-        active: {
-          icon: 'playlist_play',
+      statusesData: [
+        {
+          status: 'active',
+          icon: 'sync',
           name: 'Active',
-          color: 'rgb(220,205,26)',
+          color: 'rgba(25, 118, 211, 1)',
         },
-        closed: {
-          icon: 'playlist_add_check',
+        {
+          status: 'closed',
+          icon: 'check',
           name: 'Finished',
           color: 'rgb(8, 205, 90)',
         },
-        'on hold': {
-          icon: 'archive',
+        {
+          status: 'on hold',
+          icon: 'pause',
           name: 'Frozen',
           color: 'rgba(138, 137, 137, 0.748)',
         },
-      },
+      ],
     },
   },
   {
-    headerName: 'Full Name',
+    headerName: 'Team Lead',
     valueGetter: (params): string => {
-      return params.data.mainParticipant.name ||
-        params.data.mainParticipant.surname
+      return params.data.mainParticipant
         ? `${params.data.mainParticipant.name} ${params.data.mainParticipant.surname}`
         : 'N/A';
     },
     flex: 2,
+  },
+  {
+    headerName: 'Secondary Assign',
+    valueGetter: (params): string => {
+      return params.data.secondaryParticipants
+        ? params.data.secondaryParticipants
+            .map((user: IUserDetails) => `${user.name} ${user.surname}`)
+            .join(', ')
+        : 'N/A';
+    },
+    flex: 3,
   },
   {
     headerName: 'Client',

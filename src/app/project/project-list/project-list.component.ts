@@ -2,15 +2,16 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { GridApi } from 'ag-grid-community';
 import { takeUntil } from 'rxjs';
-import { ProjectListColDefs } from 'src/app/project/project-list/constants/column-definitions';
 
+import { ProjectListColDefs } from 'src/app/project/project-list/constants/column-definitions';
 import { ProjectListStore } from 'src/app/project/project-list/project-list.component.store';
 import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
 
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
-  styleUrls: ['./project-list.component.scss'],
+  styleUrls: ['./project-list.component.scss',
+              '../../shared/styles/ag-grid.scss'],
   providers: [ProjectListStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -36,6 +37,13 @@ export class ProjectListComponent
       .subscribe((value) => {
         this.gridApi.setQuickFilter(value);
       });
+  }
+
+  changeStatus(status: string, projectId: string, projectName: string): void {
+    this.projectListStore.updateProject$({
+      projectId: projectId,
+      updatedProject: { name: projectName, status: status },
+    });
   }
 
   onGridReady(params: { api: GridApi }): void {

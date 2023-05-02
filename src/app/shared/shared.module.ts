@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatRippleModule } from '@angular/material/core';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -26,7 +27,7 @@ import { StatusCellComponent } from './components/ag-grid/status-cell/status-cel
     ConfirmDialogDirective,
     CopyCellComponent,
     StatusCellComponent,
-    LoaderComponent
+    LoaderComponent,
   ],
   imports: [
     MatProgressSpinnerModule,
@@ -35,6 +36,8 @@ import { StatusCellComponent } from './components/ag-grid/status-cell/status-cel
     MatButtonModule,
     MatDialogModule,
     ClipboardModule,
+    MatSelectModule,
+    ReactiveFormsModule,
   ],
   exports: [
     LayoutModule,

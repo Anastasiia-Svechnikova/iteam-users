@@ -1,0 +1,20 @@
+@import '/src/styles/_variables.scss';
+@import '/src/styles/_media-mixins.scss';
+
+.wrapper {
+  margin: $xxl-size auto;
+  height: 70vh;
+  width: 280%;
+
+  @include media(l-mobile) {
+    width: 200%;
+  }
+
+  @include media(tablet) {
+    width: 130%;
+  }
+
+  @include media(l-tablet){
+    width: 90%;
+  }
+}

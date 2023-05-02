@@ -1,8 +1,27 @@
 <p
-  *ngIf="status; else notApplicable"
-  class="wrapper"
-  [ngStyle]="{ color: statusesData[status]!.color }">
-  <mat-icon>{{ statusesData[status]!.icon }}</mat-icon>
-  {{ statusesData[status]!.name }}
+  *ngIf="statusesData"
+  class="wrapper">
+  <mat-select
+    [formControl]="statusControl"
+    (selectionChange)="
+      onChangeStatus(
+        statusControl.value.status,
+        params.data.id,
+        params.data.name
+      )
+    ">
+    <mat-select-trigger
+      class="selected-option"
+      [ngStyle]="{ color: statusControl.value.color }">
+      <mat-icon>{{ statusControl.value.icon }}</mat-icon>
+      {{ statusControl.value.name }}
+    </mat-select-trigger>
+    <mat-option
+      *ngFor="let status of statusesData"
+      [ngStyle]="{ color: status.color }"
+      [value]="status">
+      <mat-icon>{{ status.icon }}</mat-icon>
+      {{ status.name }}
+    </mat-option>
+  </mat-select>
 </p>
-<ng-template #notApplicable>N/A</ng-template>
