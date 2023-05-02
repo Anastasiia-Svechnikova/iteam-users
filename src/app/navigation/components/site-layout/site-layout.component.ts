@@ -36,7 +36,7 @@ export class SiteLayoutComponent implements OnInit {
     this.store.dispatch(mainUserActions.loadCurrentUser());
   }
 
-  private setHeader(): void {
+  setHeader(): void {
     const finalChild = this.getFinalRouterChild(this.route.snapshot.firstChild);
     this.title = finalChild?.data['header'];
   }
