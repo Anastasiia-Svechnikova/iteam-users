@@ -2,7 +2,6 @@ import { ColDef, ICellRendererParams } from 'ag-grid-community';
 
 import { CopyCellComponent } from 'src/app/shared/components/ag-grid/copy-cell/copy-cell.component';
 import { StatusCellComponent } from 'src/app/shared/components/ag-grid/status-cell/status-cell.component';
-import { ArchiveCellComponent } from 'src/app/user/components/user-list/cell-components/archive-cell/archive-cell.component';
 import { EditUserCellComponent } from 'src/app/user/components/user-list/cell-components/edit-user-cell/edit-user-cell.component';
 import { ProjectsCellComponent } from 'src/app/user/components/user-list/cell-components/projects-cell/projects-cell.component';
 
@@ -23,11 +22,11 @@ export const UserListColDefs: ColDef[] = [
       value: (params: ICellRendererParams) => params.data.email,
     },
     getQuickFilterText: (params): string => params.data.email,
-    flex: 6,
+    flex: 4,
   },
   {
     headerName: 'Status',
-    flex: 4,
+    flex: 3,
     cellRenderer: StatusCellComponent,
     cellRendererParams: {
       value: (params: ICellRendererParams) => params.data.status,
@@ -66,11 +65,6 @@ export const UserListColDefs: ColDef[] = [
     flex: 2,
   },
   { headerName: 'Projects', cellRenderer: ProjectsCellComponent, flex: 3 },
-  {
-    headerName: 'Activate',
-    cellRenderer: ArchiveCellComponent,
-    flex: 2,
-  },
   {
     headerName: 'Edit User',
     cellRenderer: EditUserCellComponent,

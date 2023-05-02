@@ -9,7 +9,7 @@
       [routerLink]="['/dashboard/project', project.id]">
       {{ project.name }}
     </a>
-    <p class="separator">{{ last ? '' : ', ' }}</p>
+    <span class="separator">{{ last ? '' : ', ' }}</span>
   </div>
 </div>
 <ng-template #notApplicable>N/A</ng-template>
