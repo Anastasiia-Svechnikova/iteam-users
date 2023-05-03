@@ -8,6 +8,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
 
@@ -43,6 +44,7 @@ const routes = [
     EducationFormModalComponent,
   ],
   imports: [
+    MatSlideToggleModule,
     MatSelectModule,
     MatNativeDateModule,
     MatDatepickerModule,

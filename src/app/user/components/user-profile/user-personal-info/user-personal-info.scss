@@ -45,7 +45,8 @@
 }
 
 .terms {
-  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
 }
 
 .avatar {
@@ -72,6 +73,11 @@
   transform: scale(0.9);
 }
 
+.birthday {
+  font-size: $xs-icon-size;
+  color: $primary-color;
+}
+
 .detail {
   display: flex;
   align-items: center;
@@ -85,9 +91,15 @@
   color: $light-subtitle-color;
 }
 
-.birthday {
-  font-size: $xs-icon-size;
-  color: $primary-color;
+.project-status {
+  margin-top: auto;
+
+  & .mat-icon {
+    position: absolute;
+    top: -35%;
+    right: -$xxs-size;
+    color: inherit;
+  }
 }
 
 %status {
@@ -104,4 +116,28 @@
 .archived {
   @extend %status;
   color: $base-color;
+}
+
+.on {
+  position: relative;
+  width: $l-size;
+  height: $s-size;
+  background-color: $light-accent-color;
+  color: $dark-accent-color;
+  border-radius: $xs-size;
+}
+
+.off {
+  @extend .on;
+  background-color: $light-caption-color;
+  color: $base-header-color;
+}
+
+.bg-circle {
+  position: absolute;
+  right: 0;
+  width: $s-size;
+  height: $s-size;
+  background-color: $white-bg-color;
+  border-radius: 50%;
 }

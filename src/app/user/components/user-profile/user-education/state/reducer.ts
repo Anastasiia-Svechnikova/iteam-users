@@ -13,7 +13,7 @@ export const UserEducationReducer = createReducer(
 
   on(
     userEducationActions.addedUserEducationItem,
-    (state, { educationItem }) => [...state, educationItem],
+    (state, { educationItem }) => [educationItem, ...state],
   ),
 
   on(userEducationActions.removedEducationItem, (state, { id }) =>

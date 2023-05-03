@@ -1,7 +1,9 @@
+import { UserStatus } from 'src/app/shared/constants/user-status';
+
 export interface IUserPersonalData {
   name: string;
   surname: string;
-  status: 'archived' | 'unarchived';
+  status: UserStatus;
   avatarUrl: string;
   birthday: string;
   email: string;
@@ -9,4 +11,5 @@ export interface IUserPersonalData {
   endDate: string;
   endReason: string;
   phone: string;
+  isOnProject?: boolean;
 }

@@ -98,5 +98,6 @@ export const selectUserPersonalInfo = createSelector(
       endReason: user?.endReason,
       phone: user?.phone,
       avatarUrl: user?.avatarUrl,
+      isOnProject: Boolean(user?.workHistory.length),
     } as IUserPersonalData),
 );
