@@ -13,12 +13,12 @@ import { MatRippleModule } from '@angular/material/core';
 import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule } from '@angular/router';
 
+import { CopyCellComponent } from 'src/app/shared/components/ag-grid/copy-cell/copy-cell.component';
+import { StatusCellComponent } from 'src/app/shared/components/ag-grid/status-cell/status-cell.component';
+import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/confirm-modal.component';
 import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custom-icon.component';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 import { ConfirmDialogDirective } from 'src/app/shared/directives/confirm-dialog.directive';
-import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
-import { CopyCellComponent } from './components/ag-grid/copy-cell/copy-cell.component';
-import { StatusCellComponent } from './components/ag-grid/status-cell/status-cell.component';
 
 @NgModule({
   declarations: [

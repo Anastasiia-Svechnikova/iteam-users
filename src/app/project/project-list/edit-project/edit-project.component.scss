@@ -1,10 +1,15 @@
 @import '/src/styles/_variables.scss';
 @import '/src/styles/color-palette';
 
+.wrapper{
+  height: $xl-size;
+  display: flex;
+  align-items: center;
+}
+
 .action-icon {
   cursor: pointer;
   color: $base-color;
-  padding-top: 8px;
 }
 
 .action-icon:hover {

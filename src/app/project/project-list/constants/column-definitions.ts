@@ -9,16 +9,17 @@ export const ProjectListColDefs: ColDef[] = [
   {
     headerName: 'Project Name',
     field: 'name',
-    flex: 2,
+    flex: 4,
   },
   {
     field: 'description',
-    flex: 3,
+    flex: 8,
   },
   {
     headerName: 'Status',
-    flex: 3,
+    flex: 7,
     cellRenderer: StatusCellComponent,
+    cellStyle: { padding: 0 },
     cellRendererParams: {
       value: (params: ICellRendererParams) => params.data.status,
       statusesData: [
@@ -50,24 +51,24 @@ export const ProjectListColDefs: ColDef[] = [
         ? `${params.data.mainParticipant.name} ${params.data.mainParticipant.surname}`
         : 'N/A';
     },
-    flex: 2,
+    flex: 6,
   },
   {
-    headerName: 'Secondary Assign',
+    headerName: 'Secondary Participant',
     valueGetter: (params): string => {
-      return params.data.secondaryParticipants
+      return params.data.secondaryParticipants.length
         ? params.data.secondaryParticipants
             .map((user: IUserDetails) => `${user.name} ${user.surname}`)
             .join(', ')
         : 'N/A';
     },
-    flex: 3,
+    flex: 8,
   },
   {
     headerName: 'Client',
-    flex: 2,
+    flex: 4,
     cellRenderer: (params: ICellRendererParams) =>
       params.data.client ? params.data.client.name : 'N/A',
   },
-  { headerName: 'Edit', flex: 1, cellRenderer: EditProjectComponent },
+  { headerName: 'Edit', flex: 4, cellRenderer: EditProjectComponent },
 ];

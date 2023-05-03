@@ -18,6 +18,7 @@
     </mat-select-trigger>
     <mat-option
       *ngFor="let status of statusesData"
+      class="mat-primary"
       [ngStyle]="{ color: status.color }"
       [value]="status">
       <mat-icon>{{ status.icon }}</mat-icon>

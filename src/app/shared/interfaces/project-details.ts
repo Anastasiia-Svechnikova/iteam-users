@@ -17,8 +17,8 @@ export interface IProjectDetailsData {
   fixedPrice: number;
   mainParticipant: IUserDetails[];
   secondaryParticipants: IUserDetails[];
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   endReason: string;
   status: string;
   client: IClientDetailsData;

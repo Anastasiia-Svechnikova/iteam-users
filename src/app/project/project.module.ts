@@ -6,9 +6,9 @@ import { RouterModule } from '@angular/router';
 import { AgGridModule } from 'ag-grid-angular';
 
 import { HeaderTitles } from 'src/app/navigation/models/header-titles';
+import { EditProjectComponent } from 'src/app/project/project-list/edit-project/edit-project.component';
+import { ProjectListComponent } from 'src/app/project/project-list/project-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ProjectListComponent } from './project-list/project-list.component';
-import { EditProjectComponent } from './project-list/edit-project/edit-project.component';
 
 const routes = [
   {
