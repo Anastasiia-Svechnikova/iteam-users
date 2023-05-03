@@ -18,7 +18,6 @@ import { IUserPersonalData } from 'src/app/shared/interfaces/user-personal-info-
 export class UserPersonalInfoComponent extends AbstractUserProfileComponent {
   userData$ = this.store.select(selectUserPersonalInfo);
   statusIcons = UserPersonalInfoStatusIcons;
-
   clipboardRegistry = clipboardPersonalInfoRegistry;
 
   onEditPersonal(): void {

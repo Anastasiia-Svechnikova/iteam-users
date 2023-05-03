@@ -16,10 +16,12 @@ export class TechnologiesService {
     return this.http.get<ITechnology[]>(`${environment.apiUrl}/technologies`);
   }
 
-  addNewTechnology(newTechnology: INewTechnology): Observable<ITechnology> {
-    return this.http.post<ITechnology>(
+  addNewTechnologies(
+    newTechnologies: INewTechnology[],
+  ): Observable<ITechnology[]> {
+    return this.http.post<ITechnology[]>(
       `${environment.apiUrl}/technologies`,
-      newTechnology,
+      newTechnologies,
     );
   }
 

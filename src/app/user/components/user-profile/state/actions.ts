@@ -14,15 +14,11 @@ export const userProfileActions = createActionGroup({
     Error: props<{ error: string }>(),
     'Update User': props<{ user: IUpdateUserDTO }>(),
     'Updated User': props<{ user: IUserDetails }>(),
-    'Assign Technology To User': props<{
-      technology: ITechnology;
+    'Update User Technologies': props<{
+      technologies: Array<ITechnology | INewTechnology>;
     }>(),
-    'Add New Technology and Assign To User': props<{
-      technology: INewTechnology;
+    'Updated User Technologies': props<{
+      updatedTechnologies: ITechnology[];
     }>(),
-    'Assigned Technology To User': props<{ technology: ITechnology }>(),
-    'Assigned Technologies To User': props<{ technologies: ITechnology[] }>(),
-    'Remove Technology From User': props<{ technologyId: string }>(),
-    'Removed Technology From User': props<{ technologyId: string }>(),
   },
 });

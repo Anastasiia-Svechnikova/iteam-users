@@ -104,9 +104,9 @@ export class TechnologiesFormModalComponent
 
     return this.allTechnologies$.pipe(
       map((technologies) => {
-        return technologies.filter(({ title }) =>
-          title.toLowerCase().includes(filterValue),
-        );
+        return technologies.filter(({ title }) => {
+          return title?.toLowerCase().includes(filterValue);
+        });
       }),
     );
   }

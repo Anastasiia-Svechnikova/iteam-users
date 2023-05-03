@@ -1,6 +1,6 @@
-export interface IAssignTechnologyToUserDTO {
+export interface IAssignTechnologiesToUserDTO {
   userId?: string;
-  technologyId: string;
+  technologyId: string[];
 }
 
 export interface IAssignTechnologyToProjectDTO {

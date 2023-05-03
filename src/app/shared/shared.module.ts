@@ -17,6 +17,7 @@ import { ConfirmDialogDirective } from 'src/app/shared/directives/confirm-dialog
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { CopyCellComponent } from './components/ag-grid/copy-cell/copy-cell.component';
 import { StatusCellComponent } from './components/ag-grid/status-cell/status-cell.component';
+import { EditModalWrapperComponent } from 'src/app/shared/components/edit-modal-wrapper/edit-modal-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { StatusCellComponent } from './components/ag-grid/status-cell/status-cel
     ConfirmDialogDirective,
     CopyCellComponent,
     StatusCellComponent,
+    EditModalWrapperComponent,
   ],
   imports: [
     MatProgressSpinnerModule,
@@ -50,6 +52,7 @@ import { StatusCellComponent } from './components/ag-grid/status-cell/status-cel
     MatDialogModule,
     MatSnackBarModule,
     ConfirmDialogDirective,
+    EditModalWrapperComponent,
   ],
 })
 export class SharedModule {}

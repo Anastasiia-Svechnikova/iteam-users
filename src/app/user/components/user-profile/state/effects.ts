@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, concatMap, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
+import { ITechnology } from 'src/app/shared/interfaces/technology';
 
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
@@ -56,99 +57,51 @@ export class UserProfileEffects {
     );
   });
 
-  assignTechnologyToUser$ = createEffect(() => {
+  updateUserTechnologies$ = createEffect(() => {
     return this.actions.pipe(
-      ofType(userProfileActions.assignTechnologyToUser),
+      ofType(userProfileActions.updateUserTechnologies),
       concatLatestFrom(() => this.store.select(selectUserId)),
-      concatMap(([{ technology }, userId = '']) => {
-        return this._userService
-          .assignTechnologyToUser({
-            userId,
-            technologyId: technology.id.toString(),
-          })
-          .pipe(
-            map(() => {
-              this._snackbarService.openSnackBar(
-                'Technology has been successfully added',
-              );
-              return userProfileActions.assignedTechnologyToUser({
-                technology,
-              });
-            }),
-            catchError((error) => {
-              console.log(error.message);
-              this._snackbarService.openSnackBar(
-                'Something went wrong when attaching a new technology...',
-              );
-              return of(userProfileActions.error({ error }));
-            }),
-          );
-      }),
-    );
-  });
+      switchMap(([{ technologies }, userId = '']) => {
+        const newTechnologies = technologies.filter(
+          (technology) => !('id' in technology),
+        );
+        const existingTechnologies = technologies.filter(
+          (technology) => 'id' in technology,
+        ) as ITechnology[];
 
-  addNewTechnologyAndAssignToUser$ = createEffect(() => {
-    return this.actions.pipe(
-      ofType(userProfileActions.addNewTechnologyAndAssignToUser),
-      concatLatestFrom(() => this.store.select(selectUserId)),
-      concatMap(([{ technology }, userId = '']) => {
-        return this._technologiesService.addNewTechnology(technology).pipe(
-          switchMap((technology) => {
+        const newTechnologies$ = newTechnologies.length
+          ? this._technologiesService.addNewTechnologies(newTechnologies)
+          : of([]);
+        return newTechnologies$.pipe(
+          switchMap((addedTechnologies: ITechnology[]) => {
+            const technologiesIds = [
+              ...addedTechnologies,
+              ...existingTechnologies,
+            ].map(({ id }) => String(id));
             return this._userService
-              .assignTechnologyToUser({
+              .updateUserTechnologies({
                 userId,
-                technologyId: technology.id.toString(),
+                technologyId: technologiesIds,
               })
               .pipe(
-                map(() => {
+                map((updatedTechnologies: ITechnology[]) => {
                   this._snackbarService.openSnackBar(
-                    'Technology has been successfully added',
+                    'User technologies have been successfully updated',
                   );
-                  return userProfileActions.assignedTechnologyToUser({
-                    technology,
+                  return userProfileActions.updatedUserTechnologies({
+                    updatedTechnologies,
                   });
                 }),
                 catchError((error) => {
                   console.log(error.message);
                   this._snackbarService.openSnackBar(
-                    'Something went wrong when attaching a new technology...',
+                    'Something went wrong when updating user technologies...',
                   );
                   return of(userProfileActions.error({ error }));
                 }),
               );
           }),
         );
-      }),
-    );
-  });
-
-  removeTechnologyFromUser$ = createEffect(() => {
-    return this.actions.pipe(
-      ofType(userProfileActions.removeTechnologyFromUser),
-      concatLatestFrom(() => this.store.select(selectUserId)),
-      switchMap(([{ technologyId }, userId = '']) => {
-        return this._userService
-          .removeTechnologyFromUser({
-            userId,
-            technologyId: technologyId,
-          })
-          .pipe(
-            map(() => {
-              this._snackbarService.openSnackBar(
-                'Technology has been successfully removed from user',
-              );
-              return userProfileActions.removedTechnologyFromUser({
-                technologyId,
-              });
-            }),
-            catchError((error) => {
-              console.log(error.message);
-              this._snackbarService.openSnackBar(
-                'Something went wrong when removing the technology...',
-              );
-              return of(userProfileActions.error({ error }));
-            }),
-          );
       }),
     );
   });

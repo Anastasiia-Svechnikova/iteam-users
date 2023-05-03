@@ -1,109 +1,82 @@
-<div mat-dialog-content>
-  <div class="upper">
-    <h3 class="mat-headline-5 title">Edit Education</h3>
-    <button
-      mat-icon-button
-      type="button"
-      class="close-btn"
-      aria-label="Close modal"
-      (click)="_dialogRef.close()">
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
-  <div class="wrapper">
-    <form
-      class="form"
-      [formGroup]="form"
-      (ngSubmit)="onSubmit()">
-      <div class="single-column">
-        <mat-form-field
-          class="input-field"
-          appearance="outline">
-          <mat-label>University Name</mat-label>
+<app-edit-modal-wrapper
+  title="Edit Education"
+  [isFormValid]="form.valid"
+  (cancel)="_dialogRef.close()"
+  (save)="onSubmit()">
+  <form
+    class="form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()">
+    <div class="single-column">
+      <mat-form-field
+        class="input-field"
+        appearance="outline">
+        <mat-label>University Name</mat-label>
+        <input
+          matInput
+          class="input"
+          formControlName="universityName" />
+        <mat-error *ngIf="checkRequiredError('universityName')">
+          University Name is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field
+        class="input-field"
+        appearance="outline">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
           <input
-            matInput
-            class="input"
-            formControlName="universityName" />
-          <mat-error *ngIf="checkRequiredError('universityName')">
-            University Name is required
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field
-          class="input-field"
-          appearance="outline">
-          <mat-label>Enter a date range</mat-label>
-          <mat-date-range-input [rangePicker]="picker">
-            <input
-              matStartDate
-              formControlName="startDate"
-              placeholder="Start date" />
-            <input
-              matEndDate
-              formControlName="endDate"
-              placeholder="End date" />
-          </mat-date-range-input>
-          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle
-            matIconSuffix
-            [for]="picker"></mat-datepicker-toggle>
-          <mat-date-range-picker #picker></mat-date-range-picker>
-          <mat-error
-            class="date-error"
-            *ngIf="checkRequiredError('startDate')">
-            Start date is required
-          </mat-error>
-          <mat-error
-            class="date-error"
-            *ngIf="checkRequiredError('endDate')">
-            End date is required
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field
-          class="input-field"
-          appearance="outline">
-          <mat-label>Education Level</mat-label>
-          <mat-select formControlName="educationLevel">
-            <mat-option
-              *ngFor="let level of educationLevels"
-              [value]="level">
-              {{ level | titlecase }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="checkRequiredError('educationLevel')">
-            Education Level is required
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field
-          class="input-field"
-          appearance="outline">
-          <mat-label>Specialization</mat-label>
+            matStartDate
+            formControlName="startDate"
+            placeholder="Start date" />
           <input
-            matInput
-            class="input"
-            formControlName="specialization" />
-          <mat-error *ngIf="checkRequiredError('specialization')">
-            Specialization is required
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div
-        mat-dialog-actions
-        class="actions">
-        <button
-          mat-button
-          type="button"
-          color="primary"
-          (click)="_dialogRef.close()">
-          Cancel
-        </button>
-        <button
-          mat-flat-button
-          type="submit"
-          color="primary"
-          [disabled]="!form.valid">
-          Save
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
+            matEndDate
+            formControlName="endDate"
+            placeholder="End date" />
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+        <mat-error
+          class="date-error"
+          *ngIf="checkRequiredError('startDate')">
+          Start date is required
+        </mat-error>
+        <mat-error
+          class="date-error"
+          *ngIf="checkRequiredError('endDate')">
+          End date is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field
+        class="input-field"
+        appearance="outline">
+        <mat-label>Education Level</mat-label>
+        <mat-select formControlName="educationLevel">
+          <mat-option
+            *ngFor="let level of educationLevels"
+            [value]="level">
+            {{ level | titlecase }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="checkRequiredError('educationLevel')">
+          Education Level is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field
+        class="input-field"
+        appearance="outline">
+        <mat-label>Specialization</mat-label>
+        <input
+          matInput
+          class="input"
+          formControlName="specialization" />
+        <mat-error *ngIf="checkRequiredError('specialization')">
+          Specialization is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</app-edit-modal-wrapper>

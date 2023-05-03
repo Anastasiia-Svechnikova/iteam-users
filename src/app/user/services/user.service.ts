@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { IUpdateUserDTO } from 'src/app/user/components/user-profile/interfaces/update-user-dto';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { IGetUsersResponse } from 'src/app/user/components/user-profile/interfaces/get-users-response';
-import { IAssignTechnologyToUserDTO } from 'src/app/user/components/technologies-form-modal/interfaces/assign-technology-dto';
+import { IAssignTechnologiesToUserDTO } from 'src/app/user/components/technologies-form-modal/interfaces/assign-technology-dto';
+import { ITechnology } from 'src/app/shared/interfaces/technology';
 
 @Injectable({
   providedIn: 'root',
@@ -42,20 +43,12 @@ export class UserService {
     }
   }
 
-  assignTechnologyToUser(
-    technology: IAssignTechnologyToUserDTO,
-  ): Observable<IAssignTechnologyToUserDTO> {
-    return this.http.post<IAssignTechnologyToUserDTO>(
+  updateUserTechnologies(
+    technologies: IAssignTechnologiesToUserDTO,
+  ): Observable<ITechnology[]> {
+    return this.http.post<ITechnology[]>(
       `${environment.apiUrl}/users/technology`,
-      technology,
+      technologies,
     );
-  }
-
-  removeTechnologyFromUser(
-    technology: IAssignTechnologyToUserDTO,
-  ): Observable<IAssignTechnologyToUserDTO> {
-    // endpoint to remove a technology from a particular user is expected to be used here
-    // return this.http.delete<void>(`${environment.apiUrl}/users/technology`);
-    return of(technology);
   }
 }
