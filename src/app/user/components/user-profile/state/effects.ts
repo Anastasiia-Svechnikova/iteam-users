@@ -22,7 +22,6 @@ export class UserProfileEffects {
             return userProfileActions.loadedUser({ user });
           }),
           catchError((error) => {
-            console.log(error.message);
             this._snackbarService.openSnackBar(
               'Something went wrong when loading the user...',
             );
@@ -46,7 +45,6 @@ export class UserProfileEffects {
             return userProfileActions.updatedUser({ user });
           }),
           catchError((error) => {
-            console.log(error.message);
             this._snackbarService.openSnackBar(
               'Something went wrong when updating the user...',
             );
@@ -93,7 +91,6 @@ export class UserProfileEffects {
                   });
                 }),
                 catchError((error) => {
-                  console.log(error.message);
                   this._snackbarService.openSnackBar(
                     'Something went wrong when updating user technologies...',
                   );

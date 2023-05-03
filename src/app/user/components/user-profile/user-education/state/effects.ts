@@ -28,7 +28,6 @@ export class UserEducationEffects {
             });
           }),
           catchError((error) => {
-            console.log(error.message);
             this._snackbarService.openSnackBar(
               'Something went wrong when updating user education...',
             );
@@ -53,7 +52,6 @@ export class UserEducationEffects {
             });
           }),
           catchError((error) => {
-            console.log(error.message);
             this._snackbarService.openSnackBar(
               'Something went wrong when deleting user education...',
             );
@@ -80,7 +78,6 @@ export class UserEducationEffects {
               });
             }),
             catchError((error) => {
-              console.log(error.message);
               this._snackbarService.openSnackBar(
                 'Something went wrong when updating user education...',
               );
