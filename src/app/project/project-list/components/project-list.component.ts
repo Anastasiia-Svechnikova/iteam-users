@@ -4,14 +4,14 @@ import { GridApi } from 'ag-grid-community';
 import { takeUntil } from 'rxjs';
 
 import { ProjectListColDefs } from 'src/app/project/project-list/constants/column-definitions';
-import { ProjectListStore } from 'src/app/project/project-list/project-list.component.store';
+import { ProjectListStore } from 'src/app/project/project-list/components/project-list.component.store';
 import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
 
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss',
-              '../../shared/styles/ag-grid.scss'],
+              '../../../shared/styles/ag-grid.scss'],
   providers: [ProjectListStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
