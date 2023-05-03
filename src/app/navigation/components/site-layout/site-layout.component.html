@@ -15,7 +15,7 @@
           <button
             *ngIf="link.accessPermission"
             mat-flat-button
-            class="btn"
+            class="navigation-button"
             routerLinkActive="active"
             attr.aria-label="Go to {{ link.name }} page"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -39,7 +39,7 @@
       <button
         *ngIf="link.accessPermission"
         mat-icon-button
-        class="btn"
+        class="navigation-button"
         routerLinkActive="active"
         attr.aria-label="Go to {{ link.name }} page"
         [routerLinkActiveOptions]="{ exact: true }"

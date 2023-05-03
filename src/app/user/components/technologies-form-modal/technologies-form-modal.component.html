@@ -35,7 +35,7 @@
           (matChipInputTokenEnd)="onAdd($event)" />
         <mat-autocomplete
           #auto="matAutocomplete"
-          (optionSelected)="onSelected($event)">
+          (optionSelected)="onSelect($event)">
           <mat-option
             *ngFor="let skill of filteredTechSkills$ | async"
             [disabled]="

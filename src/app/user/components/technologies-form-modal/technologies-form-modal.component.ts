@@ -81,7 +81,7 @@ export class TechnologiesFormModalComponent
     this._resetInputs();
   }
 
-  onSelected(event: MatAutocompleteSelectedEvent): void {
+  onSelect(event: MatAutocompleteSelectedEvent): void {
     const selectedTechnology = event.option.value;
     this._technologiesFormStore.addToUserTechnologies(selectedTechnology);
     this._resetInputs();

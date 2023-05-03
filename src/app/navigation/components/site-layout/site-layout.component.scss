@@ -41,12 +41,12 @@
   }
 }
 
-.btn {
+.navigation-button {
   justify-content: flex-start;
   height: $xxl-size;
 }
 
-.btn.active {
+.navigation-button.active {
   color: $primary-color;
 }
 .btn-icon {
