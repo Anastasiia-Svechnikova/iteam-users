@@ -41,7 +41,6 @@ export class TechnologiesFormModalComponent
   separatorKeysCodes: number[] = [ENTER, COMMA];
   techSkillsCtrl = new FormControl('');
   filteredTechSkills$!: Observable<ITechnology[]>;
-
   allTechnologies$ = this._technologiesFormStore.allTechnologies$;
   userTechnologies$ = this._technologiesFormStore.userTechnologies$;
   disabledTechnologiesList$ = this.userTechnologies$.pipe(
@@ -73,7 +72,7 @@ export class TechnologiesFormModalComponent
     });
   }
 
-  add(event: MatChipInputEvent): void {
+  onAdd(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
     if (value) {
       this._technologiesFormStore.addToUserTechnologies({ title: value });
@@ -82,13 +81,13 @@ export class TechnologiesFormModalComponent
     this._resetInputs();
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
+  onSelected(event: MatAutocompleteSelectedEvent): void {
     const selectedTechnology = event.option.value;
     this._technologiesFormStore.addToUserTechnologies(selectedTechnology);
     this._resetInputs();
   }
 
-  remove(technology: ITechnology | INewSkill): void {
+  onRemove(technology: ITechnology | INewSkill): void {
     this._technologiesFormStore.removeFromUserTechnologies(technology);
   }
 

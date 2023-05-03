@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { ITechnology } from 'src/app/shared/interfaces/technology';
 
+import { ITechnology } from 'src/app/shared/interfaces/technology';
 import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { TechnologiesService } from 'src/app/user/components/technologies-form-modal/technologies.service';
