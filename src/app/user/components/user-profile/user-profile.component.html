@@ -8,7 +8,7 @@
       <app-user-bank-and-socials-info></app-user-bank-and-socials-info>
     </div>
     <div class="right">
-      <div class="tile">
+      <app-content-card>
         <div class="upper-wrapper">
           <h3 class="mat-subtitle-2 primary">Description</h3>
           <button
@@ -39,7 +39,7 @@
         <app-empty-message
           *ngIf="!user.positionDescription"
           title="description"></app-empty-message>
-      </div>
+      </app-content-card>
       <div class="tile">
         <app-user-skills></app-user-skills>
       </div>

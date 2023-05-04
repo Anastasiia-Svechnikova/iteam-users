@@ -13,6 +13,11 @@ export const selectCurrentUser = createSelector(
   (state: IMainState) => state.user,
 );
 
+export const selectCurrentUserName = createSelector(
+  selectUserFeature,
+  (state: IMainState) => state.user?.name,
+);
+
 export const selectSiteNavigationLinksDataByUserRole = createSelector(
   selectUserFeature,
   (state: IMainState): ISiteNavigationLink[] => {
@@ -20,7 +25,10 @@ export const selectSiteNavigationLinksDataByUserRole = createSelector(
       const id = state.user.id;
       const userRoles = state.user.roles.map((role) => role.value as UserRoles);
       return siteNavigationLinksData.map((link) => {
-        if (link.name === SiteNavigationLinkNames.currentUser) {
+        if (
+          link.name === SiteNavigationLinkNames.currentUser &&
+          !link.path.includes(id.toString())
+        ) {
           link.path.push(id.toString());
         }
         if (link.restrictedAccessRoles) {

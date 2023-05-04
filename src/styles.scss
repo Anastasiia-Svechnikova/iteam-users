@@ -9,13 +9,30 @@
 @include mat.core();
 @include mat.all-component-themes($theme);
 
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
 }
 
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
 body {
   margin: 0;
+  background-color: $base-color;
+
   .mat-headline-5.mb-0 {
     margin: 0;
   }

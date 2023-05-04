@@ -8,6 +8,7 @@ import { mainUserActions } from 'src/app/user/state/actions';
 export interface ICurrentUserStoreData {
   id: number;
   roles: IUserPermissionsRole[];
+  name: string;
 }
 
 export interface IMainState {

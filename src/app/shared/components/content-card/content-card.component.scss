@@ -1,0 +1,11 @@
+@import '/src/styles/_variables.scss';
+@import '/src/styles/_color-palette.scss';
+@import '/src/styles/_media-mixins.scss';
+
+.card-wrapper {
+  width: 100%;
+  padding: $s-size;
+  border-radius: $xs-size;
+  box-shadow: $base-box-shadow;
+  background-color: $white-bg-color;
+}

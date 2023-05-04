@@ -5,7 +5,6 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  padding: $l-size $s-size;
 
   @include media(tablet) {
     gap: $xxl-size;

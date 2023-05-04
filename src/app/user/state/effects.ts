@@ -16,7 +16,7 @@ export class UserEffects {
         return this.mainUserService.getCurrentUser().pipe(
           map((user: IUserDetails) => {
             return mainUserActions.loadedCurrentUser({
-              user: { id: user.id, roles: user.roles },
+              user: { id: user.id, roles: user.roles, name: user.name },
             });
           }),
           catchError((error) => {
