@@ -2,8 +2,10 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { logout } from 'src/app/auth/state/actions';
+import { wavingHandEmoji } from 'src/app/navigation/constants/waving-hand-emoji';
 import { mainUserActions } from 'src/app/user/state/actions';
 import {
+  selectCurrentUserAvatar,
   selectCurrentUserName,
   selectSiteNavigationLinksDataByUserRole,
 } from 'src/app/user/state/selectors';
@@ -19,6 +21,8 @@ export class SiteLayoutComponent implements OnInit {
     selectSiteNavigationLinksDataByUserRole,
   );
   currentUserName$ = this.store.select(selectCurrentUserName);
+  currentUserAvatar$ = this.store.select(selectCurrentUserAvatar);
+  wavingHand = wavingHandEmoji;
 
   constructor(private store: Store) {}
 

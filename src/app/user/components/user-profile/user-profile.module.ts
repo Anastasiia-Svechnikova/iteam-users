@@ -20,9 +20,10 @@ import { UserSkillsComponent } from 'src/app/user/components/user-profile/user-s
 import { UserWorkInfoComponent } from 'src/app/user/components/user-profile/user-work-info/user-work-info.component';
 import { TextInputFormModalComponent } from 'src/app/user/components/user-profile/user-edit/text-input-form-modal/text-input-form-modal.component';
 import { PersonalInfoFormModalComponent } from 'src/app/user/components/user-profile/user-edit/personal-info-form-modal/personal-info-form-modal.component';
-import { EducationFormModalComponent } from './user-edit/education-form-modal/education-form-modal.component';
 import { UserContactsBankSocialsInfoComponent } from 'src/app/user/components/user-profile/user-contacts-bank-socials-info/user-contacts-bank-socials-info.component';
 import { UserEducationComponent } from 'src/app/user/components/user-profile/user-education/user-education.component';
+import { UserTermsComponent } from 'src/app/user/components/user-profile/user-personal-info/user-terms/user-terms.component';
+import { EducationFormModalComponent } from 'src/app/user/components/user-profile/user-edit/education-form-modal/education-form-modal.component';
 
 const routes = [
   {
@@ -42,6 +43,7 @@ const routes = [
     TextInputFormModalComponent,
     PersonalInfoFormModalComponent,
     EducationFormModalComponent,
+    UserTermsComponent,
   ],
   imports: [
     MatSlideToggleModule,

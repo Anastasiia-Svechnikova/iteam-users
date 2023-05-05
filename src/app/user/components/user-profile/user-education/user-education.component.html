@@ -20,7 +20,7 @@
       </button>
     </div>
     <ul class="column-wrapper">
-      <li *ngFor="let education of educationInfo">
+      <li *ngFor="let education of educationInfo; let last = last">
         <div class="education-upper">
           <p class="university-name">
             {{ education.universityName | uppercase }}
@@ -48,6 +48,7 @@
         </p>
         <p>{{ education.educationLevel | titlecase }}</p>
         <p>{{ education.specialization | titlecase }}</p>
+        <mat-divider *ngIf="!last"></mat-divider>
       </li>
     </ul>
     <app-empty-message

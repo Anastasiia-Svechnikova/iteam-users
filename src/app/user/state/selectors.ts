@@ -18,6 +18,11 @@ export const selectCurrentUserName = createSelector(
   (state: IMainState) => state.user?.name,
 );
 
+export const selectCurrentUserAvatar = createSelector(
+  selectUserFeature,
+  (state: IMainState) => state.user?.avatarUrl,
+);
+
 export const selectSiteNavigationLinksDataByUserRole = createSelector(
   selectUserFeature,
   (state: IMainState): ISiteNavigationLink[] => {

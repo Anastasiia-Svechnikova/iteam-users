@@ -9,4 +9,11 @@
   border-radius: $xs-size;
   box-shadow: $base-box-shadow;
   background-color: $white-bg-color;
+
+  @include media(tablet) {
+    padding: $m-size;
+  }
+  @include media(desktop) {
+    padding: $l-size;
+  }
 }

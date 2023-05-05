@@ -3,7 +3,11 @@
 @import '/src/styles/_media-mixins.scss';
 
 .wrapper {
-  padding: $m-size;
+  padding: $s-size;
+
+  @include media(tablet) {
+    padding: $m-size;
+  }
 }
 
 .column-wrapper {

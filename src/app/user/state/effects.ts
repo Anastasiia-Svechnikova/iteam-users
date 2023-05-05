@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 
-import { IUserDetails } from 'src/app/shared/interfaces/user-details';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { UserService } from 'src/app/user/services/user.service';
 import { mainUserActions } from 'src/app/user/state/actions';
@@ -14,9 +13,9 @@ export class UserEffects {
       ofType(mainUserActions.loadCurrentUser),
       switchMap(() => {
         return this.mainUserService.getCurrentUser().pipe(
-          map((user: IUserDetails) => {
+          map(({ id, roles, name, avatarUrl }) => {
             return mainUserActions.loadedCurrentUser({
-              user: { id: user.id, roles: user.roles, name: user.name },
+              user: { id, roles, name, avatarUrl },
             });
           }),
           catchError((error) => {

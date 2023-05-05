@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
@@ -17,7 +16,7 @@ import { ConfirmModalComponent } from 'src/app/shared/components/confirm-modal/c
 import { CopyCellComponent } from 'src/app/shared/components/ag-grid/copy-cell/copy-cell.component';
 import { StatusCellComponent } from 'src/app/shared/components/ag-grid/status-cell/status-cell.component';
 import { EditModalWrapperComponent } from 'src/app/shared/components/edit-modal-wrapper/edit-modal-wrapper.component';
-import { ContentCardComponent } from './components/content-card/content-card.component';
+import { ContentCardComponent } from 'src/app/shared/components/content-card/content-card.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,6 @@ import { ContentCardComponent } from './components/content-card/content-card.com
     ConfirmModalComponent,
     RouterModule,
     CommonModule,
-    MatCardModule,
     MatSnackBarModule,
     ReactiveFormsModule,
     MatIconModule,

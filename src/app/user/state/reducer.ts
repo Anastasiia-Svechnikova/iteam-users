@@ -9,6 +9,7 @@ export interface ICurrentUserStoreData {
   id: number;
   roles: IUserPermissionsRole[];
   name: string;
+  avatarUrl: string;
 }
 
 export interface IMainState {

@@ -4,11 +4,12 @@
 
 .personal-wrapper {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   gap: $m-size;
 
   @include media(tablet) {
     flex-direction: row;
+    justify-content: space-between;
   }
 }
 
@@ -16,29 +17,27 @@
   flex-grow: 1;
 }
 
-.terms-card {
-  width: 30%;
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: $m-size;
 
-  & .card-wrapper {
-    height: 100%;
+  @include media(tablet) {
+    align-items: center;
+    flex-direction: row;
+    gap: $l-size;
   }
 }
 
-.inner {
-  display: flex;
-  align-items: center;
-  gap: $l-size;
-}
-
 .avatar-thumb {
-  width: fit-content;
+  height: $avatar-width;
+  width: $avatar-width;
+  align-self: center;
   border-radius: 50%;
+  background-color: $light-caption-color;
 }
 
 .avatar {
-  height: $avatar-width;
-  width: $avatar-width;
-  background-color: $base-color;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -84,47 +83,26 @@
   min-height: $s-icon-size;
 }
 
-.terms {
-  display: flex;
-  flex-direction: column;
-}
-
-.term {
-  width: $xxl-size;
-  color: $light-subtitle-color;
-}
-
-.project-status {
-  margin-top: auto;
-
-  & .mat-icon {
-    position: absolute;
-    top: -35%;
-    right: -$xxs-size;
-    color: inherit;
+.mobile-terms {
+  @include media(tablet) {
+    display: none;
   }
 }
 
-.on-project {
-  position: relative;
-  width: $l-size;
-  height: $s-size;
-  background-color: $light-accent-color;
-  color: $dark-accent-color;
-  border-radius: $xs-size;
+.bio {
+  display: flex;
+  justify-content: space-between;
+
+  @include media(tablet) {
+    display: block;
+  }
 }
 
-.off-project {
-  @extend .on-project;
-  background-color: $light-caption-color;
-  color: $base-header-color;
-}
+.desktop-terms {
+  display: none;
 
-.bg-circle {
-  position: absolute;
-  right: 0;
-  width: $s-size;
-  height: $s-size;
-  background-color: $white-bg-color;
-  border-radius: 50%;
+  @include media(tablet) {
+    display: block;
+    width: 30%;
+  }
 }

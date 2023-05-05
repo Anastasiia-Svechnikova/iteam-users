@@ -3,14 +3,12 @@
     autosize
     class="main-layout">
     <div class="sidenav-holder">
-      <div
-        *ngIf="linksData.length"
-        class="sidenav-box">
+      <div *ngIf="linksData.length">
         <div class="avatar-thumb">
           <img
+            *ngIf="currentUserAvatar$ | async"
             class="avatar"
-            src="https://t3.ftcdn.net/jpg/02/61/57/04/360_F_261570402_ja0EsYGUax9yJF8l7jibXA5JtI1ISe71.jpg"
-            alt="User avatar" />
+            [src]="currentUserAvatar$ | async" />
         </div>
         <nav>
           <ul class="sidenav">
@@ -50,7 +48,7 @@
         <div>
           <p class="greeting">
             {{ 'Hi,' }} {{ currentUserName$ | async | titlecase }}
-            <mat-icon>waving_hand_outline</mat-icon>
+            <span [innerHTML]="wavingHand"></span>
           </p>
           <p class="mat-headline-5 mb-0">Welcome Back!</p>
         </div>
