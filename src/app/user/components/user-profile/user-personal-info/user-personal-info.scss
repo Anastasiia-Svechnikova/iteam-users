@@ -4,55 +4,35 @@
 
 .personal-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: $m-size;
-  border-bottom: $base-border;
-
-  @include media(tablet) {
-    padding: $m-size;
-    flex-direction: row;
-    border: none;
-  }
-}
-.inner {
-  width: 100%;
-
-  @include media(tablet) {
-    width: auto;
-    flex-grow: 1;
-  }
-}
-.avatar {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.bio {
-  @include media(tablet) {
-    flex-direction: row;
-    width: auto;
-    padding-bottom: 0;
-    border-bottom: none;
-  }
-}
-
-.info {
-  display: flex;
-  flex-grow: 1;
   justify-content: space-between;
-  padding: $m-size;
+  gap: $m-size;
 
   @include media(tablet) {
-    padding: 0;
+    flex-direction: row;
   }
 }
 
-.terms {
+.bio-card {
+  flex-grow: 1;
+}
+
+.terms-card {
+  width: 30%;
+
+  & .card-wrapper {
+    height: 100%;
+  }
+}
+
+.inner {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: $l-size;
+}
+
+.avatar-thumb {
+  width: fit-content;
+  border-radius: 50%;
 }
 
 .avatar {
@@ -60,6 +40,7 @@
   width: $avatar-width;
   background-color: $base-color;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .name-wrapper {
@@ -74,12 +55,23 @@
   }
 }
 
-.icon {
-  color: inherit;
-  transform: scale(0.9);
+%user-status {
+  display: flex;
+  align-items: center;
+  gap: $xxs-size;
 }
 
-.birthday {
+.unarchived {
+  @extend %user-status;
+  color: $green-color;
+}
+
+.archived {
+  @extend %user-status;
+  color: $light-subtitle-color;
+}
+
+.birthday-icon {
   font-size: $xs-icon-size;
   color: $primary-color;
 }
@@ -89,11 +81,16 @@
   align-items: center;
   gap: $xxs-size;
   margin-bottom: $xxs-size;
-  min-height: 24px;
+  min-height: $s-icon-size;
+}
+
+.terms {
+  display: flex;
+  flex-direction: column;
 }
 
 .term {
-  flex: 1 1 auto;
+  width: $xxl-size;
   color: $light-subtitle-color;
 }
 
@@ -108,23 +105,7 @@
   }
 }
 
-%status {
-  display: flex;
-  align-items: center;
-  gap: $xxs-size;
-}
-
-.unarchived {
-  @extend %status;
-  color: $green-color;
-}
-
-.archived {
-  @extend %status;
-  color: $base-color;
-}
-
-.on {
+.on-project {
   position: relative;
   width: $l-size;
   height: $s-size;
@@ -133,8 +114,8 @@
   border-radius: $xs-size;
 }
 
-.off {
-  @extend .on;
+.off-project {
+  @extend .on-project;
   background-color: $light-caption-color;
   color: $base-header-color;
 }

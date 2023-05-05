@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { filter, map, Observable, takeUntil } from 'rxjs';
+import { combineLatest, filter, map, Observable, takeUntil } from 'rxjs';
 
-import { IUserSocialLinksData } from 'src/app/shared/interfaces/user-social-links-data';
-import { IUserBankInvoiceData } from 'src/app/shared/interfaces/user-bank-invoice-data';
 import {
   textInputFormModalData,
   TextInputFormModalComponent,
@@ -39,8 +37,21 @@ export class UserContactsBankSocialsInfoComponent extends AbstractUserProfileCom
   UserSocialLinksTitles = UserSocialLinksTitles;
   bankSocialsClipboardRegistry = clipboardBankSocialsRegistry;
 
-  isUserBankDataEmpty$ = this.checkDataEmpty(this.userBankData$);
-  isSocialsDataEmpty$ = this.checkDataEmpty(this.userSocialsData$);
+  isEmpty$ = combineLatest([
+    this.userBankData$,
+    this.userSocialsData$,
+    this.userContacts$,
+  ]).pipe(
+    map(([bank, socials, contacts]) => {
+      const checkEmpty = <T extends object>(data: T): boolean =>
+        Object.values(data).every((value) => !value);
+      return {
+        bank: checkEmpty(bank),
+        socials: checkEmpty(socials),
+        contacts: checkEmpty(contacts),
+      };
+    }),
+  );
 
   onEditContacts(): void {
     const dialogData = this.userContacts$.pipe(
@@ -93,13 +104,5 @@ export class UserContactsBankSocialsInfoComponent extends AbstractUserProfileCom
       .subscribe((data) => {
         this.store.dispatch(userProfileActions.updateUser({ user: data }));
       });
-  }
-
-  private checkDataEmpty(
-    data$: Observable<IUserBankInvoiceData | IUserSocialLinksData>,
-  ): Observable<boolean> {
-    return data$.pipe(
-      map((data) => Object.values(data).every((value) => !value)),
-    );
   }
 }

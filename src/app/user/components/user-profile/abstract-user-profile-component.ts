@@ -15,6 +15,7 @@ import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.se
 @Component({
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./user-profile.component.scss'],
 })
 export abstract class AbstractUserProfileComponent extends UnSubscriberComponent {
   protected store = inject(Store);

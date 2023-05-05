@@ -4,7 +4,7 @@
     [isFormValid]="true"
     (cancel)="_dialogRef.close()"
     (save)="onSubmit(userTechnologies)">
-    <div class="single-column">
+    <div>
       <mat-form-field
         class="input-field"
         appearance="outline">
@@ -14,7 +14,7 @@
           aria-label="Tech skills selection">
           <mat-chip-row
             *ngFor="let skill of userTechnologies"
-            class="chips"
+            class="chips skills-chips"
             (removed)="onRemove(skill)">
             {{ skill.title }}
             <button

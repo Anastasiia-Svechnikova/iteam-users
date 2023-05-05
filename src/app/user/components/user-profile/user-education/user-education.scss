@@ -1,11 +1,5 @@
 @import '/src/styles/_variables.scss';
 
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: $m-size;
-}
-
 .education-upper {
   display: flex;
   gap: $xs-size;

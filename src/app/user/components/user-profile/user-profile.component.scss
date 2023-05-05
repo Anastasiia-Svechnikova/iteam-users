@@ -3,12 +3,13 @@
 @import '/src/styles/_media-mixins.scss';
 
 .wrapper {
+  padding: $m-size;
+}
+
+.column-wrapper {
   display: flex;
   flex-direction: column;
-
-  @include media(tablet) {
-    gap: $xxl-size;
-  }
+  gap: $m-size;
 }
 
 .upper-wrapper {
@@ -26,54 +27,15 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  gap: $m-size;
 
   @include media(tablet) {
     flex-direction: row;
   }
 }
 
-.left {
-  min-width: fit-content;
-}
-
-.left-inner {
-  display: flex;
-  flex-direction: column;
-  padding: $m-size;
-  margin: 0 auto;
-  border-bottom: $base-border;
-
-  @include media(tablet) {
-    max-width: 17em;
-    padding: 0 $m-size;
-    margin-bottom: $m-size;
-    border: none;
-  }
-  @include media(l-tablet) {
-    max-width: 20em;
-  }
-}
-
 .right {
   flex-grow: 1;
-
-  @include media(tablet) {
-    padding: 0 $xxl-size;
-    border-left: $base-border;
-  }
-}
-
-.tile {
-  padding: $m-size;
-  @include media(tablet) {
-    &:first-of-type {
-      padding-top: 0;
-    }
-  }
-
-  &:not(:last-of-type) {
-    border-bottom: $base-border;
-  }
 }
 
 .icon-btn {
@@ -91,10 +53,10 @@
 }
 
 .backdrop {
-  background-color: rgba(0, 0, 0, 0.446);
+  background-color: rgba(0, 0, 0, 0.146);
   position: fixed;
   z-index: 3;
-  top: $mobile-header-height;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -102,6 +64,5 @@
   justify-content: center;
   align-items: center;
   @include media(tablet) {
-    top: $header-height;
   }
 }

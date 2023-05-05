@@ -1,5 +1,5 @@
 <ng-container *ngIf="userEducation$ | async as educationInfo">
-  <div class="left-inner">
+  <app-content-card>
     <div class="upper-wrapper">
       <h3 class="mat-subtitle-2 primary">Education</h3>
       <button
@@ -19,8 +19,8 @@
         <mat-icon>add</mat-icon>
       </button>
     </div>
-    <div class="list">
-      <div *ngFor="let education of educationInfo">
+    <ul class="column-wrapper">
+      <li *ngFor="let education of educationInfo">
         <div class="education-upper">
           <p class="university-name">
             {{ education.universityName | uppercase }}
@@ -48,10 +48,10 @@
         </p>
         <p>{{ education.educationLevel | titlecase }}</p>
         <p>{{ education.specialization | titlecase }}</p>
-      </div>
-    </div>
+      </li>
+    </ul>
     <app-empty-message
       *ngIf="!educationInfo?.length"
       title="education"></app-empty-message>
-  </div>
+  </app-content-card>
 </ng-container>

@@ -1,11 +1,11 @@
 @import '/src/styles/_variables.scss';
 @import '/src/styles/_color-palette.scss';
 
-.wrapper .chips {
+.skills-chips.chips {
   background-color: $primary-color-light;
   border: $primary-border;
 }
 
-.wrapper .chips .mat-icon {
+.skills-chips.chips .mat-icon {
   color: $primary-color;
 }

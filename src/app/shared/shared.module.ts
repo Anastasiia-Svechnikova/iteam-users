@@ -8,8 +8,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatRippleModule } from '@angular/material/core';
-import { LayoutModule } from '@angular/cdk/layout';
+import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
 
 import { CustomIconComponent } from 'src/app/shared/components/custom-icon/custom-icon.component';
@@ -31,6 +30,7 @@ import { ContentCardComponent } from './components/content-card/content-card.com
     ContentCardComponent,
   ],
   imports: [
+    MatDividerModule,
     MatProgressSpinnerModule,
     CommonModule,
     MatIconModule,
@@ -39,8 +39,7 @@ import { ContentCardComponent } from './components/content-card/content-card.com
     ClipboardModule,
   ],
   exports: [
-    LayoutModule,
-    MatRippleModule,
+    MatDividerModule,
     MatProgressSpinnerModule,
     CustomIconComponent,
     ConfirmModalComponent,
