@@ -1,5 +1,5 @@
-import { UserReducer } from 'src/app/user/state/reducer';
+import { MainUserReducer } from 'src/app/user/state/reducer';
 
 export const appState = {
-  main: UserReducer,
+  main: MainUserReducer,
 };

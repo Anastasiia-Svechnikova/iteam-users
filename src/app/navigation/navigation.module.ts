@@ -1,21 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatSidenavModule } from '@angular/material/sidenav';
 
-import { SiteLayoutComponent } from './components/site-layout/site-layout.component';
-import { HeaderComponent } from './components/header/header.component';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { SiteLayoutComponent } from 'src/app/navigation/components/site-layout/site-layout.component';
 
 @NgModule({
-  declarations: [HeaderComponent, SiteLayoutComponent],
-  imports: [
-    SharedModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatSidenavModule,
-    RouterModule,
-  ],
+  declarations: [SiteLayoutComponent],
+  imports: [SharedModule, RouterModule],
 })
 export class NavigationModule {}

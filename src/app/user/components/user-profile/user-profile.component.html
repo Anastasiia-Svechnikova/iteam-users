@@ -1,21 +1,21 @@
 <div
   *ngIf="user$ | async as user"
-  class="wrapper">
+  class="column-wrapper wrapper">
   <app-user-personal-info></app-user-personal-info>
   <div class="middle">
-    <div class="left">
+    <div class="column-wrapper">
       <app-user-education-contacts></app-user-education-contacts>
       <app-user-bank-and-socials-info></app-user-bank-and-socials-info>
     </div>
-    <div class="right">
-      <div class="tile">
+    <div class="column-wrapper right">
+      <app-content-card>
         <div class="upper-wrapper">
           <h3 class="mat-subtitle-2 primary">Description</h3>
           <button
             mat-icon-button
             class="icon-btn"
             aria-label="Edit content button"
-            (click)="onEditDescription()">
+            (click)="onEdit()">
             <mat-icon>edit</mat-icon>
           </button>
           <button
@@ -39,14 +39,14 @@
         <app-empty-message
           *ngIf="!user.positionDescription"
           title="description"></app-empty-message>
-      </div>
-      <div class="tile">
+      </app-content-card>
+      <div>
         <app-user-skills></app-user-skills>
       </div>
-      <div class="tile">
+      <div>
         <app-user-work-info></app-user-work-info>
       </div>
-      <div class="tile"></div>
+      <div></div>
     </div>
   </div>
   <div class="bottom"></div>

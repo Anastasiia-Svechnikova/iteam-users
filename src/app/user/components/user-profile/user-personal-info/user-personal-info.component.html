@@ -1,75 +1,80 @@
 <div
   *ngIf="userData$ | async as userData"
   class="personal-wrapper">
-  <div class="avatar"></div>
-  <div class="inner">
-    <div class="name-wrapper">
-      <p class="mat-headline-5 mb-0">
-        {{ userData.name || 'No Name' }}
-        {{ userData.surname }}
-      </p>
-      <button
-        mat-icon-button
-        class="icon-btn"
-        aria-label="Edit content button">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        class="icon-btn"
-        aria-label="Copy content button"
-        (click)="clipboardService.copyToClipboard(userData, clipboardRegistry)">
-        <mat-icon>content_copy</mat-icon>
-      </button>
-    </div>
-    <div class="info">
-      <div class="bio">
-        <p
-          *ngIf="userData.status"
-          class="detail">
-          Status:
-          <span [ngClass]="userData.status">
-            {{ userData.status === 'archived' ? 'Deactivated' : 'Active' }}
-            <mat-icon class="icon">
-              {{ statusIcons.get(userData.status) }}
-            </mat-icon>
-          </span>
-        </p>
-        <p
-          *ngIf="userData.birthday"
-          class="detail">
-          <mat-icon class="icon">card_giftcard</mat-icon>
-          <span>{{ userData.birthday | date }}</span>
-        </p>
-        <p
-          *ngIf="userData.phone"
-          class="detail">
-          {{ userData.phone }}
-        </p>
-        <p class="detail">
-          {{ userData.email }}
-        </p>
+  <app-content-card class="bio-card">
+    <div class="inner">
+      <div class="avatar-thumb">
+        <img
+          *ngIf="userData.avatarUrl"
+          class="avatar"
+          [src]="userData.avatarUrl" />
       </div>
-      <div
-        *ngIf="userData.startDate"
-        class="terms">
-        <p class="detail">
-          <span class="term">Start Date:</span>
-          <span>{{ userData.startDate | date }}</span>
-        </p>
-        <p
-          *ngIf="userData.endDate"
-          class="detail">
-          <span class="term">End Date:</span>
-          <span>{{ userData.endDate | date }}</span>
-        </p>
-        <p
-          *ngIf="userData.endReason"
-          class="detail">
-          <span class="term">Reason:</span>
-          <span>{{ userData.endReason }}</span>
-        </p>
+      <div>
+        <div class="name-wrapper">
+          <p class="mat-headline-5 mb-0">
+            {{ userData.name || 'No Name' }}
+            {{ userData.surname }}
+          </p>
+          <button
+            mat-icon-button
+            class="icon-btn"
+            aria-label="Edit content button"
+            (click)="onEditPersonal()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="icon-btn"
+            aria-label="Copy content button"
+            (click)="
+              clipboardService.copyToClipboard(userData, clipboardRegistry)
+            ">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </div>
+        <div class="bio">
+          <div>
+            <p
+              *ngIf="userData.status"
+              class="detail">
+              Status:
+              <span [ngClass]="userData.status">
+                {{
+                  userData.status === userStatus.archived
+                    ? 'Deactivated'
+                    : 'Active'
+                }}
+              </span>
+              <mat-slide-toggle
+                appConfirmDialog
+                #toggle
+                [checked]="checkUserActive(userData.status)"
+                (change)="toggle.checked = checkUserActive(userData.status)"
+                (confirm)="onToggleStatus(userData.status)"></mat-slide-toggle>
+            </p>
+            <p
+              *ngIf="userData.birthday"
+              class="detail">
+              <mat-icon class="birthday-icon">cake</mat-icon>
+              <span>{{ userData.birthday | date }}</span>
+            </p>
+            <p
+              *ngIf="userData.phone"
+              class="detail">
+              {{ userData.phone }}
+            </p>
+            <p class="detail">
+              {{ userData.email }}
+            </p>
+          </div>
+          <app-user-terms class="mobile-terms"></app-user-terms>
+        </div>
       </div>
     </div>
+  </app-content-card>
+  <div class="desktop-terms">
+    <app-content-card>
+      <app-user-terms></app-user-terms>
+    </app-content-card>
   </div>
 </div>

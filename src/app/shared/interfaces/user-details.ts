@@ -1,7 +1,7 @@
 import { IAccessToken } from 'src/app/shared/interfaces/access-token';
 import { IUserOrProjectAttachment } from 'src/app/shared/interfaces/attachments-details';
 import { IProjectDetailsData } from 'src/app/shared/interfaces/project-details';
-import { ITechnologyUsedInProject } from 'src/app/shared/interfaces/technology';
+import { ITechnology } from 'src/app/shared/interfaces/technology';
 import { IUserAssignedCvData } from 'src/app/shared/interfaces/user-cv';
 import { IUserEducationDetails } from 'src/app/shared/interfaces/user-education';
 import { IUserPermissionsRole } from 'src/app/shared/interfaces/user-permissions-role';
@@ -55,7 +55,7 @@ export interface IUserDetails {
   participatingInProjects: IProjectDetailsData[];
   attachedAttachments: IUserOrProjectAttachment[];
   publishedAttachments: IUserOrProjectAttachment[];
-  techStack: ITechnologyUsedInProject[];
+  techStack: ITechnology[];
   educationInfo: IUserEducationDetails[];
   workHistory: IUserWorkHistory[];
 }

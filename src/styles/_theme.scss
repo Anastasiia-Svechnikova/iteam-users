@@ -2,7 +2,7 @@
 @import '/src/styles/_typography.scss';
 
 $palette-primary: mat.define-palette(mat.$blue-palette, 600);
-$palette-accent: mat.define-palette(mat.$yellow-palette, A200, A100, A400);
+$palette-accent: mat.define-palette(mat.$green-palette, A400);
 
 @include mat.typography-hierarchy($typography);
 

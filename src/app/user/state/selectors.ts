@@ -8,9 +8,19 @@ import { IMainState } from 'src/app/user/state/reducer';
 
 export const selectUserFeature = createFeatureSelector<IMainState>('main');
 
-export const selectUser = createSelector(
+export const selectCurrentUser = createSelector(
   selectUserFeature,
   (state: IMainState) => state.user,
+);
+
+export const selectCurrentUserName = createSelector(
+  selectUserFeature,
+  (state: IMainState) => state.user?.name,
+);
+
+export const selectCurrentUserAvatar = createSelector(
+  selectUserFeature,
+  (state: IMainState) => state.user?.avatarUrl,
 );
 
 export const selectSiteNavigationLinksDataByUserRole = createSelector(
@@ -20,7 +30,10 @@ export const selectSiteNavigationLinksDataByUserRole = createSelector(
       const id = state.user.id;
       const userRoles = state.user.roles.map((role) => role.value as UserRoles);
       return siteNavigationLinksData.map((link) => {
-        if (link.name === SiteNavigationLinkNames.currentUser) {
+        if (
+          link.name === SiteNavigationLinkNames.currentUser &&
+          !link.path.includes(id.toString())
+        ) {
           link.path.push(id.toString());
         }
         if (link.restrictedAccessRoles) {
