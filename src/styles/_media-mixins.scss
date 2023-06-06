@@ -7,6 +7,12 @@
     }
   }
 
+  @if $type == 'l-mobile' {
+    @media screen and (min-width: $l-mobile) {
+      @content;
+    }
+  }
+
   @if $type == 'tablet' {
     @media screen and (min-width: $tablet) {
       @content;

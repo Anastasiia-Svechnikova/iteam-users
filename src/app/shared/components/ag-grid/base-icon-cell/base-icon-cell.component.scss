@@ -1,18 +1,12 @@
 @import '/src/styles/_variables.scss';
 @import '/src/styles/color-palette';
 
-.wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.copy-icon {
+.action-icon {
   cursor: pointer;
   color: $base-color;
-  transform: scale(0.9);
+  padding: $xs-size 0 0 $s-size;
 }
 
-.copy-icon:hover {
+.action-icon:hover {
   color: $base-text-color;
 }

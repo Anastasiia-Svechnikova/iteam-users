@@ -10,13 +10,18 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { ArchiveCellComponent }
+  from 'src/app/user/components/user-list/cell-components/archive-cell/archive-cell.component';
+import { EditUserCellComponent }
+  from 'src/app/user/components/user-list/cell-components/edit-user-cell/edit-user-cell.component';
+import { ProjectsCellComponent }
+  from 'src/app/user/components/user-list/cell-components/projects-cell/projects-cell.component';
 import { UserListComponent } from 'src/app/user/components/user-list/user-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UserProfileEffects } from 'src/app/user/components/user-profile/state/effects';
 import { TechnologiesFormModalComponent } from 'src/app/user/components/technologies-form-modal/technologies-form-modal.component';
 import { userReducersMap } from 'src/app/user/user-reducers-map';
 import { UserEducationEffects } from 'src/app/user/components/user-profile/user-education/state/effects';
-import { SettingsCellComponent } from 'src/app/user/components/user-list/cell-components/settings-cell/settings-cell.component';
 
 const routes = [
   {
@@ -37,7 +42,7 @@ const routes = [
   declarations: [
     TechnologiesFormModalComponent,
     UserListComponent,
-    SettingsCellComponent,
+    ArchiveCellComponent, EditUserCellComponent, ProjectsCellComponent,
   ],
   imports: [
     MatChipsModule,
@@ -53,4 +58,4 @@ const routes = [
     AgGridModule,
   ],
 })
-export class UserModule {}
+export class UserModule { }

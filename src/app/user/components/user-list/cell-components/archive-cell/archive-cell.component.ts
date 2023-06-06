@@ -1,26 +1,22 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 
-import { IUserDetails } from 'src/app/shared/interfaces/user-details';
+import { BaseIconCellComponent } from 'src/app/shared/components/ag-grid/base-icon-cell/base-icon-cell.component';
 
 @Component({
-  selector: 'app-settings-cell',
-  templateUrl: './settings-cell.component.html',
-  styleUrls: ['./settings-cell.component.scss'],
+  selector: 'app-archive-cell',
+  templateUrl: './archive-cell.component.html',
+  styleUrls: [
+    './archive-cell.component.scss',
+    '../../../../../shared/components/ag-grid/base-icon-cell/base-icon-cell.component.scss',
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SettingsCellComponent implements ICellRendererAngularComp {
-  data!: IUserDetails;
+export class ArchiveCellComponent extends BaseIconCellComponent {
   params!: ICellRendererParams;
 
-  agInit(params: ICellRendererParams): void {
-    this.data = params.data;
+  override agInit(params: ICellRendererParams): void {
     this.params = params;
-  }
-
-  refresh(): boolean {
-    return false;
   }
 
   onToggleStatus(userId: string, status: string): void {
