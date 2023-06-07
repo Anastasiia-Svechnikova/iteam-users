@@ -13,8 +13,9 @@ import { IStatusData } from 'src/app/shared/interfaces/status-data';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StatusCellComponent implements ICellRendererAngularComp {
+  status: any;
   currentStatus?: IStatusData;
-  statusesData!: IStatusData[];
+  statusesData?: IStatusData[];
   statusControl = new FormControl();
   params!: ICellRendererParams;
 
@@ -24,6 +25,7 @@ export class StatusCellComponent implements ICellRendererAngularComp {
     this.currentStatus = this.statusesData.find(
       (obj) => obj.status === params.value(params),
     );
+    console.log(this.currentStatus);
     this.statusControl.setValue(this.currentStatus ? this.currentStatus : '');
   }
 

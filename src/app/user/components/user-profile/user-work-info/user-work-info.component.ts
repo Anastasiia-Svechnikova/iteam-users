@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { map } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
-import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
+import { selectUserWorkInfo } from 'src/app/user/components/user-profile/state/selectors';
 
 @Component({
   selector: 'app-user-work-info',
@@ -14,10 +14,10 @@ import { UserStore } from 'src/app/user/components/user-profile/user-profile.sto
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserWorkInfoComponent {
-  userData$ = this._userStore.user$.pipe(map((user) => user?.workHistory));
+  userData$ = this.store.select(selectUserWorkInfo);
 
   constructor(
-    private readonly _userStore: UserStore,
+    private store: Store,
     public clipboardService: ClipboardService,
   ) {}
 }

@@ -24,7 +24,7 @@ export class AuthEffects {
       ofType(AuthActions.login),
       switchMap((action: ReturnType<typeof AuthActions.login>) =>
         this.authService.login(action.credentials).pipe(
-          map((loginResponseData)=>{
+          map((loginResponseData) => {
             this.snackbarService.openSnackBar(
               'Welcome to I Team! You can start with editing your profile.',
             );
@@ -37,7 +37,8 @@ export class AuthEffects {
               String(loginResponseData.user.id),
             );
             this.router.navigateByUrl('home');
-            return AuthActions.loginSuccess()}),
+            return AuthActions.loginSuccess();
+          }),
           catchError((err) => {
             this.snackbarService.openSnackBar(
               `Login Failed: ${err.error.message}`,
@@ -73,7 +74,7 @@ export class AuthEffects {
   logout$: Observable<Action> = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.logout),
-      switchMap(()=> {
+      switchMap(() => {
         return this.authService.logout().pipe(
           map(() => {
             this.snackbarService.openSnackBar('Logout Success');

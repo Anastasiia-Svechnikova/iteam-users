@@ -6,7 +6,7 @@ import { ICellRendererParams } from 'ag-grid-community';
   selector: 'app-copy-cell',
   templateUrl: './copy-cell.component.html',
   styleUrls: ['./copy-cell.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyCellComponent implements ICellRendererAngularComp {
   valueToCopy!: string;

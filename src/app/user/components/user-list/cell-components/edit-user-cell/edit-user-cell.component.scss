@@ -1,0 +1,17 @@
+@import '../../../../../../styles/variables';
+@import '../../../../../../styles/color-palette';
+
+.wrapper {
+  height: $xl-size;
+  display: flex;
+  align-items: center;
+}
+
+.action-icon {
+  cursor: pointer;
+  color: $light-caption-color;
+}
+
+.action-icon:hover {
+  color: $base-text-color;
+}

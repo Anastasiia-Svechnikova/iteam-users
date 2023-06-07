@@ -3,7 +3,8 @@ import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import { CopyCellComponent } from 'src/app/shared/components/ag-grid/copy-cell/copy-cell.component';
 import { StatusCellComponent } from 'src/app/shared/components/ag-grid/status-cell/status-cell.component';
 import { colors } from 'src/app/shared/constants/colors';
-import { SettingsCellComponent } from 'src/app/user/components/user-list/cell-components/settings-cell/settings-cell.component';
+import { EditUserCellComponent } from 'src/app/user/components/user-list/cell-components/edit-user-cell/edit-user-cell.component';
+import { ProjectsCellComponent } from 'src/app/user/components/user-list/cell-components/projects-cell/projects-cell.component';
 
 export const UserListColDefs: ColDef[] = [
   {
@@ -13,7 +14,7 @@ export const UserListColDefs: ColDef[] = [
         ? `${params.data.name} ${params.data.surname}`
         : 'N/A';
     },
-    flex: 1,
+    flex: 3,
   },
   {
     headerName: 'Email',
@@ -22,11 +23,11 @@ export const UserListColDefs: ColDef[] = [
       value: (params: ICellRendererParams) => params.data.email,
     },
     getQuickFilterText: (params): string => params.data.email,
-    flex: 2,
+    flex: 4,
   },
   {
     headerName: 'Status',
-    flex: 1,
+    flex: 3,
     cellRenderer: StatusCellComponent,
     cellRendererParams: {
       value: (params: ICellRendererParams) => params.data.status,
@@ -46,24 +47,30 @@ export const UserListColDefs: ColDef[] = [
       ],
     },
   },
-
   {
     headerName: 'CV',
     cellRenderer: (params: ICellRendererParams): string => {
       if (params.data.cv) {
         const { fileUrl, originalName } = params.data.cv;
-        const formattedFileName = originalName.replace(/\s*(\(\w*\s*\))*(\.\w+)*/g, '');
-        const downloadUrl = fileUrl.replace('upload/', `upload/fl_attachment:${formattedFileName}/`);
+        const formattedFileName = originalName.replace(
+          /\s*(\(\w*\s*\))*(\.\w+)*/g,
+          '',
+        );
+        const downloadUrl = fileUrl.replace(
+          'upload/',
+          `upload/fl_attachment:${formattedFileName}/`,
+        );
         return `<a  href="${downloadUrl}" style="color:black">${originalName}</a>`;
       }
       return 'N/A';
     },
     getQuickFilterText: (params): string => params.data.cv?.originalName,
-    flex: 1,
+    flex: 2,
   },
+  { headerName: 'Projects', cellRenderer: ProjectsCellComponent, flex: 3 },
   {
-    headerName: 'Settings',
-    cellRenderer: SettingsCellComponent,
-    flex: 1,
+    headerName: 'Edit User',
+    cellRenderer: EditUserCellComponent,
+    flex: 2,
   },
 ];

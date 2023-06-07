@@ -13,10 +13,15 @@ export class ProjectService {
   constructor(private http: HttpClient) {}
 
   getAllProjects(): Observable<IProjectDetailsData[]> {
-    return this.http.get<IProjectDetailsData[]>(`${environment.apiUrl}/projects`);
+    return this.http.get<IProjectDetailsData[]>(
+      `${environment.apiUrl}/projects`,
+    );
   }
 
-  updateProjectById(id: string, body: IUpdateProjectDTO,): Observable<IProjectDetailsData> {
+  updateProjectById(
+    id: string,
+    body: IUpdateProjectDTO,
+  ): Observable<IProjectDetailsData> {
     return this.http.patch<IProjectDetailsData>(
       `${environment.apiUrl}/projects/${id}`,
       body,

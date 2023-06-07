@@ -1,7 +1,7 @@
 @import '/src/styles/_variables.scss';
 @import '/src/styles/_color-palette.scss';
 
-.skills-wrapper .chips {
+.skills-chips.chips {
   background-color: $primary-color-light;
   border: $primary-border;
   pointer-events: none;

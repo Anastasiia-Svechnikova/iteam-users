@@ -20,7 +20,7 @@ export const siteNavigationLinksData: ISiteNavigationLink[] = [
   },
   {
     path: ['/dashboard', 'user', 'all'],
-    iconName: 'bar_chart',
+    iconName: 'people',
     name: SiteNavigationLinkNames.allUsers,
     // in prod mode all users route will be only available to UserRole.Admin
     restrictedAccessRoles: [UserRoles.Guest],

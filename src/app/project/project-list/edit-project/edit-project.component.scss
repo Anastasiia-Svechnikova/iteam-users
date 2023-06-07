@@ -1,7 +1,7 @@
-@import '/src/styles/_variables.scss';
-@import '/src/styles/color-palette';
+@import '../../../../styles/variables';
+@import '../../../../styles/color-palette';
 
-.wrapper{
+.wrapper {
   height: $xl-size;
   display: flex;
   align-items: center;
@@ -9,7 +9,7 @@
 
 .action-icon {
   cursor: pointer;
-  color: $base-color;
+  color: $light-caption-color;
 }
 
 .action-icon:hover {

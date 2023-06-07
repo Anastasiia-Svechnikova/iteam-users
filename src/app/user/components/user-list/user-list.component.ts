@@ -10,7 +10,10 @@ import { UserListStore } from 'src/app/user/components/user-list/user-list.compo
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss', '../../../shared/styles/ag-grid.scss'],
+  styleUrls: [
+    './user-list.component.scss',
+    '../../../shared/styles/ag-grid.scss',
+  ],
   providers: [UserListStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

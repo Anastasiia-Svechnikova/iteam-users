@@ -5,54 +5,41 @@
 .personal-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: $m-size;
-  border-bottom: $base-border;
 
-  @include media(tablet) {
-    padding: $m-size;
-    flex-direction: row;
-    border: none;
-  }
-}
-.inner {
-  width: 100%;
-
-  @include media(tablet) {
-    width: auto;
-    flex-grow: 1;
-  }
-}
-
-.bio {
   @include media(tablet) {
     flex-direction: row;
-    width: auto;
-    padding-bottom: 0;
-    border-bottom: none;
+    justify-content: space-between;
   }
 }
 
-.info {
-  display: flex;
+.bio-card {
   flex-grow: 1;
-  justify-content: space-between;
-  padding: $m-size;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: $m-size;
 
   @include media(tablet) {
-    padding: 0;
+    align-items: center;
+    flex-direction: row;
+    gap: $l-size;
   }
 }
 
-.terms {
-  align-self: flex-end;
+.avatar-thumb {
+  height: $avatar-width;
+  width: $avatar-width;
+  align-self: center;
+  border-radius: 50%;
+  background-color: $light-caption-color;
 }
 
 .avatar {
-  height: $avatar-width;
-  width: $avatar-width;
-  background-color: $base-color;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .name-wrapper {
@@ -67,9 +54,25 @@
   }
 }
 
-.icon {
-  color: inherit;
-  transform: scale(0.9);
+%user-status {
+  display: flex;
+  align-items: center;
+  gap: $xxs-size;
+}
+
+.unarchived {
+  @extend %user-status;
+  color: $green-color;
+}
+
+.archived {
+  @extend %user-status;
+  color: $light-subtitle-color;
+}
+
+.birthday-icon {
+  font-size: $xs-icon-size;
+  color: $primary-color;
 }
 
 .detail {
@@ -77,25 +80,29 @@
   align-items: center;
   gap: $xxs-size;
   margin-bottom: $xxs-size;
-  min-height: 24px;
+  min-height: $s-icon-size;
 }
 
-.term {
-  flex: 1 1 auto;
+.mobile-terms {
+  @include media(tablet) {
+    display: none;
+  }
 }
 
-%status {
+.bio {
   display: flex;
-  align-items: center;
-  gap: $xxs-size;
+  justify-content: space-between;
+
+  @include media(tablet) {
+    display: block;
+  }
 }
 
-.unarchived {
-  @extend %status;
-  color: $green-color;
-}
+.desktop-terms {
+  display: none;
 
-.archived {
-  @extend %status;
-  color: $base-color;
+  @include media(tablet) {
+    display: block;
+    width: 30%;
+  }
 }

@@ -1,64 +1,66 @@
-import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { map, take } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs';
 
-import {
-  mobileModalWidth,
-  mobileScreenWidth,
-} from 'src/app/shared/constants/media-width';
-import { ClipboardService } from 'src/app/shared/services/clipboard/clipboard.service';
+import { AbstractUserProfileComponent } from 'src/app/user/components/user-profile/abstract-user-profile-component';
 import { clipboardPersonalInfoRegistry } from 'src/app/user/components/user-profile/constants/clipboard-property-names-registries/clipboard-personal-info-registry';
-import { editDialogOptions } from 'src/app/user/components/user-profile/constants/edit-dialog-options';
-import { EditDescriptionModalComponent } from 'src/app/user/components/user-profile/user-edit/edit-description-modal/edit-description-modal.component';
-import { UserStore } from 'src/app/user/components/user-profile/user-profile.store';
+import { userProfileActions } from 'src/app/user/components/user-profile/state/actions';
+import {
+  selectLoading,
+  selectUser,
+} from 'src/app/user/components/user-profile/state/selectors';
+import {
+  textInputFormModalData,
+  TextInputFormModalComponent,
+} from 'src/app/user/components/user-profile/user-edit/text-input-form-modal/text-input-form-modal.component';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [UserStore],
 })
-export class UserProfileComponent implements OnInit {
-  user$ = this._userStore.user$;
-  loading$ = this._userStore.loading$;
+export class UserProfileComponent
+  extends AbstractUserProfileComponent
+  implements OnInit
+{
+  user$ = this.store.select(selectUser);
+  loading$ = this.store.select(selectLoading);
 
   clipboardRegistry = clipboardPersonalInfoRegistry;
 
-  constructor(
-    private route: ActivatedRoute,
-    private readonly _userStore: UserStore,
-    private dialog: MatDialog,
-    public clipboardService: ClipboardService,
-    private media: MediaMatcher,
-  ) {}
+  constructor(private route: ActivatedRoute) {
+    super();
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
-    this._userStore.getUser(id);
+    if (id) {
+      this.store.dispatch(userProfileActions.loadUser({ id }));
+    }
   }
 
-  onEditDescription(): void {
-    const dialogRef = this.dialog.open(EditDescriptionModalComponent, {
-      ...editDialogOptions,
-      width: this.media.matchMedia(mobileScreenWidth).matches
-        ? mobileModalWidth
-        : '',
-      maxWidth: this.media.matchMedia(mobileScreenWidth).matches
-        ? mobileModalWidth
-        : '',
-      data: this.user$.pipe(
-        map((user) => ({ positionDescription: user?.positionDescription })),
+  onEdit(): void {
+    this.setModal<TextInputFormModalComponent, textInputFormModalData>(
+      TextInputFormModalComponent,
+      this.user$.pipe(
+        map((user) => ({
+          titles: new Map([['positionDescription', 'Position Description']]),
+          formData: { positionDescription: user?.positionDescription },
+          header: 'Edit Position Description',
+          style: 'single-column',
+          textareaFields: ['positionDescription'],
+        })),
       ),
-    });
-    dialogRef
+    )
       .afterClosed()
-      .pipe(take(1))
+      .pipe(
+        takeUntil(this.destroyed$),
+        filter((data) => data),
+      )
       .subscribe((data) => {
         if (data) {
-          this._userStore.updateUserInfo(data);
+          this.store.dispatch(userProfileActions.updateUser({ user: data }));
         }
       });
   }
