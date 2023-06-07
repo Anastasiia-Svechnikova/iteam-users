@@ -2,6 +2,7 @@ import { ColDef, ICellRendererParams } from 'ag-grid-community';
 
 import { CopyCellComponent } from 'src/app/shared/components/ag-grid/copy-cell/copy-cell.component';
 import { StatusCellComponent } from 'src/app/shared/components/ag-grid/status-cell/status-cell.component';
+import { colors } from 'src/app/shared/constants/colors';
 import { EditUserCellComponent } from 'src/app/user/components/user-list/cell-components/edit-user-cell/edit-user-cell.component';
 import { ProjectsCellComponent } from 'src/app/user/components/user-list/cell-components/projects-cell/projects-cell.component';
 
@@ -30,18 +31,20 @@ export const UserListColDefs: ColDef[] = [
     cellRenderer: StatusCellComponent,
     cellRendererParams: {
       value: (params: ICellRendererParams) => params.data.status,
-      statusesData: {
-        archived: {
-          icon: 'person',
+      statusesData: [
+        {
+          status: 'archived',
+          icon: 'person_remove',
           name: 'Disabled',
-          color: 'rgba(138, 137, 137, 0.748)',
+          color: colors.lightCaptionColor,
         },
-        unarchived: {
+        {
+          status: 'unarchived',
           icon: 'how_to_reg',
           name: 'Active',
-          color: 'rgb(8, 205, 90)',
+          color: colors.greenColor,
         },
-      },
+      ],
     },
   },
   {

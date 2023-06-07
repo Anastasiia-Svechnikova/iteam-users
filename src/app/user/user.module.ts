@@ -10,12 +10,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
-import { ArchiveCellComponent }
-  from 'src/app/user/components/user-list/cell-components/archive-cell/archive-cell.component';
-import { EditUserCellComponent }
-  from 'src/app/user/components/user-list/cell-components/edit-user-cell/edit-user-cell.component';
-import { ProjectsCellComponent }
-  from 'src/app/user/components/user-list/cell-components/projects-cell/projects-cell.component';
+import { ArchiveCellComponent } from 'src/app/user/components/user-list/cell-components/archive-cell/archive-cell.component';
+import { EditUserCellComponent } from 'src/app/user/components/user-list/cell-components/edit-user-cell/edit-user-cell.component';
+import { ProjectsCellComponent } from 'src/app/user/components/user-list/cell-components/projects-cell/projects-cell.component';
 import { UserListComponent } from 'src/app/user/components/user-list/user-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UserProfileEffects } from 'src/app/user/components/user-profile/state/effects';
@@ -37,12 +34,18 @@ const routes = [
         (m) => m.UserProfileModule,
       ),
   },
+  {
+    path: '**',
+    redirectTo: '/dashboard/home',
+  },
 ];
 @NgModule({
   declarations: [
     TechnologiesFormModalComponent,
     UserListComponent,
-    ArchiveCellComponent, EditUserCellComponent, ProjectsCellComponent,
+    ArchiveCellComponent,
+    EditUserCellComponent,
+    ProjectsCellComponent,
   ],
   imports: [
     MatChipsModule,
@@ -58,4 +61,4 @@ const routes = [
     AgGridModule,
   ],
 })
-export class UserModule { }
+export class UserModule {}

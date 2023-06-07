@@ -14,7 +14,7 @@ export const siteNavigationLinksData: ISiteNavigationLink[] = [
     name: SiteNavigationLinkNames.currentUser,
   },
   {
-    path: ['/dashboard', 'project'],
+    path: ['/dashboard', 'project', 'all'],
     iconName: 'dashboard',
     name: SiteNavigationLinkNames.projects,
   },

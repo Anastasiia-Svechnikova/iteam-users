@@ -11,10 +11,13 @@ import { IProjectDetailsData } from 'src/app/shared/interfaces/project-details';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsCellComponent implements ICellRendererAngularComp {
-  projects!:IProjectDetailsData[];
+  projects!: IProjectDetailsData[];
 
   agInit(params: ICellRendererParams): void {
-    this.projects = [...params.data.leadingInProjects, ...params.data.participatingInProjects]
+    this.projects = [
+      ...params.data.leadingInProjects,
+      ...params.data.participatingInProjects,
+    ];
   }
 
   refresh(): boolean {

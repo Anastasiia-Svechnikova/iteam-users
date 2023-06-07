@@ -2,16 +2,18 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { GridApi } from 'ag-grid-community';
 import { takeUntil } from 'rxjs';
-import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
 
+import { UnSubscriberComponent } from 'src/app/shared/classes/unsubscriber';
 import { UserListColDefs } from 'src/app/user/components/user-list/constants/column-definitions';
 import { UserListStore } from 'src/app/user/components/user-list/user-list.component.store';
-import { IUpdateUserDTO } from 'src/app/user/components/user-profile/interfaces/update-user-dto';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
+  styleUrls: [
+    './user-list.component.scss',
+    '../../../shared/styles/ag-grid.scss',
+  ],
   providers: [UserListStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -36,11 +38,11 @@ export class UserListComponent extends UnSubscriberComponent implements OnInit {
       });
   }
 
-  toggleUserStatus({ userId, updatedUser }: {
-    userId: string;
-    updatedUser: IUpdateUserDTO;
-  }): void {
-    this.userListStore.updateUser$({ userId, updatedUser });
+  changeStatus(status: string, userId: string): void {
+    this.userListStore.updateUser$({
+      userId: userId,
+      updatedUser: { status: status },
+    });
   }
 
   onGridReady(params: { api: GridApi }): void {

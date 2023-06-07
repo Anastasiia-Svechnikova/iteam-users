@@ -1,5 +1,5 @@
 <div
-  *ngIf="users$ | async as users"
+  *ngIf="projects$ | async as projects"
   class="wrapper">
   <mat-form-field appearance="outline">
     <input
@@ -10,10 +10,7 @@
   <ag-grid-angular
     class="ag-theme-alpine users-grid"
     domLayout="autoHeight"
-    [suppressHorizontalScroll]="false"
-    [suppressScrollOnNewData]="true"
-    [rowData]="users"
-    [suppressDragLeaveHidesColumns]="true"
+    [rowData]="projects"
     [enableCellTextSelection]="true"
     [columnDefs]="colDefs"
     [context]="context"
